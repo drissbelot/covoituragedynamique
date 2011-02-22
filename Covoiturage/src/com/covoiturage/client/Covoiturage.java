@@ -1,21 +1,17 @@
 package com.covoiturage.client;
 
-import com.covoiturage.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.Maps;
+import com.google.gwt.maps.client.control.MapTypeControl;
+import com.google.gwt.maps.client.control.SmallMapControl;
+import com.google.gwt.maps.client.event.MapClickHandler;
+import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Overlay;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -38,10 +34,44 @@ public class Covoiturage implements EntryPoint {
 	/**
 	 * This is the entry point method.
 	 */
-	public void onModuleLoad() {
+	public void onModuleLoad() { 
+		//Maps.loadMapsApi("", "2", false, onLoad)
+	    GWT.log(Maps.getVersion());
+			GWT.log("Hello World!", null);
+	
+		 MapWidget mapWiget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
+	        mapWiget.setSize("500px", "300px");
+	        Window.alert("page");
+	        mapWiget.addControl(new SmallMapControl());
+	        mapWiget.addControl(new MapTypeControl());
+	 
+	        mapWiget.addMapClickHandler(new MapClickHandler() {
+	          public void onClick(MapClickEvent e) {
+	            MapWidget sender = e.getSender();
+	            Overlay overlay = e.getOverlay();
+	            LatLng point = e.getLatLng();
+	 
+	            if (overlay != null && overlay instanceof Marker) {
+	              sender.removeOverlay(overlay);
+	            } else {
+	              sender.addOverlay(new Marker(point));
+	            }
+	          }
+	        });
+	 
+	        RootPanel.get().add(mapWiget);
+	}
+}
+
+		
+		/*
+		
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
+		nameField.setText("Login");
+		final TextBox passField = new PasswordTextBox();
+		passField.setText("Password");
+
 		final Label errorLabel = new Label();
 
 		// We can add style names to widgets
@@ -49,10 +79,11 @@ public class Covoiturage implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
-
+		RootPanel.get().add(nameField);
+		RootPanel.get().add(sendButton);
+		RootPanel.get().add(errorLabel);
+		RootPanel.get().add(passField);
+		
 		// Focus the cursor on the name field when the app loads
 		nameField.setFocus(true);
 		nameField.selectAll();
@@ -87,25 +118,25 @@ public class Covoiturage implements EntryPoint {
 
 		// Create a handler for the sendButton and nameField
 		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
+			*//**
 			 * Fired when the user clicks on the sendButton.
-			 */
+			 *//*
 			public void onClick(ClickEvent event) {
 				sendNameToServer();
 			}
 
-			/**
+			*//**
 			 * Fired when the user types in the nameField.
-			 */
+			 *//*
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					sendNameToServer();
 				}
 			}
 
-			/**
+			*//**
 			 * Send the name from the nameField to the server and wait for a response.
-			 */
+			 *//*
 			private void sendNameToServer() {
 				// First, we validate the input.
 				errorLabel.setText("");
@@ -150,3 +181,4 @@ public class Covoiturage implements EntryPoint {
 		nameField.addKeyUpHandler(handler);
 	}
 }
+*/

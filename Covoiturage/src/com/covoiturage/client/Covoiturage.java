@@ -2,6 +2,7 @@ package com.covoiturage.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.client.control.MapTypeControl;
@@ -36,30 +37,10 @@ public class Covoiturage implements EntryPoint {
 	 */
 	public void onModuleLoad() { 
 		//Maps.loadMapsApi("", "2", false, onLoad)
-	    GWT.log(Maps.getVersion());
-			GWT.log("Hello World!", null);
+	    HandlerManager eventBus = new HandlerManager(null);
+	    AppController appViewer = new AppController(eventBus);
+	    appViewer.go(RootPanel.get());
 	
-		 MapWidget mapWiget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
-	        mapWiget.setSize("500px", "300px");
-	        Window.alert("page");
-	        mapWiget.addControl(new SmallMapControl());
-	        mapWiget.addControl(new MapTypeControl());
-	 
-	        mapWiget.addMapClickHandler(new MapClickHandler() {
-	          public void onClick(MapClickEvent e) {
-	            MapWidget sender = e.getSender();
-	            Overlay overlay = e.getOverlay();
-	            LatLng point = e.getLatLng();
-	 
-	            if (overlay != null && overlay instanceof Marker) {
-	              sender.removeOverlay(overlay);
-	            } else {
-	              sender.addOverlay(new Marker(point));
-	            }
-	          }
-	        });
-	 
-	        RootPanel.get().add(mapWiget);
 	}
 }
 

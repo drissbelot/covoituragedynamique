@@ -1,0 +1,42 @@
+package com.covoiturage.client.presenter;
+
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Widget;
+
+public class MapPresenter implements Presenter {  
+
+
+
+  public interface Display {
+   
+
+
+    Widget asWidget();
+  }
+  
+ // private final MapServiceAsync rpcService;
+  private final HandlerManager eventBus;
+  private final Display display;
+  
+  public MapPresenter(/*ContactsServiceAsync rpcService, */HandlerManager eventBus, Display view) {
+  //  this.rpcService = rpcService;
+    this.eventBus = eventBus;
+    this.display = view;
+  }
+  
+  public void bind() {
+	  
+	  
+	  
+  }
+  
+  
+  public void go(final HasWidgets container) {
+	    bind();
+	    container.clear();
+	    container.add(display.asWidget());
+
+	  }
+}

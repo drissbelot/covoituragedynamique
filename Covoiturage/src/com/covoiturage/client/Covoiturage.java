@@ -3,15 +3,7 @@ package com.covoiturage.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.Maps;
-import com.google.gwt.maps.client.control.MapTypeControl;
-import com.google.gwt.maps.client.control.SmallMapControl;
-import com.google.gwt.maps.client.event.MapClickHandler;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.overlay.Marker;
-import com.google.gwt.maps.client.overlay.Overlay;
-import com.google.gwt.user.client.Window;
+
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -36,7 +28,7 @@ public class Covoiturage implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() { 
-		//Maps.loadMapsApi("", "2", false, onLoad)
+
 	    HandlerManager eventBus = new HandlerManager(null);
 	    AppController appViewer = new AppController(eventBus);
 	    appViewer.go(RootPanel.get());
@@ -44,50 +36,7 @@ public class Covoiturage implements EntryPoint {
 	}
 }
 
-		
-		/*
-		
-		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		nameField.setText("Login");
-		final TextBox passField = new PasswordTextBox();
-		passField.setText("Password");
-
-		final Label errorLabel = new Label();
-
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
-
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get().add(nameField);
-		RootPanel.get().add(sendButton);
-		RootPanel.get().add(errorLabel);
-		RootPanel.get().add(passField);
-		
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
+	/*
 		// Add a handler to close the DialogBox
 		closeButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {

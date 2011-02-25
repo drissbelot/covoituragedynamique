@@ -38,7 +38,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 	          }
 	        });
 	 
-	        RootPanel.get().add(mapWiget);
+	        MapDecorator.add(mapWiget);
 	}
 	        
 }

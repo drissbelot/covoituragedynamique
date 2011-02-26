@@ -4,7 +4,7 @@ import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.presenter.LoginPresenter;
 import com.covoiturage.client.presenter.Presenter;
-import com.google.gwt.core.client.GWT;
+
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;

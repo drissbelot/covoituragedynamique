@@ -5,16 +5,7 @@
 
 <web-app>
   
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.covoiturage.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/covoiturage/greet</url-pattern>
-  </servlet-mapping>
+
   
   <!-- Default page to serve -->
   <welcome-file-list>

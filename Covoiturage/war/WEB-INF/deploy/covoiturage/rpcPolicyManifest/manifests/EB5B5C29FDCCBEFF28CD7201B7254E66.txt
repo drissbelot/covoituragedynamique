@@ -1,2 +1,0 @@
-serviceClass: com.covoiturage.client.GreetingService
-path: BAC6B825AA7EAFA26FC14508F93E89E0.gwt.rpc

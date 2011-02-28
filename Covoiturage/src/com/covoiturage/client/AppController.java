@@ -1,5 +1,7 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.event.NewUserEvent;
+import com.covoiturage.client.event.NewUserEventHandler;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.presenter.LoginPresenter;
@@ -11,6 +13,9 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.covoiturage.client.presenter.MapPresenter;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.MapView;
+import com.covoiturage.client.view.AddUserView;
+import com.covoiturage.client.presenter.AddUserPresenter;
+
 
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -34,6 +39,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
                 SendLogin();
               }
             });
+    eventBus.addHandler(NewUserEvent.TYPE,
+            new NewUserEventHandler() {
+              public void onNewUser(NewUserEvent event) {
+                NewUser();
+              }
+            });
    
 
   }
@@ -41,7 +52,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
    
   private void SendLogin() {
 	  History.newItem("sendLogin");
-	// TODO Auto-generated method stub
+
+	
+}
+  private void NewUser() {
+	  History.newItem("newUser");
+
 	
 }
 
@@ -68,6 +84,10 @@ public void go(final HasWidgets container) {
       else if (token.equals("sendLogin")) {
     	        presenter = new MapPresenter(/*rpcService,*/ eventBus, new MapView());
     	      }
+      else if (token.equals("newUser")){
+    	  	presenter = new AddUserPresenter(/*rpcService,*/eventBus, new AddUserView());
+    	  
+      }
     
       
       if (presenter != null) {

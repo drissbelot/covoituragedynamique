@@ -11,14 +11,14 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AddUser extends Composite implements AddUserPresenter.Display {
+public class AddUserView extends Composite implements AddUserPresenter.Display {
   private final Button addButton;
   private TextBox firstName;
   private TextBox lastName;
   private TextBox emailAdress;
   private TextBox password;
   
-  public AddUser() {
+  public AddUserView() {
     DecoratorPanel contentTableDecorator = new DecoratorPanel();
     initWidget(contentTableDecorator);
     contentTableDecorator.setWidth("100%");
@@ -42,7 +42,7 @@ public class AddUser extends Composite implements AddUserPresenter.Display {
     
     vPanel.add(addButton);
 
-
+    contentTableDecorator.add(vPanel);
 
   }
   

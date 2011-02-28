@@ -2,6 +2,7 @@ package com.covoiturage.client.presenter;
 
 
 import com.covoiturage.client.event.AddUserEvent;
+import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -49,7 +50,7 @@ public class LoginPresenter implements Presenter {
 		    });
 		display.getAddUserButton().addClickHandler(new ClickHandler() {   
 		      public void onClick(ClickEvent event) {
-		        eventBus.fireEvent(new AddUserEvent());
+		        eventBus.fireEvent(new NewUserEvent());
 		      }
 		    });
 	} 

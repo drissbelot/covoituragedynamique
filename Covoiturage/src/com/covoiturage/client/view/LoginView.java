@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.TextBox;
 public class LoginView extends Composite implements LoginPresenter.Display {
 	final Button sendButton = new Button("Login");
 	final TextBox nameField = new TextBox();
-	final TextBox passField = new PasswordTextBox();
+	private TextBox passField = new PasswordTextBox();
 	final Button addUserButton = new Button("S'enregistrer");
 	public LoginView(){
 		
@@ -55,5 +55,14 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 		  return addUserButton;
 		  
 	  }
+	public  String getPassword() {
+		
+		return passField.getText();
+	}
+	@Override
+	public String getLogin() {
+		
+		return nameField.getText();
+	}
 	
 }

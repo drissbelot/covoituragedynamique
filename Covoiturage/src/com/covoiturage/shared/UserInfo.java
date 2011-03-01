@@ -1,0 +1,47 @@
+package com.covoiturage.shared;
+
+import java.io.Serializable;
+
+
+
+
+@SuppressWarnings("serial")
+public class UserInfo implements Serializable {
+	public String id;
+	public String login;
+	public String emailAddress;
+	private boolean loggedIn = false;
+
+
+
+	public UserInfo() {}
+
+	public UserInfo(String id, String login, String emailAddress) {
+		this.id = id;
+		this.login = login;
+		
+		this.emailAddress = emailAddress;
+	}
+	  public boolean isLoggedIn() {
+		    return loggedIn;
+		  }
+
+	public String getId() { return id; }
+	public void setId(String id) { this.id = id; }
+	public String getLogin() { return login; }
+	
+	public void setLogin(String login) { this.login= login; }
+	public String getEmailAddress() { return emailAddress; }
+	public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
+	
+
+	public static Object getDefaultUser() {
+
+		return null;
+	}
+
+	public void setLoggedIn(boolean b) {
+		loggedIn=b;
+		
+	}
+}

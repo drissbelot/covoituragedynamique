@@ -1,14 +1,21 @@
 package com.covoiturage.client.presenter;
 
 
+import com.covoiturage.client.UserAccountService;
+import com.covoiturage.client.UserAccountServiceAsync;
 import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
+import com.covoiturage.client.view.LoginView;
+import com.covoiturage.shared.UserInfo;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -24,10 +31,22 @@ public class LoginPresenter implements Presenter {
 
 
 			HasClickHandlers getAddUserButton();
+
+
+
+			String getLogin();
+
+
+
+			String getPassword();
+
+
+
 		  }
 	
 	  private final HandlerManager eventBus;
 	  private final Display display;
+	  private UserInfo currentUser;
 
 	  public LoginPresenter(/*ContactsServiceAsync rpcService, */HandlerManager eventBus, Display view) {
 		  //  this.rpcService = rpcService;
@@ -45,7 +64,8 @@ public class LoginPresenter implements Presenter {
 	private void bind() {
 		display.getSendLoginButton().addClickHandler(new ClickHandler() {   
 		      public void onClick(ClickEvent event) {
-		        eventBus.fireEvent(new SendLoginEvent());
+		   	  login();
+
 		      }
 		    });
 		display.getAddUserButton().addClickHandler(new ClickHandler() {   
@@ -54,5 +74,29 @@ public class LoginPresenter implements Presenter {
 		      }
 		    });
 	} 
+	
+	private void login()
+	{
+		 UserAccountServiceAsync loginService = GWT.create(UserAccountService.class);
+
+		    loginService.login(display.getLogin(),display.getPassword(), new AsyncCallback<UserInfo>() {
+		      public void onFailure(Throwable error) {
+		 		 GWT.log("test");
+		      }
+
+		      public void onSuccess(UserInfo result) {
+		    	  currentUser = result;
+		        if(currentUser.isLoggedIn()) {
+			        eventBus.fireEvent(new SendLoginEvent());
+		        } else {
+		          Window.alert("Erreur de connexion");
+		        }
+		      }
+		    });
+		  }
+
+
+	
+	
 	
 }

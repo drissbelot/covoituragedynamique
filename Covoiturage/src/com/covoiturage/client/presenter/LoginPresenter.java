@@ -5,6 +5,7 @@ import com.covoiturage.client.UserAccountService;
 import com.covoiturage.client.UserAccountServiceAsync;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
+import com.covoiturage.server.UserAccountServiceImpl;
 import com.covoiturage.shared.UserInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -81,9 +82,8 @@ public class LoginPresenter implements Presenter {
 	
 	private void login()
 	{
-		 UserAccountServiceAsync loginService = GWT.create(UserAccountService.class);
-
-		    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
+		 	
+		    UserAccountServiceImpl.login(display.getLogin(), display.getPassword(), new AsyncCallback<UserInfo>() {
 		      public void onFailure(Throwable error) {
 
 		      }

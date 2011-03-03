@@ -12,27 +12,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class UserAccountServiceImpl extends RemoteServiceServlet implements UserAccountService{
 
 	@Override
-	public UserInfo login(String requestUri) {
+	public UserInfo login(String email, String password) {
 
-			    UserService userService = UserServiceFactory.getUserService();
-			    User user = userService.getCurrentUser();
-			    UserInfo userInfo = new UserInfo();
+		new AppMisc().populateDataStoreOnce();
+		return UserInfo.toDTO(UserInfo.getDefaultUser());
 
-			    if (user != null) {
-
-			      userInfo.setLoggedIn(true);
-			      userInfo.setEmailAddress(user.getEmail());
-			      userInfo.setLogin(user.getNickname());
-			      userInfo.setLogoutUrl(userService.createLogoutURL(requestUri));
-
-			      
-			      
-			    } else {
-			      userInfo.setLoggedIn(false);
-			      userInfo.setLoginUrl(userService.createLoginURL(requestUri));
-
-			    }
-			    return userInfo;
+		
 
 
 	}

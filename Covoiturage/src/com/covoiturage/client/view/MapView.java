@@ -17,8 +17,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class MapView extends Composite implements MapPresenter.Display {
 
 
-	  private Label latLabel;
-	  private Label lngLabel;
+
 	  private FlowPanel mapDecorator;
 	  private MapWidget mapWidget;
 	  private Button sendAddress;

@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geocode.DirectionQueryOptions;
 import com.google.gwt.maps.client.geocode.DirectionResults;
 import com.google.gwt.maps.client.geocode.Directions;
@@ -14,6 +15,8 @@ import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LatLngCallback;
 import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -60,6 +63,20 @@ public class MapPresenter implements Presenter {
 				doGeolocate();
 			}
 		});
+		display.getMap().addMapClickHandler(new MapClickHandler() {
+		      public void onClick(MapClickEvent e) {
+		        MapWidget sender = e.getSender();
+		        Overlay overlay = e.getOverlay();
+		        LatLng point = e.getLatLng();
+
+		        if (overlay != null && overlay instanceof Marker) {
+		          sender.removeOverlay(overlay);
+		        } else {
+		          sender.addOverlay(new Marker(point));
+		        }
+		      }
+		});
+
 
 
 	}

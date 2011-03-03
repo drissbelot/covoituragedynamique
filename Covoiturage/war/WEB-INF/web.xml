@@ -4,6 +4,14 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
+<servlet>
+<servlet-name>UserAccountService</servlet-name>
+<servlet-class>com.covoiturage.server.UserAccountServiceImpl</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>UserAccountService</servlet-name>
+<url-pattern>/covoiturage/userAccount</url-pattern>
+</servlet-mapping>
   
 
   
@@ -11,17 +19,5 @@
   <welcome-file-list>
     <welcome-file>Covoiturage.html</welcome-file>
   </welcome-file-list>
-  
-    <!-- Servlets -->
-  <servlet>
-    <servlet-name>userAccount</servlet-name>
-    <servlet-class>com.covoiturage.server.UserAccountServiceImpl</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>userAccount</servlet-name>
-    <url-pattern>/covoiturage/userAccount</url-pattern>
-  </servlet-mapping>
-  
 
 </web-app>

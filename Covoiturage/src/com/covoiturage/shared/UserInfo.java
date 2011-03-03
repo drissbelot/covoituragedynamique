@@ -63,4 +63,9 @@ public class UserInfo implements Serializable {
 	public String getLogoutUrl() {
 		return logoutUrl;
 	}
+
+	public static UserInfo toDTO(Object defaultUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

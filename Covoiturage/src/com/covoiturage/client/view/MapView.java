@@ -50,7 +50,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 	        addressPanel.add(destinationAddress);
 	        addressPanel.add(sendAddress);
 
-	        mapDecorator.add(buildLatLngPanel());
+
 	        
 	        mapDecorator.add(mapWidget);
 	        mapDecorator.add(addressPanel);
@@ -61,19 +61,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 		    return sendAddress;
 		  }
 	
-	Panel buildLatLngPanel() {
-        HorizontalPanel horiz = new HorizontalPanel();
-        horiz.add(new Label("Lat:"));
-        latLabel = new Label();
-        horiz.add(latLabel);
-        horiz.add(new Label("Long:"));
-        lngLabel = new Label();
-        horiz.add(lngLabel);
-        horiz.setSpacing(10);
-        return horiz;
-	        
-	        
-	}
+
 
 	@Override
 	public String getOriginAddress() {

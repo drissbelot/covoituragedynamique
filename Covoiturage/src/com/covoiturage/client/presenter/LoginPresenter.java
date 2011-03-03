@@ -3,19 +3,17 @@ package com.covoiturage.client.presenter;
 
 import com.covoiturage.client.UserAccountService;
 import com.covoiturage.client.UserAccountServiceAsync;
-import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
-import com.covoiturage.client.view.LoginView;
 import com.covoiturage.shared.UserInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -42,11 +40,17 @@ public class LoginPresenter implements Presenter {
 
 
 
+			Anchor getSignInLink();
+
+
+
 		  }
 	
 	  private final HandlerManager eventBus;
 	  private final Display display;
 	  private UserInfo currentUser;
+
+
 
 	  public LoginPresenter(/*ContactsServiceAsync rpcService, */HandlerManager eventBus, Display view) {
 		  //  this.rpcService = rpcService;
@@ -79,9 +83,9 @@ public class LoginPresenter implements Presenter {
 	{
 		 UserAccountServiceAsync loginService = GWT.create(UserAccountService.class);
 
-		    loginService.login(display.getLogin(),display.getPassword(), new AsyncCallback<UserInfo>() {
+		    loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<UserInfo>() {
 		      public void onFailure(Throwable error) {
-		 		 GWT.log("test");
+
 		      }
 
 		      public void onSuccess(UserInfo result) {
@@ -89,12 +93,19 @@ public class LoginPresenter implements Presenter {
 		        if(currentUser.isLoggedIn()) {
 			        eventBus.fireEvent(new SendLoginEvent());
 		        } else {
-		          Window.alert("Erreur de connexion");
+		        	  loadLogin();
+
 		        }
 		      }
 		    });
 		  }
 
+	  private void loadLogin() {
+		    // Assemble login panel.
+		    display.getSignInLink().setHref(currentUser.getLoginUrl());
+
+
+		  }
 
 	
 	

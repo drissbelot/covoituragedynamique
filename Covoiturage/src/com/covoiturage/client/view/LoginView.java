@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 import com.covoiturage.client.presenter.LoginPresenter;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
@@ -14,6 +15,7 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	final TextBox nameField = new TextBox();
 	private TextBox passField = new PasswordTextBox();
 	final Button addUserButton = new Button("S'enregistrer");
+	  private Anchor signInLink = new Anchor("Sign In");
 	public LoginView(){
 		
 		  DecoratorPanel LoginDecorator = new DecoratorPanel();
@@ -41,6 +43,7 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 		hPanel.add(passField);
 		hPanel.add(sendButton);
 		hPanel.add(addUserButton);
+		hPanel.add(signInLink);
 		LoginDecorator.setWidget(hPanel);
 		nameField.setFocus(true);
 		nameField.selectAll();
@@ -63,6 +66,10 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	public String getLogin() {
 		
 		return nameField.getText();
+	}
+
+	public Anchor getSignInLink() {
+		return signInLink;
 	}
 	
 }

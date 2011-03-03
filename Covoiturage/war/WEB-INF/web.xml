@@ -11,5 +11,17 @@
   <welcome-file-list>
     <welcome-file>Covoiturage.html</welcome-file>
   </welcome-file-list>
+  
+    <!-- Servlets -->
+  <servlet>
+    <servlet-name>userAccount</servlet-name>
+    <servlet-class>com.covoiturage.server.UserAccountServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>userAccount</servlet-name>
+    <url-pattern>/covoiturage/userAccount</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>

@@ -10,6 +10,9 @@ public class UserInfo implements Serializable {
 	public String id;
 	public String login;
 	public String emailAddress;
+	  private String loginUrl;
+	  private String logoutUrl;
+
 	private boolean loggedIn = false;
 
 
@@ -43,5 +46,21 @@ public class UserInfo implements Serializable {
 	public void setLoggedIn(boolean b) {
 		loggedIn=b;
 		
+	}
+
+	public void setLoginUrl(String loginUrl) {
+		this.loginUrl = loginUrl;
+	}
+
+	public String getLoginUrl() {
+		return loginUrl;
+	}
+
+	public void setLogoutUrl(String logoutUrl) {
+		this.logoutUrl = logoutUrl;
+	}
+
+	public String getLogoutUrl() {
+		return logoutUrl;
 	}
 }

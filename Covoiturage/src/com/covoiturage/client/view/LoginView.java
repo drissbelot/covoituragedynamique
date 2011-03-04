@@ -15,7 +15,7 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	final TextBox nameField = new TextBox();
 	private TextBox passField = new PasswordTextBox();
 	final Button addUserButton = new Button("S'enregistrer");
-	  private Anchor signInLink = new Anchor("Sign In");
+	private Anchor signInLink = new Anchor("Sign In");
 	public LoginView(){
 		
 		  DecoratorPanel LoginDecorator = new DecoratorPanel();

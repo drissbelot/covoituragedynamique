@@ -1,18 +1,15 @@
 package com.covoiturage.client.presenter;
 
 
-import com.covoiturage.client.UserAccountService;
 import com.covoiturage.client.UserAccountServiceAsync;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
-import com.covoiturage.server.UserAccountServiceImpl;
 import com.covoiturage.shared.UserInfo;
-import com.google.gwt.core.client.GWT;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -50,11 +47,12 @@ public class LoginPresenter implements Presenter {
 	  private final HandlerManager eventBus;
 	  private final Display display;
 	  private UserInfo currentUser;
+	  private UserAccountServiceAsync rpcService;
 
 
 
-	  public LoginPresenter(/*ContactsServiceAsync rpcService, */HandlerManager eventBus, Display view) {
-		  //  this.rpcService = rpcService;
+	  public LoginPresenter(UserAccountServiceAsync rpcService, HandlerManager eventBus, Display view) {
+		  this.rpcService = rpcService;
 		    this.eventBus = eventBus;
 		    this.display = view;
 		  }
@@ -83,13 +81,14 @@ public class LoginPresenter implements Presenter {
 	private void login()
 	{
 		 	
-		    UserAccountServiceImpl.login(display.getLogin(), display.getPassword(), new AsyncCallback<UserInfo>() {
+		    rpcService.login(display.getLogin(), display.getPassword(), new AsyncCallback<UserInfo>() {
 		      public void onFailure(Throwable error) {
 
 		      }
 
 		      public void onSuccess(UserInfo result) {
 		    	  currentUser = result;
+		    	  
 		        if(currentUser.isLoggedIn()) {
 			        eventBus.fireEvent(new SendLoginEvent());
 		        } else {

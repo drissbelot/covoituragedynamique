@@ -1,0 +1,2 @@
+serviceClass: com.covoiturage.client.UserAccountService
+path: DF249E43A0BBC14A7BE59A6F08EFF8B5.gwt.rpc

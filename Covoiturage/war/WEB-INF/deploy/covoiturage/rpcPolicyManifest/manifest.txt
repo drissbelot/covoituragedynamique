@@ -1,3 +1,2 @@
 # Module covoiturage
 # RPC service class, partial path of RPC policy file
-com.covoiturage.client.UserAccountService, DF249E43A0BBC14A7BE59A6F08EFF8B5.gwt.rpc

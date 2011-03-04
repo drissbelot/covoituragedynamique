@@ -12,7 +12,7 @@
 <servlet-name>UserAccountService</servlet-name>
 <url-pattern>/covoiturage/userAccount</url-pattern>
 </servlet-mapping>
-  
+
 
   
   <!-- Default page to serve -->

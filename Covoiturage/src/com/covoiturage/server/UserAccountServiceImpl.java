@@ -62,6 +62,37 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 }
 
 
+	public UserInfo addUser(String login, String password) {
+		UserInfo user = new UserInfo();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		Query query= pm.newQuery("select from com.covoiturage.shared.UserInfo where login == loginParam");
+		query.declareParameters("String loginParam");
+		try
+		{
+			List<UserInfo> results = (List<UserInfo>) query.execute(login);
+			if(results.size()==0){
+				user.setLogin(login);
+				user.setPassword(password);
+				 pm.makePersistent(user);
+			}
+			else
+			{
+
+				return null;
+			}
+		}
+		finally
+		{
+			query.closeAll();
+			pm.close();
+		}
+
+		return user;
+
+
+	}
+
+
 
 
 }

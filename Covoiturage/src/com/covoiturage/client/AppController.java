@@ -88,7 +88,7 @@ public void go(final HasWidgets container) {
     	        presenter = new MapPresenter(/*rpcService,*/ eventBus, new MapView());
     	      }
       else if (token.equals("newUser")){
-    	  	presenter = new AddUserPresenter(/*rpcService,*/eventBus, new AddUserView());
+    	  	presenter = new AddUserPresenter(rpcService,eventBus, new AddUserView());
     	  
       }
     

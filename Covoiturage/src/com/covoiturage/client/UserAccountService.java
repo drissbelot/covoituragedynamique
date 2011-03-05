@@ -8,4 +8,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface UserAccountService extends RemoteService{
 	public UserInfo login(String email, String password);
 
+	public UserInfo addUser(String login, String password);
+
 }

@@ -15,7 +15,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class UserInfo implements Serializable {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	public String id;
+	public Long id;
 	@Persistent
 	public String login;
 	@Persistent
@@ -31,7 +31,7 @@ public class UserInfo implements Serializable {
 
 	public UserInfo() {}
 
-	public UserInfo(String id, String login, String emailAddress, String password) {
+	public UserInfo(Long id, String login, String emailAddress, String password) {
 		this.id = id;
 		this.login = login;
 		this.setPassword(password);
@@ -42,8 +42,8 @@ public class UserInfo implements Serializable {
 		    return loggedIn;
 		  }
 
-	public String getId() { return id; }
-	public void setId(String id) { this.id = id; }
+	public Long getId() { return id; }
+	public void setId(Long id) { this.id = id; }
 	public String getLogin() { return login; }
 	
 	public void setLogin(String login) { this.login= login; }

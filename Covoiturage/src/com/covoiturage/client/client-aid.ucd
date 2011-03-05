@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="client-aid" id="{UMLID=_cxGcAEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client}" metadata="uml2-1.0" initialized="true" zoom="1.2885261545382964" scrolledY="4036" tag="10" key="323030373036323920436F766F69747572616765" Shrink="true" showMutiplicity="false" showNonNavigableMutiplicity="false">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.1" name="LoginPresenter" location="1062,2782" size="205,386" timstampe="198" stereotype="" id="{UMLID=_BwnbwEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/LoginPresenter}" runTimeClassModel="rpcService,bind(),login(),LoginPresenter(Lcom.covoiturage.client.UserAccountServiceAsync;Lcom.google.gwt.event.shared.HandlerManager;Lcom.covoiturage.client.presenter.LoginPresenter.Display;),currentUser,com.covoiturage.client.presenter.LoginPresenter.Display,go(Lcom.google.gwt.user.client.ui.HasWidgets;),eventBus,display">
+    <children xsi:type="editmodel:CompartmentEditModel" size="93,87">
+      <children xsi:type="editmodel:AttributeEditModel" name="eventBus" size="75,16" id="{UMLID=_T9_LIEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="display" size="69,21" id="{UMLID=_T999AEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="currentUser" size="93,21" id="{UMLID=_T98u4EcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rpcService" size="88,21" id="{UMLID=_T97gwEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="113,72">
+      <children xsi:type="editmodel:MethodEditModel" name="LoginPresenter" size="113,16" id="{UMLID=_T-TUMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="go" size="52,16" id="{UMLID=_T-AZQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="bind" size="60,16" id="{UMLID=_T-YMsEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="login" size="62,16" id="{UMLID=_T-W-kUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="158,170">
+      <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.4" name="Display" size="158,168" timstampe="198" id="{UMLID=_BwoC0UcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/LoginPresenter$Display}" runTimeClassModel="getPassword(),getAddUserButton(),getSignInLink(),getSendLoginButton(),asWidget(),getLogin()">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel" size="137,108">
+          <children xsi:type="editmodel:MethodEditModel" name="getSendLoginButton" size="137,16" id="{UMLID=_UBi1cEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="asWidget" size="85,16" id="{UMLID=_UBZrgEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getAddUserButton" size="129,16" id="{UMLID=_UBbgsUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getLogin" size="81,16" id="{UMLID=_UBfLEEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getPassword" size="105,16" id="{UMLID=_UBdV4EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getSignInLink" size="103,16" id="{UMLID=_UBhAQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_T9QyYEcqEeCRe4E2Vm0niQ}" source="//@children.0" target="//@children.10" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="205,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,78"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_T_V2AUcqEeCRe4E2Vm0niQ}" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="205,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,96"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_UAXwwUcqEeCRe4E2Vm0niQ}" source="//@children.0" target="//@children.5" targetEnd="//@children.0/@sourceConnections.2/@children.2" label="//@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,310" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="261,101"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_UBEUUEcqEeCRe4E2Vm0niQ}" source="//@children.0" target="//@children.5" targetEnd="//@children.0/@sourceConnections.3/@children.2" label="//@children.0/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="0,300" id="{UMLID=_UBEUUUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="currentUser" location="261,111" id="{UMLID=_T98u4EcqEeCRe4E2Vm0niQ}" roleLabel="//@children.0/@sourceConnections.3/@children.2/@children.0" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- currentUser" location="791,3379" size="65,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_UBDtQEcqEeCRe4E2Vm0niQ}" source="//@children.0" target="//@children.0/@children.2/@children.0" targetEnd="//@children.0/@sourceConnections.4/@children.2" label="//@children.0/@sourceConnections.4/@children.0" sourceEnd="//@children.0/@sourceConnections.4/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="205,84" id="{UMLID=_UBDtQUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="display" location="158,84" id="{UMLID=_T999AEcqEeCRe4E2Vm0niQ}" roleLabel="//@children.0/@sourceConnections.4/@children.2/@children.0" navigable="true" changeability="2" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- display" location="1263,3083" size="41,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.4" name="AddUserView" location="2643,1523" size="163,353" timstampe="1122" stereotype="" id="{UMLID=_eTk7YEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.view/AddUserView}" runTimeClassModel="labelLastName,lastName,AddUserView(),getPassword(),labelPassword,asWidget(),password,emailAdress,getAddUserButton(),labelLogin,labelEmail,labelFirstName,addButton,login,getAddButton(),firstName,getLogin()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,198">
+      <children xsi:type="editmodel:AttributeEditModel" name="addButton" size="78,16" id="{UMLID=_BXtMgEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="labelFirstName" size="99,16" id="{UMLID=_BXr-YEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="labelLastName" size="99,16" id="{UMLID=_BXl3wEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="labelEmail" size="75,16" id="{UMLID=_BXqJMEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="labelPassword" size="101,16" id="{UMLID=_BX4ysEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="labelLogin" size="77,16" id="{UMLID=_BXo7EEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="firstName" size="75,16" id="{UMLID=_BYAugEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lastName" size="73,16" id="{UMLID=_BXns8UcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="emailAdress" size="89,16" id="{UMLID=_BXa4oEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="login" size="51,16" id="{UMLID=_BX3kkEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="password" size="79,16" id="{UMLID=_BYCjsEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="129,108">
+      <children xsi:type="editmodel:MethodEditModel" name="AddUserView" size="109,16" id="{UMLID=_BYR0QEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAddUserButton" size="129,16" id="{UMLID=_BYeokEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="asWidget" size="85,16" id="{UMLID=_BYUQgEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAddButton" size="106,16" id="{UMLID=_BYFnAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPassword" size="105,16" id="{UMLID=_BYDx0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLogin" size="81,16" id="{UMLID=_BYSbUEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.15/@sourceConnections.1 //@children.15/@sourceConnections.8 //@children.6/@sourceConnections.1 //@children.0/@sourceConnections.1 //@children.13/@sourceConnections.0" name="UserAccountServiceAsync" location="1553,2231" size="204,96" timstampe="35" id="{UMLID=_c3legEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client/UserAccountServiceAsync}" runTimeClassModel="login(Ljava.lang.String;Ljava.lang.String;Lcom.covoiturage.shared.UserInfo;),addUser(Ljava.lang.String;Ljava.lang.String;Lcom.covoiturage.shared.UserInfo;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="81,36">
+      <children xsi:type="editmodel:MethodEditModel" name="login" size="62,16" id="{UMLID=_BNEp0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addUser" size="81,16" id="{UMLID=_BNncYEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_TzCfYEcqEeCRe4E2Vm0niQ}" source="//@children.2" target="//@children.6" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="rpcService" location="145,96" id="{UMLID=_Tw_Q8EcqEeCRe4E2Vm0niQ}" attachSource="true" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- rpcService" location="1631,2334" size="60,13" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="0,39" id="{UMLID=_TzCfYUcqEeCRe4E2Vm0niQ}" flags="1"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="{UMLID=_UBEUUkcqEeCRe4E2Vm0niQ}" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="rpcService" location="20,96" id="{UMLID=_T97gwEcqEeCRe4E2Vm0niQ}" attachSource="true" roleLabel="//@children.2/@sourceConnections.1/@children.1/@children.0" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- rpcService" location="1580,2334" size="60,13" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="205,20" id="{UMLID=_UBEUU0cqEeCRe4E2Vm0niQ}" flags="1"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.17/@sourceConnections.0 //@children.17/@sourceConnections.1" name="SendLoginEventHandler" location="3312,796" size="237,78" timstampe="7" id="{UMLID=_BgpGEEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/SendLoginEventHandler}" runTimeClassModel="onSendLogin(Lcom.covoiturage.client.event.SendLoginEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onSendLogin" size="103,16" id="{UMLID=_UcgTIEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_UcsgYEcqEeCRe4E2Vm0niQ}" source="//@children.3" target="//@children.17" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,78" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="187,6"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.2 //@children.7/@sourceConnections.0" name="AddUserEvent" location="1109,1371" size="171,106" timstampe="111" stereotype="" id="{UMLID=_eTnXoEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/AddUserEvent}" runTimeClassModel="dispatch(Lcom.covoiturage.client.event.AddUserEventHandler;),getAssociatedType(),TYPE">
+    <children xsi:type="editmodel:CompartmentEditModel" size="61,23">
+      <children xsi:type="editmodel:AttributeEditModel" name="TYPE" size="61,21" id="{UMLID=_BP1p8EcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,36">
+      <children xsi:type="editmodel:MethodEditModel" name="getAssociatedType" size="134,16" id="{UMLID=_BQGIoEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dispatch" size="81,16" id="{UMLID=_BP6icUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_BRyxwUcqEeCRe4E2Vm0niQ}" source="//@children.4" target="//@children.7" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="221,77"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="{UMLID=_BShxkEcqEeCRe4E2Vm0niQ}" source="//@children.4" target="//@children.7" targetEnd="//@children.4/@sourceConnections.1/@children.2" label="//@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="0,20" id="{UMLID=_BShxkUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="TYPE" location="201,78" id="{UMLID=_BP1p8EcqEeCRe4E2Vm0niQ}" roleLabel="//@children.4/@sourceConnections.1/@children.2/@children.1" orderingLabel="//@children.4/@sourceConnections.1/@children.2/@children.0" scopeKind="1" navigable="true" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="698,1033" size="34,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="+ TYPE" location="628,1033" size="35,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.2 //@children.0/@sourceConnections.3 //@children.12/@sourceConnections.0" name="UserInfo" location="523,3261" size="261,497" timstampe="65" stereotype="" id="{UMLID=_BNlAIEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.shared/UserInfo}" runTimeClassModel="getLogoutUrl(),UserInfo(Ljava.lang.Long;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),password,id,isLoggedIn(),toDTO(Ljava.lang.Object;),setPassword(Ljava.lang.String;),setLoggedIn(Z),loginUrl,setId(Ljava.lang.Long;),login,getLogin(),logoutUrl,getPassword(),setLoginUrl(Ljava.lang.String;),UserInfo(),emailAddress,setLogin(Ljava.lang.String;),loggedIn,setLogoutUrl(Ljava.lang.String;),setEmailAddress(Ljava.lang.String;),getId(),getEmailAddress(),getLoginUrl(),getDefaultUser()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,126">
+      <children xsi:type="editmodel:AttributeEditModel" name="id" size="37,16" id="{UMLID=_TtHdkEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="login" size="51,16" id="{UMLID=_TtMWEUcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="emailAddress" size="95,16" id="{UMLID=_TtLvAEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loginUrl" size="64,16" id="{UMLID=_TtKg4EcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="logoutUrl" size="71,16" id="{UMLID=_TtJSwkcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="password" size="79,16" id="{UMLID=_TtOyUEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="loggedIn" size="69,16" id="{UMLID=_TtNkMEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="121,324">
+      <children xsi:type="editmodel:MethodEditModel" name="UserInfo" size="81,16" id="{UMLID=_Ttq3MEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UserInfo" size="81,16" id="{UMLID=_Tt3rgUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isLoggedIn" size="92,16" id="{UMLID=_TtjicEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getId" size="63,16" id="{UMLID=_TtlXoEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setId" size="63,16" id="{UMLID=_TuAOYEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLogin" size="81,16" id="{UMLID=_Tta_kEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setLogin" size="81,16" id="{UMLID=_TtnM0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getEmailAddress" size="121,16" id="{UMLID=_TtXVMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setEmailAddress" size="121,16" id="{UMLID=_TthGMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDefaultUser" size="112,16" id="{UMLID=_TtfRAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setLoggedIn" size="99,16" id="{UMLID=_Tt-ZMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setLoginUrl" size="94,16" id="{UMLID=_TtTq0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLoginUrl" size="94,16" id="{UMLID=_Tt0oMUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setLogoutUrl" size="101,16" id="{UMLID=_TtPZYEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLogoutUrl" size="101,16" id="{UMLID=_Ttc0wEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toDTO" size="70,16" id="{UMLID=_TtsFUEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setPassword" size="105,16" id="{UMLID=_TtpCAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPassword" size="105,16" id="{UMLID=_Tt8kAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="AddUserPresenter" location="2227,2877" size="222,327" timstampe="301" stereotype="" id="{UMLID=_BWazEEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/AddUserPresenter}" runTimeClassModel="rpcService,bind(),AddUserPresenter(Lcom.covoiturage.client.UserAccountServiceAsync;Lcom.google.gwt.event.shared.HandlerManager;Lcom.covoiturage.client.presenter.AddUserPresenter.Display;),go(Lcom.google.gwt.user.client.ui.HasWidgets;),eventBus,display,com.covoiturage.client.presenter.AddUserPresenter.Display,addUser()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="88,64">
+      <children xsi:type="editmodel:AttributeEditModel" name="eventBus" size="75,16" id="{UMLID=_TxNTYEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="display" size="69,21" id="{UMLID=_TxAfEUcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rpcService" size="88,21" id="{UMLID=_Tw_Q8EcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="130,72">
+      <children xsi:type="editmodel:MethodEditModel" name="AddUserPresenter" size="130,16" id="{UMLID=_TxOhgUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="go" size="52,16" id="{UMLID=_TxTaAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="bind" size="60,16" id="{UMLID=_TxSL4EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addUser" size="81,16" id="{UMLID=_TxXrcEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="127,134">
+      <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.6/@sourceConnections.2" name="Display" size="127,132" timstampe="301" id="{UMLID=_BWbaIUcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/AddUserPresenter$Display}" runTimeClassModel="getPassword(),getAddButton(),asWidget(),getLogin()">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel" size="106,72">
+          <children xsi:type="editmodel:MethodEditModel" name="asWidget" size="85,16" id="{UMLID=_TzqKcEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getAddButton" size="106,16" id="{UMLID=_TzkD0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getPassword" size="105,16" id="{UMLID=_TzoVQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getLogin" size="81,16" id="{UMLID=_Tzl5AEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_TwzDsEcqEeCRe4E2Vm0niQ}" source="//@children.6" target="//@children.10" targetEnd="//@children.6/@sourceConnections.0/@children.2" label="//@children.6/@sourceConnections.0/@children.0" sourceEnd="//@children.6/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="159,78"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_Txve4UcqEeCRe4E2Vm0niQ}" source="//@children.6" target="//@children.2" targetEnd="//@children.6/@sourceConnections.1/@children.2" label="//@children.6/@sourceConnections.1/@children.0" sourceEnd="//@children.6/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,49" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="155,96"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_TzB4UEcqEeCRe4E2Vm0niQ}" source="//@children.6" target="//@children.6/@children.2/@children.0" targetEnd="//@children.6/@sourceConnections.2/@children.2" label="//@children.6/@sourceConnections.2/@children.0" sourceEnd="//@children.6/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="222,66" id="{UMLID=_TzB4UUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="display" location="127,66" id="{UMLID=_TxAfEUcqEeCRe4E2Vm0niQ}" roleLabel="//@children.6/@sourceConnections.2/@children.2/@children.0" navigable="true" changeability="2" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- display" location="2445,3137" size="41,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.4/@sourceConnections.1" name="AddUserEventHandler" location="469,948" size="221,78" timstampe="30" id="{UMLID=_BP57YEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/AddUserEventHandler}" runTimeClassModel="onAddUser(Lcom.covoiturage.client.event.AddUserEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onAddUser" size="95,16" id="{UMLID=_UZGZ0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_UZLSUEcqEeCRe4E2Vm0niQ}" source="//@children.7" target="//@children.4" targetEnd="//@children.7/@sourceConnections.0/@children.2" label="//@children.7/@sourceConnections.0/@children.0" sourceEnd="//@children.7/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="211,78" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,10"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.6" name="MapView" location="2733,1951" size="174,281" timstampe="960" stereotype="" id="{UMLID=_eTolwEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.view/MapView}" runTimeClassModel="mapDecorator,sendAddress,MapView(),originAddress,directionsPanel,mapWidget,getDirectionsPanel(),addressPanel,getDestinationAddress(),destinationAddress,getOriginAddress(),getMap(),getSendAddressButton()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,126">
+      <children xsi:type="editmodel:AttributeEditModel" name="mapDecorator" size="97,16" id="{UMLID=_BlctkEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mapWidget" size="82,16" id="{UMLID=_BmDxkkcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sendAddress" size="95,16" id="{UMLID=_Bll3gEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="originAddress" size="97,16" id="{UMLID=_BloTwEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="destinationAddress" size="123,16" id="{UMLID=_BlnFoEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="addressPanel" size="95,16" id="{UMLID=_BmM7gkcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="directionsPanel" size="102,16" id="{UMLID=_BlxdsEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="153,108">
+      <children xsi:type="editmodel:MethodEditModel" name="MapView" size="86,16" id="{UMLID=_BmXTkEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSendAddressButton" size="153,16" id="{UMLID=_BmtR0EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getOriginAddress" size="125,16" id="{UMLID=_BmkH4EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDestinationAddress" size="150,16" id="{UMLID=_BmyKUUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMap" size="75,16" id="{UMLID=_BmX6oEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDirectionsPanel" size="129,16" id="{UMLID=_BmhroEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.3 //@children.11/@sourceConnections.0" name="NewUserEvent" location="1917,799" size="174,106" timstampe="51" stereotype="" id="{UMLID=_eTmJgEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/NewUserEvent}" runTimeClassModel="dispatch(Lcom.covoiturage.client.event.NewUserEventHandler;),getAssociatedType(),TYPE">
+    <children xsi:type="editmodel:CompartmentEditModel" size="61,23">
+      <children xsi:type="editmodel:AttributeEditModel" name="TYPE" size="61,21" id="{UMLID=_BS-dgEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,36">
+      <children xsi:type="editmodel:MethodEditModel" name="getAssociatedType" size="134,16" id="{UMLID=_BTQxYEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dispatch" size="81,16" id="{UMLID=_BTNHAUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_BUh8sEcqEeCRe4E2Vm0niQ}" source="//@children.9" target="//@children.11" targetEnd="//@children.9/@sourceConnections.0/@children.2" label="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="67,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="156,78"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="{UMLID=_BWBxgEcqEeCRe4E2Vm0niQ}" source="//@children.9" target="//@children.11" targetEnd="//@children.9/@sourceConnections.1/@children.2" label="//@children.9/@sourceConnections.1/@children.0" sourceEnd="//@children.9/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="77,0" id="{UMLID=_BWBxgUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="TYPE" location="166,78" id="{UMLID=_BS-dgEcqEeCRe4E2Vm0niQ}" roleLabel="//@children.9/@sourceConnections.1/@children.2/@children.1" orderingLabel="//@children.9/@sourceConnections.1/@children.2/@children.0" scopeKind="1" navigable="true" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="1953,135" size="34,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="+ TYPE" location="2001,135" size="35,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.15/@sourceConnections.0 //@children.6/@sourceConnections.0 //@children.14/@sourceConnections.0 //@children.0/@sourceConnections.0" name="Presenter" location="1746,2520" size="169,78" timstampe="9" id="{UMLID=_ePGEAEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/Presenter}" runTimeClassModel="go(Lcom.google.gwt.user.client.ui.HasWidgets;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
+      <children xsi:type="editmodel:MethodEditModel" name="go" size="52,16" id="{UMLID=_BMbJkEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.9/@sourceConnections.0 //@children.9/@sourceConnections.1" name="NewUserEventHandler" location="1828,50" size="224,78" timstampe="30" id="{UMLID=_BTMf8EcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/NewUserEventHandler}" runTimeClassModel="onNewUser(Lcom.covoiturage.client.event.NewUserEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onNewUser" size="98,16" id="{UMLID=_UasVQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_Uax00EcqEeCRe4E2Vm0niQ}" source="//@children.11" target="//@children.9" targetEnd="//@children.11/@sourceConnections.0/@children.2" label="//@children.11/@sourceConnections.0/@children.0" sourceEnd="//@children.11/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="146,78" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="57,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" name="UserAccountService" location="50,3766" size="167,128" timstampe="51" id="{UMLID=_B9WQMEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client/UserAccountService}" runTimeClassModel="login(Ljava.lang.String;Ljava.lang.String;),addUser(Ljava.lang.String;Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="81,36">
+      <children xsi:type="editmodel:MethodEditModel" name="login" size="62,16" id="{UMLID=_B93NkEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addUser" size="81,16" id="{UMLID=_B-lmUEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_B_u10UcqEeCRe4E2Vm0niQ}" source="//@children.12" target="//@children.5" targetEnd="//@children.12/@sourceConnections.0/@children.2" label="//@children.12/@sourceConnections.0/@children.0" sourceEnd="//@children.12/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="167,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,497"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Covoiturage" location="2124,2097" size="131,173" timstampe="24" stereotype="" id="{UMLID=_cxMioEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client/Covoiturage}" runTimeClassModel="AppController,onModuleLoad(),RootPanel,Covoiturage,HandlerManager,Default actor,com.covoiturage.client.Covoiturage.Covoiturage.onModuleLoad(),GWT">
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="Default actor" size="91,16" description="UML" id="{UMLID=__B9D0UcuEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="GWT" size="53,16" description="UML" id="{UMLID=__ICdsEcuEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="Covoiturage" size="87,16" description="UML" id="{UMLID=__CDxgEcuEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="HandlerManager" size="108,16" description="UML" id="{UMLID=__EjE0EcuEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="RootPanel" size="77,16" description="UML" id="{UMLID=__VjVQEcuEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="AppController" size="95,16" description="UML" id="{UMLID=__M9Z8UcuEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="110,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onModuleLoad" size="110,16" id="{UMLID=_c1cwgEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_c5SHoEcpEeCRe4E2Vm0niQ}" source="//@children.13" target="//@children.2" targetEnd="//@children.13/@sourceConnections.0/@children.2" label="//@children.13/@sourceConnections.0/@children.0" sourceEnd="//@children.13/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,153" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="204,19"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_c6trAUcpEeCRe4E2Vm0niQ}" source="//@children.13" target="//@children.15" targetEnd="//@children.13/@sourceConnections.1/@children.2" label="//@children.13/@sourceConnections.1/@children.0" sourceEnd="//@children.13/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="138,222"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="MapPresenter" location="1987,3314" size="196,412" timstampe="1217" stereotype="" id="{UMLID=_BjY4EEcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/MapPresenter}" runTimeClassModel="bind(),geocoder,addressOrigin,com.covoiturage.client.presenter.MapPresenter.Display,clearGeolocate(),go(Lcom.google.gwt.user.client.ui.HasWidgets;),addressDestination,eventBus,display,MapPresenter(Lcom.google.gwt.event.shared.HandlerManager;Lcom.covoiturage.client.presenter.MapPresenter.Display;),doGeolocate()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,95">
+      <children xsi:type="editmodel:AttributeEditModel" name="eventBus" size="75,16" id="{UMLID=_T2NIIEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="display" size="69,21" id="{UMLID=_T2L6AEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="geocoder" size="75,16" id="{UMLID=_T2CJAEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="addressOrigin" size="97,16" id="{UMLID=_T2ElQkcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="addressDestination" size="122,16" id="{UMLID=_T2Kr4EcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="113,90">
+      <children xsi:type="editmodel:MethodEditModel" name="MapPresenter" size="107,16" id="{UMLID=_T2pNAEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="bind" size="60,16" id="{UMLID=_T2xv4EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="go" size="52,16" id="{UMLID=_T2OWQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clearGeolocate" size="113,16" id="{UMLID=_T21aQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="doGeolocate" size="101,16" id="{UMLID=_T20zMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="174,170">
+      <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.14/@sourceConnections.1" name="Display" size="174,168" timstampe="1217" id="{UMLID=_BjZfIUcqEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.presenter/MapPresenter$Display}" runTimeClassModel="getOriginAddress(),getMap(),getDirectionsPanel(),asWidget(),getSendAddressButton(),getDestinationAddress()">
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <children xsi:type="editmodel:CompartmentEditModel" size="153,108">
+          <children xsi:type="editmodel:MethodEditModel" name="asWidget" size="85,16" id="{UMLID=_T7qP4EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getSendAddressButton" size="153,16" id="{UMLID=_T7sFEUcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getDestinationAddress" size="150,16" id="{UMLID=_T7hF8EcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getMap" size="75,16" id="{UMLID=_T7epsEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getOriginAddress" size="125,16" id="{UMLID=_T7c0gEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+          <children xsi:type="editmodel:MethodEditModel" name="getDirectionsPanel" size="129,16" id="{UMLID=_T7aYQEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_T0w9sEcqEeCRe4E2Vm0niQ}" source="//@children.14" target="//@children.10" targetEnd="//@children.14/@sourceConnections.0/@children.2" label="//@children.14/@sourceConnections.0/@children.0" sourceEnd="//@children.14/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="169,68"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_T6pjQEcqEeCRe4E2Vm0niQ}" source="//@children.14" target="//@children.14/@children.2/@children.0" targetEnd="//@children.14/@sourceConnections.1/@children.2" label="//@children.14/@sourceConnections.1/@children.0" sourceEnd="//@children.14/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="196,84" id="{UMLID=_T6pjQUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="display" location="174,84" id="{UMLID=_T2L6AEcqEeCRe4E2Vm0niQ}" roleLabel="//@children.14/@sourceConnections.1/@children.2/@children.0" navigable="true" changeability="2" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- display" location="2179,3641" size="41,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.1" name="AppController" location="1937,1605" size="138,232" timstampe="410" stereotype="" id="{UMLID=_c3R8gEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client/AppController}" runTimeClassModel="rpcService,bind(),onValueChange(Ljava.lang.String;),SendLogin(),container,AddUser(),go(Lcom.google.gwt.user.client.ui.HasWidgets;),eventBus,NewUser(),AppController(Lcom.covoiturage.client.UserAccountServiceAsync;Lcom.google.gwt.event.shared.HandlerManager;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="88,59">
+      <children xsi:type="editmodel:AttributeEditModel" name="eventBus" size="75,16" id="{UMLID=_eQxfAUcpEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="rpcService" size="88,21" id="{UMLID=_eQqKQEcpEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="container" size="74,16" id="{UMLID=_eQt0oEcpEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="117,126">
+      <children xsi:type="editmodel:MethodEditModel" name="AppController" size="106,16" id="{UMLID=_eSevMEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="bind" size="60,16" id="{UMLID=_eQ1JYEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="AddUser" size="83,16" id="{UMLID=_eSdhEEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="SendLogin" size="91,16" id="{UMLID=_eQzUMEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="NewUser" size="86,16" id="{UMLID=_eSmrAEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="go" size="52,16" id="{UMLID=_eSR64EcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onValueChange" size="117,16" id="{UMLID=_eQ2XgEcpEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_ePGrEEcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.10" targetEnd="//@children.15/@sourceConnections.0/@children.2" label="//@children.15/@sourceConnections.0/@children.0" sourceEnd="//@children.15/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,232" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="169,10"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_eTv6gEcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.2" targetEnd="//@children.15/@sourceConnections.1/@children.2" label="//@children.15/@sourceConnections.1/@children.0" sourceEnd="//@children.15/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="50,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,216" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="142,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eU5xEUcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.4" targetEnd="//@children.15/@sourceConnections.2/@children.2" label="//@children.15/@sourceConnections.2/@children.0" sourceEnd="//@children.15/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="38,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="171,96"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eVY5QUcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.9" targetEnd="//@children.15/@sourceConnections.3/@children.2" label="//@children.15/@sourceConnections.3/@children.0" sourceEnd="//@children.15/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="38,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="68,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="88,106"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eWsg0EcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.1" targetEnd="//@children.15/@sourceConnections.4/@children.2" label="//@children.15/@sourceConnections.4/@children.0" sourceEnd="//@children.15/@sourceConnections.4/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="70,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="138,115" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,197"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eX8eAUcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.17" targetEnd="//@children.15/@sourceConnections.5/@children.2" label="//@children.15/@sourceConnections.5/@children.0" sourceEnd="//@children.15/@sourceConnections.5/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="38,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="138,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,106"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eYMVoUcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.8" targetEnd="//@children.15/@sourceConnections.6/@children.2" label="//@children.15/@sourceConnections.6/@children.0" sourceEnd="//@children.15/@sourceConnections.6/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="70,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="128,232" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,10"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_eY8jkUcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.16" targetEnd="//@children.15/@sourceConnections.7/@children.2" label="//@children.15/@sourceConnections.7/@children.0" sourceEnd="//@children.15/@sourceConnections.7/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="70,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="158,235"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_eabKQEcpEeCRe4E2Vm0niQ}" source="//@children.15" target="//@children.2" targetEnd="//@children.15/@sourceConnections.8/@children.2" label="//@children.15/@sourceConnections.8/@children.0" sourceEnd="//@children.15/@sourceConnections.8/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="0,226" id="{UMLID=_eabKQUcpEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="rpcService" location="132,0" id="{UMLID=_eQqKQEcpEeCRe4E2Vm0niQ}" roleLabel="//@children.15/@sourceConnections.8/@children.2/@children.0" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="- rpcService" location="1618,2211" size="60,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.7" name="LoginView" location="1512,1126" size="158,245" timstampe="225" stereotype="" id="{UMLID=_eTpz4EcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.view/LoginView}" runTimeClassModel="addUserButton,signInLink,getPassword(),getAddUserButton(),getSignInLink(),passField,nameField,LoginView(),sendButton,getSendLoginButton(),getLogin()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="sendButton" size="84,16" id="{UMLID=_ByMwIEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nameField" size="77,16" id="{UMLID=_ByLiAEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="passField" size="75,16" id="{UMLID=_ByC_IEcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="addUserButton" size="101,16" id="{UMLID=_Bx3Y8EcqEeCRe4E2Vm0niQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="signInLink" size="76,16" id="{UMLID=_Bx4nEEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,108">
+      <children xsi:type="editmodel:MethodEditModel" name="LoginView" size="92,16" id="{UMLID=_fShoMEcvEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSendLoginButton" size="137,16" id="{UMLID=_ByZkcEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAddUserButton" size="129,16" id="{UMLID=_ByPMYEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPassword" size="105,16" id="{UMLID=_Byr4UEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLogin" size="81,16" id="{UMLID=_ByqDIEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSignInLink" size="103,16" id="{UMLID=_BygSIEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.15/@sourceConnections.5 //@children.3/@sourceConnections.0" name="SendLoginEvent" location="2594,1077" size="187,106" timstampe="8" stereotype="" id="{UMLID=_eTZ8QEcpEeCRe4E2Vm0niQ,JavaID=com.covoiturage.client.event/SendLoginEvent}" runTimeClassModel="dispatch(Lcom.covoiturage.client.event.SendLoginEventHandler;),getAssociatedType(),TYPE">
+    <children xsi:type="editmodel:CompartmentEditModel" size="61,23">
+      <children xsi:type="editmodel:AttributeEditModel" name="TYPE" size="61,21" id="{UMLID=_BglbsEcqEeCRe4E2Vm0niQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="134,36">
+      <children xsi:type="editmodel:MethodEditModel" name="getAssociatedType" size="134,16" id="{UMLID=_BgqUMEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+      <children xsi:type="editmodel:MethodEditModel" name="dispatch" size="81,16" id="{UMLID=_Bg2hcEcqEeCRe4E2Vm0niQ}" isAssociationMemeber="true"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" id="{UMLID=_BibOwUcqEeCRe4E2Vm0niQ}" source="//@children.17" target="//@children.3" targetEnd="//@children.17/@sourceConnections.0/@children.2" label="//@children.17/@sourceConnections.0/@children.0" sourceEnd="//@children.17/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="73,26" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="187,26" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="30,78"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_BjAdkEcqEeCRe4E2Vm0niQ}" source="//@children.17" target="//@children.3" targetEnd="//@children.17/@sourceConnections.1/@children.2" label="//@children.17/@sourceConnections.1/@children.0" sourceEnd="//@children.17/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="187,16" id="{UMLID=_BjAdkUcqEeCRe4E2Vm0niQ}" attachSource="true" flags="1"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="TYPE" location="20,78" id="{UMLID=_BglbsEcqEeCRe4E2Vm0niQ}" roleLabel="//@children.17/@sourceConnections.1/@children.2/@children.1" orderingLabel="//@children.17/@sourceConnections.1/@children.2/@children.0" scopeKind="1" navigable="true" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="3277,881" size="34,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="+ TYPE" location="3339,881" size="35,13" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Naturel" methodSorter="Naturel" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="0,3136" rulerUnit="cm" gridShow="true">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Naturel" methodSorter="Naturel" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Naturel" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true"/>
+</editmodel:ClassDiagramEditModel>

@@ -1,6 +1,7 @@
 package com.covoiturage.client.presenter;
 
 import com.covoiturage.client.UserAccountServiceAsync;
+import com.covoiturage.client.event.AddUserEvent;
 
 import com.covoiturage.shared.UserInfo;
 import com.google.gwt.core.client.GWT;
@@ -8,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -47,7 +49,7 @@ public class AddUserPresenter implements Presenter{
 		display.getAddButton().addClickHandler(new ClickHandler() {   
 		      public void onClick(ClickEvent event) {
 		    	  addUser();
-		        //eventBus.fireEvent(new AddUserEvent());
+		        
 		      }
 		    });
 	}
@@ -60,6 +62,8 @@ public class AddUserPresenter implements Presenter{
 		      }
 
 		      public void onSuccess(UserInfo result) {
+		    	  Window.alert("User "+result.getLogin()+" added");
+		    	  eventBus.fireEvent(new AddUserEvent());
 		    	
 		      }
 		    });

@@ -1,5 +1,7 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.event.AddUserEvent;
+import com.covoiturage.client.event.AddUserEventHandler;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.NewUserEventHandler;
 import com.covoiturage.client.event.SendLoginEvent;
@@ -48,12 +50,24 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
                 NewUser();
               }
             });
+    eventBus.addHandler(AddUserEvent.TYPE,
+            new AddUserEventHandler() {
+              public void onAddUser(AddUserEvent event) {
+                AddUser();
+              }
+            });
    
 
   }
   
    
-  private void SendLogin() {
+  protected void AddUser() {
+
+	  
+	  History.newItem("Login");
+}
+
+private void SendLogin() {
 	  History.newItem("sendLogin");
 
 	

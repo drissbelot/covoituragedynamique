@@ -1,5 +1,6 @@
 package com.covoiturage.server;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -7,8 +8,9 @@ import javax.jdo.PersistenceManager;
 
 
 import com.covoiturage.client.MapService;
+import com.covoiturage.shared.Journey;
+import com.covoiturage.shared.UserInfo;
 
-import com.covoiturage.shared.SimpleTravel;
 
 
 
@@ -22,13 +24,15 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public SimpleTravel saveJourney(List<String> steps){
-		SimpleTravel simpleTravel = new SimpleTravel();
+	public Journey saveJourney(List<String> steps, Date date, UserInfo driver){
+		Journey journey = new Journey();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try
 		{
-				simpleTravel.setSteps(steps);
-				pm.makePersistent(simpleTravel);
+				journey.setSteps(steps);
+				journey.setDate(date);
+				journey.setDriver(driver);
+				pm.makePersistent(journey);
 			
 
 		}
@@ -38,7 +42,7 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 			pm.close();
 		}
 
-		return simpleTravel;
+		return journey;
 	}
 
 

@@ -1,14 +1,15 @@
 package com.covoiturage.client.view;
 import com.covoiturage.client.presenter.LoginPresenter;
+
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class LoginView extends Composite implements LoginPresenter.Display {
 	final Button sendButton = new Button("Login");
@@ -20,31 +21,29 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 		
 		  DecoratorPanel LoginDecorator = new DecoratorPanel();
 		    initWidget(LoginDecorator); 
-		    LoginDecorator.setWidth("100%");
+
 		    
 		    
-		    HorizontalPanel hPanel = new HorizontalPanel();
-		    hPanel.setBorderWidth(0);
-		    hPanel.setSpacing(0);
-		    hPanel.setHorizontalAlignment(HorizontalPanel.ALIGN_LEFT);
+		    VerticalPanel loginPanel = new VerticalPanel();
+
+
 
 		nameField.setText("Login");
 		
 		passField.setText("Password");
 
 		final Label errorLabel = new Label();
-
 		
 		sendButton.addStyleName("sendButton");
 
-		hPanel.add(nameField);
+		loginPanel.add(nameField);
 
-		hPanel.add(errorLabel);
-		hPanel.add(passField);
-		hPanel.add(sendButton);
-		hPanel.add(addUserButton);
-		hPanel.add(signInLink);
-		LoginDecorator.setWidget(hPanel);
+		loginPanel.add(errorLabel);
+		loginPanel.add(passField);
+		loginPanel.add(sendButton);
+		loginPanel.add(addUserButton);
+		loginPanel.add(signInLink);
+		LoginDecorator.setWidget(loginPanel);
 		nameField.setFocus(true);
 		nameField.selectAll();
 
@@ -61,6 +60,7 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	public  String getPassword() {
 		
 		return passField.getText();
+
 	}
 	@Override
 	public String getLogin() {

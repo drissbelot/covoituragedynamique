@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.presenter.AddUserPresenter;
+
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -83,7 +84,8 @@ public HasClickHandlers getAddButton() {
 
 public String getPassword() {
 	
-	return password.getText();
+	return  password.getText();
+
 }
 
 

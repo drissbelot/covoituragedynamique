@@ -78,6 +78,7 @@ public class LoginPresenter implements Presenter {
 		        eventBus.fireEvent(new NewUserEvent());
 		      }
 		    });
+		
 	} 
 	
 	private void login()
@@ -93,7 +94,7 @@ public class LoginPresenter implements Presenter {
 
 		    	  
 		        if(currentUser!=null && currentUser.isLoggedIn()) {
-			    	GWT.log(currentUser.getLogin());
+
 			        eventBus.fireEvent(new SendLoginEvent());
 		        } else {
 		        	  Window.alert("Veuillez vous identifiez");

@@ -9,4 +9,6 @@ public interface UserAccountServiceAsync {
 
 	void addUser(String login, String password, AsyncCallback<UserInfo> callback);
 
+	void getUserFromSession(AsyncCallback<UserInfo> callback);
+
 }

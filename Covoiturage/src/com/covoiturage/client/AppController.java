@@ -102,7 +102,7 @@ public void go(final HasWidgets container) {
       }
       else if (token.equals("sendLogin")) {
 
-				presenter = new MapPresenter(mapRpcService, eventBus, new MapView());
+				presenter = new MapPresenter(mapRpcService, userAccountRpcService,eventBus, new MapView());
     	      }
       else if (token.equals("newUser")){
     	  	presenter = new AddUserPresenter(userAccountRpcService,eventBus, new AddUserView());

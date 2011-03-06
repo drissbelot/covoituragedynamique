@@ -1,14 +1,19 @@
 package com.covoiturage.client.presenter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.client.MapServiceAsync;
-import com.covoiturage.shared.SimpleTravel;
+import com.covoiturage.client.UserAccountServiceAsync;
+import com.covoiturage.shared.Journey;
+import com.covoiturage.shared.UserInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapClickHandler;
@@ -25,10 +30,10 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapPresenter implements Presenter {  
 
@@ -51,18 +56,28 @@ public class MapPresenter implements Presenter {
 		DirectionsPanel getDirectionsPanel();
 
 		HasClickHandlers getSaveJourneyButton();
+
+		DatePicker getDateOfJourney();
+
+		RadioButton getDriverRadioButton();
+
+		HasClickHandlers getPassengerRadioButton();
 	}
 
-	private final MapServiceAsync rpcService;
+	private final MapServiceAsync mapRpcService;
+	private final UserAccountServiceAsync userRpcService;
 	private final HandlerManager eventBus;
 	private final Display display;
 	private Geocoder geocoder;
+	private Date date;
+	private boolean isDriver, isPassenger;
 
 	private List<String> listAddress=null;
 
 
-	public MapPresenter(MapServiceAsync rpcService, HandlerManager eventBus, Display view) {
-		this.rpcService = rpcService;
+	public MapPresenter(MapServiceAsync mapRpcService, UserAccountServiceAsync userRpcService,HandlerManager eventBus, Display view) {
+		this.mapRpcService = mapRpcService;
+		this.userRpcService = userRpcService;
 		this.eventBus = eventBus;
 		this.display = view;
 	}
@@ -93,65 +108,102 @@ public class MapPresenter implements Presenter {
 
 			}
 		});
+		display.getDateOfJourney().addValueChangeHandler(new ValueChangeHandler<Date>(){
 
+
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				date = event.getValue();
+
+			}
+		});
+		display.getDriverRadioButton().addClickHandler(new ClickHandler() {
+
+			public void onClick(ClickEvent event) {
+				isDriver = display.getDriverRadioButton().getValue();
+			}
+		});
+		display.getPassengerRadioButton().addClickHandler(new ClickHandler() {
+
+			public void onClick(ClickEvent event) {
+				isPassenger = display.getDriverRadioButton().getValue();
+			}
+		});
 
 
 	}
 
 
 	protected void saveJourney() {
-		
+
 
 		geocoder= new Geocoder();
 		listAddress = new ArrayList<String>();
-			geocoder.getLatLng(display.getOriginAddress(), new LatLngCallback() {
-				public void onFailure() {
-					Window.alert(" not found");
-				}
+		geocoder.getLatLng(display.getOriginAddress(), new LatLngCallback() {
+			public void onFailure() {
+				Window.alert(" not found");
+			}
 
-				public void onSuccess(LatLng point) {
-					listAddress.add(point.toString());
-					geocoder= new Geocoder();
+			public void onSuccess(LatLng point) {
+				listAddress.add(point.toString());
+				geocoder= new Geocoder();
 
-						geocoder.getLatLng(display.getDestinationAddress(), new LatLngCallback() {
-							public void onFailure() {
-								Window.alert(" not found");
+				geocoder.getLatLng(display.getDestinationAddress(), new LatLngCallback() {
+					public void onFailure() {
+						Window.alert(" not found");
+					}
+
+					public void onSuccess(LatLng point) {
+						listAddress.add(point.toString());
+						userRpcService.getUserFromSession(new AsyncCallback<UserInfo>() {
+							public void onFailure(Throwable caught) {
+
+								GWT.log(caught.getMessage());
+								GWT.log("failure");
+
 							}
 
-							public void onSuccess(LatLng point) {
-								listAddress.add(point.toString());
-			
-									rpcService.saveJourney(listAddress, new AsyncCallback<SimpleTravel>() {
-										public void onFailure(Throwable caught) {
-										
-											GWT.log(caught.getMessage());
-											GWT.log("failure");
-											     
-										}
 
-										
-										public void onSuccess(SimpleTravel result) {
-											
-											Window.alert("Itinéraire sauvé");
-										}
-									});
-							
+							public void onSuccess(UserInfo result) {
+								mapRpcService.saveJourney(listAddress, date,result, new AsyncCallback<Journey>() {
+
+
+								public void onFailure(Throwable caught) {
+
+									GWT.log(caught.getMessage());
+									GWT.log("failure");
+
+								}
+
+
+								public void onSuccess(Journey result) {
+
+									Window.alert("Itinéraire sauvé");
+								}
+
+
+
+							});
 
 							}
 						});
+						
 
-					}
 
-
-				
+				}
 			});
 
 		}
 
 
-		
 
-	
+	});
+
+}
+
+
+
+
+
 
 
 

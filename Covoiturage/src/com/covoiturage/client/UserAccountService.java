@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("userAccount")
 public interface UserAccountService extends RemoteService{
+	public UserInfo getUserFromSession();
 	public UserInfo login(String email, String password);
 
 	public UserInfo addUser(String login, String password);

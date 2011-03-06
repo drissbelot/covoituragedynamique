@@ -8,12 +8,12 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapView extends Composite implements MapPresenter.Display {
-
-
 
 	private FlowPanel mapDecorator;
 	private MapWidget mapWidget;
@@ -23,7 +23,11 @@ public class MapView extends Composite implements MapPresenter.Display {
 	private VerticalPanel addressPanel;
 	private DirectionsPanel directionsPanel;
 	private Button saveJourney;
-
+	private DatePicker dateOfJourney;
+	private RadioButton driverRadioButton;
+	private RadioButton passengerRadioButton;
+	private VerticalPanel typeOfUser;
+	
 	public MapView() {
 		mapDecorator = new FlowPanel();
 		initWidget(mapDecorator);
@@ -38,9 +42,16 @@ public class MapView extends Composite implements MapPresenter.Display {
 		destinationAddress= new TextBox();
 		destinationAddress.setVisibleLength(60);
 		destinationAddress.setText("1 Grand Place, Louvain-la-neuve");
+		dateOfJourney= new DatePicker();
+		driverRadioButton = new RadioButton("groupTypeOfUser", "Driver");
+		passengerRadioButton = new RadioButton("groupTypeOfUser", "Passenger");
+		typeOfUser = new VerticalPanel();
+		typeOfUser.add(driverRadioButton);
+		typeOfUser.add(passengerRadioButton);
+		driverRadioButton.setValue(true);
 		sendAddress= new Button("Locate");
 		saveJourney = new Button("Save journey");
-		
+
 
 		directionsPanel = new DirectionsPanel();
 
@@ -53,8 +64,25 @@ public class MapView extends Composite implements MapPresenter.Display {
 
 		mapDecorator.add(mapWidget);
 		mapDecorator.add(addressPanel);
+		mapDecorator.add(dateOfJourney);
+		
+		
 		mapDecorator.add(saveJourney);
 		mapDecorator.add(directionsPanel);
+	}
+
+
+	public RadioButton getPassengerRadioButton() {
+		return passengerRadioButton;
+	}
+
+
+	public RadioButton getDriverRadioButton() {
+		return driverRadioButton;
+	}
+
+	public DatePicker getDateOfJourney() {
+		return dateOfJourney;
 	}
 
 	public HasClickHandlers getSendAddressButton() {
@@ -63,7 +91,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 
 
 
-	@Override
+
 	public String getOriginAddress() {
 
 		return originAddress.getText();
@@ -74,19 +102,18 @@ public class MapView extends Composite implements MapPresenter.Display {
 	}
 
 
-	@Override
+
 	public MapWidget getMap() {
 
 		return mapWidget;
 	}
 
-	@Override
+
 	public DirectionsPanel getDirectionsPanel() {
 
 		return directionsPanel;
 	}
 
-	@Override
 	public HasClickHandlers getSaveJourneyButton() {
 
 		return saveJourney;

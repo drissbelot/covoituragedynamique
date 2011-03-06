@@ -2,7 +2,7 @@ package com.covoiturage.shared;
 
 import java.io.Serializable;
 
-	
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -10,22 +10,23 @@ import javax.jdo.annotations.PrimaryKey;
 
 
 
-@PersistenceCapable
 
+
+@PersistenceCapable
 public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 1;
 	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	public Long id;
 	@Persistent
 	public String login;
 	@Persistent
 	public String emailAddress;
-	  private String loginUrl;
-	  private String logoutUrl;
-		@Persistent
-	  private String password;
+	private String loginUrl;
+	private String logoutUrl;
+	@Persistent
+	private String password;
 
 	private boolean loggedIn = false;
 
@@ -37,30 +38,31 @@ public class UserInfo implements Serializable {
 		this.id = id;
 		this.login = login;
 		this.setPassword(password);
-		
+
 		this.emailAddress = emailAddress;
 	}
-	  public boolean isLoggedIn() {
-		    return loggedIn;
-		  }
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
 
 	public Long getId() { return id; }
 	public void setId(Long id) { this.id = id; }
 	public String getLogin() { return login; }
-	
+
 	public void setLogin(String login) { this.login= login; }
 	public String getEmailAddress() { return emailAddress; }
 	public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
-	
+
 
 	public static UserInfo getDefaultUser() {
 
 		return null;
 	}
 
+
 	public void setLoggedIn(boolean b) {
 		loggedIn=b;
-		
+
 	}
 
 	public void setLoginUrl(String loginUrl) {
@@ -79,10 +81,6 @@ public class UserInfo implements Serializable {
 		return logoutUrl;
 	}
 
-	public static UserInfo toDTO(Object defaultUser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;

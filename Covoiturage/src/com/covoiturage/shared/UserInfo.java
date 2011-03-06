@@ -11,9 +11,11 @@ import javax.jdo.annotations.PrimaryKey;
 
 
 @PersistenceCapable
-@SuppressWarnings("serial")
+
 public class UserInfo implements Serializable {
-    @PrimaryKey
+
+	private static final long serialVersionUID = 1;
+	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	public Long id;
 	@Persistent

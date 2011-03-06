@@ -14,8 +14,9 @@ public class Covoiturage implements EntryPoint {
 	public void onModuleLoad() { 
 
 	    HandlerManager eventBus = new HandlerManager(null);
-	    UserAccountServiceAsync rpcService = GWT.create(UserAccountService.class);
-	    AppController appViewer = new AppController(rpcService,eventBus);
+	    UserAccountServiceAsync userAccountRpcService = GWT.create(UserAccountService.class);
+	    MapServiceAsync mapRpcService = GWT.create(MapService.class);
+	    AppController appViewer = new AppController(userAccountRpcService,mapRpcService,eventBus);
 	    appViewer.go(RootPanel.get());
 	
 	}

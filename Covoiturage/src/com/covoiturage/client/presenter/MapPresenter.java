@@ -1,5 +1,11 @@
 package com.covoiturage.client.presenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.covoiturage.client.MapServiceAsync;
+import com.covoiturage.shared.SimpleTravel;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -18,6 +24,9 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
+import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -40,18 +49,20 @@ public class MapPresenter implements Presenter {
 		String getOriginAddress();
 
 		DirectionsPanel getDirectionsPanel();
+
+		HasClickHandlers getSaveJourneyButton();
 	}
 
-	// private final MapServiceAsync rpcService;
+	private final MapServiceAsync rpcService;
 	private final HandlerManager eventBus;
 	private final Display display;
 	private Geocoder geocoder;
-	private String addressOrigin;
-	private String addressDestination;
+
+	private List<String> listAddress=null;
 
 
-	public MapPresenter(/*ContactsServiceAsync rpcService, */HandlerManager eventBus, Display view) {
-		//  this.rpcService = rpcService;
+	public MapPresenter(MapServiceAsync rpcService, HandlerManager eventBus, Display view) {
+		this.rpcService = rpcService;
 		this.eventBus = eventBus;
 		this.display = view;
 	}
@@ -60,21 +71,27 @@ public class MapPresenter implements Presenter {
 		display.getSendAddressButton().addClickHandler(new ClickHandler() {   
 			public void onClick(ClickEvent event) {
 				clearGeolocate();
-				doGeolocate();
+				getDirections();
 			}
 		});
 		display.getMap().addMapClickHandler(new MapClickHandler() {
-		      public void onClick(MapClickEvent e) {
-		        MapWidget sender = e.getSender();
-		        Overlay overlay = e.getOverlay();
-		        LatLng point = e.getLatLng();
+			public void onClick(MapClickEvent e) {
+				MapWidget sender = e.getSender();
+				Overlay overlay = e.getOverlay();
+				LatLng point = e.getLatLng();
 
-		        if (overlay != null && overlay instanceof Marker) {
-		          sender.removeOverlay(overlay);
-		        } else {
-		          sender.addOverlay(new Marker(point));
-		        }
-		      }
+				if (overlay != null && overlay instanceof Marker) {
+					sender.removeOverlay(overlay);
+				} else {
+					sender.addOverlay(new Marker(point));
+				}
+			}
+		});
+		display.getSaveJourneyButton().addClickHandler(new ClickHandler() {   
+			public void onClick(ClickEvent event) {
+				saveJourney();
+
+			}
 		});
 
 
@@ -82,66 +99,96 @@ public class MapPresenter implements Presenter {
 	}
 
 
-	public void go(final HasWidgets container) {
-		bind();
-		container.clear();
-		container.add(display.asWidget());
+	protected void saveJourney() {
+		
 
-	}
-	private void clearGeolocate(){
-		
-		display.getMap().clearOverlays();
-		
-	}
-	
-	
-	private void doGeolocate() {
 		geocoder= new Geocoder();
-		addressOrigin =display.getOriginAddress();
-		addressDestination = display.getDestinationAddress();
+		listAddress = new ArrayList<String>();
+			geocoder.getLatLng(display.getOriginAddress(), new LatLngCallback() {
+				public void onFailure() {
+					Window.alert(" not found");
+				}
 
-	
-		DirectionQueryOptions opts = new DirectionQueryOptions(display.getMap(),display.getDirectionsPanel());
+				public void onSuccess(LatLng point) {
+					listAddress.add(point.toString());
+					geocoder= new Geocoder();
 
-		geocoder.getLatLng(addressOrigin, new LatLngCallback() {
-			public void onFailure() {
-				Window.alert(addressOrigin + " not found");
-			}
+						geocoder.getLatLng(display.getDestinationAddress(), new LatLngCallback() {
+							public void onFailure() {
+								Window.alert(" not found");
+							}
 
-			public void onSuccess(LatLng point) {
+							public void onSuccess(LatLng point) {
+								listAddress.add(point.toString());
+			
+									rpcService.saveJourney(listAddress, new AsyncCallback<SimpleTravel>() {
+										public void onFailure(Throwable caught) {
+										
+											GWT.log(caught.getMessage());
+											GWT.log("failure");
+											     
+										}
 
+										
+										public void onSuccess(SimpleTravel result) {
+											
+											Window.alert("Itinéraire sauvé");
+										}
+									});
+							
 
+							}
+						});
 
-			}
-		});
-		geocoder.getLatLng(addressDestination, new LatLngCallback() {
-			public void onFailure() {
-				Window.alert(addressDestination + " not found");
-			}
-
-			public void onSuccess(LatLng point) {
-
-
-
-			}
-		});
-
-		Directions.load("from: "+addressOrigin +" to: "+ addressDestination, opts,  new DirectionsCallback() {
-			public void onFailure(int statusCode) {
-				Window.alert("Failed to load directions: Status "
-						+ StatusCodes.getName(statusCode) + " " + statusCode);
-			}
-
-			public void onSuccess(DirectionResults result) {
-
-			}
-		});
+					}
 
 
+				
+			});
+
+		}
 
 
 		
-	}
+
+	
+
+
+
+
+public void go(final HasWidgets container) {
+	bind();
+	container.clear();
+	container.add(display.asWidget());
+
+}
+private void clearGeolocate(){
+
+	display.getMap().clearOverlays();
+
+}
+
+
+
+
+private void getDirections(){
+	DirectionQueryOptions opts = new DirectionQueryOptions(display.getMap(),display.getDirectionsPanel());
+	Directions.load("from: "+display.getOriginAddress() +" to: "+ display.getDestinationAddress(), opts,  new DirectionsCallback() {
+		public void onFailure(int statusCode) {
+			Window.alert("Failed to load directions: Status "
+					+ StatusCodes.getName(statusCode) + " " + statusCode);
+		}
+
+		public void onSuccess(DirectionResults result) {
+
+		}
+	});
+
+
+
+
+
+}
 
 
 

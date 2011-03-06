@@ -24,14 +24,16 @@ import com.google.gwt.user.client.ui.HasWidgets;
 
 public class AppController implements Presenter, ValueChangeHandler<String> {
   private final HandlerManager eventBus;
-  private UserAccountServiceAsync rpcService;
+  private UserAccountServiceAsync userAccountRpcService;
   private HasWidgets container;
+  private MapServiceAsync mapRpcService;
   
  
   
-  public AppController(UserAccountServiceAsync rpcService,HandlerManager eventBus) {
+  public AppController(UserAccountServiceAsync userAccountRpcService, MapServiceAsync mapRpcService, HandlerManager eventBus) {
     this.eventBus = eventBus;
-    this.rpcService = rpcService;
+    this.userAccountRpcService = userAccountRpcService;
+    this.mapRpcService = mapRpcService;
     bind();
   }
   
@@ -95,14 +97,15 @@ public void go(final HasWidgets container) {
     if (token != null) {
       Presenter presenter = null;
       if(token.equals("Login")){
-    	  presenter = new LoginPresenter(rpcService,eventBus,new LoginView() );
+    	  presenter = new LoginPresenter(userAccountRpcService,eventBus,new LoginView() );
     	  
       }
       else if (token.equals("sendLogin")) {
-    	        presenter = new MapPresenter(/*rpcService,*/ eventBus, new MapView());
+
+				presenter = new MapPresenter(mapRpcService, eventBus, new MapView());
     	      }
       else if (token.equals("newUser")){
-    	  	presenter = new AddUserPresenter(rpcService,eventBus, new AddUserView());
+    	  	presenter = new AddUserPresenter(userAccountRpcService,eventBus, new AddUserView());
     	  
       }
     

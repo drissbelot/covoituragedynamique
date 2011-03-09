@@ -22,7 +22,7 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 
 	private void setUserInSession(UserInfo user) {
 		HttpSession session = getThreadLocalRequest().getSession();
-		session.setAttribute("user", user.getId());
+		session.setAttribute("user", user);
 	}
 	public UserInfo getUserFromSession() {
 	    HttpSession session = getThreadLocalRequest().getSession();
@@ -36,11 +36,11 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 
 		UserInfo user = new UserInfo();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query= pm.newQuery("select from "+ user.getClass()+" where login == loginParam && password == passwordParam");
+		Query query= pm.newQuery("select from com.covoiturage.shared.UserInfo where login == loginParam && password == passwordParam");
 		query.declareParameters("String loginParam, String passwordParam");
 		try
 		{
-			List<UserInfo> results = (List<UserInfo>) query.execute(login);
+			List<UserInfo> results = (List<UserInfo>) query.execute(login,password);
 			
 			if(results.size()==0){
 				return null;

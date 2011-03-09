@@ -164,6 +164,7 @@ public class MapPresenter implements Presenter {
 
 
 							public void onSuccess(UserInfo result) {
+								GWT.log(result.getLogin());
 								mapRpcService.saveJourney(listAddress, date,result, new AsyncCallback<Journey>() {
 
 
@@ -177,7 +178,7 @@ public class MapPresenter implements Presenter {
 
 								public void onSuccess(Journey result) {
 
-									Window.alert("Itinéraire sauvé");
+									Window.alert("ok");
 								}
 
 

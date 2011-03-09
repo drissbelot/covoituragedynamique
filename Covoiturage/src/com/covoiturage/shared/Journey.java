@@ -9,14 +9,15 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
+import javax.jdo.annotations.Extension;
 
 @PersistenceCapable
 @SuppressWarnings("serial")
 public class Journey implements Serializable{
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	public Long id;
+   @Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	public String id;
 	@Persistent
 	public UserInfo driver;
 	@Persistent
@@ -32,7 +33,7 @@ public class Journey implements Serializable{
 
 	public Journey() {}
 
-	public Journey(Long id, UserInfo driver, List<UserInfo> passengers, List<String> steps) {
+	public Journey(String id, UserInfo driver, List<UserInfo> passengers, List<String> steps) {
 		super();
 		this.id = id;
 		this.driver = driver;

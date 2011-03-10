@@ -7,6 +7,7 @@ import java.util.List;
 import com.covoiturage.client.MapServiceAsync;
 import com.covoiturage.client.UserAccountServiceAsync;
 import com.covoiturage.shared.Journey;
+import com.covoiturage.shared.SimpleTravel;
 import com.covoiturage.shared.UserInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -161,26 +162,43 @@ public class MapPresenter implements Presenter {
 								GWT.log("failure");
 
 							}
-						public void onSuccess(UserInfo result) {
+							public void onSuccess(UserInfo result) {
 								GWT.log(result.getLogin());
-								mapRpcService.saveJourney(listAddress, date,result, new AsyncCallback<Journey>() {
-									public void onFailure(Throwable caught) {
+								if (isDriver) {
+									mapRpcService.saveJourneyDriver(listAddress,
+											date, result,
+											new AsyncCallback<Journey>() {
+												public void onFailure(Throwable caught) {
 
-										GWT.log(caught.getMessage());
-										GWT.log("failure");
+													GWT.log(caught.getMessage());
+													GWT.log("failure");
 
-									}
+												}
 
+												public void onSuccess(Journey result) {
 
-									public void onSuccess(Journey result) {
+													Window.alert("Itinéraire sauvé");
+												}
 
-										Window.alert("Itinéraire sauvé");
-									}
+											});
+								}
+								else if(isPassenger){
+									mapRpcService.saveJourneyPassenger(listAddress, date, result,new AsyncCallback<SimpleTravel>() {
+												public void onFailure(Throwable caught) {
 
+													GWT.log(caught.getMessage());
+													GWT.log("failure");
 
+												}
 
+												public void onSuccess(SimpleTravel result) {
 
-								});
+													Window.alert("Itinéraire sauvé");
+												}
+
+											});
+									
+								}
 
 							}
 						});
@@ -230,6 +248,25 @@ public class MapPresenter implements Presenter {
 			}
 
 			public void onSuccess(DirectionResults result) {
+				List<String> steps=new ArrayList<String>();
+				for(int i = 0; i < result.getPolyline().getVertexCount(); i++)
+				{
+					steps.add(result.getPolyline().getVertex(i).toString());
+
+
+				} 
+
+				mapRpcService.getPassengers(steps, new AsyncCallback<List<UserInfo>>() {
+					public void onFailure(Throwable caught) {
+
+
+					}
+
+					public void onSuccess(List<UserInfo> result) {
+
+
+					}
+				});
 
 			}
 		});

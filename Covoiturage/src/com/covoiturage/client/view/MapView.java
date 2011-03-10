@@ -65,7 +65,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 		mapDecorator.add(mapWidget);
 		mapDecorator.add(addressPanel);
 		mapDecorator.add(dateOfJourney);
-		
+		mapDecorator.add(typeOfUser);
 		
 		mapDecorator.add(saveJourney);
 		mapDecorator.add(directionsPanel);

@@ -1,6 +1,7 @@
 package com.covoiturage.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 	
@@ -20,15 +21,41 @@ public class SimpleTravel implements Serializable {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	public Long id;
 	@Persistent
-	public List<String> steps;
+	private List<String> steps;
+	@Persistent
+	private Date date;
+	
+	
 
+	public Date getDate() {
+		return date;
+	}
 
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public List<String> getSteps() {
+		return steps;
+	}
+
+	@Persistent
+	public String passenger;
+
+	public String getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(String passenger) {
+		this.passenger = passenger;
+	}
 
 	public SimpleTravel() {}
 
-	public SimpleTravel(Long id,  List<String> steps) {
+	public SimpleTravel(Long id, String passenger, List<String> steps) {
 
 		this.id = id;
+		this.passenger=passenger;
 		this.steps = steps;
 	}
 

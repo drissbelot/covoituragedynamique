@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.covoiturage.client.MapServiceAsync;
 import com.covoiturage.client.UserAccountServiceAsync;
+import com.covoiturage.client.event.getValidatePassengersEvent;
 import com.covoiturage.shared.Journey;
 import com.covoiturage.shared.SimpleTravel;
 import com.covoiturage.shared.UserInfo;
@@ -269,7 +270,7 @@ public class MapPresenter implements Presenter {
 					public void onSuccess(List<UserInfo> result) {
 
 							Window.alert(result.get(0).getLogin() +" "+ result.size());
-							
+							eventBus.fireEvent(new getValidatePassengersEvent());
 					}
 				});
 

@@ -18,22 +18,22 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 	final Button addUserButton = new Button("S'enregistrer");
 	private Anchor signInLink = new Anchor("Sign In");
 	public LoginView(){
-		
-		  DecoratorPanel LoginDecorator = new DecoratorPanel();
-		    initWidget(LoginDecorator); 
 
-		    
-		    
-		    VerticalPanel loginPanel = new VerticalPanel();
+		DecoratorPanel LoginDecorator = new DecoratorPanel();
+		initWidget(LoginDecorator); 
+
+
+
+		VerticalPanel loginPanel = new VerticalPanel();
 
 
 
 		nameField.setText("Login");
-		
+
 		passField.setText("Password");
 
 		final Label errorLabel = new Label();
-		
+
 		sendButton.addStyleName("sendButton");
 
 		loginPanel.add(nameField);
@@ -48,28 +48,28 @@ public class LoginView extends Composite implements LoginPresenter.Display {
 		nameField.selectAll();
 
 
-		
+
 	}
-	  public HasClickHandlers getSendLoginButton() {
-		    return sendButton;
-		  }
-	  public HasClickHandlers getAddUserButton(){
-		  return addUserButton;
-		  
-	  }
+	public HasClickHandlers getSendLoginButton() {
+		return sendButton;
+	}
+	public HasClickHandlers getAddUserButton(){
+		return addUserButton;
+
+	}
 	public  String getPassword() {
-		
+
 		return passField.getText();
 
 	}
 	@Override
 	public String getLogin() {
-		
+
 		return nameField.getText();
 	}
 
 	public Anchor getSignInLink() {
 		return signInLink;
 	}
-	
+
 }

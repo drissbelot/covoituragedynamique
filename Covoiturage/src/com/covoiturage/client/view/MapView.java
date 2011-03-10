@@ -1,5 +1,6 @@
 package com.covoiturage.client.view;
 import com.covoiturage.client.presenter.MapPresenter;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.LargeMapControl;
@@ -7,7 +8,8 @@ import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -15,7 +17,11 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapView extends Composite implements MapPresenter.Display {
 
-	private FlowPanel mapDecorator;
+	private DockLayoutPanel mapDecorator;
+
+
+
+
 	private MapWidget mapWidget;
 	private Button sendAddress;
 	private  TextBox originAddress;
@@ -28,9 +34,10 @@ public class MapView extends Composite implements MapPresenter.Display {
 	private RadioButton passengerRadioButton;
 	private VerticalPanel typeOfUser;
 	private TextBox distanceMax;
+	private Label labelDistanceMax;
 	
 	public MapView() {
-		mapDecorator = new FlowPanel();
+		mapDecorator = new DockLayoutPanel(Unit.EM);
 		initWidget(mapDecorator);
 		mapWidget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
 		mapWidget.setSize("500px", "500px");
@@ -52,6 +59,9 @@ public class MapView extends Composite implements MapPresenter.Display {
 		driverRadioButton.setValue(true);
 		sendAddress= new Button("Locate");
 		saveJourney = new Button("Save journey");
+		distanceMax= new TextBox();
+		distanceMax.setText("0");
+		labelDistanceMax = new Label("Distance maximale");
 
 
 		directionsPanel = new DirectionsPanel();
@@ -67,6 +77,8 @@ public class MapView extends Composite implements MapPresenter.Display {
 		mapDecorator.add(addressPanel);
 		mapDecorator.add(dateOfJourney);
 		mapDecorator.add(typeOfUser);
+		mapDecorator.add(labelDistanceMax);
+		mapDecorator.add(distanceMax);
 		
 		mapDecorator.add(saveJourney);
 		mapDecorator.add(directionsPanel);
@@ -125,6 +137,9 @@ public class MapView extends Composite implements MapPresenter.Display {
 	public float getDistanceMax() {
 
 		return Float.valueOf(distanceMax.getText());
+	}
+	public DockLayoutPanel getMapDecorator() {
+		return mapDecorator;
 	}
 
 }

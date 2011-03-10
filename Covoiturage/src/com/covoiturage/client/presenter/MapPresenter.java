@@ -62,7 +62,7 @@ public class MapPresenter implements Presenter {
 
 		RadioButton getDriverRadioButton();
 
-		HasClickHandlers getPassengerRadioButton();
+		RadioButton getPassengerRadioButton();
 
 		float getDistanceMax();
 	}
@@ -123,12 +123,14 @@ public class MapPresenter implements Presenter {
 
 			public void onClick(ClickEvent event) {
 				isDriver = display.getDriverRadioButton().getValue();
+				isPassenger = display.getPassengerRadioButton().getValue();
 			}
 		});
 		display.getPassengerRadioButton().addClickHandler(new ClickHandler() {
 
 			public void onClick(ClickEvent event) {
-				isPassenger = display.getDriverRadioButton().getValue();
+				isDriver = display.getDriverRadioButton().getValue();
+				isPassenger = display.getPassengerRadioButton().getValue();
 			}
 		});
 
@@ -166,7 +168,7 @@ public class MapPresenter implements Presenter {
 							}
 							public void onSuccess(UserInfo result) {
 								GWT.log(result.getLogin());
-								if (isDriver) {
+								if(isDriver) {
 									mapRpcService.saveJourneyDriver(listAddress,
 											date, result,
 											new AsyncCallback<Journey>() {
@@ -266,7 +268,8 @@ public class MapPresenter implements Presenter {
 
 					public void onSuccess(List<UserInfo> result) {
 
-
+							Window.alert(result.get(0).getLogin() +" "+ result.size());
+							
 					}
 				});
 

@@ -1,9 +1,11 @@
 package com.covoiturage.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 
 
@@ -17,6 +19,7 @@ import com.covoiturage.shared.UserInfo;
 
 
 
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class MapServiceImpl extends RemoteServiceServlet implements MapService{
@@ -30,11 +33,11 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try
 		{
-				journey.setSteps(steps);
-				journey.setDate(date);
-				journey.setDriver(driver.getId());
-				pm.makePersistent(journey);
-			
+			journey.setSteps(steps);
+			journey.setDate(date);
+			journey.setDriver(driver.getId());
+			pm.makePersistent(journey);
+
 
 		}
 		finally
@@ -53,8 +56,8 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 			simpleTravel.setSteps(steps);
 			simpleTravel.setDate(date);
 			simpleTravel.setPassenger(passenger.getId());
-				pm.makePersistent(simpleTravel);
-			
+			pm.makePersistent(simpleTravel);
+
 
 		}
 		finally
@@ -67,13 +70,40 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 	}
 
 	public List<UserInfo> getPassengers(List<String> steps, float distance) {
-		MapUtils.bufferRoute(steps, distance);
-		
-		return null;
+		List<String> passengersInBuffer = MapUtils.bufferRoute(steps, distance);
+		List<UserInfo> passengers = new ArrayList<UserInfo>();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try
+		{
+			for (String passenger : passengersInBuffer) {
+				Query query= pm.newQuery("select from com.covoiturage.shared.UserInfo where id == idParam");
+				query.declareParameters("String idParam");
+				try
+				{
+					if(passenger!=null){
+					@SuppressWarnings("unchecked")
+					List<UserInfo> results = (List<UserInfo>) query.execute(KeyFactory.stringToKey(passenger));
+					if(results !=null)
+						passengers.add(results.get(0));
+					}
+
+				}
+				finally{
+				
+				}
+
+			}
+
+
+
+		}
+		finally{
+			pm.close();
+
+		}
+		return passengers;
 
 	}
-
-
 
 
 }

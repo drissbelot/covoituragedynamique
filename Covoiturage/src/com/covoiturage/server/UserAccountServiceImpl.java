@@ -23,6 +23,7 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 	private void setUserInSession(UserInfo user) {
 		HttpSession session = getThreadLocalRequest().getSession();
 		session.setAttribute("user", user);
+		
 	}
 	public UserInfo getUserFromSession() {
 	    HttpSession session = getThreadLocalRequest().getSession();
@@ -41,6 +42,7 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 		try
 		{
 
+			@SuppressWarnings("unchecked")
 			List<UserInfo> results = (List<UserInfo>) query.execute(login, password);
 
 			
@@ -79,6 +81,7 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 		query.declareParameters("String loginParam, String passwordParam");
 		try
 		{
+			@SuppressWarnings("unchecked")
 			List<UserInfo> results = (List<UserInfo>) query.execute(login, password);
 			if(results.size()==0){
 				user.setLogin(login);

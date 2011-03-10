@@ -8,6 +8,7 @@ import javax.jdo.Query;
 
 
 import com.covoiturage.shared.SimpleTravel;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -32,15 +33,17 @@ public class MapUtils {
 
 		
 		
-		return passengersInBuffer(polyline.buffer(100));
+		return passengersInBuffer(polyline.buffer(distance/111));
 	}
 	public static List<String> passengersInBuffer(Geometry buffer){
 		List<String> passengers = new ArrayList<String>();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+
 		Query query= pm.newQuery("select from com.covoiturage.shared.SimpleTravel");
 		try
 		{
 
+			@SuppressWarnings("unchecked")
 			List<SimpleTravel> results = (List<SimpleTravel>) query.execute();
 			for (SimpleTravel travel : results) {
 				List<String> steps = travel.getSteps();

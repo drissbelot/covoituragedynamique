@@ -40,7 +40,9 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 		query.declareParameters("String loginParam, String passwordParam");
 		try
 		{
-			List<UserInfo> results = (List<UserInfo>) query.execute(login,password);
+
+			List<UserInfo> results = (List<UserInfo>) query.execute(login, password);
+
 			
 			if(results.size()==0){
 				return null;
@@ -73,11 +75,11 @@ public class UserAccountServiceImpl extends RemoteServiceServlet implements User
 	public UserInfo addUser(String login, String password) {
 		UserInfo user = new UserInfo();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query= pm.newQuery("select from com.covoiturage.shared.UserInfo where login == loginParam");
-		query.declareParameters("String loginParam");
+		Query query= pm.newQuery("select from com.covoiturage.shared.UserInfo where login == loginParam && password==passwordParam");
+		query.declareParameters("String loginParam, String passwordParam");
 		try
 		{
-			List<UserInfo> results = (List<UserInfo>) query.execute(login);
+			List<UserInfo> results = (List<UserInfo>) query.execute(login, password);
 			if(results.size()==0){
 				user.setLogin(login);
 				user.setPassword(password);

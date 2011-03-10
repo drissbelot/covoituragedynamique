@@ -31,7 +31,7 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 		{
 				journey.setSteps(steps);
 				journey.setDate(date);
-				journey.setDriver(driver);
+				journey.setDriver(driver.getId());
 				pm.makePersistent(journey);
 			
 

@@ -19,9 +19,9 @@ public class Journey implements Serializable{
    @Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
 	public String id;
 	@Persistent
-	public UserInfo driver;
+	public String driver;
 	@Persistent
-	public List<UserInfo> passengers;
+	public List<String> passengers;
 	@Persistent
 	public List<String> steps;
 	@Persistent 
@@ -33,7 +33,7 @@ public class Journey implements Serializable{
 
 	public Journey() {}
 
-	public Journey(String id, UserInfo driver, List<UserInfo> passengers, List<String> steps) {
+	public Journey(String id, String driver, List<String> passengers, List<String> steps) {
 		super();
 		this.id = id;
 		this.driver = driver;
@@ -49,19 +49,19 @@ public class Journey implements Serializable{
 		this.date = date;
 	}
 
-	public UserInfo getDriver() {
+	public String getDriver() {
 		return driver;
 	}
 
-	public void setDriver(UserInfo driver) {
+	public void setDriver(String driver) {
 		this.driver = driver;
 	}
 
-	public List<UserInfo> getPassengers() {
+	public List<String> getPassengers() {
 		return passengers;
 	}
 
-	public void setPassengers(List<UserInfo> passengers) {
+	public void setPassengers(List<String> passengers) {
 		this.passengers = passengers;
 	}
 

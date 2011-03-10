@@ -161,87 +161,84 @@ public class MapPresenter implements Presenter {
 								GWT.log("failure");
 
 							}
-
-
-							public void onSuccess(UserInfo result) {
+						public void onSuccess(UserInfo result) {
 								GWT.log(result.getLogin());
 								mapRpcService.saveJourney(listAddress, date,result, new AsyncCallback<Journey>() {
+									public void onFailure(Throwable caught) {
+
+										GWT.log(caught.getMessage());
+										GWT.log("failure");
+
+									}
 
 
-								public void onFailure(Throwable caught) {
+									public void onSuccess(Journey result) {
 
-									GWT.log(caught.getMessage());
-									GWT.log("failure");
-
-								}
-
-
-								public void onSuccess(Journey result) {
-
-									Window.alert("ok");
-								}
+										Window.alert("Itinéraire sauvé");
+									}
 
 
 
-							});
+
+								});
 
 							}
 						});
-						
-
-
-				}
-			});
-
-		}
 
 
 
-	});
+					}
+				});
 
-}
+			}
 
 
 
+		});
+
+	}
 
 
 
 
 
 
-public void go(final HasWidgets container) {
-	bind();
-	container.clear();
-	container.add(display.asWidget());
-
-}
-private void clearGeolocate(){
-
-	display.getMap().clearOverlays();
-
-}
 
 
 
+	public void go(final HasWidgets container) {
+		bind();
+		container.clear();
+		container.add(display.asWidget());
 
-private void getDirections(){
-	DirectionQueryOptions opts = new DirectionQueryOptions(display.getMap(),display.getDirectionsPanel());
-	Directions.load("from: "+display.getOriginAddress() +" to: "+ display.getDestinationAddress(), opts,  new DirectionsCallback() {
-		public void onFailure(int statusCode) {
-			Window.alert("Failed to load directions: Status "
-					+ StatusCodes.getName(statusCode) + " " + statusCode);
-		}
+	}
+	private void clearGeolocate(){
 
-		public void onSuccess(DirectionResults result) {
+		display.getMap().clearOverlays();
 
-		}
-	});
+	}
 
 
 
 
+	private void getDirections(){
+		DirectionQueryOptions opts = new DirectionQueryOptions(display.getMap(),display.getDirectionsPanel());
+		Directions.load("from: "+display.getOriginAddress() +" to: "+ display.getDestinationAddress(), opts,  new DirectionsCallback() {
+			public void onFailure(int statusCode) {
+				Window.alert("Failed to load directions: Status "
+						+ StatusCodes.getName(statusCode) + " " + statusCode);
+			}
 
-}
+			public void onSuccess(DirectionResults result) {
+
+			}
+		});
+
+
+
+
+
+	}
 
 
 

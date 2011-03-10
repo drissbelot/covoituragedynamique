@@ -66,8 +66,8 @@ public class MapServiceImpl extends RemoteServiceServlet implements MapService{
 		return simpleTravel;
 	}
 
-	public List<UserInfo> getPassengers(List<String> steps) {
-		MapUtils.bufferRoute(steps);
+	public List<UserInfo> getPassengers(List<String> steps, float distance) {
+		MapUtils.bufferRoute(steps, distance);
 		
 		return null;
 

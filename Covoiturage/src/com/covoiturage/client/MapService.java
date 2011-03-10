@@ -16,7 +16,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface MapService extends RemoteService{
 	public Journey saveJourneyDriver(List<String> steps, Date date, UserInfo driver) ;
 
-	List<UserInfo> getPassengers(List<String> steps);
+	List<UserInfo> getPassengers(List<String> steps, float distance);
 
 	SimpleTravel saveJourneyPassenger(List<String> listAddress, Date date,UserInfo passenger);
 }

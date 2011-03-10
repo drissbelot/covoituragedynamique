@@ -27,6 +27,7 @@ public class MapView extends Composite implements MapPresenter.Display {
 	private RadioButton driverRadioButton;
 	private RadioButton passengerRadioButton;
 	private VerticalPanel typeOfUser;
+	private TextBox distanceMax;
 	
 	public MapView() {
 		mapDecorator = new FlowPanel();
@@ -117,6 +118,13 @@ public class MapView extends Composite implements MapPresenter.Display {
 	public HasClickHandlers getSaveJourneyButton() {
 
 		return saveJourney;
+	}
+
+
+
+	public float getDistanceMax() {
+
+		return Float.valueOf(distanceMax.getText());
 	}
 
 }

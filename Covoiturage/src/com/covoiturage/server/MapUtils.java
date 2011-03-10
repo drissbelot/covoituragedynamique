@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.covoiturage.shared.Journey;
+
 import com.covoiturage.shared.SimpleTravel;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -16,7 +16,9 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 
 public class MapUtils {
 
-	public static List<String> bufferRoute(List<String> coordinates){
+	
+	
+	public static List<String> bufferRoute(List<String> coordinates, float distance){
 		Coordinate[] coordArray=new Coordinate[coordinates.size()];
 		int i=0;
 		for (String singleCoord : coordinates) {
@@ -25,6 +27,11 @@ public class MapUtils {
 			i++;
 		}
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
+		
+		
+
+		
+		
 		return passengersInBuffer(polyline.buffer(100));
 	}
 	public static List<String> passengersInBuffer(Geometry buffer){

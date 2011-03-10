@@ -63,6 +63,8 @@ public class MapPresenter implements Presenter {
 		RadioButton getDriverRadioButton();
 
 		HasClickHandlers getPassengerRadioButton();
+
+		float getDistanceMax();
 	}
 
 	private final MapServiceAsync mapRpcService;
@@ -177,7 +179,7 @@ public class MapPresenter implements Presenter {
 
 												public void onSuccess(Journey result) {
 
-													Window.alert("Itinéraire sauvé");
+													Window.alert("savec");
 												}
 
 											});
@@ -193,7 +195,7 @@ public class MapPresenter implements Presenter {
 
 												public void onSuccess(SimpleTravel result) {
 
-													Window.alert("Itinéraire sauvé");
+													Window.alert("saved");
 												}
 
 											});
@@ -256,7 +258,7 @@ public class MapPresenter implements Presenter {
 
 				} 
 
-				mapRpcService.getPassengers(steps, new AsyncCallback<List<UserInfo>>() {
+				mapRpcService.getPassengers(steps, display.getDistanceMax(), new AsyncCallback<List<UserInfo>>() {
 					public void onFailure(Throwable caught) {
 
 

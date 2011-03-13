@@ -4,10 +4,7 @@ package com.covoiturage.shared;
 import java.util.Date;
 import java.util.List;
 
-
-
 import com.covoiturage.server.domain.Journey;
-import com.covoiturage.server.domain.UserInfo;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
@@ -20,13 +17,14 @@ public interface JourneyProxy extends EntityProxy{
 
 	public void setDate(Date date);
 
-	public UserInfo getDriver();
+	
+	public UserInfoProxy getDriver();
 
-	public void setDriver(UserInfo driver);
+	public void setDriver(UserInfoProxy driver);
 
-	public List<UserInfo> getPassengers() ;
+	public List<UserInfoProxy> getPassengers() ;
 
-	public void setPassengers(List<UserInfo> passengers);
+	public void setPassengers(List<UserInfoProxy> passengers);
 
 	public List<String> getSteps();
 

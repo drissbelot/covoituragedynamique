@@ -149,7 +149,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						listAddress.add(point.toString());
 						
 						UserInfoRequest request = requestFactory.userInfoRequest();
-						RequestFactoryServlet.getThreadLocalRequest().getUserPrincipal().getName();
+		//				RequestFactoryServlet.getThreadLocalRequest().getUserPrincipal().getName();
 
 //						createReq.fire(new Receiver<UserInfoProxy>(){
 //						userRpcService.getUserFromSession(new AsyncCallback<UserInfo>() {

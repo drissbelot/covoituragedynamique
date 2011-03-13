@@ -65,7 +65,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 				 currentUser = result;
 
 		    	  
-			        if(currentUser!=null && currentUser.isLoggedIn()) {
+			        if(currentUser!=null && currentUser.getLoggedIn()) {
 
 				        eventBus.fireEvent(new SendLoginEvent());
 			        } else {

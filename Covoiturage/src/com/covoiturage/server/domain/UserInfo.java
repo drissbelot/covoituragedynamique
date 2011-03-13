@@ -155,7 +155,7 @@ public class UserInfo{
 
 		this.emailAddress = emailAddress;
 	}
-	public boolean isLoggedIn() {
+	public boolean getLoggedIn() {
 		return loggedIn;
 	}
 

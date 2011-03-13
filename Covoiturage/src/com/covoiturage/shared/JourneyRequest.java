@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.server.domain.Journey;
-import com.covoiturage.server.domain.UserInfo;
 import com.google.gwt.requestfactory.shared.InstanceRequest;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
@@ -21,7 +20,7 @@ public interface JourneyRequest extends RequestContext{
 
 	Request<JourneyProxy> findJourney(Long id);
 	
-	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, UserInfo driver);
+	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, UserInfoProxy driver);
 	
 
 	InstanceRequest<JourneyProxy, Void> persist();

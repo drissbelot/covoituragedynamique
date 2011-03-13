@@ -11,6 +11,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
@@ -25,10 +26,13 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 	AddUserView addUserView;
 	private CovoiturageRequestFactory requestFactory;
 
+	private PlaceController placeController;
+
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
 		this.addUserView = clientFactory.getAddUserView();
+		  this.placeController = clientFactory.getPlaceController();
 	}
 
 
@@ -66,14 +70,19 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-
 		bind();
+        
+        
+        addUserView.setPresenter(this);
+        panel.setWidget(addUserView.asWidget());
+		
 	}
 
 	@Override
 	public void goTo(Place place) {
-		// TODO Auto-generated method stub
-		
+
+		placeController.goTo(place);
+
 	}
 
 }

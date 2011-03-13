@@ -13,6 +13,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
@@ -25,6 +26,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	  private final LoginView loginView;
 	  private UserInfoProxy currentUser;
 	  private CovoiturageRequestFactory requestFactory;
+	private PlaceController placeController;
 
 
 
@@ -32,6 +34,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 		  this.requestFactory = clientFactory.getRequestFactory();
 		    this.eventBus = clientFactory.getEventBus();
 		    this.loginView = clientFactory.getLoginView();
+		    this.placeController = clientFactory.getPlaceController();
 		  }
 	
 
@@ -78,15 +81,24 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	}
 
 	@Override
-	public void start(AcceptsOneWidget panel, EventBus eventBus) {
+	
+	    public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
+	        
+	        
+	        loginView.setPresenter(this);
+	        containerWidget.setWidget(loginView.asWidget());
+			
+	    }
+
+
 		
-	}
 
 	@Override
 	public void goTo(Place place) {
-		// TODO Auto-generated method stub
-		
+
+		placeController.goTo(place);
+
 	}
 
 	 

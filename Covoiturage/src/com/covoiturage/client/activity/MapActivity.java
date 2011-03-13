@@ -41,6 +41,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
@@ -64,6 +65,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private boolean isDriver, isPassenger;
 
 	private List<String> listAddress=null;
+	private PlaceController placeController;
 
 
 	public MapActivity(ClientFactory clientFactory) {
@@ -71,6 +73,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 		this.eventBus = clientFactory.getEventBus();
 		this.mapView = clientFactory.getMapView();
+	    this.placeController = clientFactory.getPlaceController();
 	}
 
 	public void bind() {
@@ -272,18 +275,28 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 
 	}
-
 	@Override
-	public void start(AcceptsOneWidget panel, EventBus eventBus) {
-		bind();
-	}
-
-	@Override
-	public void goTo(Place place) {
-		// TODO Auto-generated method stub
+	
+    public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
+	bind();
+        
+        
+        mapView.setPresenter(this);
+        containerWidget.setWidget(mapView.asWidget());
 		
-	}
+    }
 
+
+	
+
+@Override
+public void goTo(Place place) {
+
+	placeController.goTo(place);
+
+}
+
+	
 
 
 }

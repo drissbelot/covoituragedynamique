@@ -6,6 +6,7 @@ import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
@@ -31,7 +32,7 @@ public interface MapView extends IsWidget{
 
 	public abstract float getDistanceMax();
 
-	public abstract DockLayoutPanel getMapDecorator();
+	public abstract LayoutPanel getMapDecorator();
     void setPresenter(Presenter presenter);
 
     public interface Presenter {

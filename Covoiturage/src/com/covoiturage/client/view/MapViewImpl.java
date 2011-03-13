@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -18,7 +19,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapViewImpl extends Composite implements  MapView {
 
-	private DockLayoutPanel mapDecorator;
+	private LayoutPanel mapDecorator;
 
 
 
@@ -43,7 +44,7 @@ public class MapViewImpl extends Composite implements  MapView {
 	private Presenter presenter;
 	
 	public MapViewImpl() {
-		mapDecorator = new DockLayoutPanel(Unit.EM);
+		mapDecorator = new LayoutPanel();
 		initWidget(mapDecorator);
 		mapWidget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
 		mapWidget.setSize("500px", "500px");
@@ -188,7 +189,7 @@ public class MapViewImpl extends Composite implements  MapView {
 	 * @see com.covoiturage.client.view.MapView#getMapDecorator()
 	 */
 	@Override
-	public DockLayoutPanel getMapDecorator() {
+	public LayoutPanel getMapDecorator() {
 		return mapDecorator;
 	}
 

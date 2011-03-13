@@ -3,11 +3,14 @@ package com.covoiturage.server;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 
-import com.covoiturage.shared.SimpleTravel;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+
+import com.covoiturage.server.domain.SimpleTravel;
+import com.covoiturage.server.domain.UserInfo;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -19,7 +22,7 @@ public class MapUtils {
 
 	
 	
-	public static List<String> bufferRoute(List<String> coordinates, float distance){
+	public static List<UserInfo> bufferRoute(List<String> coordinates, float distance){
 		Coordinate[] coordArray=new Coordinate[coordinates.size()];
 		int i=0;
 		for (String singleCoord : coordinates) {
@@ -35,16 +38,15 @@ public class MapUtils {
 		
 		return passengersInBuffer(polyline.buffer(distance/111));
 	}
-	public static List<String> passengersInBuffer(Geometry buffer){
-		List<String> passengers = new ArrayList<String>();
-		PersistenceManager pm = PMF.get().getPersistenceManager();
+	public static List<UserInfo> passengersInBuffer(Geometry buffer){
+		List<UserInfo> passengers = new ArrayList<UserInfo>();
+		EntityManager em = EMF.get().createEntityManager();
 
-		Query query= pm.newQuery("select from com.covoiturage.shared.SimpleTravel");
 		try
 		{
 
 			@SuppressWarnings("unchecked")
-			List<SimpleTravel> results = (List<SimpleTravel>) query.execute();
+			List<SimpleTravel> results = em.createQuery("select o from SimpleTravel").getResultList();
 			for (SimpleTravel travel : results) {
 				List<String> steps = travel.getSteps();
 				int i=0;
@@ -67,7 +69,7 @@ public class MapUtils {
 		finally
 		{
 
-			pm.close();
+			em.close();
 		}
 		return passengers;
 

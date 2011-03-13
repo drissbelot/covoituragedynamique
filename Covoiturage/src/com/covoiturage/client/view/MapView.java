@@ -1,145 +1,41 @@
 package com.covoiturage.client.view;
-import com.covoiturage.client.presenter.MapPresenter;
-import com.google.gwt.dom.client.Style.Unit;
+
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geocode.DirectionsPanel;
-import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-public class MapView extends Composite implements MapPresenter.Display {
+public interface MapView extends IsWidget{
 
-	private DockLayoutPanel mapDecorator;
+	public abstract RadioButton getPassengerRadioButton();
 
+	public abstract RadioButton getDriverRadioButton();
 
+	public abstract DatePicker getDateOfJourney();
 
+	public abstract HasClickHandlers getSendAddressButton();
 
-	private MapWidget mapWidget;
-	private Button sendAddress;
-	private  TextBox originAddress;
-	private  TextBox destinationAddress;
-	private VerticalPanel addressPanel;
-	private DirectionsPanel directionsPanel;
-	private Button saveJourney;
-	private DatePicker dateOfJourney;
-	private RadioButton driverRadioButton;
-	private RadioButton passengerRadioButton;
-	private VerticalPanel typeOfUser;
-	private TextBox distanceMax;
-	private Label labelDistanceMax;
-	
-	public MapView() {
-		mapDecorator = new DockLayoutPanel(Unit.EM);
-		initWidget(mapDecorator);
-		mapWidget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
-		mapWidget.setSize("500px", "500px");
-		mapWidget.addControl(new LargeMapControl());
-		addressPanel = new VerticalPanel();
+	public abstract String getOriginAddress();
 
-		originAddress= new TextBox();
-		originAddress.setVisibleLength(60);
-		originAddress.setText("1 Grand Place, Louvain-la-neuve");
-		destinationAddress= new TextBox();
-		destinationAddress.setVisibleLength(60);
-		destinationAddress.setText("1 Grand Place, Louvain-la-neuve");
-		dateOfJourney= new DatePicker();
-		driverRadioButton = new RadioButton("groupTypeOfUser", "Driver");
-		passengerRadioButton = new RadioButton("groupTypeOfUser", "Passenger");
-		typeOfUser = new VerticalPanel();
-		typeOfUser.add(driverRadioButton);
-		typeOfUser.add(passengerRadioButton);
-		driverRadioButton.setValue(true);
-		sendAddress= new Button("Locate");
-		saveJourney = new Button("Save journey");
-		distanceMax= new TextBox();
-		distanceMax.setText("0");
-		labelDistanceMax = new Label("Distance maximale");
+	public abstract String getDestinationAddress();
 
+	public abstract MapWidget getMap();
 
-		directionsPanel = new DirectionsPanel();
+	public abstract DirectionsPanel getDirectionsPanel();
 
+	public abstract HasClickHandlers getSaveJourneyButton();
 
-		addressPanel.add(originAddress);
-		addressPanel.add(destinationAddress);
-		addressPanel.add(sendAddress);
+	public abstract float getDistanceMax();
 
+	public abstract DockLayoutPanel getMapDecorator();
+    void setPresenter(Presenter presenter);
 
-
-		mapDecorator.add(mapWidget);
-		mapDecorator.add(addressPanel);
-		mapDecorator.add(dateOfJourney);
-		mapDecorator.add(typeOfUser);
-		mapDecorator.add(labelDistanceMax);
-		mapDecorator.add(distanceMax);
-		
-		mapDecorator.add(saveJourney);
-		mapDecorator.add(directionsPanel);
-	}
-
-
-	public RadioButton getPassengerRadioButton() {
-		return passengerRadioButton;
-	}
-
-
-	public RadioButton getDriverRadioButton() {
-		return driverRadioButton;
-	}
-
-	public DatePicker getDateOfJourney() {
-		return dateOfJourney;
-	}
-
-	public HasClickHandlers getSendAddressButton() {
-		return sendAddress;
-	}
-
-
-
-
-	public String getOriginAddress() {
-
-		return originAddress.getText();
-	}
-	public String getDestinationAddress() {
-
-		return destinationAddress.getText();
-	}
-
-
-
-	public MapWidget getMap() {
-
-		return mapWidget;
-	}
-
-
-	public DirectionsPanel getDirectionsPanel() {
-
-		return directionsPanel;
-	}
-
-	public HasClickHandlers getSaveJourneyButton() {
-
-		return saveJourney;
-	}
-
-
-
-	public float getDistanceMax() {
-
-		return Float.valueOf(distanceMax.getText());
-	}
-	public DockLayoutPanel getMapDecorator() {
-		return mapDecorator;
-	}
+    public interface Presenter {
+        void goTo(Place place);
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.covoiturage.client.presenter;
+package com.covoiturage.client.activity;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 

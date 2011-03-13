@@ -1,4 +1,4 @@
-package com.covoiturage.shared;
+package com.covoiturage.server.domain;
 
 import javax.jdo.annotations.PersistenceCapable;
 

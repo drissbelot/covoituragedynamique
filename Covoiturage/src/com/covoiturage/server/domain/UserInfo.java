@@ -17,7 +17,7 @@ import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
-import com.google.gwt.requestfactory.server.RequestFactoryServlet;
+
 
 @Entity
 public class UserInfo{

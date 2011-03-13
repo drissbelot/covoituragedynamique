@@ -4,24 +4,17 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-<servlet>
-<servlet-name>UserAccountService</servlet-name>
-<servlet-class>com.covoiturage.server.UserAccountServiceImpl</servlet-class>
-</servlet>
-<servlet-mapping>
-<servlet-name>UserAccountService</servlet-name>
-<url-pattern>/covoiturage/userAccount</url-pattern>
-</servlet-mapping>
-<servlet>
-<servlet-name>MapService</servlet-name>
-<servlet-class>com.covoiturage.server.MapServiceImpl</servlet-class>
-</servlet>
-<servlet-mapping>
-<servlet-name>MapService</servlet-name>
-<url-pattern>/covoiturage/map</url-pattern>
-</servlet-mapping>
 
-  
+
+ <servlet>
+<servlet-name>requestFactoryServlet</servlet-name>
+<servlet-class>com.google.gwt.requestfactory.server.RequestFactoryServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>requestFactoryServlet</servlet-name>
+<url-pattern>/gwtRequest</url-pattern>
+</servlet-mapping> 
+ 
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Covoiturage.html</welcome-file>

@@ -163,4 +163,18 @@ public class MapViewImpl extends Composite implements  MapView {
 		
 	}
 
+
+
+	public void setOriginAddress(String originAddress) {
+		this.originAddress.setText(originAddress);
+	}
+
+
+
+	public void setDestinationAddress(String destinationAddress) {
+		this.destinationAddress.setText(destinationAddress);
+	}
+
+
+
 }

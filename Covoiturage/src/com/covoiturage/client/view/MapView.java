@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 public interface MapView extends IsWidget{
@@ -40,5 +41,11 @@ public interface MapView extends IsWidget{
     public interface Presenter {
         void goTo(Place place);
     }
+
+	public void setOriginAddress(String originAddress);
+
+
+
+	public void setDestinationAddress(String destinationAddress) ;
 
 }

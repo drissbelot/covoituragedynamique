@@ -17,6 +17,7 @@ import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -30,6 +31,8 @@ import com.google.gwt.maps.client.geocode.Directions;
 import com.google.gwt.maps.client.geocode.DirectionsCallback;
 import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LatLngCallback;
+import com.google.gwt.maps.client.geocode.LocationCallback;
+import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
@@ -50,7 +53,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private Geocoder geocoder;
 	private Date date;
-	private boolean isDriver, isPassenger;
+	private boolean isDriver=true, isPassenger;
 
 	private List<String> listAddress=null;
 	private PlaceController placeController;
@@ -77,11 +80,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				MapWidget sender = e.getSender();
 				Overlay overlay = e.getOverlay();
 				LatLng point = e.getLatLng();
-
+				
 				if (overlay != null && overlay instanceof Marker) {
 					sender.removeOverlay(overlay);
 				} else {
 					sender.addOverlay(new Marker(point));
+					doGeolocate(point);
 				}
 			}
 		});
@@ -122,6 +126,24 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		});
 	}
 
+	protected void doGeolocate(LatLng point){
+		geocoder= new Geocoder();
+		geocoder.getLocations(point, new LocationCallback() {
+			
+			@Override
+			public void onSuccess(JsArray<Placemark> locations) {
+				mapView.setOriginAddress(locations.get(0).getAddress());
+				
+			}
+			
+			@Override
+			public void onFailure(int statusCode) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+	}
 
 	protected void saveJourney() {
 
@@ -217,6 +239,7 @@ private void clearGeolocate(){
 
 
 private void getDirections(){
+	
 	DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(),mapView.getDirectionsPanel());
 	Directions.load("from: "+mapView.getOriginAddress() +" to: "+ mapView.getDestinationAddress(), opts,  new DirectionsCallback() {
 		public void onFailure(int statusCode) {
@@ -238,6 +261,7 @@ private void getDirections(){
 
 				@Override
 				public void onSuccess(List<String> result) {
+					if(result!=null)
 					Window.alert(result.get(0)+" "+ result.size());
 					eventBus.fireEvent(new getValidatePassengersEvent());
 				}

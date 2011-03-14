@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Version;
 
+import org.datanucleus.jpa.annotations.Extension;
+
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 
@@ -28,7 +30,7 @@ public class UserInfo{
 			return ((Number) em.createQuery("select count(o) from UserInfo o").getSingleResult()).longValue();
 		} finally {
 			em.close();
-		}
+		} 
 	}
 
 	@SuppressWarnings("unchecked")
@@ -44,7 +46,7 @@ public class UserInfo{
 		}
 	}
 
-	public static UserInfo findUser(Long id) {
+	public static UserInfo findUserInfo(String id) {
 		if (id == null) {
 			return null;
 		}
@@ -81,19 +83,19 @@ public class UserInfo{
 		return EMF.get().createEntityManager();
 	}
 	
-	public List<UserInfo> getPassengers(List<String> steps, float distance) {
+	public static List<String> getPassengers(List<String> steps, float distance) {
 		return MapUtils.bufferRoute(steps, distance);
 		
 
 	}
 
 
-	public UserInfo login(String login, String password) {
+	public static UserInfo login(String login, String password) {
 
 
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
-		Query query= em.createQuery("select o from UserInfo where o login =:loginParam && password =:passwordParam");
+		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam and o.password = :passwordParam");
 		query.setParameter("loginParam",login);
 		query.setParameter("passwordParam",password);
 		try
@@ -127,8 +129,9 @@ public class UserInfo{
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)   
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+    public String id;
 
 	public String login;
 
@@ -148,7 +151,7 @@ public class UserInfo{
 
 	public UserInfo() {}
 
-	public UserInfo(Long id, String login, String emailAddress, String password) {
+	public UserInfo(String id, String login, String emailAddress, String password) {
 		this.id = id;
 		this.login = login;
 		this.setPassword(password);
@@ -159,8 +162,8 @@ public class UserInfo{
 		return loggedIn;
 	}
 
-	public Long getId() { return id; }
-	public void setId(Long id) { this.id = id; }
+	public String getId() { return id; }
+	public void setId(String id) { this.id = id; }
 	public String getLogin() { return login; }
 
 	public void setLogin(String login) { this.login= login; }

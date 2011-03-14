@@ -15,11 +15,11 @@ public interface UserInfoRequest extends RequestContext {
 
 	Request<List<UserInfoProxy>> findAllUsers();
 
-	Request<UserInfoProxy> findUser(Long id);
+	Request<UserInfoProxy> findUserInfo(String id);
 	
 	Request<UserInfoProxy> login(String login, String password);
 	
-	Request<List<UserInfoProxy>> getPassengers(List<String> steps, float distance);
+	Request<List<String>> getPassengers(List<String> steps, float distance);
 
 	InstanceRequest<UserInfoProxy, Void> persist();
 

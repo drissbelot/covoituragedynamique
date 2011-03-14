@@ -38,7 +38,7 @@ public class SimpleTravel{
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<SimpleTravel> findSimpleTravels() {
+	public static List<SimpleTravel> findAllSimpleTravels() {
 		EntityManager em = entityManager();
 		try {
 			List<SimpleTravel> list = em.createQuery("select o from SimpleTravel o").getResultList();
@@ -63,7 +63,7 @@ public class SimpleTravel{
 		}
 	}
 	
-	public SimpleTravel saveJourneyPassenger(List<String> steps, Date date, UserInfo passenger){
+	public static SimpleTravel saveJourneyPassenger(List<String> steps, Date date, String passenger){
 		SimpleTravel simpleTravel = new SimpleTravel();
 		EntityManager em = entityManager();
 		try
@@ -71,7 +71,7 @@ public class SimpleTravel{
 			simpleTravel.setSteps(steps);
 			simpleTravel.setDate(date);
 			simpleTravel.setPassenger(passenger);
-			persist();
+			em.persist(simpleTravel);
 
 
 		}
@@ -109,6 +109,15 @@ public class SimpleTravel{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	private List<String> steps;
 
 	private Date date;
@@ -139,19 +148,19 @@ public class SimpleTravel{
 	}
 
 
-	public UserInfo passenger;
+	public String passenger;
 
-	public UserInfo getPassenger() {
+	public String getPassenger() {
 		return passenger;
 	}
 
-	public void setPassenger(UserInfo passenger) {
+	public void setPassenger(String passenger) {
 		this.passenger = passenger;
 	}
 
 	public SimpleTravel() {}
 
-	public SimpleTravel(Long id, UserInfo passenger, List<String> steps) {
+	public SimpleTravel(Long id, String passenger, List<String> steps) {
 
 		this.id = id;
 		this.passenger=passenger;

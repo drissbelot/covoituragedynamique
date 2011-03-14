@@ -20,7 +20,7 @@ public interface JourneyRequest extends RequestContext{
 
 	Request<JourneyProxy> findJourney(Long id);
 	
-	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, UserInfoProxy driver);
+	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, String driver);
 	
 
 	InstanceRequest<JourneyProxy, Void> persist();

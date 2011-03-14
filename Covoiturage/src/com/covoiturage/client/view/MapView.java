@@ -4,7 +4,9 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -32,7 +34,7 @@ public interface MapView extends IsWidget{
 
 	public abstract float getDistanceMax();
 
-	public abstract LayoutPanel getMapDecorator();
+	public abstract FlowPanel getMapDecorator();
     void setPresenter(Presenter presenter);
 
     public interface Presenter {

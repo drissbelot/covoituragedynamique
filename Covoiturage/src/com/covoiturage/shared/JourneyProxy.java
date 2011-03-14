@@ -18,13 +18,13 @@ public interface JourneyProxy extends EntityProxy{
 	public void setDate(Date date);
 
 	
-	public UserInfoProxy getDriver();
+	public String getDriver();
 
-	public void setDriver(UserInfoProxy driver);
+	public void setDriver(String driver);
 
-	public List<UserInfoProxy> getPassengers() ;
+	public List<String> getPassengers() ;
 
-	public void setPassengers(List<UserInfoProxy> passengers);
+	public void setPassengers(List<String> passengers);
 
 	public List<String> getSteps();
 

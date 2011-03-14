@@ -1,7 +1,4 @@
 package com.covoiturage.client.view;
-import com.covoiturage.client.activity.MapActivity;
-import com.covoiturage.client.view.MapView.Presenter;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.control.LargeMapControl;
@@ -9,9 +6,8 @@ import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -19,7 +15,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapViewImpl extends Composite implements  MapView {
 
-	private LayoutPanel mapDecorator;
+	private FlowPanel mapDecorator;
 
 
 
@@ -44,7 +40,7 @@ public class MapViewImpl extends Composite implements  MapView {
 	private Presenter presenter;
 	
 	public MapViewImpl() {
-		mapDecorator = new LayoutPanel();
+		mapDecorator = new FlowPanel();
 		initWidget(mapDecorator);
 		mapWidget = new MapWidget(LatLng.newInstance(48.136559, 11.576318), 13);
 		mapWidget.setSize("500px", "500px");
@@ -92,53 +88,36 @@ public class MapViewImpl extends Composite implements  MapView {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getPassengerRadioButton()
-	 */
+
 	@Override
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getDriverRadioButton()
-	 */
+	
 	@Override
 	public RadioButton getDriverRadioButton() {
 		return driverRadioButton;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getDateOfJourney()
-	 */
 	@Override
 	public DatePicker getDateOfJourney() {
 		return dateOfJourney;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getSendAddressButton()
-	 */
+
 	@Override
 	public HasClickHandlers getSendAddressButton() {
 		return sendAddress;
 	}
 
-
-
-
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getOriginAddress()
-	 */
 	@Override
 	public String getOriginAddress() {
 
 		return originAddress.getText();
 	}
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getDestinationAddress()
-	 */
+
 	@Override
 	public String getDestinationAddress() {
 
@@ -146,10 +125,6 @@ public class MapViewImpl extends Composite implements  MapView {
 	}
 
 
-
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getMap()
-	 */
 	@Override
 	public MapWidget getMap() {
 
@@ -157,18 +132,12 @@ public class MapViewImpl extends Composite implements  MapView {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getDirectionsPanel()
-	 */
 	@Override
 	public DirectionsPanel getDirectionsPanel() {
 
 		return directionsPanel;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getSaveJourneyButton()
-	 */
 	@Override
 	public HasClickHandlers getSaveJourneyButton() {
 
@@ -176,20 +145,14 @@ public class MapViewImpl extends Composite implements  MapView {
 	}
 
 
-
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getDistanceMax()
-	 */
 	@Override
 	public float getDistanceMax() {
 
 		return Float.valueOf(distanceMax.getText());
 	}
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#getMapDecorator()
-	 */
+
 	@Override
-	public LayoutPanel getMapDecorator() {
+	public FlowPanel getMapDecorator() {
 		return mapDecorator;
 	}
 

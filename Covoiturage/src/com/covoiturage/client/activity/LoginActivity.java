@@ -4,6 +4,8 @@ package com.covoiturage.client.activity;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
+import com.covoiturage.client.place.AddUserPlace;
+import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
@@ -48,7 +50,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 		    });
 		loginView.getAddUserButton().addClickHandler(new ClickHandler() {   
 		      public void onClick(ClickEvent event) {
-		        eventBus.fireEvent(new NewUserEvent());
+		        goTo(new AddUserPlace(null));
 		      }
 		    });
 		
@@ -66,11 +68,10 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 			@Override
 			public void onSuccess(UserInfoProxy result) {
 				 currentUser = result;
-
-		    	  
+    	  
 			        if(currentUser!=null && currentUser.getLoggedIn()) {
-
-				        eventBus.fireEvent(new SendLoginEvent());
+					   	  goTo(new MapPlace(null));
+				        eventBus.fireEvent(new SendLoginEvent(currentUser));
 			        } else {
 			        	  Window.alert("Veuillez vous identifiez");
 

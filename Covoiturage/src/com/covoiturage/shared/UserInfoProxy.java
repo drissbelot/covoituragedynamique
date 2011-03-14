@@ -1,6 +1,7 @@
 package com.covoiturage.shared;
 
 import com.covoiturage.server.domain.UserInfo;
+
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
@@ -34,6 +35,10 @@ public interface UserInfoProxy extends EntityProxy{
 	public String getPassword();
 
 	EntityProxyId<UserInfoProxy> stableId();
+
+
+	public String getId();
+
 
 	
 }

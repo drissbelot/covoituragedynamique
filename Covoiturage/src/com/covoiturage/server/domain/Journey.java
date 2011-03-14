@@ -56,7 +56,7 @@ public class Journey {
 		}
 	}
 
-	public Journey saveJourneyDriver(List<String> steps, Date date, UserInfo driver){
+	public static Journey saveJourneyDriver(List<String> steps, Date date, String driver){
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 		try
@@ -64,7 +64,7 @@ public class Journey {
 			journey.setSteps(steps);
 			journey.setDate(date);
 			journey.setDriver(driver);
-			persist();
+			em.persist(journey);
 
 
 		}
@@ -77,7 +77,7 @@ public class Journey {
 		return journey;
 	}
 	
-	public void persist() {
+	public  void persist() {
 		EntityManager em = entityManager();
 		try {
 			em.persist(this);
@@ -115,9 +115,9 @@ public class Journey {
 		this.id = id;
 	}
 
-	public UserInfo driver;
+	public String driver;
 
-	public List<UserInfo> passengers;
+	public List<String> passengers;
 
 	public List<String> steps;
 
@@ -140,7 +140,7 @@ public class Journey {
 
 	public Journey() {}
 
-	public Journey(Long id, UserInfo driver, List<UserInfo> passengers, List<String> steps) {
+	public Journey(Long id, String driver, List<String> passengers, List<String> steps) {
 		super();
 		this.id = id;
 		this.driver = driver;
@@ -156,19 +156,19 @@ public class Journey {
 		this.date = date;
 	}
 
-	public UserInfo getDriver() {
+	public String getDriver() {
 		return driver;
 	}
 
-	public void setDriver(UserInfo driver) {
+	public void setDriver(String driver) {
 		this.driver = driver;
 	}
 
-	public List<UserInfo> getPassengers() {
+	public List<String> getPassengers() {
 		return passengers;
 	}
 
-	public void setPassengers(List<UserInfo> passengers) {
+	public void setPassengers(List<String> passengers) {
 		this.passengers = passengers;
 	}
 

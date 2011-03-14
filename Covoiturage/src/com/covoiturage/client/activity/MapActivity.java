@@ -54,6 +54,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private Geocoder geocoder;
 	private Date date;
 	private boolean isDriver=true, isPassenger;
+	
+	private  int counter;
 
 	private List<String> listAddress=null;
 	private PlaceController placeController;
@@ -77,15 +79,32 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		});
 		mapView.getMap().addMapClickHandler(new MapClickHandler() {
 			public void onClick(MapClickEvent e) {
+
 				MapWidget sender = e.getSender();
 				Overlay overlay = e.getOverlay();
 				LatLng point = e.getLatLng();
-				
 				if (overlay != null && overlay instanceof Marker) {
 					sender.removeOverlay(overlay);
 				} else {
-					sender.addOverlay(new Marker(point));
-					doGeolocate(point);
+					switch (counter){
+					case 0:
+						sender.addOverlay(new Marker(point));
+						doGeolocate(point);
+						counter++;
+						break;
+					case 1:
+						sender.addOverlay(new Marker(point));
+						doGeolocate(point);
+						counter++;
+						break;
+					case 2:
+						mapView.getMap().clearOverlays();
+						counter = 0;
+						break;
+					
+					}
+					
+
 				}
 			}
 		});
@@ -132,7 +151,13 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			
 			@Override
 			public void onSuccess(JsArray<Placemark> locations) {
+				if(counter==1){
 				mapView.setOriginAddress(locations.get(0).getAddress());
+				}else if(counter==2){
+					mapView.setDestinationAddress(locations.get(0).getAddress());
+					
+				}
+				
 				
 			}
 			

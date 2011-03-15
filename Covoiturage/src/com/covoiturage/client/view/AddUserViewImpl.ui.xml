@@ -1,0 +1,59 @@
+<!-- ViewerNvUser.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	
+	<ui:style>
+    	.label { 
+    		background-color: black; 
+    		color: orange;
+    		font: 112% Arial;
+    	}
+    	.panel { 
+    		border: 2px solid orange;	
+    	}
+    	.h1{
+    		font: 150% Arial;
+			color: orange;
+			text-align: center;
+			margin: 20px 0% 2%;
+			background-color: black;
+			border-bottom: solid orange 2px;
+    	}
+  	</ui:style>
+	
+	<g:FlowPanel ui:field="flowpanel">
+	
+		<g:Label styleName='{style.h1}'  text="completez vos coordonnees"/>
+	
+	<g:VerticalPanel ui:field="container" styleName='{style.panel}'>
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}'  text="UserName :"/>
+			<g:TextBox ui:field="login" text="UserName"/>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="FirstName :"/>
+			<g:TextBox ui:field="firstName" text="UserName"/>
+		</g:HorizontalPanel>	
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="LastName :"/>
+			<g:TextBox ui:field="lastName" text="UserName"/>
+		</g:HorizontalPanel>	
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="Email :"/>
+			<g:TextBox ui:field="emailAdress" text="UserName"/>
+		</g:HorizontalPanel>	
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="Password :"/>
+			<g:TextBox ui:field="password" text="UserName"/>
+		</g:HorizontalPanel>	
+		<g:HorizontalPanel>
+			<g:Button ui:field="addButton" text="Register"/>
+		</g:HorizontalPanel>
+		
+	</g:VerticalPanel>
+	
+	</g:FlowPanel>
+		
+
+</ui:UiBinder>

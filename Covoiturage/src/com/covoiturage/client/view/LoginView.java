@@ -15,7 +15,6 @@ public interface LoginView extends IsWidget{
 
 	public abstract String getLogin();
 
-	public abstract Anchor getSignInLink();
     void setPresenter(Presenter presenter);
 
     public interface Presenter {

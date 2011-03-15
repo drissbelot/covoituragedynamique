@@ -4,13 +4,29 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 	
 	<ui:style>
+		.button {
+			/*padding: 1em;*/
+			margin: 1em;
+		}
     	.label { 
     		background-color: black; 
     		color: orange;
     		font: 112% Arial;
+    		width: 6em;
+    		margin: 0em 1em 0.5em 1em;
     	}
     	.panel { 
     		border: 2px solid orange;	
+    		margin: 1em;
+    		background-color: black;
+    		/*padding: 1em;*/
+    	}
+    	.centerpanel { 
+    		border: 2px solid orange;	
+    		margin: 20% 33%;
+    		background-color: black;
+    		
+    		/*padding: 1em;*/
     	}
     	.h1{
     		font: 200% Arial;
@@ -20,33 +36,37 @@
 			background-color: black;
 			border: solid orange 2px;
     	}
+    	.h2{
+    		font: 150% Arial;
+			color: orange;
+			text-align: center;
+			margin : 0em 0em 1em 0em;
+			background-color: black;
+			border-bottom: solid orange 2px;
+    	}
   	</ui:style>
 	
-	<g:FlowPanel ui:field="flowpanel">
+	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 	
 		<g:Label styleName='{style.h1}'  text="Bienvenue sur covoiturage.appspot.com"/>
 		
-		<g:VerticalPanel>
+		<g:VerticalPanel styleName='{style.centerpanel}' width="" height="" verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
+			<g:Label styleName='{style.h2}' text="Login"/>
 			<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' text="Password :"/>
+				<g:Label styleName='{style.label}' text="UserName :"/>
 				<g:TextBox ui:field="nameField" text="UserName"/>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' text="Password :"/>
-				<g:TextBox ui:field="passField" text="UserName"/>
+				<g:TextBox ui:field="passField" text="Password"/>
 			</g:HorizontalPanel>
-			<g:HorizontalPanel>
-				<g:Button ui:field="sendButton" text="Login"/>
-				<g:Button ui:field="addUserButton" text="Creat Account"/>
+			<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
+				<g:Button ui:field="sendButton" text="Login" styleName='{style.button}'/>
+				<g:Button ui:field="addUserButton" text="Creat Account" styleName='{style.button}'/>
 			</g:HorizontalPanel>	
 			
 		</g:VerticalPanel>
 		
-	
-
-
-	
-	
 	</g:FlowPanel>
 		
 

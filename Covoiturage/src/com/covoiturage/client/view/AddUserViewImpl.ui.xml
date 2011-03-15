@@ -4,51 +4,73 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 	
 	<ui:style>
+		.button {
+			/*padding: 1em;*/
+			margin: 1em;
+		}
     	.label { 
     		background-color: black; 
     		color: orange;
     		font: 112% Arial;
+    		width: 6em;
+    		margin: 0em 1em 0.5em 1em;
     	}
     	.panel { 
-    		border: 2px solid orange;	
+    		border: 2px solid orange;
+    		
+    		background-color: black; 	
+    	}
+    	.centerpanel { 
+    		border: 2px solid orange;
+    		
+    		background-color: black; 	
     	}
     	.h1{
-    		font: 150% Arial;
+    		font: 200% Arial;
 			color: orange;
 			text-align: center;
 			margin: 20px 0% 2%;
 			background-color: black;
 			border-bottom: solid orange 2px;
     	}
+    	.h2{
+    		font: 150% Arial;
+			color: orange;
+			text-align: center;
+			margin : 0em 0em 1em 0em;
+			background-color: black;
+			border-bottom: solid orange 2px;
+    	}
   	</ui:style>
 	
-	<g:FlowPanel ui:field="flowpanel">
+	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 	
-		<g:Label styleName='{style.h1}'  text="completez vos coordonnees"/>
+		<g:Label styleName='{style.h1}'  text="Creat an new Account"/>
 	
-	<g:VerticalPanel ui:field="container" styleName='{style.panel}'>
+	<g:VerticalPanel ui:field="container" styleName='{style.panel}' horizontalAlignment="ALIGN_LEFT">
+		<g:Label styleName='{style.h2}'  text="enter your personnal data"/>
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}'  text="UserName :"/>
+			<g:Label styleName='{style.label}'  text="Username :"/>
 			<g:TextBox ui:field="login" text="UserName"/>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="FirstName :"/>
-			<g:TextBox ui:field="firstName" text="UserName"/>
+			<g:TextBox ui:field="firstName" text="Firstname"/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="LastName :"/>
-			<g:TextBox ui:field="lastName" text="UserName"/>
+			<g:TextBox ui:field="lastName" text="Lastname"/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="Email :"/>
-			<g:TextBox ui:field="emailAdress" text="UserName"/>
+			<g:TextBox ui:field="emailAdress" text="EmailAdress"/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="Password :"/>
-			<g:TextBox ui:field="password" text="UserName"/>
+			<g:TextBox ui:field="password" text="Password"/>
 		</g:HorizontalPanel>	
-		<g:HorizontalPanel>
-			<g:Button ui:field="addButton" text="Register"/>
+		<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
+			<g:Button ui:field="addButton" styleName='{style.button}' text="Register"/>
 		</g:HorizontalPanel>
 		
 	</g:VerticalPanel>

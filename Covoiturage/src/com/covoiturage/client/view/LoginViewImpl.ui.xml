@@ -1,0 +1,53 @@
+<!-- ViewerNvUser.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	
+	<ui:style>
+    	.label { 
+    		background-color: black; 
+    		color: orange;
+    		font: 112% Arial;
+    	}
+    	.panel { 
+    		border: 2px solid orange;	
+    	}
+    	.h1{
+    		font: 200% Arial;
+			color: orange;
+			text-align: center;
+			margin: 20px 3% 2%;
+			background-color: black;
+			border: solid orange 2px;
+    	}
+  	</ui:style>
+	
+	<g:FlowPanel ui:field="flowpanel">
+	
+		<g:Label styleName='{style.h1}'  text="Bienvenue sur covoiturage.appspot.com"/>
+		
+		<g:VerticalPanel>
+			<g:HorizontalPanel>
+				<g:Label styleName='{style.label}' text="Password :"/>
+				<g:TextBox ui:field="nameField" text="UserName"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:Label styleName='{style.label}' text="Password :"/>
+				<g:TextBox ui:field="passField" text="UserName"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:Button ui:field="sendButton" text="Login"/>
+				<g:Button ui:field="addUserButton" text="Creat Account"/>
+			</g:HorizontalPanel>	
+			
+		</g:VerticalPanel>
+		
+	
+
+
+	
+	
+	</g:FlowPanel>
+		
+
+</ui:UiBinder>

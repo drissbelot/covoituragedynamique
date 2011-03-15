@@ -8,6 +8,7 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.event.getValidatePassengersEvent;
+import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -17,6 +18,7 @@ import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -273,6 +275,7 @@ private void getDirections(){
 		}
 
 		public void onSuccess(DirectionResults result) {
+
 			List<String> steps=new ArrayList<String>();
 			for(int i = 0; i < result.getPolyline().getVertexCount(); i++)
 			{
@@ -280,15 +283,21 @@ private void getDirections(){
 
 
 			} 
+			
 			UserInfoRequest request = requestFactory.userInfoRequest();
 			Request<List<String>> createReq = request.getPassengers(listAddress, mapView.getDistanceMax());
+
 			createReq.fire(new Receiver<List<String>>() {
 
 				@Override
 				public void onSuccess(List<String> result) {
-					if(result!=null)
+					GWT.log("test");
+					if(result!=null){
+
 					Window.alert(result.get(0)+" "+ result.size());
-					eventBus.fireEvent(new getValidatePassengersEvent());
+					eventBus.fireEvent(new getValidatePassengersEvent(result));
+					goTo(new ValidatePassengersPlace(null));
+					}
 				}
 			});
 

@@ -2,6 +2,7 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
@@ -14,9 +15,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.HasWidgets;
 
 public class AddUserActivity extends AbstractActivity implements AddUserView.Presenter{
 
@@ -58,8 +57,9 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		createReq.fire(new Receiver(){
 			@Override
 			public void onSuccess(Object response) {
-				Window.alert("User "+((UserInfoProxy)response).getLogin()+" added");
+				
 				eventBus.fireEvent(new AddUserEvent());
+				goTo(new LoginPlace(null));
 			}
 		});
 

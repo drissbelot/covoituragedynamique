@@ -1,5 +1,7 @@
 package com.covoiturage.client.activity;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
@@ -15,6 +17,8 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
@@ -45,45 +49,57 @@ public class ValidatePassengersActivity extends AbstractActivity implements Vali
 
 
 	private void bind() {
+
 		eventBus.addHandler(getValidatePassengersEvent.TYPE, new getValidatePassengersEventHandler() {
-			
 			@Override
 			public void onGetValidatePassengers(getValidatePassengersEvent event) {
 				passengers=event.getPassengers();
 				
+				displayPassengers();
+				
 			}
 		});
-	    ListDataProvider<UserInfoProxy> dataProvider = new ListDataProvider<UserInfoProxy>();
-
-
-	    dataProvider.addDataDisplay(validatePassengersView.getTable());
-
-	
-	    List<UserInfoProxy> list = dataProvider.getList();
-	    for (String passenger : passengers) {
-	    	UserInfoRequest request = requestFactory.userInfoRequest();
-
-
-			Request<UserInfoProxy> createReq = request.findUserInfo(passenger);
-
-			createReq.fire(new Receiver<UserInfoProxy>() {
-				
-				@Override
-				public void onSuccess(UserInfoProxy response) {
-					passengersInfo.add(response);
-					
-				}
-			});
-			
-		}
-	    
-	    for (UserInfoProxy user : passengersInfo) {
-	      list.add(user);
-	    }
+	   
 
 		
 		}
 
+	
+	private void displayPassengers(){
+		
+		 ListDataProvider<UserInfoProxy> dataProvider = new ListDataProvider<UserInfoProxy>();
+		 passengersInfo = new ArrayList<UserInfoProxy>();
+
+		    dataProvider.addDataDisplay(validatePassengersView.getTable());
+
+		
+		    List<UserInfoProxy> list = dataProvider.getList();
+		    for (String passenger : passengers) {
+		    	UserInfoRequest request = requestFactory.userInfoRequest();
+			      Window.alert(passenger);
+				Request<UserInfoProxy> createReq = request.findUserInfo(passenger);
+
+				createReq.fire(new Receiver<UserInfoProxy>() {
+					
+					@Override
+					public void onSuccess(UserInfoProxy response) {
+						passengersInfo.add(response);
+
+					}
+				});
+				
+			}
+		    
+		    for (UserInfoProxy user : passengersInfo) {
+		      list.add(user);
+
+		    }
+
+
+		    
+
+		
+	}
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		

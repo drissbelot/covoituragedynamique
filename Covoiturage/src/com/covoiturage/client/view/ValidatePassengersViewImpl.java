@@ -12,6 +12,11 @@ import com.google.gwt.view.client.HasData;
 public class ValidatePassengersViewImpl extends Composite implements  ValidatePassengersView {
 
 	 CellTable<UserInfoProxy> passengersCellTable = new CellTable<UserInfoProxy>();
+	public CellTable<UserInfoProxy> getPassengersCellTable() {
+		return passengersCellTable;
+	}
+
+
 	private Presenter presenter;
   public ValidatePassengersViewImpl() {
    initWidget(passengersCellTable);

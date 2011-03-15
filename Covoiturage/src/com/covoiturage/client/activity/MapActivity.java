@@ -56,7 +56,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private Geocoder geocoder;
 	private Date date;
 	private boolean isDriver=true, isPassenger;
-	
+
 	private  int counter;
 
 	private List<String> listAddress=null;
@@ -103,9 +103,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						mapView.getMap().clearOverlays();
 						counter = 0;
 						break;
-					
+
 					}
-					
+
 
 				}
 			}
@@ -142,7 +142,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				
+
 			}
 		});
 	}
@@ -150,31 +150,31 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	protected void doGeolocate(LatLng point){
 		geocoder= new Geocoder();
 		geocoder.getLocations(point, new LocationCallback() {
-			
+
 			@Override
 			public void onSuccess(JsArray<Placemark> locations) {
 				if(counter==1){
-				mapView.setOriginAddress(locations.get(0).getAddress());
+					mapView.setOriginAddress(locations.get(0).getAddress());
 				}else if(counter==2){
 					mapView.setDestinationAddress(locations.get(0).getAddress());
-					
+
 				}
-				
-				
+
+
 			}
-			
+
 			@Override
 			public void onFailure(int statusCode) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 	}
 
 	protected void saveJourney() {
 
-		
+
 		geocoder= new Geocoder();
 		listAddress = new ArrayList<String>();
 		geocoder.getLatLng(mapView.getOriginAddress(), new LatLngCallback() {
@@ -190,7 +190,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					public void onFailure() {
 						Window.alert(" not found");
 					}
-					
+
 					public void onSuccess(LatLng point) {
 						listAddress.add(point.toString());
 
@@ -240,98 +240,99 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			}
 		});
 
-	
-
-
-
-
-
-}
 
 
 
 
 
 
-
-
-
-private void clearGeolocate(){
-
-	mapView.getMap().clearOverlays();
-
-}
+	}
 
 
 
 
-private void getDirections(){
-	
-	DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(),mapView.getDirectionsPanel());
-	Directions.load("from: "+mapView.getOriginAddress() +" to: "+ mapView.getDestinationAddress(), opts,  new DirectionsCallback() {
-		public void onFailure(int statusCode) {
-			Window.alert("Failed to load directions: Status "
-					+ StatusCodes.getName(statusCode) + " " + statusCode);
-		}
-
-		public void onSuccess(DirectionResults result) {
-
-			List<String> steps=new ArrayList<String>();
-			for(int i = 0; i < result.getPolyline().getVertexCount(); i++)
-			{
-				steps.add(result.getPolyline().getVertex(i).toString());
 
 
-			} 
-			
-			UserInfoRequest request = requestFactory.userInfoRequest();
-			Request<List<String>> createReq = request.getPassengers(listAddress, mapView.getDistanceMax());
 
-			createReq.fire(new Receiver<List<String>>() {
 
-				@Override
-				public void onSuccess(List<String> result) {
-					GWT.log("test");
-					if(result!=null){
 
-					Window.alert(result.get(0)+" "+ result.size());
-					eventBus.fireEvent(new getValidatePassengersEvent(result));
-					goTo(new ValidatePassengersPlace(null));
+	private void clearGeolocate(){
+
+		mapView.getMap().clearOverlays();
+
+	}
+
+
+
+
+	private void getDirections(){
+
+		DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(),mapView.getDirectionsPanel());
+		Directions.load("from: "+mapView.getOriginAddress() +" to: "+ mapView.getDestinationAddress(), opts,  new DirectionsCallback() {
+			public void onFailure(int statusCode) {
+				Window.alert("Failed to load directions: Status "
+						+ StatusCodes.getName(statusCode) + " " + statusCode);
+			}
+
+			public void onSuccess(DirectionResults result) {
+
+				List<String> steps=new ArrayList<String>();
+				for(int i = 0; i < result.getPolyline().getVertexCount(); i++)
+				{
+					steps.add(result.getPolyline().getVertex(i).toString());
+
+
+				} 
+
+				UserInfoRequest request = requestFactory.userInfoRequest();
+				Request<List<String>> createReq = request.getPassengers(steps, mapView.getDistanceMax());
+
+				createReq.fire(new Receiver<List<String>>() {
+
+					@Override
+					public void onSuccess(List<String> result) {
+
+						if(result!=null&& result.size()!=0){
+
+							Window.alert(result.get(0)+" "+ result.size());
+							goTo(new ValidatePassengersPlace(null));
+							eventBus.fireEvent(new getValidatePassengersEvent(result));
+							
+						}
 					}
-				}
-			});
+				});
 
 
 
 
 
 
-		}
-	});
+			}
+		});
 
 
 
 
 
-}
-@Override
+	}
+	@Override
 
-public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-	bind();
-	mapView.setPresenter(this);
-	containerWidget.setWidget(mapView.asWidget());
+	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
+		bind();
+		mapView.setPresenter(this);
+		containerWidget.setWidget(mapView.asWidget());
 
-}
-
-
+	}
 
 
-@Override
-public void goTo(Place place) {
 
-	placeController.goTo(place);
 
-}
+	@Override
+	public void goTo(Place place) {
+
+		placeController.goTo(place);
+
+	}
 
 
 

@@ -9,6 +9,7 @@ public class getValidatePassengersEvent extends GwtEvent<getValidatePassengersEv
 	public static Type<getValidatePassengersEventHandler> TYPE = new Type<getValidatePassengersEventHandler>();
 	private List<String> passengers;
 	public getValidatePassengersEvent(List<String> result) {
+		super();
 		this.setPassengers(result);
 	}
 

@@ -44,9 +44,7 @@ public class UserInfo{
 	}
 
 	public static UserInfo findUserInfo(String id) {
-		if (id == null) {
-			return null;
-		}
+
 		EntityManager em = entityManager();
 		try {
 			UserInfo user = em.find(UserInfo.class, id);

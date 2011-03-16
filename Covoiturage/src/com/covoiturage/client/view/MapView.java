@@ -7,6 +7,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -29,7 +30,7 @@ public interface MapView extends IsWidget{
 
 	public abstract MapWidget getMap();
 
-	public abstract DirectionsPanel getDirectionsPanel();
+	public abstract HorizontalPanel getDirectionsPanel();
 
 	public abstract HasClickHandlers getSaveJourneyButton();
 

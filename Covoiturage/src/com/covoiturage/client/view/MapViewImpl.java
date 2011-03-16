@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -27,12 +28,11 @@ public class MapViewImpl extends Composite implements  MapView {
 	@UiField Button sendAddress;
 	@UiField TextBox originAddress;
 	@UiField TextBox destinationAddress;
-	@UiField DirectionsPanel directionsPanel;
+	@UiField HorizontalPanel directionsPanel;
 	@UiField Button saveJourney;
 	@UiField DatePicker dateOfJourney;
 	@UiField RadioButton driverRadioButton;
 	@UiField RadioButton passengerRadioButton;
-	@UiField VerticalPanel typeOfUser;
 	@UiField TextBox distanceMax;
 
 	private Presenter presenter;
@@ -81,7 +81,7 @@ public class MapViewImpl extends Composite implements  MapView {
 
 
 	@Override
-	public DirectionsPanel getDirectionsPanel() {
+	public HorizontalPanel getDirectionsPanel() {
 
 		return directionsPanel;
 	}

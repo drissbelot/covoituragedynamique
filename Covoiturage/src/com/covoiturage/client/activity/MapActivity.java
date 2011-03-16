@@ -32,6 +32,7 @@ import com.google.gwt.maps.client.geocode.DirectionQueryOptions;
 import com.google.gwt.maps.client.geocode.DirectionResults;
 import com.google.gwt.maps.client.geocode.Directions;
 import com.google.gwt.maps.client.geocode.DirectionsCallback;
+import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LatLngCallback;
 import com.google.gwt.maps.client.geocode.LocationCallback;
@@ -46,6 +47,7 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
@@ -280,9 +282,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	}
 
 	private void getDirections() {
+		
+		HorizontalPanel pane = mapView.getDirectionsPanel();
+		pane.clear();
+		DirectionsPanel panedir = new DirectionsPanel();
+		pane.add(panedir);
+		
 
-		DirectionQueryOptions opts = new DirectionQueryOptions(
-				mapView.getMap(), mapView.getDirectionsPanel());
+		DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(), panedir);
 		Directions.load("from: " + mapView.getOriginAddress() + " to: "
 				+ mapView.getDestinationAddress(), opts,
 				new DirectionsCallback() {

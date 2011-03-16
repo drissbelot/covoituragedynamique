@@ -76,7 +76,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements Vali
 		    List<UserInfoProxy> list = dataProvider.getList();
 		    for (String passenger : passengers) {
 		    	UserInfoRequest request = requestFactory.userInfoRequest();
-			    //  Window.alert(passenger);
+
 				Request<UserInfoProxy> createReq = request.findUserInfo(passenger);
 
 				createReq.fire(new Receiver<UserInfoProxy>() {

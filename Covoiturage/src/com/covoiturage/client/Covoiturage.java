@@ -49,12 +49,17 @@ public class Covoiturage implements EntryPoint {
 				 Widget widget = Widget.asWidgetOrNull(activityWidget);
 				 asidePanel.setVisible(widget!=null);
 				 SimplePanel temp =new SimplePanel();
+				 Widget tempWidget= new Widget();
 				 if(mainPanel!=null){
 					 temp=mainPanel;
+					 tempWidget=mainPanel.getWidget();
 					 layoutPanel.remove(mainPanel);
 				 }
 				 layoutPanel.addEast(asidePanel, 20);
+				 
 				 layoutPanel.add(temp);
+				 temp.setWidget(tempWidget);
+				 temp.setVisible(true);
 				 asidePanel.setWidget(widget);
 			}
 		};
@@ -96,9 +101,9 @@ public class Covoiturage implements EntryPoint {
         
 
         ActivityManager vertMasterActivityManager = new ActivityManager(vertMasterActivityMapper, eventBus);
-         ActivityManager horizMasterActivityManager = new ActivityManager(horizMasterActivityMapper, eventBus);
-         ActivityManager mainActivityManager = new ActivityManager(mainActivityMapper, eventBus);
-          ActivityManager asideActivityManager = new ActivityManager(asideActivityMapper, eventBus);
+        ActivityManager horizMasterActivityManager = new ActivityManager(horizMasterActivityMapper, eventBus);
+        ActivityManager mainActivityManager = new ActivityManager(mainActivityMapper, eventBus);
+        ActivityManager asideActivityManager = new ActivityManager(asideActivityMapper, eventBus);
         
         
         vertMasterActivityManager.setDisplay(vertMasterDisplay);

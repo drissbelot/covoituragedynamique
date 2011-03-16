@@ -295,7 +295,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						if(result!=null&& result.size()!=0){
 
-							Window.alert(result.get(0)+" "+ result.size());
+						//	Window.alert(result.get(0)+" "+ result.size());
 							goTo(new ValidatePassengersPlace(null));
 							eventBus.fireEvent(new getValidatePassengersEvent(result));
 							

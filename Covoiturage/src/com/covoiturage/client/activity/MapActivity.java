@@ -155,8 +155,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void onSelectPassengers(
 							SelectPassengersEvent selectPassengersEvent) {
+						mapView.getMap().clearOverlays();
 						for (SimpleTravelProxy simpletravel : selectPassengersEvent
 								.getPassengers()) {
+
 							String origin = simpletravel.getSteps().get(0);
 							String destination = simpletravel.getSteps().get(1);
 							mapView.getMap().addOverlay(
@@ -168,7 +170,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											LatLng.fromUrlValue(destination
 													.substring(1, destination
 															.length()))));
-
+							// TODO calculer une fois pour toutes les LatLng +
+							// créer les détours
 						}
 
 					}
@@ -192,7 +195,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 			@Override
 			public void onFailure(int statusCode) {
-				// TODO Auto-generated method stub
 
 			}
 		});

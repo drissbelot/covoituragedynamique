@@ -62,7 +62,7 @@
 			</g:HorizontalPanel>
 			<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 				<g:Button ui:field="sendButton" text="Login" styleName='{style.button}'/>
-				<g:Button ui:field="addUserButton" text="Creat Account" styleName='{style.button}'/>
+				<g:Button ui:field="addUserButton" text="Create Account" styleName='{style.button}'/>
 			</g:HorizontalPanel>	
 			
 		</g:VerticalPanel>

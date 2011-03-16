@@ -8,6 +8,7 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.event.getValidatePassengersEvent;
+import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;

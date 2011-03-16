@@ -8,6 +8,7 @@ import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 
 public class MainAppActivityMapper implements ActivityMapper {
@@ -25,7 +26,7 @@ private ClientFactory clientFactory;
 		else if (place instanceof MapPlace)
 			return new MapActivity(clientFactory);
 
-		
+
 		return null;
 	}
 

@@ -3,6 +3,7 @@ package com.covoiturage.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
+import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geocode.DirectionsPanel;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,16 +18,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class MapViewImpl extends Composite implements  MapView {
-	
+
 	interface MyUiBinder extends UiBinder<FlowPanel, MapViewImpl> { }
-    private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
+	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
 	@UiField FlowPanel flowpanel;
 	@UiField SimplePanel mapWidgetcontainer;
-	private MapWidget mapWidget;
+	@UiField MapWidget mapWidget;
 	@UiField Button sendAddress;
-	@UiField  TextBox originAddress;
-	@UiField  TextBox destinationAddress;
+	@UiField TextBox originAddress;
+	@UiField TextBox destinationAddress;
 	@UiField DirectionsPanel directionsPanel;
 	@UiField Button saveJourney;
 	@UiField DatePicker dateOfJourney;
@@ -36,19 +37,20 @@ public class MapViewImpl extends Composite implements  MapView {
 	@UiField TextBox distanceMax;
 
 	private Presenter presenter;
-	
+
 	public MapViewImpl() {
-		binder.createAndBindUi(this);
+
 	
-		mapWidget = new MapWidget(LatLng.newInstance(4.009,50.645),13);
-		mapWidget.setPixelSize(350,350);
-		mapWidgetcontainer.add(mapWidget);
+		
+		initWidget(binder.createAndBindUi(this));
+		mapWidget.addControl(new LargeMapControl());
+		mapWidget.setCenter(LatLng.newInstance(48,11),13);
 	}
 
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
 	}
-	
+
 	public RadioButton getDriverRadioButton() {
 		return driverRadioButton;
 	}
@@ -88,7 +90,7 @@ public class MapViewImpl extends Composite implements  MapView {
 
 		return saveJourney;
 	}
-	
+
 	public float getDistanceMax() {
 
 		return Float.valueOf(distanceMax.getText());
@@ -102,8 +104,8 @@ public class MapViewImpl extends Composite implements  MapView {
 
 	@Override
 	public void setPresenter(Presenter presenter) {
-			this.presenter=presenter;
-		
+		this.presenter=presenter;
+
 	}
 
 

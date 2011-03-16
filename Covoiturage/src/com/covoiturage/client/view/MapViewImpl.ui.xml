@@ -51,9 +51,9 @@
   		<g:Label styleName='{style.h1}'  text="Titre"/>
   		
   		<g:HorizontalPanel styleName='{style.panel}' width="96%" height="80%" horizontalAlignment="ALIGN_LEFT">
-  			<g:SimplePanel  ui:field="mapWidgetcontainer" styleName='{style.panel}'>
-  				<!-- container de la map widget -->
-  			</g:SimplePanel>
+  			<g:SimplePanel ui:field="mapWidgetcontainer" styleName='{style.panel}' width="90%" height="100%">
+  				<m:MapWidget ui:field='mapWidget' width="350px" height="350px"/> 
+   			</g:SimplePanel>
   			<g:VerticalPanel styleName='{style.panel}'>
   				<g:HorizontalPanel>
   					<g:Label styleName='{style.label}' text="From :"/>

@@ -25,7 +25,7 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	private Presenter presenter;
 
 	public AddUserViewImpl() {
-		binder.createAndBindUi(this); 
+		initWidget(binder.createAndBindUi(this)); 
 	}
 
 	public HasClickHandlers getAddUserButton() {return addButton;}

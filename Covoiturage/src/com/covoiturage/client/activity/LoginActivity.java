@@ -11,6 +11,7 @@ import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -85,7 +86,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	
 	    public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
-	        
+		 
 	        
 	        loginView.setPresenter(this);
 	        containerWidget.setWidget(loginView.asWidget());

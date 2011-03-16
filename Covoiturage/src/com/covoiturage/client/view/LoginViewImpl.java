@@ -24,7 +24,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 
 	
 	public LoginViewImpl(){
-		binder.createAndBindUi(this); 
+		initWidget(binder.createAndBindUi(this)); 
 	}
 
 	public HasClickHandlers getSendLoginButton() {

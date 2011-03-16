@@ -22,7 +22,7 @@ public class MapUtils {
 
 	
 	
-	public static List<String> bufferRoute(List<String> coordinates, float distance){
+	public static List<SimpleTravel> bufferRoute(List<String> coordinates, float distance){
 		Coordinate[] coordArray=new Coordinate[coordinates.size()];
 		int i=0;
 		for (String singleCoord : coordinates) {
@@ -31,17 +31,12 @@ public class MapUtils {
 			i++;
 		}
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
-		
-		
-
-		
-		
-		return passengersInBuffer(polyline.buffer(distance/111));
+		return simpleTravelsInBuffer(polyline.buffer(distance/111));
 	}
-	public static List<String> passengersInBuffer(Geometry buffer){
-		List<String> passengers = new ArrayList<String>();
+	
+	public static List<SimpleTravel> simpleTravelsInBuffer(Geometry buffer){
 		EntityManager em = EMF.get().createEntityManager();
-
+		List<SimpleTravel> simpleTravels= new ArrayList<SimpleTravel>();
 		try
 		{
 
@@ -58,22 +53,18 @@ public class MapUtils {
 
 				}
 				if(buffer.contains(new GeometryFactory().createMultiPoint(coordArray))){
-					passengers.add(travel.getPassenger());
-
+					simpleTravels.add(travel);
+					
 				}
 			}
-
-		}
-
-
-		finally
-		{
-
-			em.close();
-		}
-		return passengers;
-
-
+			}
+			finally{
+				em.close();
+				
+			}
+			return simpleTravels;
 	}
+	
+
 
 }

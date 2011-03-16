@@ -9,8 +9,8 @@
 			margin: 1em;
 		}
     	.label { 
-    		background-color: black; 
-    		color: orange;
+    	/*	background-color: black;*/ 
+    	/*	color: orange;*/
     		font: 112% Arial;
     		width: 6em;
     		margin: 0em 1em 0.5em 1em;
@@ -18,27 +18,27 @@
     	.panel { 
     		border: 2px solid orange;
     		
-    		background-color: black; 	
+    		/*background-color: black;*/ 	
     	}
     	.centerpanel { 
     		border: 2px solid orange;
     		
-    		background-color: black; 	
+    		/*background-color: black;*/ 	
     	}
     	.h1{
     		font: 200% Arial;
-			color: orange;
+			/*color: orange;*/
 			text-align: center;
 			margin: 20px 0% 2%;
-			background-color: black;
+			/*background-color: black;*/
 			border-bottom: solid orange 2px;
     	}
     	.h2{
     		font: 150% Arial;
-			color: orange;
+			/*color: orange;*/
 			text-align: center;
 			margin : 0em 0em 1em 0em;
-			background-color: black;
+/*			background-color: black;*/
 			border-bottom: solid orange 2px;
     	}
   	</ui:style>

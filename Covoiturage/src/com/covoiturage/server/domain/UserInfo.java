@@ -1,6 +1,7 @@
 package com.covoiturage.server.domain;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -78,8 +79,15 @@ public class UserInfo{
 		return EMF.get().createEntityManager();
 	}
 	
-	public static List<String> getPassengers(List<String> steps, float distance) {
-		return MapUtils.bufferRoute(steps, distance);
+	public static List<String> getPassengers(List<SimpleTravel> travels) {
+		List<String> passengers = new ArrayList<String>();
+		for (SimpleTravel simpleTravel : travels) {
+			passengers.add(simpleTravel.getPassenger());
+			
+		}
+		
+		return passengers;
+		
 		
 
 	}

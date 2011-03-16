@@ -26,4 +26,8 @@ public interface SimpleTravelRequest extends RequestContext{
 
 	InstanceRequest<SimpleTravelProxy, Void> remove();
 
+
+	Request<List<SimpleTravelProxy>> getSimpleTravels(List<String> steps,
+			float distanceMax);
+
 }

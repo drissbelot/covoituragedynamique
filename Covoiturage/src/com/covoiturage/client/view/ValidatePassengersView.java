@@ -1,12 +1,15 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
+import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
+import com.google.gwt.view.client.MultiSelectionModel;
+import com.google.gwt.view.client.SelectionModel;
 
 public interface ValidatePassengersView extends IsWidget{
 
@@ -14,8 +17,9 @@ public interface ValidatePassengersView extends IsWidget{
     public interface Presenter {
         void goTo(Place place);
     }
-	public abstract HasData<UserInfoProxy> getTable();
+	public abstract HasData<SimpleTravelProxy> getTable();
 	public abstract void setPresenter(
 			ValidatePassengersActivity validatePassengersActivity);
-	public CellTable<UserInfoProxy> getPassengersCellTable();
+	public CellTable<SimpleTravelProxy> getPassengersCellTable();
+	public MultiSelectionModel<SimpleTravelProxy> getSelectionModel();
 }

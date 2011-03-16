@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
+import com.covoiturage.server.MapUtils;
 
 
 
@@ -83,6 +84,12 @@ public class SimpleTravel{
 
 		return simpleTravel;
 	}
+	
+	public static List<SimpleTravel> getSimpleTravels(List<String> steps,float distanceMax){
+		return MapUtils.bufferRoute(steps, distanceMax);
+		
+	}
+	
 	
 
 	public void persist() {

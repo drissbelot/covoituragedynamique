@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -20,7 +21,7 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	@UiField TextBox lastName;
 	@UiField TextBox emailAdress;
 	@UiField TextBox login;
-	@UiField TextBox password;
+	@UiField PasswordTextBox password;
 	@UiField FlowPanel flowpanel;
 	private Presenter presenter;
 

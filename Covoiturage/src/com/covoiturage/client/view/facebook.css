@@ -1,0 +1,78 @@
+		.button {
+			margin: 1em;
+			background-color: RGB(59,89,152); 
+			display:block;
+			color: white;
+			text-decoration : none;
+		}
+		.button:hover {
+			margin: 1em;
+			background-color: RGB(109,134,183); 
+			display:block;
+			text-decoration : none;
+			color: white;
+		}
+		.button:visited {
+			margin: 1em;
+			background-color: RGB(109,134,183); 
+			display:block;
+			text-decoration : none;
+			color: white;
+		}
+		.cartecontainer{
+			padding: 2em 2em 2em 2em;
+			border : solid RGB(109,134,183) 3px;
+		
+		}
+    	.label { 
+    		background-color: white; 
+    		color: black;
+    		font: 112% Arial;
+    		width: 5.5em;
+    		margin: 0em 1em 1em 1em;
+    	}
+    	.panel { 
+    		/*background-color: RGB(59,89,152); */
+    		border-top : solid RGB(109,134,183) 3px;
+    		border-right : solid RGB(109,134,183) 3px;
+    		border-bottom : solid RGB(109,134,183) 3px;	
+    		/*margin: 2em;*/
+    		padding: 1.3em;
+    	}
+    	.centerpanel { 
+    		border: solid RGB(109,134,183) 3px;
+    		margin: 10% 40%;
+    		/*background-color: black;*/
+    		
+    		/*padding: 1em;*/
+    	}
+    	.grandpanel { 
+    		border: 2px solid orange;	
+    		margin: 1em;
+    		/*padding: 1em;*/
+    	}
+    	.h1{
+    		font: 200% Arial;
+			color: white;
+			text-align: center;
+			margin: 0px 0% 0%;
+			background-color: RGB(59,89,152);
+			/*border: solid orange 2px;*/
+    	}
+    	.h2{
+    		font: 150% Arial;
+			color: white;
+			text-align: center;
+			margin : 0em 0em 1em 0em;
+			background-color: RGB(59,89,152);
+			border-bottom: solid RGB(109,134,183) 3px;
+    	}
+    	.textbox{
+    		margin : 0em 1em 0em 0em;
+    	}
+    	.datepicker{
+    		margin : 0em 0em 1em 2em;
+    	}
+    	.radiobutton{
+    		margin : 0em 0em 1em 1.5em;
+    	}

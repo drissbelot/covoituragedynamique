@@ -23,7 +23,6 @@ public class MapViewImpl extends Composite implements  MapView {
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
 	@UiField FlowPanel flowpanel;
-	@UiField SimplePanel mapWidgetcontainer;
 	@UiField MapWidget mapWidget;
 	@UiField Button sendAddress;
 	@UiField TextBox originAddress;
@@ -45,6 +44,8 @@ public class MapViewImpl extends Composite implements  MapView {
 		initWidget(binder.createAndBindUi(this));
 		mapWidget.addControl(new LargeMapControl());
 		mapWidget.setCenter(LatLng.newInstance(48,11),13);
+		driverRadioButton.setText("Driver");
+		passengerRadioButton.setText("Passenger");
 	}
 
 	public RadioButton getPassengerRadioButton() {

@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,7 +19,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 	
 	@UiField Button sendButton ; 
 	@UiField TextBox nameField ;
-	@UiField TextBox passField ;
+	@UiField PasswordTextBox passField ;
 	@UiField Button addUserButton;
     private Presenter presenter;
 

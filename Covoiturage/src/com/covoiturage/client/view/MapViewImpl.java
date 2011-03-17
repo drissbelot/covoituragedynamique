@@ -7,6 +7,7 @@ import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -44,11 +45,14 @@ public class MapViewImpl extends Composite implements MapView {
 	RadioButton passengerRadioButton;
 	@UiField
 	TextBox distanceMax;
+	@UiField
+	Anchor EditProfil;
+	@UiField
+	Anchor logout;
 
 	private Presenter presenter;
 
 	public MapViewImpl() {
-
 		initWidget(binder.createAndBindUi(this));
 		mapWidget.addControl(new LargeMapControl());
 		mapWidget.setCenter(LatLng.newInstance(48, 11), 13);
@@ -56,39 +60,32 @@ public class MapViewImpl extends Composite implements MapView {
 		passengerRadioButton.setText("Passenger");
 	}
 
-	@Override
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
 	}
 
-	@Override
 	public RadioButton getDriverRadioButton() {
 		return driverRadioButton;
 	}
 
-	@Override
 	public DatePicker getDateOfJourney() {
 		return dateOfJourney;
 	}
 
-	@Override
 	public HasClickHandlers getSendAddressButton() {
 		return sendAddress;
 	}
 
-	@Override
 	public String getOriginAddress() {
 
 		return originAddress.getText();
 	}
 
-	@Override
 	public String getDestinationAddress() {
 
 		return destinationAddress.getText();
 	}
 
-	@Override
 	public MapWidget getMap() {
 
 		return mapWidget;
@@ -100,37 +97,41 @@ public class MapViewImpl extends Composite implements MapView {
 		return directionsPanel;
 	}
 
-	@Override
 	public HasClickHandlers getSaveJourneyButton() {
 
 		return saveJourney;
 	}
 
-	@Override
 	public float getDistanceMax() {
 
 		return Float.valueOf(distanceMax.getText());
 	}
 
-	@Override
 	public FlowPanel getMapDecorator() {
 		return flowpanel;
 	}
 
-	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 
 	}
 
-	@Override
 	public void setOriginAddress(String originAddress) {
 		this.originAddress.setText(originAddress);
 	}
 
-	@Override
 	public void setDestinationAddress(String destinationAddress) {
 		this.destinationAddress.setText(destinationAddress);
 	}
+	
+	public HasClickHandlers getEditProfilButton() {
+
+		return EditProfil;
+	}
+	public HasClickHandlers getLogout() {
+
+		return logout;
+	}
+	
 
 }

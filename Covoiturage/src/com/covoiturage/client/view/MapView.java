@@ -37,6 +37,7 @@ public interface MapView extends IsWidget{
 	public abstract float getDistanceMax();
 
 	public abstract FlowPanel getMapDecorator();
+	
     void setPresenter(Presenter presenter);
 
     public interface Presenter {
@@ -45,8 +46,10 @@ public interface MapView extends IsWidget{
 
 	public void setOriginAddress(String originAddress);
 
-
-
 	public void setDestinationAddress(String destinationAddress) ;
+	
+	public HasClickHandlers getLogout();
+	
+	public HasClickHandlers getEditProfilButton();
 
 }

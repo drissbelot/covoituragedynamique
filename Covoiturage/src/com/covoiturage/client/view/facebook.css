@@ -83,3 +83,31 @@
     		/*border: solid RGB(109,134,183) 3px;*/
     		margin: 10% 26%;
     	}
+    	.menutirte{
+    		background-color: RGB(59,89,152);
+    		color: white;
+    	}
+    	.buttontitre {
+    		font: 120% normal;
+			background-color: RGB(59,89,152); 
+			display:block;
+			color: white;
+		}
+		.buttontitre:hover {
+			background-color: RGB(109,134,183); 
+			display:block;
+			color: white;
+		}
+		.buttontitre:visited {
+			background-color: RGB(109,134,183); 
+			display:block;
+			color: white;
+		}
+			.h1titre{
+			padding : 0px 50px 0px 50px 0px;
+			/*margin : 0px 50px 0px 50px 0px;*/
+    		font: 200% Arial;
+			color: white;
+			text-align: center;
+			background-color: RGB(59,89,152);
+    	}

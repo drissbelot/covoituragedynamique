@@ -19,12 +19,9 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class AddUserActivity extends AbstractActivity implements AddUserView.Presenter{
 
-
 	private final EventBus eventBus;
-
 	AddUserView addUserView;
 	private CovoiturageRequestFactory requestFactory;
-
 	private PlaceController placeController;
 
 	public AddUserActivity(ClientFactory clientFactory) {
@@ -34,13 +31,10 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		  this.placeController = clientFactory.getPlaceController();
 	}
 
-
-
 	private void bind() {
 		addUserView.getAddButton().addClickHandler(new ClickHandler() {   
 			public void onClick(ClickEvent event) {
 				addUser();
-
 			}
 		});
 	}
@@ -48,7 +42,6 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 	@SuppressWarnings("unchecked")
 	protected void addUser() {
 		UserInfoRequest request = requestFactory.userInfoRequest();
-
 		UserInfoProxy newUser = request.create(UserInfoProxy.class);
 		newUser.setLogin(addUserView.getLogin());
 		newUser.setPassword(addUserView.getPassword());
@@ -57,32 +50,19 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		createReq.fire(new Receiver(){
 			@Override
 			public void onSuccess(Object response) {
-				
 				eventBus.fireEvent(new AddUserEvent());
 				goTo(new LoginPlace(null));
 			}
 		});
-
-
-
-
 	}
 
-	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
-        
-        
         addUserView.setPresenter(this);
         panel.setWidget(addUserView.asWidget());
-		
 	}
 
-	@Override
 	public void goTo(Place place) {
-
 		placeController.goTo(place);
-
 	}
-
 }

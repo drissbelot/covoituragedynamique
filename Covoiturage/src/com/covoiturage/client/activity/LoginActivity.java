@@ -24,87 +24,57 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class LoginActivity extends AbstractActivity implements LoginView.Presenter {
 
-	
-	  private final EventBus eventBus;
-	  private final LoginView loginView;
-	  private UserInfoProxy currentUser;
-	  private CovoiturageRequestFactory requestFactory;
+	private final EventBus eventBus;
+	private final LoginView loginView;
+	private UserInfoProxy currentUser;
+	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 
-
-
-	  public LoginActivity(ClientFactory clientFactory) {
-		  this.requestFactory = clientFactory.getRequestFactory();
-		    this.eventBus = clientFactory.getEventBus();
-		    this.loginView = clientFactory.getLoginView();
-		    this.placeController = clientFactory.getPlaceController();
-		  }
-	
-
+	public LoginActivity(ClientFactory clientFactory) {
+		this.requestFactory = clientFactory.getRequestFactory();
+		this.eventBus = clientFactory.getEventBus();
+		this.loginView = clientFactory.getLoginView();
+		this.placeController = clientFactory.getPlaceController();
+	}
 
 	private void bind() {
 		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {   
-		      public void onClick(ClickEvent event) {
-		   	  login();
-
-		      }
-		    });
+			public void onClick(ClickEvent event) {
+				login();
+			}
+		});
 		loginView.getAddUserButton().addClickHandler(new ClickHandler() {   
-		      public void onClick(ClickEvent event) {
-		        goTo(new AddUserPlace(null));
-		      }
-		    });
-		
+			public void onClick(ClickEvent event) {
+				goTo(new AddUserPlace(null));
+			}
+		});
 	} 
-	
-	private void login()
-	{
-		
+
+	private void login(){
 		UserInfoRequest request = requestFactory.userInfoRequest();
-
-
 		Request<UserInfoProxy> createReq = request.login(loginView.getLogin(), loginView.getPassword());
-
 		createReq.fire(new Receiver<UserInfoProxy>(){
 			@Override
 			public void onSuccess(UserInfoProxy result) {
-				 currentUser = result;
-    	  
-			        if(currentUser!=null && currentUser.getLoggedIn()) {
-					   	  goTo(new MapPlace(null));
-				        eventBus.fireEvent(new SendLoginEvent(currentUser));
-			        } else {
-			        	  Window.alert("Veuillez vous identifiez");
-
-			        }
-				
+				currentUser = result;
+				if(currentUser!=null && currentUser.getLoggedIn()) {
+					goTo(new MapPlace(null));
+					eventBus.fireEvent(new SendLoginEvent(currentUser));
+				} else {
+					Window.alert("Veuillez vous identifiez");
+				}
 			}
 		});
 	}
 
-	@Override
-	
-	    public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
+	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
-		 
-	        
-	        loginView.setPresenter(this);
-	        containerWidget.setWidget(loginView.asWidget());
-			
-	    }
-
-
-		
-
-	@Override
-	public void goTo(Place place) {
-
-		placeController.goTo(place);
-
+		loginView.setPresenter(this);
+		containerWidget.setWidget(loginView.asWidget());
 	}
 
-	 
-	
-	
-	
+	public void goTo(Place place) {
+		placeController.goTo(place);
+	}
+
 }

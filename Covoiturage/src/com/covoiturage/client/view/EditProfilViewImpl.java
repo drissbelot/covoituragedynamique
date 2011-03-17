@@ -32,10 +32,13 @@ public class EditProfilViewImpl extends Composite implements  EditProfilView{
 		login.setText("login=fix");
 	}
 	
-	
 	public HasClickHandlers getSubmit() {
 
 		return submitButton;
+	}
+	
+	public void setPresenter(Presenter presenter) {
+		this.presenter=presenter;
 	}
 
 }

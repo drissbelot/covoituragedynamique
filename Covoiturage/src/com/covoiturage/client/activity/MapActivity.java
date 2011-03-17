@@ -57,6 +57,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private Geocoder geocoder;
 	private Date date;
 	private boolean isDriver = true, isPassenger;
+	private final List<Overlay> mapOverlay = new ArrayList<Overlay>();
 
 	private int counter;
 
@@ -74,6 +75,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	}
 
 	public void bind() {
+
 		mapView.getSendAddressButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -282,14 +284,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	}
 
 	private void getDirections() {
-		
+
 		HorizontalPanel pane = mapView.getDirectionsPanel();
 		pane.clear();
 		DirectionsPanel panedir = new DirectionsPanel();
 		pane.add(panedir);
-		
 
-		DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(), panedir);
+		DirectionQueryOptions opts = new DirectionQueryOptions(
+				mapView.getMap(), panedir);
 		Directions.load("from: " + mapView.getOriginAddress() + " to: "
 				+ mapView.getDestinationAddress(), opts,
 				new DirectionsCallback() {

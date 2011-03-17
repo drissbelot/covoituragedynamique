@@ -29,8 +29,8 @@
   						<d:DatePicker ui:field="dateOfJourney" styleName='{style.datepicker}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
-  						<g:RadioButton name="driver"  ui:field="driverRadioButton" styleName='{style.radiobutton}' />
-  						<g:RadioButton name="passenger"  ui:field="passengerRadioButton"  styleName='{style.radiobutton}'/>
+  						<g:RadioButton  ui:field="driverRadioButton" styleName='{style.radiobutton}' ui:name="typeOfUser"/>
+  						<g:RadioButton ui:field="passengerRadioButton"  styleName='{style.radiobutton}' ui:name="typeOfUser"/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' text="Distance Max:" width="7em"/>
@@ -42,14 +42,6 @@
   					</g:HorizontalPanel>
   				</g:VerticalPanel>
   			</g:HorizontalPanel>
-  			<g:VerticalPanel>
-  				<g:HorizontalPanel styleName='{style.panel}'>
-  					<g:Label text="utilisateur potentiel"/>
-  				</g:HorizontalPanel>
-  				<g:HorizontalPanel styleName='{style.panel}'>
-  					<g:Label text="driver potentiel"/>
-  				</g:HorizontalPanel>
-  			</g:VerticalPanel>
   		</g:HorizontalPanel>
 
   		<g:HorizontalPanel ui:field="directionsPanel"/>

@@ -41,6 +41,10 @@
     		/*margin: 2em;*/
     		padding: 1.3em;
     	}
+    	.panelfullborder{
+    		border: solid RGB(109,134,183) 3px;
+    		padding: 1.3em;
+    	}
     	.centerpanel { 
     		border: solid RGB(109,134,183) 3px;
     		margin: 10% 40%;
@@ -74,4 +78,8 @@
     	}
     	.radiobutton{
     		margin : 0em 0em 1em 1.5em;
+    	}
+    	.containerphtoto{
+    		/*border: solid RGB(109,134,183) 3px;*/
+    		margin: 10% 26%;
     	}

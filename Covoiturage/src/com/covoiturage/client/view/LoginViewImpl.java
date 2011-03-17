@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -21,11 +22,13 @@ public class LoginViewImpl extends Composite implements LoginView {
 	@UiField TextBox nameField ;
 	@UiField PasswordTextBox passField ;
 	@UiField Button addUserButton;
+	@UiField Image image;
     private Presenter presenter;
 
 	
 	public LoginViewImpl(){
 		initWidget(binder.createAndBindUi(this)); 
+		image.setUrl("http://1.bp.blogspot.com/_q6GXjsy7QfU/SwheN_DnA6I/AAAAAAAACC4/ktKRwE4r3tQ/s1600/D%C3%A9rapage.gif");
 	}
 
 	public HasClickHandlers getSendLoginButton() {

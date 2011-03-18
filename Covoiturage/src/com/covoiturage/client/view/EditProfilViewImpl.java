@@ -25,7 +25,7 @@ public class EditProfilViewImpl extends Composite implements  EditProfilView{
 	@UiField PasswordTextBox prevpassword;
 	@UiField PasswordTextBox newpassword;
 	
-	private Presenter presenter;  //a quoi il sert?
+	private Presenter presenter; 
 	
 	public EditProfilViewImpl(){
 		initWidget(binder.createAndBindUi(this));

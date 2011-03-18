@@ -20,9 +20,12 @@ import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -48,6 +51,7 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
@@ -57,7 +61,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private Geocoder geocoder;
 	private Date date;
 	private boolean isDriver = true, isPassenger;
-	private final List<Overlay> mapOverlay = new ArrayList<Overlay>();
 
 	private int counter;
 
@@ -75,7 +78,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	}
 
 	public void bind() {
-
 		mapView.getSendAddressButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -156,30 +158,86 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		eventBus.addHandler(SelectPassengersEvent.TYPE,
 				new SelectPassengersEventHandler() {
 
+			@Override
+			public void onSelectPassengers(
+					SelectPassengersEvent selectPassengersEvent) {
+				mapView.getMap().clearOverlays();
+				for (SimpleTravelProxy simpletravel : selectPassengersEvent
+						.getPassengers()) {
+
+					String origin = simpletravel.getSteps().get(0);
+					String destination = simpletravel.getSteps().get(1);
+					mapView.getMap().addOverlay(
+							new Marker(LatLng.fromUrlValue(origin
+									.substring(1, origin.length()))));
+
+					mapView.getMap().addOverlay(
+							new Marker(
+									LatLng.fromUrlValue(destination
+											.substring(1, destination
+													.length()))));
+					// TODO calculer une fois pour toutes les LatLng +
+					// créer les détours
+				}
+
+			}
+		});
+		mapView.getOriginAddress().getTextBox().addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				GWT.log(mapView.getOriginAddress().getText());
+				geocoder = new Geocoder();
+				geocoder.getLocations(mapView.getOriginAddress().getTextBox().getText(), new LocationCallback() {
+
 					@Override
-					public void onSelectPassengers(
-							SelectPassengersEvent selectPassengersEvent) {
-						mapView.getMap().clearOverlays();
-						for (SimpleTravelProxy simpletravel : selectPassengersEvent
-								.getPassengers()) {
-
-							String origin = simpletravel.getSteps().get(0);
-							String destination = simpletravel.getSteps().get(1);
-							mapView.getMap().addOverlay(
-									new Marker(LatLng.fromUrlValue(origin
-											.substring(1, origin.length()))));
-
-							mapView.getMap().addOverlay(
-									new Marker(
-											LatLng.fromUrlValue(destination
-													.substring(1, destination
-															.length()))));
-							// TODO calculer une fois pour toutes les LatLng +
-							// créer les détours
+					public void onSuccess(JsArray<Placemark> locations) {
+						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView.getOriginAddress().getSuggestOracle();  
+						for (int i = 0; i < locations.length(); i++) {
+							oracle.add(locations.get(i).getAddress());
 						}
+
+
+					}
+
+					@Override
+					public void onFailure(int statusCode) {
+
 
 					}
 				});
+
+
+			}
+		});
+		mapView.getDestinationAddress().getTextBox().addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				GWT.log(mapView.getDestinationAddress().getText());
+				geocoder = new Geocoder();
+				geocoder.getLocations(mapView.getDestinationAddress().getTextBox().getText(), new LocationCallback() {
+
+					@Override
+					public void onSuccess(JsArray<Placemark> locations) {
+						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView.getDestinationAddress().getSuggestOracle();  
+						for (int i = 0; i < locations.length(); i++) {
+							oracle.add(locations.get(i).getAddress());
+						}
+
+
+					}
+
+					@Override
+					public void onFailure(int statusCode) {
+
+
+					}
+				});
+
+
+			}
+		});
+
+
 	}
 
 	protected void doGeolocate(LatLng point) {
@@ -189,7 +247,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void onSuccess(JsArray<Placemark> locations) {
 				if (counter == 1) {
-					mapView.setOriginAddress(locations.get(0).getAddress());
+					mapView.getOriginAddress().setText((locations.get(0).getAddress()));
 				} else if (counter == 2) {
 					mapView.setDestinationAddress(locations.get(0).getAddress());
 
@@ -209,7 +267,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 		geocoder = new Geocoder();
 		listAddress = new ArrayList<String>();
-		geocoder.getLatLng(mapView.getOriginAddress(), new LatLngCallback() {
+		geocoder.getLatLng(mapView.getOriginAddress().getText(), new LatLngCallback() {
 			@Override
 			public void onFailure() {
 				Window.alert(" not found");
@@ -220,57 +278,57 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				listAddress.add(point.toString());
 				geocoder = new Geocoder();
 
-				geocoder.getLatLng(mapView.getDestinationAddress(),
+				geocoder.getLatLng(mapView.getDestinationAddress().getText(),
 						new LatLngCallback() {
-							@Override
-							public void onFailure() {
-								Window.alert(" not found");
-							}
+					@Override
+					public void onFailure() {
+						Window.alert(" not found");
+					}
 
-							@Override
-							public void onSuccess(LatLng point) {
-								listAddress.add(point.toString());
+					@Override
+					public void onSuccess(LatLng point) {
+						listAddress.add(point.toString());
 
-								if (isDriver) {
-									JourneyRequest request = requestFactory
-											.journeyRequest();
-									Request<JourneyProxy> createReq = request
-											.saveJourneyDriver(listAddress,
-													date, currentUser.getId());
-									createReq
-											.fire(new Receiver<JourneyProxy>() {
+						if (isDriver) {
+							JourneyRequest request = requestFactory
+							.journeyRequest();
+							Request<JourneyProxy> createReq = request
+							.saveJourneyDriver(listAddress,
+									date, currentUser.getId());
+							createReq
+							.fire(new Receiver<JourneyProxy>() {
 
-												@Override
-												public void onSuccess(
-														JourneyProxy response) {
+								@Override
+								public void onSuccess(
+										JourneyProxy response) {
 
-													Window.alert("savec");
-
-												}
-											});
-
-								} else if (isPassenger) {
-									SimpleTravelRequest request = requestFactory
-											.simpleTravelRequest();
-									Request<SimpleTravelProxy> createReq = request
-											.saveJourneyPassenger(listAddress,
-													date, currentUser.getId());
-									createReq
-											.fire(new Receiver<SimpleTravelProxy>() {
-
-												@Override
-												public void onSuccess(
-														SimpleTravelProxy response) {
-
-													Window.alert("saved");
-
-												}
-											});
+									Window.alert("savec");
 
 								}
+							});
 
-							}
-						});
+						} else if (isPassenger) {
+							SimpleTravelRequest request = requestFactory
+							.simpleTravelRequest();
+							Request<SimpleTravelProxy> createReq = request
+							.saveJourneyPassenger(listAddress,
+									date, currentUser.getId());
+							createReq
+							.fire(new Receiver<SimpleTravelProxy>() {
+
+								@Override
+								public void onSuccess(
+										SimpleTravelProxy response) {
+
+									Window.alert("saved");
+
+								}
+							});
+
+						}
+
+					}
+				});
 
 			}
 		});
@@ -290,69 +348,69 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		DirectionsPanel panedir = new DirectionsPanel();
 		pane.add(panedir);
 
-		DirectionQueryOptions opts = new DirectionQueryOptions(
-				mapView.getMap(), panedir);
-		Directions.load("from: " + mapView.getOriginAddress() + " to: "
-				+ mapView.getDestinationAddress(), opts,
+
+		DirectionQueryOptions opts = new DirectionQueryOptions(mapView.getMap(), panedir);
+		Directions.load("from: " + mapView.getOriginAddress().getText() + " to: "
+				+ mapView.getDestinationAddress().getText(), opts,
 				new DirectionsCallback() {
-					@Override
-					public void onFailure(int statusCode) {
-						Window.alert("Failed to load directions: Status "
-								+ StatusCodes.getName(statusCode) + " "
-								+ statusCode);
-					}
+			@Override
+			public void onFailure(int statusCode) {
+				Window.alert("Failed to load directions: Status "
+						+ StatusCodes.getName(statusCode) + " "
+						+ statusCode);
+			}
+
+			@Override
+			public void onSuccess(DirectionResults result) {
+
+				List<String> steps = new ArrayList<String>();
+				for (int i = 0; i < result.getPolyline()
+				.getVertexCount(); i++) {
+					steps.add(result.getPolyline().getVertex(i)
+							.toString());
+
+				}
+
+				SimpleTravelRequest request = requestFactory
+				.simpleTravelRequest();
+				Request<List<SimpleTravelProxy>> createReq = request
+				.getSimpleTravels(steps,
+						mapView.getDistanceMax());
+
+				createReq.fire(new Receiver<List<SimpleTravelProxy>>() {
 
 					@Override
-					public void onSuccess(DirectionResults result) {
+					public void onSuccess(
+							final List<SimpleTravelProxy> resultSimpleTravel) {
 
-						List<String> steps = new ArrayList<String>();
-						for (int i = 0; i < result.getPolyline()
-								.getVertexCount(); i++) {
-							steps.add(result.getPolyline().getVertex(i)
-									.toString());
+						if (resultSimpleTravel != null
+								&& resultSimpleTravel.size() != 0) {
 
-						}
+							UserInfoRequest request = requestFactory
+							.userInfoRequest();
+							Request<List<String>> createReq = request
+							.getPassengers(resultSimpleTravel);
 
-						SimpleTravelRequest request = requestFactory
-								.simpleTravelRequest();
-						Request<List<SimpleTravelProxy>> createReq = request
-								.getSimpleTravels(steps,
-										mapView.getDistanceMax());
+							createReq
+							.fire(new Receiver<List<String>>() {
 
-						createReq.fire(new Receiver<List<SimpleTravelProxy>>() {
+								@Override
+								public void onSuccess(
+										List<String> resultPassengers) {
+									goTo(new ValidatePassengersPlace(
+											null));
+									eventBus.fireEvent(new GetValidatePassengersEvent(
+											resultPassengers,
+											resultSimpleTravel));
 
-							@Override
-							public void onSuccess(
-									final List<SimpleTravelProxy> resultSimpleTravel) {
-
-								if (resultSimpleTravel != null
-										&& resultSimpleTravel.size() != 0) {
-
-									UserInfoRequest request = requestFactory
-											.userInfoRequest();
-									Request<List<String>> createReq = request
-											.getPassengers(resultSimpleTravel);
-
-									createReq
-											.fire(new Receiver<List<String>>() {
-
-												@Override
-												public void onSuccess(
-														List<String> resultPassengers) {
-													goTo(new ValidatePassengersPlace(
-															null));
-													eventBus.fireEvent(new GetValidatePassengersEvent(
-															resultPassengers,
-															resultSimpleTravel));
-
-												}
-											});
 								}
-							}
-						});
-
+							});
+						}
 					}
 				});
+
+			}
+		});
 
 	}
 

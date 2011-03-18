@@ -12,7 +12,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
@@ -30,9 +32,9 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField
 	Button sendAddress;
 	@UiField
-	TextBox originAddress;
+	SuggestBox originAddress;
 	@UiField
-	TextBox destinationAddress;
+	SuggestBox destinationAddress;
 	@UiField
 	HorizontalPanel directionsPanel;
 	@UiField
@@ -58,6 +60,7 @@ public class MapViewImpl extends Composite implements MapView {
 		mapWidget.setCenter(LatLng.newInstance(48, 11), 13);
 		driverRadioButton.setText("Driver");
 		passengerRadioButton.setText("Passenger");
+
 	}
 
 	public RadioButton getPassengerRadioButton() {
@@ -76,14 +79,14 @@ public class MapViewImpl extends Composite implements MapView {
 		return sendAddress;
 	}
 
-	public String getOriginAddress() {
+	public SuggestBox getOriginAddress() {
 
-		return originAddress.getText();
+		return originAddress;
 	}
 
-	public String getDestinationAddress() {
+	public SuggestBox getDestinationAddress() {
 
-		return destinationAddress.getText();
+		return destinationAddress;
 	}
 
 	public MapWidget getMap() {
@@ -116,8 +119,8 @@ public class MapViewImpl extends Composite implements MapView {
 
 	}
 
-	public void setOriginAddress(String originAddress) {
-		this.originAddress.setText(originAddress);
+	public void setOriginAddress(SuggestBox originAddress) {
+		this.originAddress=originAddress;
 	}
 
 	public void setDestinationAddress(String destinationAddress) {

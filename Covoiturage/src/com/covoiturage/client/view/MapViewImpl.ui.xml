@@ -23,7 +23,7 @@
   				<g:VerticalPanel >
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' text="From :" width="3em"/>
-						<g:TextBox ui:field="originAddress" text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
+						<g:SuggestBox ui:field="originAddress" text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' text="To :" width="3em"/>

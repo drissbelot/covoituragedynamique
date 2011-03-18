@@ -10,7 +10,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
@@ -24,9 +26,9 @@ public interface MapView extends IsWidget{
 
 	public abstract HasClickHandlers getSendAddressButton();
 
-	public abstract String getOriginAddress();
+	public abstract SuggestBox getOriginAddress();
 
-	public abstract String getDestinationAddress();
+	public abstract SuggestBox getDestinationAddress();
 
 	public abstract MapWidget getMap();
 
@@ -44,7 +46,7 @@ public interface MapView extends IsWidget{
         void goTo(Place place);
     }
 
-	public void setOriginAddress(String originAddress);
+	public void setOriginAddress(SuggestBox suggestBox);
 
 	public void setDestinationAddress(String destinationAddress) ;
 	

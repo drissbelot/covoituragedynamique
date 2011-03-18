@@ -16,7 +16,6 @@ import javax.persistence.Version;
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.EMF;
-import com.covoiturage.server.MapUtils;
 
 
 @Entity

@@ -25,6 +25,7 @@ public class EditProfilViewImpl extends Composite implements  EditProfilView{
 	@UiField PasswordTextBox prevpassword;
 	@UiField PasswordTextBox newpassword;
 	
+	@SuppressWarnings("unused")
 	private Presenter presenter; 
 	
 	public EditProfilViewImpl(){

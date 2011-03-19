@@ -15,13 +15,16 @@ import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
 import com.covoiturage.shared.JourneyRequest;
+import com.covoiturage.shared.PassengerInfoRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoProxy;
-import com.covoiturage.shared.UserInfoRequest;
+
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -59,7 +62,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final EventBus eventBus;
 	private final MapView mapView;
 	private Geocoder geocoder;
-	private Date date;
+	private Date date= new Date();
 	private boolean isDriver = true, isPassenger;
 
 	private int counter;
@@ -132,6 +135,22 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					}
 				});
+		mapView.getHours().addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				date.setHours(Integer.parseInt(mapView.getHours().getItemText(mapView.getHours().getSelectedIndex())));
+				
+			}
+		});
+	mapView.getMinutes().addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				date.setMinutes(Integer.parseInt(mapView.getMinutes().getItemText(mapView.getMinutes().getSelectedIndex())));
+				
+			}
+		});
 		mapView.getDriverRadioButton().addClickHandler(new ClickHandler() {
 
 			@Override
@@ -386,8 +405,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						if (resultSimpleTravel != null
 								&& resultSimpleTravel.size() != 0) {
 
-							UserInfoRequest request = requestFactory
-							.userInfoRequest();
+							PassengerInfoRequest request = requestFactory
+							.passengerInfoRequest();
 							Request<List<String>> createReq = request
 							.getPassengers(resultSimpleTravel);
 

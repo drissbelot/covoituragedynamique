@@ -31,6 +31,8 @@
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<d:DatePicker ui:field="dateOfJourney" styleName='{style.datepicker}'/>
+  						<g:ListBox ui:field="hours" styleName='{style.datepicker}'/>
+  						<g:ListBox ui:field="minutes" styleName='{style.datepicker}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<g:RadioButton  ui:field="driverRadioButton" styleName='{style.radiobutton}' ui:name="typeOfUser"/>

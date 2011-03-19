@@ -8,7 +8,7 @@
 	
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 	
-		<g:Label styleName='{style.h1}'  text="Creat an new Account"/>
+		<g:Label styleName='{style.h1}'  text="Create a new Account"/>
 	
 	<g:VerticalPanel ui:field="container" styleName='{style.centerpanel}' horizontalAlignment="ALIGN_LEFT">
 		<g:Label styleName='{style.h2}'  text="Enter your personnal data"/>
@@ -31,6 +31,14 @@
 		<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="Password :"/>
 			<g:PasswordTextBox ui:field="password" text="Password" styleName='{style.textbox}'/>
+		</g:HorizontalPanel>	
+		<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="Make :"/>
+			<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}'/>
+		</g:HorizontalPanel>	
+				<g:HorizontalPanel>
+			<g:Label styleName='{style.label}' text="Model :"/>
+			<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 			<g:Button ui:field="addButton" styleName='{style.button}' text="Register"/>

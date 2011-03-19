@@ -1,10 +1,8 @@
 package com.covoiturage.client.event;
 
-import java.util.List;
 import java.util.Set;
 
 import com.covoiturage.shared.SimpleTravelProxy;
-import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.event.shared.GwtEvent;
 
 

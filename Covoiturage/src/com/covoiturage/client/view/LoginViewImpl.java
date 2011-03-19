@@ -23,7 +23,8 @@ public class LoginViewImpl extends Composite implements LoginView {
 	@UiField PasswordTextBox passField ;
 	@UiField Button addUserButton;
 	@UiField Image image;
-    private Presenter presenter;
+    @SuppressWarnings("unused")
+	private Presenter presenter;
 
 	
 	public LoginViewImpl(){

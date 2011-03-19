@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -16,13 +17,44 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	interface MyUiBinder extends UiBinder<FlowPanel, AddUserViewImpl> { }
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	
+	@UiField FlowPanel flowpanel;
 	@UiField Button addButton;
 	@UiField TextBox firstName;
 	@UiField TextBox lastName;
 	@UiField TextBox emailAdress;
 	@UiField TextBox login;
 	@UiField PasswordTextBox password;
-	@UiField FlowPanel flowpanel;
+	@UiField SuggestBox vehicleMake;
+	@UiField SuggestBox vehicleModel;
+
+	
+	
+	
+	public String getFirstName() {
+		return firstName.getText();
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName.setText(firstName);
+	}
+
+	public String getLastName() {
+		return lastName.getText();
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName.setText(lastName);
+	}
+
+	public String getEmailAddress() {
+		return emailAdress.getText();
+	}
+
+	public void setEmailAddress(String emailAdress) {
+		this.emailAdress.setText(emailAdress);
+	}
+
+	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	public AddUserViewImpl() {
@@ -35,4 +67,15 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	public String getPassword() {return  password.getText();}
 	public String getLogin() {return login.getText();}
 	public void setPresenter(Presenter presenter) {this.presenter=presenter;}
+
+	@Override
+	public SuggestBox getMakeSuggestTextBox() {
+		return vehicleMake;
+	}
+
+	@Override
+	public SuggestBox getModelSuggestTextBox() {
+
+		return vehicleModel;
+	}
 }

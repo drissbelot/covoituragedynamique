@@ -2,19 +2,15 @@ package com.covoiturage.client.view;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
 import com.covoiturage.shared.SimpleTravelProxy;
-import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.MultiSelectionModel;
-import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SelectionModel;
 
 public class ValidatePassengersViewImpl extends Composite implements  ValidatePassengersView {
@@ -25,6 +21,7 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 	}
 
 
+	@SuppressWarnings("unused")
 	private Presenter presenter;
 	private   Column<SimpleTravelProxy, Boolean> checkColumn;
 	private final MultiSelectionModel<SimpleTravelProxy> selectionModel;

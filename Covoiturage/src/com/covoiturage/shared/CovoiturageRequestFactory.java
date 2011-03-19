@@ -8,7 +8,9 @@ public interface CovoiturageRequestFactory extends RequestFactory {
 	JourneyRequest journeyRequest();
 	
 	SimpleTravelRequest simpleTravelRequest();
-	
 
+	PassengerInfoRequest passengerInfoRequest();
+	DriverInfoRequest driverInfoRequest();
+	
 
 }

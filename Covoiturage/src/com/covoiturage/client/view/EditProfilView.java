@@ -1,6 +1,6 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.view.LoginView.Presenter;
+
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.Widget;

@@ -12,7 +12,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.ListBox;
+
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -25,33 +26,23 @@ public class MapViewImpl extends Composite implements MapView {
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
-	@UiField
-	FlowPanel flowpanel;
-	@UiField
-	MapWidget mapWidget;
-	@UiField
-	Button sendAddress;
-	@UiField
-	SuggestBox originAddress;
-	@UiField
-	SuggestBox destinationAddress;
-	@UiField
-	HorizontalPanel directionsPanel;
-	@UiField
-	Button saveJourney;
-	@UiField
-	DatePicker dateOfJourney;
-	@UiField
-	RadioButton driverRadioButton;
-	@UiField
-	RadioButton passengerRadioButton;
-	@UiField
-	TextBox distanceMax;
-	@UiField
-	Anchor EditProfil;
-	@UiField
-	Anchor logout;
+	@UiField FlowPanel flowpanel;
+	@UiField MapWidget mapWidget;
+	@UiField Button sendAddress;
+	@UiField SuggestBox originAddress;
+	@UiField SuggestBox destinationAddress;
+	@UiField HorizontalPanel directionsPanel;
+	@UiField Button saveJourney;
+	@UiField DatePicker dateOfJourney;
+	@UiField ListBox hours;
+	@UiField ListBox minutes;
+	@UiField RadioButton driverRadioButton;
+	@UiField RadioButton passengerRadioButton;
+	@UiField TextBox distanceMax;
+	@UiField Anchor EditProfil;
+	@UiField Anchor logout;
 
+	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	public MapViewImpl() {
@@ -60,6 +51,13 @@ public class MapViewImpl extends Composite implements MapView {
 		mapWidget.setCenter(LatLng.newInstance(48, 11), 13);
 		driverRadioButton.setText("Driver");
 		passengerRadioButton.setText("Passenger");
+		for (int i = 0; i < 24; i++) {
+			hours.addItem(String.valueOf(i));
+		}
+		for (int i = 0; i < 60; i+=5) {
+			minutes.addItem(String.valueOf(i));
+		}
+
 
 	}
 
@@ -135,6 +133,15 @@ public class MapViewImpl extends Composite implements MapView {
 
 		return logout;
 	}
-	
+	public ListBox getHours() {
+		return hours;
+	}
+
+
+	public ListBox getMinutes() {
+		return minutes;
+	}
+
+
 
 }

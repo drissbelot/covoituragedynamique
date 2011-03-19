@@ -78,18 +78,7 @@ public class UserInfo{
 		return EMF.get().createEntityManager();
 	}
 	
-	public static List<String> getPassengers(List<SimpleTravel> travels) {
-		List<String> passengers = new ArrayList<String>();
-		for (SimpleTravel simpleTravel : travels) {
-			passengers.add(simpleTravel.getPassenger());
-			
-		}
-		
-		return passengers;
-		
-		
-
-	}
+	
 
 
 	public static UserInfo login(String login, String password) {

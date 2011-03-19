@@ -19,5 +19,14 @@
   <welcome-file-list>
     <welcome-file>Covoiturage.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>vehicleService</servlet-name>
+    <servlet-class>com.covoiturage.server.VehicleServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>vehicleService</servlet-name>
+    <url-pattern>/covoiturage/vehicleService</url-pattern>
+  </servlet-mapping>
 
 </web-app>

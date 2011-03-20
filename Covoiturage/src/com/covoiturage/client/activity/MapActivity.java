@@ -57,9 +57,7 @@ import com.google.gwt.maps.client.geocoder.HasGeocoderRequest;
 import com.google.gwt.maps.client.geocoder.HasGeocoderResult;
 import com.google.gwt.maps.client.overlay.HasMarker;
 import com.google.gwt.maps.client.overlay.Marker;
-import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
-import com.google.gwt.maps.client.overlay.impl.PolylineImpl;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
@@ -98,6 +96,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			public void onClick(ClickEvent event) {
 				clearGeolocate();
 				getDirections();
+
 			}
 		});
 
@@ -127,7 +126,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					break;
 				case 2:
 					clearGeolocate();
-					// TODO faire ça plus proprement
 					counter = 0;
 					break;
 

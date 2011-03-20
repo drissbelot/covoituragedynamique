@@ -6,6 +6,7 @@ import com.covoiturage.client.event.NewUserEvent;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.MapPlace;
+import com.covoiturage.client.place.MenuPlace;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;

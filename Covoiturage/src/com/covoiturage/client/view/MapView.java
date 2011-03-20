@@ -45,9 +45,7 @@ public interface MapView extends IsWidget{
 
 	public void setDestinationAddress(String destinationAddress) ;
 	
-	public HasClickHandlers getLogout();
-	
-	public HasClickHandlers getEditProfilButton();
+
 	
 	public ListBox getHours();
 

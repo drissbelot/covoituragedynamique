@@ -31,9 +31,15 @@ public class Covoiturage implements EntryPoint {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
-			asidePanel.setVisible(widget != null);
-			layoutPanel.addNorth(horizMasterPanel, 20);
-			asidePanel.setWidget(widget);
+			horizMasterPanel.setVisible(widget != null);
+			SimplePanel temp = new SimplePanel();
+			if (mainPanel != null) {
+				temp = mainPanel;
+				layoutPanel.remove(mainPanel);
+			}
+			layoutPanel.addNorth(horizMasterPanel, 10);
+			layoutPanel.add(temp);
+			horizMasterPanel.setWidget(widget);
 		}
 	};
 	AcceptsOneWidget asideDisplay = new AcceptsOneWidget() {
@@ -48,9 +54,7 @@ public class Covoiturage implements EntryPoint {
 				layoutPanel.remove(mainPanel);
 			}
 			layoutPanel.addEast(asidePanel, 20);
-
 			layoutPanel.add(temp);
-
 			asidePanel.setWidget(widget);
 		}
 	};
@@ -58,9 +62,9 @@ public class Covoiturage implements EntryPoint {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
-			asidePanel.setVisible(widget != null);
+			vertMasterPanel.setVisible(widget != null);
 			layoutPanel.addWest(vertMasterPanel, 20);
-			asidePanel.setWidget(widget);
+			vertMasterPanel.setWidget(widget);
 		}
 	};
 
@@ -73,7 +77,7 @@ public class Covoiturage implements EntryPoint {
 				layoutPanel.remove(mainPanel);
 			layoutPanel.add(mainPanel);
 			mainPanel.setWidget(widget);
-			// GWT.log("coucou");
+
 		}
 	};
 

@@ -42,8 +42,7 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField RadioButton driverRadioButton;
 	@UiField RadioButton passengerRadioButton;
 	@UiField TextBox distanceMax;
-	@UiField Anchor EditProfil;
-	@UiField Anchor logout;
+
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -135,14 +134,7 @@ public class MapViewImpl extends Composite implements MapView {
 		this.destinationAddress.setText(destinationAddress);
 	}
 	
-	public HasClickHandlers getEditProfilButton() {
 
-		return EditProfil;
-	}
-	public HasClickHandlers getLogout() {
-
-		return logout;
-	}
 	public ListBox getHours() {
 		return hours;
 	}

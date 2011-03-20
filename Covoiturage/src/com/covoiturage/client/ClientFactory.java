@@ -1,5 +1,6 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.view.MenuView;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.EditProfilView;
 import com.covoiturage.client.view.LoginView;
@@ -19,4 +20,5 @@ public interface ClientFactory {
 	ValidatePassengersView getValidatePassengersView();
 	CovoiturageRequestFactory getRequestFactory();
 	EditProfilView getEditProfilView();
+	MenuView getMenuView();
 }

@@ -8,6 +8,8 @@ import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.LoginViewImpl;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.client.view.MapViewImpl;
+import com.covoiturage.client.view.MenuView;
+import com.covoiturage.client.view.MenuViewImpl;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.client.view.ValidatePassengersViewImpl;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -25,7 +27,9 @@ public class ClientFactoryImpl implements ClientFactory {
     private final AddUserView addUserView = new AddUserViewImpl();
     private final EditProfilView EditProfilView = new EditProfilViewImpl();
     private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
+    private final MenuView menuView = new MenuViewImpl();
     private final CovoiturageRequestFactory requestFactory = GWT.create(CovoiturageRequestFactory.class);
+	
     
     
     public CovoiturageRequestFactory getRequestFactory() {
@@ -74,6 +78,13 @@ public class ClientFactoryImpl implements ClientFactory {
 	public EditProfilView getEditProfilView() {
 		
 		return EditProfilView;
+	}
+
+
+	@Override
+	public MenuView getMenuView() {
+
+		return menuView ;
 	}
 
 

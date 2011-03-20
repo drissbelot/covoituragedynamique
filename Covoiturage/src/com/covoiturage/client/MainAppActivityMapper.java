@@ -6,6 +6,7 @@ import com.covoiturage.client.activity.MapActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
+import com.covoiturage.client.place.MenuPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -28,9 +29,7 @@ private ClientFactory clientFactory;
 			return new MapActivity(clientFactory);
 		else if (place instanceof ValidatePassengersPlace)
 			return new MapActivity(clientFactory);
-
-
-		return null;
+ 	return null;
 	}
 
 }

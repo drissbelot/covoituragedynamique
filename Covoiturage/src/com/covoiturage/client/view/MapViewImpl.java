@@ -3,6 +3,7 @@ package com.covoiturage.client.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapOptions;
+import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
 
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -47,15 +49,14 @@ public class MapViewImpl extends Composite implements MapView {
 	private Presenter presenter;
 
 	public MapViewImpl() {
-		final MapOptions options = new MapOptions();
+		MapOptions options = new MapOptions();
 		options.setCenter(new LatLng(48, 11));
-		options.setZoom(8);
+		options.setZoom(12);
+		options.setMapTypeId(new MapTypeId().getRoadmap());
 	    options.setNavigationControl(true);
 	    options.setDraggable(true);
 	    options.setMapTypeControl(true);
 	    mapWidget= new MapWidget(options);
-	    mapWidget.setSize("800px", "600px");
-
 	    initWidget(binder.createAndBindUi(this));
 
 		driverRadioButton.setText("Driver");

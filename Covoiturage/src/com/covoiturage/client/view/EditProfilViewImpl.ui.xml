@@ -2,7 +2,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
-	xmlns:dir='urn:import:com.google.gwt.maps.client.geocode'>
+	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'>
 	
 	<ui:style src="facebook.css"/>
 		

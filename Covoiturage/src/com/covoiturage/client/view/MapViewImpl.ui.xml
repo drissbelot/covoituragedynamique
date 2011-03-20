@@ -2,7 +2,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
-	xmlns:dir='urn:import:com.google.gwt.maps.client.geocode'>
+	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'>
 	
 	<ui:style src="facebook.css"/>
 		
@@ -18,9 +18,8 @@
   		
   		<g:HorizontalPanel  horizontalAlignment="ALIGN_LEFT">
   			<g:HorizontalPanel styleName='{style.cartecontainer}'>
-  				<m:MapWidget ui:field='mapWidget' width="350px" height="350px" /> 
-  			
-  				<g:VerticalPanel >
+  				<m:MapWidget ui:field='mapWidget'  width="350px" height="350px" /> 
+   				<g:VerticalPanel >
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' text="From :" width="3em"/>
 						<g:SuggestBox ui:field="originAddress" text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>

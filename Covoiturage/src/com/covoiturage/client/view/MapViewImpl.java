@@ -2,9 +2,10 @@ package com.covoiturage.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
-import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.base.LatLng;
+
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
@@ -27,7 +28,7 @@ public class MapViewImpl extends Composite implements MapView {
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
 	@UiField FlowPanel flowpanel;
-	@UiField MapWidget mapWidget;
+	@UiField(provided=true) MapWidget mapWidget;
 	@UiField Button sendAddress;
 	@UiField SuggestBox originAddress;
 	@UiField SuggestBox destinationAddress;
@@ -46,9 +47,17 @@ public class MapViewImpl extends Composite implements MapView {
 	private Presenter presenter;
 
 	public MapViewImpl() {
-		initWidget(binder.createAndBindUi(this));
-		mapWidget.addControl(new LargeMapControl());
-		mapWidget.setCenter(LatLng.newInstance(48, 11), 13);
+		final MapOptions options = new MapOptions();
+		options.setCenter(new LatLng(48, 11));
+		options.setZoom(8);
+	    options.setNavigationControl(true);
+	    options.setDraggable(true);
+	    options.setMapTypeControl(true);
+	    mapWidget= new MapWidget(options);
+	    mapWidget.setSize("800px", "600px");
+
+	    initWidget(binder.createAndBindUi(this));
+
 		driverRadioButton.setText("Driver");
 		passengerRadioButton.setText("Passenger");
 		for (int i = 0; i < 24; i++) {

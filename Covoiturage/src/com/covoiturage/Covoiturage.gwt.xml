@@ -2,8 +2,8 @@
 <module rename-to='covoiturage'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
-  <inherits name='com.google.gwt.maps.GoogleMaps' />
-  <script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2.x&amp;key=ABQIAAAA9iRrpHrFwrXLRyepjm6NVBS1pwgXoH8zm7upzLo1j_Y5uzfZ5BTL372Tjx3FBj-Qwrj8KYV1uIvv8w" />
+  <inherits name='com.google.gwt.maps.Maps' />
+  <script src="http://maps.google.com/maps/api/js?sensor=false" />
 
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->

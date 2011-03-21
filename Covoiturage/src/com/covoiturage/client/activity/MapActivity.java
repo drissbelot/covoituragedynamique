@@ -15,6 +15,7 @@ import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
 import com.covoiturage.shared.JourneyRequest;
+import com.covoiturage.shared.PassengerInfoProxy;
 import com.covoiturage.shared.PassengerInfoRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
@@ -358,11 +359,18 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							});
 
 						} else if (isPassenger) {
-							SimpleTravelRequest request = requestFactory
+							PassengerInfoRequest requestPassenger = requestFactory.passengerInfoRequest();
+							Request<PassengerInfoProxy> createReqPassenger = requestPassenger.findPassengerFromUser(currentUser.getId());
+							createReqPassenger.fire(new Receiver<PassengerInfoProxy>() {
+
+								@Override
+								public void onSuccess(
+										PassengerInfoProxy response) {
+									SimpleTravelRequest request = requestFactory
 									.simpleTravelRequest();
 							Request<SimpleTravelProxy> createReq = request
 									.saveJourneyPassenger(listAddress, date,
-											currentUser.getId());
+											response.getId());
 							createReq.fire(new Receiver<SimpleTravelProxy>() {
 
 								@Override
@@ -372,6 +380,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 								}
 							});
+
+									
+								}
+							});
+							
+							
 
 						}
 
@@ -389,7 +403,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			if(overlays.get(i).getClass()==Marker.class)
 			MarkerImpl.impl.setMap(overlays.get(i).getJso(), null);
 		}
-		overlays = new ArrayList<HasMarker>(); 
+	//	overlays = new ArrayList<HasMarker>(); 
 
 	}
 

@@ -11,7 +11,7 @@ import com.covoiturage.server.domain.PassengerInfo;
 
 @Service(PassengerInfo.class)
 public interface PassengerInfoRequest extends RequestContext {
-	Request<Long> countUsers();
+	Request<Long> countPassengers();
 
 
 	Request<List<PassengerInfoProxy>> findAllPassengers();
@@ -24,6 +24,9 @@ public interface PassengerInfoRequest extends RequestContext {
 	InstanceRequest<PassengerInfoProxy, Void> persist();
 
 	InstanceRequest<PassengerInfoProxy, Void> remove();
+
+
+	Request<PassengerInfoProxy> findPassengerFromUser(String id);
 
 
 	

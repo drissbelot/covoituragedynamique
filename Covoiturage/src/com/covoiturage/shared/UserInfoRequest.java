@@ -21,7 +21,7 @@ public interface UserInfoRequest extends RequestContext {
 	Request<UserInfoProxy> login(String login, String password);
 	
 
-	InstanceRequest<UserInfoProxy, Void> persist();
+	InstanceRequest<UserInfoProxy, String> persist();
 
 	InstanceRequest<UserInfoProxy, Void> remove();
 

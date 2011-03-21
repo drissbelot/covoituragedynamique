@@ -2,17 +2,48 @@ package com.covoiturage.server.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Version;
+
+import org.datanucleus.jpa.annotations.Extension;
+
+import com.covoiturage.server.EMF;
+
 
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class DriverInfo extends UserInfo{
-	
+public class DriverInfo {
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)   
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+    public String id;
+	public String getId() {
+		return id;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+
+
+
+
+	@Version
+	@Column(name = "version")
+	private Integer version = 0;
+	public static final EntityManager entityManager() {
+		
+		return EMF.get().createEntityManager();
+		
+	}
 	public static long countDrivers() {
 		EntityManager em = entityManager();
 		try {
@@ -115,8 +146,17 @@ public class DriverInfo extends UserInfo{
 	private int countOfJourneys;
 	private String firstName;
 	private String lastName;
+	private String user;
 
 
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
 
 	public void setCountOfPlaces(String countOfPlaces) {
 		this.countOfPlaces = countOfPlaces;

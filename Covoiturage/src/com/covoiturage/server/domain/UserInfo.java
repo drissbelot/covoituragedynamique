@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.FlushModeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,13 +56,22 @@ public class UserInfo{
 		}
 	}
 
-	public void persist() {
+	public String persist() {
 		EntityManager em = entityManager();
+		EntityTransaction tx = em.getTransaction();
+
 		try {
+			tx.begin();
 			em.persist(this);
+			em.flush();
+			tx.commit();
+
 		} finally {
+
 			em.close();
+
 		}
+		return this.id;
 	}
 
 	public void remove() {
@@ -75,7 +86,9 @@ public class UserInfo{
 
 
 	public static final EntityManager entityManager() {
+		
 		return EMF.get().createEntityManager();
+		
 	}
 	
 	
@@ -121,7 +134,7 @@ public class UserInfo{
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
     public String id;
 
 	public String login;

@@ -8,7 +8,7 @@ import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(DriverInfo.class)
-public interface DriverInfoProxy extends EntityProxy, UserInfoProxy{
+public interface DriverInfoProxy extends EntityProxy{
 	
 	public void setMakeOfvehicle(String makeOfvehicle);
 	public String getMakeOfvehicle();
@@ -27,6 +27,9 @@ public interface DriverInfoProxy extends EntityProxy, UserInfoProxy{
 	public void setLastName(String lastName);
 
 	public String getLastName();
+	
+	public String getUser();
+	public void setUser(String user);
 
 	
 }

@@ -3,20 +3,44 @@ package com.covoiturage.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Query;
+
+import javax.persistence.Version;
+
+import org.datanucleus.jpa.annotations.Extension;
+
+import com.covoiturage.server.EMF;
 
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class PassengerInfo extends UserInfo{
+
+public class PassengerInfo {
 	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)   
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+    public String id;
+	@Version
+	@Column(name = "version")
+	private Integer version = 0;
+
 	
-	
-	
+	public Integer getVersion() {
+		return version;
+	}
+
+	public String getId() {
+		return id;
+	}
+
 	public static long countPassengers() {
 		EntityManager em = entityManager();
 		try {
@@ -38,7 +62,22 @@ public class PassengerInfo extends UserInfo{
 			em.close();
 		}
 	}
+	public static PassengerInfo findPassengerFromUser(String id){
+		EntityManager em = entityManager();
+		Query query = em.createQuery("select o from PassengerInfo o where o.user=:idParam");
+		List<PassengerInfo> results = new ArrayList<PassengerInfo>();
+		query.setParameter("idParam",id);
+		try {
 
+			 results=query.getResultList();
+		}
+		finally{
+			em.close();
+			
+		}
+		return results.get(0);
+
+	}
 	public static PassengerInfo findPassengerInfo(String id) {
 
 		EntityManager em = entityManager();
@@ -68,8 +107,11 @@ public class PassengerInfo extends UserInfo{
 			em.close();
 		}
 	}
+ 
 
-
+	public static final EntityManager entityManager() {
+		return EMF.get().createEntityManager();
+	}
 	
 	
 	
@@ -77,7 +119,16 @@ public class PassengerInfo extends UserInfo{
 	private int countOfJourneys;
 	private String firstName;
 	private String lastName;
+	private String user;
 	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
 	public PassengerInfo(){
 		
 	}

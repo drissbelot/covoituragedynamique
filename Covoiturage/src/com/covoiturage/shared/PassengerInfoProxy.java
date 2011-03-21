@@ -8,7 +8,7 @@ import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(PassengerInfo.class)
-public interface PassengerInfoProxy extends EntityProxy, UserInfoProxy{
+public interface PassengerInfoProxy extends EntityProxy{
 
 	public void setRating(int rating);
 	public int getRating();
@@ -21,5 +21,9 @@ public interface PassengerInfoProxy extends EntityProxy, UserInfoProxy{
 	public void setLastName(String lastName);
 
 	public String getLastName();
+
+	public String getUser();
+	public void setUser(String user);
 	
+	public String getId();
 }

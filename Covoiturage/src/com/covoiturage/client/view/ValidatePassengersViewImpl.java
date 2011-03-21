@@ -2,10 +2,14 @@ package com.covoiturage.client.view;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
 import com.covoiturage.shared.SimpleTravelProxy;
+
+import com.google.gwt.cell.client.ActionCell;
+import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
@@ -55,6 +59,20 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 		passengersCellTable.addColumn(nameColumn,"Login");
 		
 		passengersCellTable.addColumn(coordColumn,"Coordinates");
+		ActionCell action=new ActionCell<SimpleTravelProxy>("Click for more info", new ActionCell.Delegate<SimpleTravelProxy>() {
+	          public void execute(SimpleTravelProxy simpletravel) {
+		            Window.alert("You clicked " + simpletravel.getPassenger());
+		          }
+		        });
+		
+		passengersCellTable.addColumn(new Column<SimpleTravelProxy, Cell<SimpleTravelProxy>> (action) {
+
+			@Override
+			public ActionCell<SimpleTravelProxy> getValue(SimpleTravelProxy object) {
+				return null;
+			}
+			
+		});
 
 
 	}

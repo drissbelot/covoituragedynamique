@@ -13,6 +13,8 @@ import com.covoiturage.shared.DriverInfoProxy;
 import com.covoiturage.shared.DriverInfoRequest;
 import com.covoiturage.shared.PassengerInfoProxy;
 import com.covoiturage.shared.PassengerInfoRequest;
+import com.covoiturage.shared.UserInfoProxy;
+import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -95,20 +97,44 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 
 	@SuppressWarnings("unchecked")
 	protected void addUser() {
+		
+		final UserInfoRequest request = requestFactory.userInfoRequest();
+		final UserInfoProxy newUser = request.create(UserInfoProxy.class);
+		newUser.setLogin(addUserView.getLogin());
+		newUser.setPassword(addUserView.getPassword());
+		newUser.setEmailAddress(addUserView.getEmailAddress());
+
+		Request<String> createReq = request.persist().using(newUser);
+		createReq.fire(new Receiver<String>() {
+			@Override
+			public void onSuccess(String response) {
+				
+						savePassengerDriver(response);
+					}
+		
+					
+
+			
+		});
+		
+	
+
+	}
+
+	protected void savePassengerDriver(String newUser) {
+		
 		if (addUserView.getMakeSuggestTextBox().getValue()!="") {
-			DriverInfoRequest request = requestFactory.driverInfoRequest();
-			DriverInfoProxy newUser = request.create(DriverInfoProxy.class);
-			newUser.setLogin(addUserView.getLogin());
-			newUser.setPassword(addUserView.getPassword());
-			newUser.setEmailAddress(addUserView.getEmailAddress());
-			newUser.setFirstName(addUserView.getFirstName());
-			newUser.setLastName(addUserView.getLastName());
-			newUser.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
-			newUser.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
+			DriverInfoRequest requestDriver = requestFactory.driverInfoRequest();
+			DriverInfoProxy newDriver = requestDriver.create(DriverInfoProxy.class);
+			newDriver.setUser(newUser);
+			newDriver.setFirstName(addUserView.getFirstName());
+			newDriver.setLastName(addUserView.getLastName());
+			newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
+			newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
 
-			Request<Void> createReq = request.persist().using(newUser);
+			Request<Void> createReqDriver = requestDriver.persist().using(newDriver);
 
-			createReq.fire(new Receiver() {
+			createReqDriver.fire(new Receiver() {
 				@Override
 				public void onSuccess(Object response) {
 					eventBus.fireEvent(new AddUserEvent());
@@ -118,16 +144,15 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		}
 		else{
 			
-			PassengerInfoRequest request = requestFactory.passengerInfoRequest();
-			PassengerInfoProxy newUser = request.create(PassengerInfoProxy.class);
-			newUser.setLogin(addUserView.getLogin());
-			newUser.setPassword(addUserView.getPassword());
-			newUser.setEmailAddress(addUserView.getEmailAddress());
-			newUser.setFirstName(addUserView.getFirstName());
-			newUser.setLastName(addUserView.getLastName());
+			PassengerInfoRequest requestPassenger = requestFactory.passengerInfoRequest();
+			PassengerInfoProxy newPassenger = requestPassenger.create(PassengerInfoProxy.class);
 
-			Request<Void> createReq = request.persist().using(newUser);
-			createReq.fire(new Receiver() {
+			newPassenger.setFirstName(addUserView.getFirstName());
+			newPassenger.setLastName(addUserView.getLastName());
+			newPassenger.setUser(newUser);
+			//GWT.log(newUser.getId());
+			Request<Void> createReqPassenger = requestPassenger.persist().using(newPassenger);
+			createReqPassenger.fire(new Receiver() {
 				@Override
 				public void onSuccess(Object response) {
 					eventBus.fireEvent(new AddUserEvent());

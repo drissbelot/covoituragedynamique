@@ -14,22 +14,24 @@ import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.client.view.ValidatePassengersViewImpl;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.Window;
 
 
 public class ClientFactoryImpl implements ClientFactory {
-    private final EventBus eventBus = new SimpleEventBus();
-    private final PlaceController placeController = new PlaceController(eventBus);
-    private final LoginView loginView = new LoginViewImpl();
-    private final MapView mapView = new MapViewImpl();
-    private final AddUserView addUserView = new AddUserViewImpl();
-    private final EditProfilView EditProfilView = new EditProfilViewImpl();
-    private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
-    private final MenuView menuView = new MenuViewImpl();
-    private final CovoiturageRequestFactory requestFactory = GWT.create(CovoiturageRequestFactory.class);
-	
+    private EventBus eventBus;
+    private PlaceController placeController;
+    private LoginView loginView;
+    private CovoiturageRequestFactory requestFactory;
+    
+    private MapView mapView;
+    private AddUserView addUserView;
+    private EditProfilView EditProfilView;
+    private ValidatePassengersView validatePassengersView ;
+    private MenuView menuView; 
     
     
     public CovoiturageRequestFactory getRequestFactory() {
@@ -38,8 +40,36 @@ public class ClientFactoryImpl implements ClientFactory {
 
 
 	public ClientFactoryImpl() {
+		GWT.runAsync(new RunAsyncCallback() {
+	        public void onFailure(Throwable caught) {
+	          Window.alert("Code download failed");
+	        }
+
+	        public void onSuccess() {
+	        	eventBus = new SimpleEventBus();
+	        	placeController = new PlaceController(eventBus);
+	        	loginView = new LoginViewImpl();
+	        	requestFactory = GWT.create(CovoiturageRequestFactory.class);
+	        }
+	      });
+		
+		
+		
         requestFactory.initialize(eventBus);
 
+        GWT.runAsync(new RunAsyncCallback() {
+	        public void onFailure(Throwable caught) {
+	          Window.alert("Code download failed");
+	        }
+
+	        public void onSuccess() {
+	        	mapView = new MapViewImpl();
+	    		addUserView = new AddUserViewImpl();
+	    		EditProfilView = new EditProfilViewImpl();
+	    		validatePassengersView = new ValidatePassengersViewImpl();
+	    		menuView = new MenuViewImpl();
+	        }
+	      });
       }
 
     

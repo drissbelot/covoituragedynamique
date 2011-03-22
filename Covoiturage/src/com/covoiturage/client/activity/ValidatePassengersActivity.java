@@ -1,5 +1,6 @@
 package com.covoiturage.client.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
@@ -11,7 +12,6 @@ import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.PassengerInfoProxy;
 import com.covoiturage.shared.PassengerInfoRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
-import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
@@ -20,12 +20,11 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 
 public class ValidatePassengersActivity extends AbstractActivity implements
-ValidatePassengersView.Presenter {
+		ValidatePassengersView.Presenter {
 
 	public interface Display {
 
@@ -37,7 +36,7 @@ ValidatePassengersView.Presenter {
 	private final ValidatePassengersView validatePassengersView;
 	private final CovoiturageRequestFactory requestFactory;
 	private List<SimpleTravelProxy> passengersTravels;
-	private List<PassengerInfoProxy> passengersInfo;
+	private List<PassengerInfoProxy> passengersInfo = new ArrayList<PassengerInfoProxy>();
 	private final PlaceController placeController;
 	private List<String> passengers;
 	private final ListDataProvider<SimpleTravelProxy> dataProvider = new ListDataProvider<SimpleTravelProxy>();
@@ -53,35 +52,36 @@ ValidatePassengersView.Presenter {
 
 		eventBus.addHandler(GetValidatePassengersEvent.TYPE,
 				new GetValidatePassengersEventHandler() {
-			@Override
-			public void onGetValidatePassengers(
-					GetValidatePassengersEvent event) {
-				passengersTravels = event.getSimpleTravels();
-				passengers=event.getPassengers();
-				PassengerInfoRequest request = requestFactory.passengerInfoRequest();
-				for (String passenger : passengers) {
-					Request<PassengerInfoProxy> createReq=request.findPassengerInfo(passenger);
+					@Override
+					public void onGetValidatePassengers(
+							GetValidatePassengersEvent event) {
+						passengersTravels = event.getSimpleTravels();
+						passengers = event.getPassengers();
+						PassengerInfoRequest request = requestFactory
+								.passengerInfoRequest();
 
-					createReq.fire(new Receiver<PassengerInfoProxy>() {
+						Request<List<PassengerInfoProxy>> createReq = request
+								.findPassengerInfo(passengers);
 
-						@Override
-						public void onSuccess(PassengerInfoProxy resultPassengers) {
-							passengersInfo.add(resultPassengers);
+						createReq
+								.fire(new Receiver<List<PassengerInfoProxy>>() {
 
-						}
-					});
+									@Override
+									public void onSuccess(
+											List<PassengerInfoProxy> resultPassengers) {
+										passengersInfo = resultPassengers;
 
+									}
+								});
 
-				}
+						dataProvider.addDataDisplay(validatePassengersView
+								.getTable());
 
-				dataProvider.addDataDisplay(validatePassengersView
-						.getTable());
+						displayPassengers(passengersTravels);
 
-				displayPassengers(passengersTravels);
+					}
 
-			}
-
-		});
+				});
 		validatePassengersView.getSelectionModel().addSelectionChangeHandler(
 				new SelectionChangeEvent.Handler() {
 
@@ -89,11 +89,10 @@ ValidatePassengersView.Presenter {
 					public void onSelectionChange(SelectionChangeEvent event) {
 						eventBus.fireEvent(new SelectPassengersEvent(
 								validatePassengersView.getSelectionModel()
-								.getSelectedSet()));
+										.getSelectedSet()));
 
 					}
 				});
-		
 
 	}
 

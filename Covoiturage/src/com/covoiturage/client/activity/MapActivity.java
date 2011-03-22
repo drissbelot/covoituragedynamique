@@ -75,12 +75,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private HasGeocoder geocoder;
 	private Date date = new Date();
 	private boolean isDriver = true, isPassenger;
-	private final HasDirectionsRenderer directionsRenderer= new DirectionsRenderer();;
+	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
 
 	private List<String> listAddress = null;
 	private final PlaceController placeController;
-	private List<HasMarker> overlays = new ArrayList<HasMarker>();
+	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
 	private UserInfoProxy currentUser;
 
 	public MapActivity(ClientFactory clientFactory) {
@@ -196,7 +196,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		});
 		eventBus.addHandler(SelectPassengersEvent.TYPE,
 				new SelectPassengersEventHandler() {
-			
+
 					@Override
 					public void onSelectPassengers(
 							SelectPassengersEvent selectPassengersEvent) {
@@ -219,7 +219,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							waypoints.add(point);
 
 						}
-						DirectionsRendererImpl.impl.setMap(directionsRenderer.getJso(), null);
+						DirectionsRendererImpl.impl.setMap(
+								directionsRenderer.getJso(), null);
 						directionsRenderer.setMap(mapView.getMap().getMap());
 						HasDirectionsRequest request = new DirectionsRequest();
 						request.setWaypoints(waypoints);
@@ -284,7 +285,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									List<HasGeocoderResult> responses,
 									String status) {
 								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
-										.getDestinationAddress().getSuggestOracle();
+										.getDestinationAddress()
+										.getSuggestOracle();
 								for (HasGeocoderResult result : responses) {
 									oracle.add(result.getFormattedAddress());
 								}
@@ -324,6 +326,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		geocoder = new Geocoder();
 		HasGeocoderRequest request = new GeocoderRequest();
 		request.setAddress(mapView.getOriginAddress().getTextBox().getText());
+		GWT.log(mapView.getOriginAddress().getTextBox().getText());
 		listAddress = new ArrayList<String>();
 		geocoder.geocode(request, new GeocoderCallback() {
 			@Override
@@ -359,33 +362,38 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							});
 
 						} else if (isPassenger) {
-							PassengerInfoRequest requestPassenger = requestFactory.passengerInfoRequest();
-							Request<PassengerInfoProxy> createReqPassenger = requestPassenger.findPassengerFromUser(currentUser.getId());
-							createReqPassenger.fire(new Receiver<PassengerInfoProxy>() {
+							PassengerInfoRequest requestPassenger = requestFactory
+									.passengerInfoRequest();
+							Request<PassengerInfoProxy> createReqPassenger = requestPassenger
+									.findPassengerFromUser(currentUser.getId());
 
-								@Override
-								public void onSuccess(
-										PassengerInfoProxy response) {
-									SimpleTravelRequest request = requestFactory
-									.simpleTravelRequest();
-							Request<SimpleTravelProxy> createReq = request
-									.saveJourneyPassenger(listAddress, date,
-											response.getId());
-							createReq.fire(new Receiver<SimpleTravelProxy>() {
+							createReqPassenger
+									.fire(new Receiver<PassengerInfoProxy>() {
 
-								@Override
-								public void onSuccess(SimpleTravelProxy response) {
+										@Override
+										public void onSuccess(
+												PassengerInfoProxy response) {
+											GWT.log("blabla");
+											SimpleTravelRequest request = requestFactory
+													.simpleTravelRequest();
+											Request<SimpleTravelProxy> createReq = request
+													.saveJourneyPassenger(
+															listAddress, date,
+															response.getId());
+											createReq
+													.fire(new Receiver<SimpleTravelProxy>() {
 
-									Window.alert("saved");
+														@Override
+														public void onSuccess(
+																SimpleTravelProxy response) {
 
-								}
-							});
+															Window.alert("saved");
 
-									
-								}
-							});
-							
-							
+														}
+													});
+
+										}
+									});
 
 						}
 
@@ -399,11 +407,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	private void clearGeolocate() {
 
-		for(int i=0; i<overlays.size();i++) {
-			if(overlays.get(i).getClass()==Marker.class)
-			MarkerImpl.impl.setMap(overlays.get(i).getJso(), null);
+		for (int i = 0; i < overlays.size(); i++) {
+			if (overlays.get(i).getClass() == Marker.class)
+				MarkerImpl.impl.setMap(overlays.get(i).getJso(), null);
 		}
-	//	overlays = new ArrayList<HasMarker>(); 
+		// overlays = new ArrayList<HasMarker>();
 
 	}
 
@@ -412,7 +420,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		HasDirectionsService directionsService = new DirectionsService();
 		DirectionsRendererImpl.impl.setMap(directionsRenderer.getJso(), null);
 		directionsRenderer.setMap(mapView.getMap().getMap());
-		HasElementProvider element = new ElementProvider(mapView.getDirectionsPanel().getElement());
+		HasElementProvider element = new ElementProvider(mapView
+				.getDirectionsPanel().getElement());
 		directionsRenderer.setPanel(element);
 		HasDirectionsRequest directionsRequest = new DirectionsRequest();
 		HasDirectionsTravelMode travelMode = new DirectionsTravelMode();

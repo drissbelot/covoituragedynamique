@@ -10,29 +10,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Query;
-
 import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.EMF;
 
-
-
 @Entity
-
 public class PassengerInfo {
-	
+
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
-    public String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	public String id;
 	@Version
 	@Column(name = "version")
-	private Integer version = 0;
+	private final Integer version = 0;
 
-	
 	public Integer getVersion() {
 		return version;
 	}
@@ -44,17 +39,20 @@ public class PassengerInfo {
 	public static long countPassengers() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from PassengerInfo o").getSingleResult()).longValue();
+			return ((Number) em.createQuery(
+					"select count(o) from PassengerInfo o").getSingleResult())
+					.longValue();
 		} finally {
 			em.close();
-		} 
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<PassengerInfo> findAllPassengers() {
 		EntityManager em = entityManager();
 		try {
-			List<PassengerInfo> list = em.createQuery("select o from PassengerInfo o").getResultList();
+			List<PassengerInfo> list = em.createQuery(
+					"select o from PassengerInfo o").getResultList();
 
 			list.size();
 			return list;
@@ -62,28 +60,33 @@ public class PassengerInfo {
 			em.close();
 		}
 	}
-	public static PassengerInfo findPassengerFromUser(String id){
+
+	public static PassengerInfo findPassengerFromUser(String id) {
 		EntityManager em = entityManager();
-		Query query = em.createQuery("select o from PassengerInfo o where o.user=:idParam");
+		Query query = em
+				.createQuery("select o from PassengerInfo o where o.user=:idParam");
 		List<PassengerInfo> results = new ArrayList<PassengerInfo>();
-		query.setParameter("idParam",id);
+		query.setParameter("idParam", id);
 		try {
 
-			 results=query.getResultList();
-		}
-		finally{
+			results = query.getResultList();
+			return results.get(0);
+		} finally {
 			em.close();
-			
+
 		}
-		return results.get(0);
 
 	}
-	public static PassengerInfo findPassengerInfo(String id) {
 
+	public static List<PassengerInfo> findPassengerInfo(List<String> id) {
+		List<PassengerInfo> passengersList = new ArrayList<PassengerInfo>();
 		EntityManager em = entityManager();
 		try {
-			PassengerInfo passenger = em.find(PassengerInfo.class, id);
-			return passenger;
+			for (PassengerInfo passengerInfo : passengersList) {
+				PassengerInfo passenger = em.find(PassengerInfo.class, id);
+				passengersList.add(passenger);
+			}
+			return passengersList;
 		} finally {
 			em.close();
 		}
@@ -107,20 +110,17 @@ public class PassengerInfo {
 			em.close();
 		}
 	}
- 
 
 	public static final EntityManager entityManager() {
 		return EMF.get().createEntityManager();
 	}
-	
-	
-	
+
 	private int rating;
 	private int countOfJourneys;
 	private String firstName;
 	private String lastName;
 	private String user;
-	
+
 	public String getUser() {
 		return user;
 	}
@@ -129,9 +129,10 @@ public class PassengerInfo {
 		this.user = user;
 	}
 
-	public PassengerInfo(){
-		
+	public PassengerInfo() {
+
 	}
+
 	public PassengerInfo(int rating, int countOfJourneys) {
 		super();
 		this.rating = rating;
@@ -141,26 +142,27 @@ public class PassengerInfo {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+
 	public int getRating() {
 		return rating;
 	}
+
 	public void setCountOfJourneys(int countOfJourneys) {
 		this.countOfJourneys = countOfJourneys;
 	}
+
 	public int getCountOfJourneys() {
 		return countOfJourneys;
 	}
-	
+
 	public static List<String> getPassengers(List<SimpleTravel> travels) {
 		List<String> passengers = new ArrayList<String>();
 		for (SimpleTravel simpleTravel : travels) {
 			passengers.add(simpleTravel.getPassenger());
-			
+
 		}
-		
+
 		return passengers;
-		
-		
 
 	}
 
@@ -179,6 +181,5 @@ public class PassengerInfo {
 	public String getLastName() {
 		return lastName;
 	}
-	
 
 }

@@ -61,7 +61,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 								.passengerInfoRequest();
 
 						Request<List<PassengerInfoProxy>> createReq = request
-								.findPassengerInfo(passengers);
+								.findPassengerList(passengers);
 
 						createReq
 								.fire(new Receiver<List<PassengerInfoProxy>>() {

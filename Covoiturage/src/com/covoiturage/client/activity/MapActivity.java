@@ -373,7 +373,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										@Override
 										public void onSuccess(
 												PassengerInfoProxy response) {
-											GWT.log("blabla");
+
 											SimpleTravelRequest request = requestFactory
 													.simpleTravelRequest();
 											Request<SimpleTravelProxy> createReq = request

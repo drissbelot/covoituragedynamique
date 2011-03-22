@@ -146,12 +146,13 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 			
 			PassengerInfoRequest requestPassenger = requestFactory.passengerInfoRequest();
 			PassengerInfoProxy newPassenger = requestPassenger.create(PassengerInfoProxy.class);
-
+			newPassenger.setUser(newUser);
 			newPassenger.setFirstName(addUserView.getFirstName());
 			newPassenger.setLastName(addUserView.getLastName());
-			newPassenger.setUser(newUser);
-			//GWT.log(newUser.getId());
+
+
 			Request<Void> createReqPassenger = requestPassenger.persist().using(newPassenger);
+			GWT.log(newPassenger.getFirstName());
 			createReqPassenger.fire(new Receiver() {
 				@Override
 				public void onSuccess(Object response) {

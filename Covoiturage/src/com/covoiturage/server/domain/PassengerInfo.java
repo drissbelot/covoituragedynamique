@@ -16,6 +16,9 @@ import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.EMF;
 
+
+
+
 @Entity
 public class PassengerInfo {
 
@@ -77,12 +80,24 @@ public class PassengerInfo {
 		}
 
 	}
+	public static PassengerInfo findPassengerInfo(String id) {
+		EntityManager em = entityManager();
+		try {
 
-	public static List<PassengerInfo> findPassengerInfo(List<String> id) {
+				PassengerInfo passenger = em.find(PassengerInfo.class, id);
+				return passenger;
+
+		} finally {
+			em.close();
+		}
+	}
+
+
+	public static List<PassengerInfo> findPassengerList(List<String> idList) {
 		List<PassengerInfo> passengersList = new ArrayList<PassengerInfo>();
 		EntityManager em = entityManager();
 		try {
-			for (PassengerInfo passengerInfo : passengersList) {
+			for (String id : idList) {
 				PassengerInfo passenger = em.find(PassengerInfo.class, id);
 				passengersList.add(passenger);
 			}
@@ -134,7 +149,7 @@ public class PassengerInfo {
 	}
 
 	public PassengerInfo(int rating, int countOfJourneys) {
-		super();
+
 		this.rating = rating;
 		this.countOfJourneys = countOfJourneys;
 	}

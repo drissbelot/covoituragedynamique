@@ -14,7 +14,7 @@ public interface PassengerInfoRequest extends RequestContext {
 
 	Request<List<PassengerInfoProxy>> findAllPassengers();
 
-	Request<List<PassengerInfoProxy>> findPassengerInfo(List<String> id);
+	Request<PassengerInfoProxy> findPassengerInfo(String id);
 
 	Request<List<String>> getPassengers(List<SimpleTravelProxy> travels);
 
@@ -23,5 +23,6 @@ public interface PassengerInfoRequest extends RequestContext {
 	InstanceRequest<PassengerInfoProxy, Void> remove();
 
 	Request<PassengerInfoProxy> findPassengerFromUser(String id);
-
+	
+	Request<List<PassengerInfoProxy>> findPassengerList(List<String> idList);
 }

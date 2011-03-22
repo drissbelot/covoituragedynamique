@@ -49,7 +49,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 	public MapViewImpl() {
 		MapOptions options = new MapOptions();
-		options.setCenter(new LatLng(48, 11));
+		options.setCenter(new LatLng(50.6687,4.57967));
 		options.setZoom(12);
 		options.setMapTypeId(new MapTypeId().getRoadmap());
 	    options.setNavigationControl(true);
@@ -66,7 +66,6 @@ public class MapViewImpl extends Composite implements MapView {
 		for (int i = 0; i < 60; i+=5) {
 			minutes.addItem(String.valueOf(i));
 		}
-
 
 	}
 

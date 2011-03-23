@@ -93,7 +93,7 @@ public class PassengerInfo {
 	}
 
 
-	public static List<PassengerInfo> findPassengerList(List<String> idList) {
+	public static List<PassengerInfo> getPassengerList(List<String> idList) {
 		List<PassengerInfo> passengersList = new ArrayList<PassengerInfo>();
 		EntityManager em = entityManager();
 		try {

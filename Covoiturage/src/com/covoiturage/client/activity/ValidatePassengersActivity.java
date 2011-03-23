@@ -9,9 +9,10 @@ import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
-import com.covoiturage.shared.PassengerInfoProxy;
-import com.covoiturage.shared.PassengerInfoRequest;
+
 import com.covoiturage.shared.SimpleTravelProxy;
+import com.covoiturage.shared.UserInfoDetailsProxy;
+import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
@@ -36,7 +37,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private final ValidatePassengersView validatePassengersView;
 	private final CovoiturageRequestFactory requestFactory;
 	private List<SimpleTravelProxy> passengersTravels;
-	private List<PassengerInfoProxy> passengersInfo = new ArrayList<PassengerInfoProxy>();
+	private List<UserInfoDetailsProxy> passengersInfo = new ArrayList<UserInfoDetailsProxy>();
 	private final PlaceController placeController;
 	private List<String> passengers;
 	private final ListDataProvider<SimpleTravelProxy> dataProvider = new ListDataProvider<SimpleTravelProxy>();
@@ -57,18 +58,18 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 							GetValidatePassengersEvent event) {
 						passengersTravels = event.getSimpleTravels();
 						passengers = event.getPassengers();
-						PassengerInfoRequest request = requestFactory
-								.passengerInfoRequest();
+						UserInfoDetailsRequest request = requestFactory
+								.userInfoDetailsRequest();
 
-						Request<List<PassengerInfoProxy>> createReq = request
+						Request<List<UserInfoDetailsProxy>> createReq = request
 								.getPassengerList(passengers);
 
 						createReq
-								.fire(new Receiver<List<PassengerInfoProxy>>() {
+								.fire(new Receiver<List<UserInfoDetailsProxy>>() {
 
 									@Override
 									public void onSuccess(
-											List<PassengerInfoProxy> resultPassengers) {
+											List<UserInfoDetailsProxy> resultPassengers) {
 										passengersInfo = resultPassengers;
 
 									}

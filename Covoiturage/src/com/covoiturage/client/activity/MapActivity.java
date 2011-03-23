@@ -15,10 +15,11 @@ import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
 import com.covoiturage.shared.JourneyRequest;
-import com.covoiturage.shared.PassengerInfoProxy;
-import com.covoiturage.shared.PassengerInfoRequest;
+
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
+import com.covoiturage.shared.UserInfoDetailsProxy;
+import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
@@ -362,17 +363,17 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							});
 
 						} else if (isPassenger) {
-							PassengerInfoRequest requestPassenger = requestFactory
-									.passengerInfoRequest();
-							Request<PassengerInfoProxy> createReqPassenger = requestPassenger
+							UserInfoDetailsRequest requestPassenger = requestFactory
+									.userInfoDetailsRequest();
+							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
 									.findPassengerFromUser(currentUser.getId());
 
 							createReqPassenger
-									.fire(new Receiver<PassengerInfoProxy>() {
+									.fire(new Receiver<UserInfoDetailsProxy>() {
 
 										@Override
 										public void onSuccess(
-												PassengerInfoProxy response) {
+												UserInfoDetailsProxy response) {
 
 											SimpleTravelRequest request = requestFactory
 													.simpleTravelRequest();
@@ -455,28 +456,22 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						if (resultSimpleTravel != null
 								&& resultSimpleTravel.size() != 0) {
-
-							PassengerInfoRequest request = requestFactory
-									.passengerInfoRequest();
-							Request<List<String>> createReq = request
-									.getPassengers(resultSimpleTravel);
-
-							createReq.fire(new Receiver<List<String>>() {
-
-								@Override
-								public void onSuccess(
-										List<String> resultPassengers) {
+							List<String> resultPassengers = new ArrayList<String>();
+							for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
+								resultPassengers.add(simpletravel.getPassenger());
+							}
+										
 									goTo(new ValidatePassengersPlace(null));
 									eventBus.fireEvent(new GetValidatePassengersEvent(
 											resultPassengers,
 											resultSimpleTravel));
 
 								}
-							});
+							
 						}
-					}
-				});
-			}
+					});
+				}
+			
 
 		});
 

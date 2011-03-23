@@ -1,5 +1,6 @@
 package com.covoiturage.server.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,17 +9,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Query;
 import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.EMF;
+import com.covoiturage.shared.UserInfoDetailsProxy;
 
 
 
 
 @Entity
-public class DriverInfo {
+public class UserInfoDetails {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   
@@ -44,20 +47,20 @@ public class DriverInfo {
 		return EMF.get().createEntityManager();
 		
 	}
-	public static long countDrivers() {
+	public static long countUserInfoDetails() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from DriverInfo o").getSingleResult()).longValue();
+			return ((Number) em.createQuery("select count(o) from UserInfoDetails o").getSingleResult()).longValue();
 		} finally {
 			em.close();
 		} 
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<DriverInfo> findAllDrivers() {
+	public static List<UserInfoDetails> findAllUserInfoDetails() {
 		EntityManager em = entityManager();
 		try {
-			List<DriverInfo> list = em.createQuery("select o from DriverInfo o").getResultList();
+			List<UserInfoDetails> list = em.createQuery("select o from UserInfoDetails o").getResultList();
 
 			list.size();
 			return list;
@@ -66,15 +69,37 @@ public class DriverInfo {
 		}
 	}
 
-	public static DriverInfo findDriverInfo(String id) {
+	public static UserInfoDetails findUserInfoDetails(String id) {
 
 		EntityManager em = entityManager();
 		try {
-			DriverInfo driver = em.find(DriverInfo.class, id);
+			UserInfoDetails driver = em.find(UserInfoDetails.class, id);
 			return driver;
 		} finally {
 			em.close();
 		}
+	}
+	public static UserInfoDetails findPassengerFromUser(String id){
+		EntityManager em = entityManager();
+		try {
+			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");
+			query.setParameter("user", id);
+			List<UserInfoDetails> list =query.getResultList();
+			
+			return list.get(0);
+		} finally {
+			em.close();
+		}
+		
+	}
+	public static List<UserInfoDetails> getPassengerList(List<String> passengers){
+		EntityManager em = entityManager();
+		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
+		for (String string : passengers) {
+			result.add(em.find(UserInfoDetails.class, string));
+		}
+		return result;
+		
 	}
 
 	public void persist() {
@@ -89,7 +114,7 @@ public class DriverInfo {
 	public void remove() {
 		EntityManager em = entityManager();
 		try {
-			DriverInfo attached = em.find(DriverInfo.class, this.id);
+			UserInfoDetails attached = em.find(UserInfoDetails.class, this.id);
 			em.remove(attached);
 		} finally {
 			em.close();
@@ -97,12 +122,12 @@ public class DriverInfo {
 	}
 
 
-	public DriverInfo(){
+	public UserInfoDetails(){
 	
 	}
 	
 	
-	public DriverInfo(String makeOfvehicle, String modelOfvehicle,
+	public UserInfoDetails(String makeOfvehicle, String modelOfvehicle,
 			String countOfPlaces, int rating, int countOfJourneys,
 			String firstName, String lastName) {
 		super();

@@ -9,10 +9,9 @@ import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
-import com.covoiturage.shared.DriverInfoProxy;
-import com.covoiturage.shared.DriverInfoRequest;
-import com.covoiturage.shared.PassengerInfoProxy;
-import com.covoiturage.shared.PassengerInfoRequest;
+import com.covoiturage.shared.UserInfoDetailsProxy;
+import com.covoiturage.shared.UserInfoDetailsRequest;
+
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -123,9 +122,9 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 
 	protected void savePassengerDriver(String newUser) {
 		
-		if (addUserView.getMakeSuggestTextBox().getValue()!="") {
-			DriverInfoRequest requestDriver = requestFactory.driverInfoRequest();
-			DriverInfoProxy newDriver = requestDriver.create(DriverInfoProxy.class);
+
+			UserInfoDetailsRequest requestDriver = requestFactory.userInfoDetailsRequest();
+			UserInfoDetailsProxy newDriver = requestDriver.create(UserInfoDetailsProxy.class);
 			newDriver.setUser(newUser);
 			newDriver.setFirstName(addUserView.getFirstName());
 			newDriver.setLastName(addUserView.getLastName());
@@ -141,26 +140,8 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 					goTo(new LoginPlace(null));
 				}
 			});
-		}
-		else{
-			
-			PassengerInfoRequest requestPassenger = requestFactory.passengerInfoRequest();
-			PassengerInfoProxy newPassenger = requestPassenger.create(PassengerInfoProxy.class);
-			newPassenger.setUser(newUser);
-			newPassenger.setFirstName(addUserView.getFirstName());
-			newPassenger.setLastName(addUserView.getLastName());
-
-
-			Request<Void> createReqPassenger = requestPassenger.persist().using(newPassenger);
-			GWT.log(newPassenger.getFirstName());
-			createReqPassenger.fire(new Receiver() {
-				@Override
-				public void onSuccess(Object response) {
-					eventBus.fireEvent(new AddUserEvent());
-					goTo(new LoginPlace(null));
-				}
-			});
-		}
+	
+		
 	}
 
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {

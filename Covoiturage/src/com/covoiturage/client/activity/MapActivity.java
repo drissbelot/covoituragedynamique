@@ -379,7 +379,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											Request<SimpleTravelProxy> createReq = request
 													.saveJourneyPassenger(
 															listAddress, date,
-															response.getId());
+															response.getId().toString());
 											createReq
 													.fire(new Receiver<SimpleTravelProxy>() {
 

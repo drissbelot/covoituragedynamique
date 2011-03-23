@@ -25,6 +25,6 @@ public interface PassengerInfoProxy extends EntityProxy{
 
 	public String getUser();
 	public void setUser(String user);
-
+	EntityProxyId<UserInfoProxy> stableId();
 	public String getId();
 }

@@ -24,5 +24,5 @@ public interface PassengerInfoRequest extends RequestContext {
 
 	Request<PassengerInfoProxy> findPassengerFromUser(String id);
 	
-	Request<List<PassengerInfoProxy>> findPassengerList(List<String> idList);
+	Request<List<PassengerInfoProxy>> getPassengerList(List<String> idList);
 }

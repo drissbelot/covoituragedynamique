@@ -27,6 +27,9 @@ public class PassengerInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	public String id;
+	public String getId() {
+		return id;
+	}
 	@Version
 	@Column(name = "version")
 	private final Integer version = 0;
@@ -35,9 +38,7 @@ public class PassengerInfo {
 		return version;
 	}
 
-	public String getId() {
-		return id;
-	}
+
 
 	public static long countPassengers() {
 		EntityManager em = entityManager();
@@ -64,6 +65,7 @@ public class PassengerInfo {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static PassengerInfo findPassengerFromUser(String id) {
 		EntityManager em = entityManager();
 		Query query = em

@@ -7,6 +7,7 @@ import java.util.ListResourceBundle;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
+import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEventHandler;
 import com.covoiturage.client.event.SendLoginEvent;
@@ -39,6 +40,7 @@ import com.google.gwt.maps.client.base.HasLatLng;
 import com.google.gwt.maps.client.directions.DirectionsCallback;
 import com.google.gwt.maps.client.directions.DirectionsRenderer;
 import com.google.gwt.maps.client.directions.DirectionsRequest;
+import com.google.gwt.maps.client.directions.DirectionsResult;
 import com.google.gwt.maps.client.directions.DirectionsService;
 import com.google.gwt.maps.client.directions.DirectionsTravelMode;
 import com.google.gwt.maps.client.directions.DirectionsWaypoint;
@@ -85,6 +87,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final PlaceController placeController;
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
 	private UserInfoProxy currentUser;
+	private  HasDirectionsResult directionsDriver = new DirectionsResult(null);
 
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -210,7 +213,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						}
 						List<HasDirectionsWaypoint> waypoints = new ArrayList<HasDirectionsWaypoint>();
 						HasDirectionsWaypoint point = new DirectionsWaypoint();
-
+						HasDirectionsWaypoint point1 = new DirectionsWaypoint();
 						for (ListGridRecord simpletravel : selectPassengersEvent
 								.getPassengers()) {
 
@@ -218,8 +221,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							String destination = simpletravel.getAttribute("destination");
 							point.setLocation(origin);
 							waypoints.add(point);
-							point.setLocation(destination);
-							waypoints.add(point);
+
+							point1.setLocation(destination);
+							waypoints.add(point1);
 
 						}
 						DirectionsRendererImpl.impl.setMap(
@@ -240,7 +244,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							public void callback(HasDirectionsResult response,
 									String status) {
 								directionsRenderer.setDirections(response);
-
+								double distance=response.getRoutes().get(0).getLegs().get(0).getDistance().getValue()-directionsDriver.getRoutes().get(0).getLegs().get(0).getDistance().getValue();
+								double duration=response.getRoutes().get(0).getLegs().get(0).getDuration().getValue()-directionsDriver.getRoutes().get(0).getLegs().get(0).getDuration().getValue();
+								eventBus.fireEvent(new PossiblePassengersEvent(distance, duration));
 							}
 						});
 					}
@@ -381,7 +387,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													.simpleTravelRequest();
 											Request<SimpleTravelProxy> createReq = request
 													.saveJourneyPassenger(
-															listAddress, date,
+															listAddress,mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), date,
 															response.getId().toString());
 											createReq
 													.fire(new Receiver<SimpleTravelProxy>() {
@@ -436,7 +442,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void callback(HasDirectionsResult response, String status) {
 				directionsRenderer.setDirections(response);
-
+				directionsDriver=response;
 				List<String> steps = new ArrayList<String>();
 				for (int i = 0; i < response.getRoutes().get(0).getLegs()
 						.get(0).getSteps().size(); i++) {

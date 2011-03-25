@@ -6,25 +6,25 @@ import java.util.List;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.GetValidatePassengersEventHandler;
+import com.covoiturage.client.event.PossiblePassengersEvent;
+import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
-
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.ListDataProvider;
-import com.google.gwt.view.client.SelectionChangeEvent;
-import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
 import com.smartgwt.client.widgets.grid.events.SelectionEvent;
@@ -84,8 +84,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 									
 											ListGridRecord rec = new ListGridRecord();
 											rec.setAttribute("login", passengersTravels.get(i).getPassenger());
-											rec.setAttribute("origin", passengersTravels.get(i).getSteps().get(0));
-											rec.setAttribute("destination", passengersTravels.get(i).getSteps().get(1));
+											rec.setAttribute("origin", passengersTravels.get(i).getOriginAddress());
+											rec.setAttribute("destination", passengersTravels.get(i).getDestinationAddress());
 											rec.setAttribute("firstName",passengersInfo.get(i).getFirstName() );
 											rec.setAttribute("lastName",passengersInfo.get(i).getLastName() );
 											listRecords.add(rec );
@@ -110,6 +110,23 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 						
 					}
 				});
+		validatePassengersView.getSaveButton().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.alert("Passengers saved");
+				
+			}
+		});
+		eventBus.addHandler(PossiblePassengersEvent.TYPE, new PossiblePassengersEventHandler() {
+			
+			@Override
+			public void onPossiblePassengers(PossiblePassengersEvent event) {
+				validatePassengersView.getDistanceLabel().setContents((Double.toString(event.getDistance()))+" m");
+				validatePassengersView.getDurationLabel().setContents((Double.toString(event.getDuration()))+" s");
+				
+			}
+		});
 
 	}
 

@@ -7,7 +7,7 @@ public class AddUserEvent extends GwtEvent<AddUserEventHandler> {
 
 	@Override
 	public com.google.gwt.event.shared.GwtEvent.Type<AddUserEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
+
 		return TYPE;
 	}
 

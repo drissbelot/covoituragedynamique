@@ -1,6 +1,8 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
+
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,41 +23,55 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 	private Presenter presenter;
 
 	private final ListGrid listGrid; 
+	private Button saveButton;
+
+	private Label distanceLabel;
+
+	private Label durationLabel;
+
+
+
 	public ValidatePassengersViewImpl() {
-		
+
 		VerticalPanel pan = new VerticalPanel();
 		listGrid = new ListGrid(){  
-            @Override  
-            public Canvas getExpansionComponent(final ListGridRecord record) {  
-  
-
-                HLayout layout = new HLayout(2);  
-                Label firstName = new Label();
-                layout.addMember(firstName);
-                firstName.setContents(record.getAttribute("firstName"));
-                Label lastName = new Label();
-                layout.addMember(lastName);
-                lastName.setContents(record.getAttribute("lastName"));
-                
-                return layout;  
-            }  
-        };  
-        
-        listGrid.setWidth(600);  
-        listGrid.setHeight(500);  
-        listGrid.setDrawAheadRatio(4);  
-        listGrid.setCanExpandRecords(true);  
-        listGrid.setSelectionType(SelectionStyle.SIMPLE);
-        listGrid.setSelectionAppearance(SelectionAppearance.CHECKBOX);
-        
-        ListGridField passengerName = new ListGridField("login");  
-        ListGridField coordsOrigin = new ListGridField("origin");  
-        ListGridField coordsDestination = new ListGridField("destination");
-        listGrid.setFields(passengerName, coordsOrigin,coordsDestination);  
+			@Override  
+			public Canvas getExpansionComponent(final ListGridRecord record) {  
 
 
-pan.add(listGrid);
-initWidget(pan);
+				HLayout layout = new HLayout(2);  
+				Label firstName = new Label();
+				layout.addMember(firstName);
+				firstName.setContents(record.getAttribute("firstName"));
+				Label lastName = new Label();
+				layout.addMember(lastName);
+				lastName.setContents(record.getAttribute("lastName"));
+
+				return layout;  
+			}  
+		};  
+
+		listGrid.setWidth("30%");  
+		listGrid.setHeight("30%");  
+		listGrid.setDrawAheadRatio(4);  
+		listGrid.setCanExpandRecords(true);  
+		listGrid.setSelectionType(SelectionStyle.SIMPLE);
+		listGrid.setSelectionAppearance(SelectionAppearance.CHECKBOX);
+
+
+		ListGridField coordsOrigin = new ListGridField("origin");  
+		ListGridField coordsDestination = new ListGridField("destination");
+		listGrid.setFields(coordsOrigin,coordsDestination);  
+
+		saveButton = new Button("Save");
+		distanceLabel=new Label();
+		durationLabel=new Label();
+		pan.add(listGrid);
+		pan.add(distanceLabel);
+		pan.add(durationLabel);
+		pan.add(saveButton);
+		
+		initWidget(pan);
 	}
 
 
@@ -63,7 +79,9 @@ initWidget(pan);
 		return this;
 	}
 
-
+	public Button getSaveButton() {
+		return saveButton;
+	}
 
 	@Override
 	public void setPresenter(ValidatePassengersActivity validatePassengersActivity) {
@@ -74,8 +92,22 @@ initWidget(pan);
 
 	@Override
 	public ListGrid getListGrid() {
-		
+
 		return listGrid;
+	}
+
+
+	@Override
+	public Label getDistanceLabel() {
+
+		return distanceLabel;
+	}
+
+
+	@Override
+	public Label getDurationLabel() {
+
+		return durationLabel;
 	}
 
 }

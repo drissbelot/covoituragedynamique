@@ -1,6 +1,5 @@
 package com.covoiturage.server.domain;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,34 +14,30 @@ import javax.persistence.Version;
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 
-
-
-
-
-
 @Entity
-public class SimpleTravel{
-
-	
-	public static final EntityManager entityManager() {
-		return EMF.get().createEntityManager();
-	}
-
+public class SimpleTravel {
 
 	public static long countSimpleTravels() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from SimpleTravel o").getSingleResult()).longValue();
+			return ((Number) em.createQuery(
+					"select count(o) from SimpleTravel o").getSingleResult())
+					.longValue();
 		} finally {
 			em.close();
 		}
+	}
+
+	public static final EntityManager entityManager() {
+		return EMF.get().createEntityManager();
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<SimpleTravel> findAllSimpleTravels() {
 		EntityManager em = entityManager();
 		try {
-			List<SimpleTravel> list = em.createQuery("select o from SimpleTravel o").getResultList();
+			List<SimpleTravel> list = em.createQuery(
+					"select o from SimpleTravel o").getResultList();
 
 			list.size();
 			return list;
@@ -63,34 +58,97 @@ public class SimpleTravel{
 			em.close();
 		}
 	}
-	
-	public static SimpleTravel saveJourneyPassenger(List<String> steps, Date date, String passenger){
+
+	public static List<SimpleTravel> getSimpleTravels(List<String> steps,
+			float distanceMax) {
+		return MapUtils.bufferRoute(steps, distanceMax);
+
+	}
+
+	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
+			Date date, String passenger) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		EntityManager em = entityManager();
-		try
-		{
+		try {
 			simpleTravel.setSteps(steps);
 			simpleTravel.setDate(date);
 			simpleTravel.setPassenger(passenger);
+			simpleTravel.setOriginAddress(originAddress);
+			simpleTravel.setDestinationAddress(destinationAddress);
 			em.persist(simpleTravel);
 
-
-		}
-		finally
-		{
+		} finally {
 
 			em.close();
 		}
 
 		return simpleTravel;
 	}
-	
-	public static List<SimpleTravel> getSimpleTravels(List<String> steps,float distanceMax){
-		return MapUtils.bufferRoute(steps, distanceMax);
-		
+
+
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long id;
+	private Date date;
+	public String passenger;
+	private String originAddress;
+	private String destinationAddress;
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
+	private List<String> steps;
+	public String getOriginAddress() {
+		return originAddress;
 	}
-	
-	
+
+	public void setOriginAddress(String originAddress) {
+		this.originAddress = originAddress;
+	}
+
+	public String getDestinationAddress() {
+		return destinationAddress;
+	}
+
+	public void setDestinationAddress(String destinationAddress) {
+		this.destinationAddress = destinationAddress;
+	}
+
+
+
+
+
+	public SimpleTravel() {
+	}
+
+	public SimpleTravel(Long id, String passenger, List<String> steps) {
+
+		this.id = id;
+		this.passenger = passenger;
+		this.steps = steps;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getPassenger() {
+		return passenger;
+	}
+
+	public List<String> getSteps() {
+		return steps;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
 
 	public void persist() {
 		EntityManager em = entityManager();
@@ -111,70 +169,24 @@ public class SimpleTravel{
 		}
 	}
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	private List<String> steps;
-
-	private Date date;
-
-	  @Version
-	  @Column(name = "version")
-	  private Integer version;
-
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public List<String> getSteps() {
-		return steps;
-	}
-
-
-	public String passenger;
-
-	public String getPassenger() {
-		return passenger;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setPassenger(String passenger) {
 		this.passenger = passenger;
 	}
 
-	public SimpleTravel() {}
-
-	public SimpleTravel(Long id, String passenger, List<String> steps) {
-
-		this.id = id;
-		this.passenger=passenger;
-		this.steps = steps;
-	}
-
 	public void setSteps(List<String> steps) {
 		this.steps = steps;
 
-	}}
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+}

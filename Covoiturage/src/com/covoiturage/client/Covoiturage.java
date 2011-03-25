@@ -53,7 +53,7 @@ public class Covoiturage implements EntryPoint {
 				temp = mainPanel;
 				layoutPanel.remove(mainPanel);
 			}
-			layoutPanel.addEast(asidePanel, 20);
+			layoutPanel.addEast(asidePanel, 30);
 			layoutPanel.add(temp);
 			asidePanel.setWidget(widget);
 		}

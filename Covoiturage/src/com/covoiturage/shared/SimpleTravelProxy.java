@@ -24,7 +24,8 @@ public interface SimpleTravelProxy extends EntityProxy{
 
 	public List<String> getSteps();
 
-
+	public String getOriginAddress();
+	 public String getDestinationAddress();
 
 	public String getPassenger();
 

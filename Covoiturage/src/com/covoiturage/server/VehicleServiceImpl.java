@@ -72,7 +72,7 @@ public class VehicleServiceImpl extends RemoteServiceServlet implements VehicleS
 
 	public List<String> getModels(String model, String make){
 		List<String> models = new ArrayList<String>();
-		if(entriesModels!=null){
+		if(entriesModels.size()==0){
 			parseDatabaseModels(make.replace(" ", "_"));
 
 		}
@@ -97,7 +97,7 @@ public class VehicleServiceImpl extends RemoteServiceServlet implements VehicleS
 	}
 	public List<String> getYears(String model, String make, String year){
 		List<String> years = new ArrayList<String>();
-		if(entriesYears!=null){
+		if(entriesYears.size()==0){
 			parseDatabaseYears();
 		}
 		for (String[] entry : entriesYears) {

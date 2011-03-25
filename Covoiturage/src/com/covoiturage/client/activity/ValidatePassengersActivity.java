@@ -14,6 +14,7 @@ import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -23,6 +24,10 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
+import com.smartgwt.client.widgets.grid.events.SelectionEvent;
 
 public class ValidatePassengersActivity extends AbstractActivity implements
 		ValidatePassengersView.Presenter {
@@ -40,7 +45,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private List<UserInfoDetailsProxy> passengersInfo = new ArrayList<UserInfoDetailsProxy>();
 	private final PlaceController placeController;
 	private List<String> passengers;
-	private final ListDataProvider<SimpleTravelProxy> dataProvider = new ListDataProvider<SimpleTravelProxy>();
+
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -56,8 +61,10 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 					@Override
 					public void onGetValidatePassengers(
 							GetValidatePassengersEvent event) {
+								
 						passengersTravels = event.getSimpleTravels();
 						passengers = event.getPassengers();
+
 						UserInfoDetailsRequest request = requestFactory
 								.userInfoDetailsRequest();
 
@@ -71,40 +78,41 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 									public void onSuccess(
 											List<UserInfoDetailsProxy> resultPassengers) {
 										passengersInfo = resultPassengers;
+										List<ListGridRecord> listRecords = new ArrayList<ListGridRecord>();
+										
+										for (int i = 0; i<passengersTravels.size(); i++) {
+									
+											ListGridRecord rec = new ListGridRecord();
+											rec.setAttribute("login", passengersTravels.get(i).getPassenger());
+											rec.setAttribute("origin", passengersTravels.get(i).getSteps().get(0));
+											rec.setAttribute("destination", passengersTravels.get(i).getSteps().get(1));
+											rec.setAttribute("firstName",passengersInfo.get(i).getFirstName() );
+											rec.setAttribute("lastName",passengersInfo.get(i).getLastName() );
+											listRecords.add(rec );
 
+										}
+										ListGridRecord[] lr = new ListGridRecord[listRecords.size()];
+										validatePassengersView.getListGrid().setData(listRecords.toArray(lr));
 									}
 								});
 
-						dataProvider.addDataDisplay(validatePassengersView
-								.getTable());
-
-						displayPassengers(passengersTravels);
-
 					}
 
 				});
-		validatePassengersView.getSelectionModel().addSelectionChangeHandler(
-				new SelectionChangeEvent.Handler() {
-
+		validatePassengersView.getListGrid().addSelectionChangedHandler(
+				new SelectionChangedHandler() {
+					
 					@Override
-					public void onSelectionChange(SelectionChangeEvent event) {
-						eventBus.fireEvent(new SelectPassengersEvent(
-								validatePassengersView.getSelectionModel()
-										.getSelectedSet()));
+					public void onSelectionChanged(SelectionEvent event) {
 
+						eventBus.fireEvent(new SelectPassengersEvent(
+								validatePassengersView.getListGrid().getSelection()));
+						
 					}
 				});
 
 	}
 
-	private void displayPassengers(List<SimpleTravelProxy> travel) {
-
-		List<SimpleTravelProxy> list = dataProvider.getList();
-		for (SimpleTravelProxy simpleTravel : travel) {
-			list.add(simpleTravel);
-		}
-
-	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {

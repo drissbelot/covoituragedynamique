@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.MultiSelectionModel;
+import com.smartgwt.client.widgets.grid.ListGrid;
 
 public interface ValidatePassengersView extends IsWidget{
 
@@ -15,9 +16,9 @@ public interface ValidatePassengersView extends IsWidget{
     public interface Presenter {
         void goTo(Place place);
     }
-	public abstract HasData<SimpleTravelProxy> getTable();
+
 	public abstract void setPresenter(
 			ValidatePassengersActivity validatePassengersActivity);
-	public CellTable<SimpleTravelProxy> getPassengersCellTable();
-	public MultiSelectionModel<SimpleTravelProxy> getSelectionModel();
+	public ListGrid getListGrid();
+
 }

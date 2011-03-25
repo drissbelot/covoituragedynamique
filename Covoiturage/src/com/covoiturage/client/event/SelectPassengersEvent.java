@@ -4,14 +4,15 @@ import java.util.Set;
 
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.google.gwt.event.shared.GwtEvent;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 
 public class SelectPassengersEvent extends GwtEvent<SelectPassengersEventHandler> {
 	public static Type<SelectPassengersEventHandler> TYPE = new Type<SelectPassengersEventHandler>();
-	private Set<SimpleTravelProxy> passengers;
-	public SelectPassengersEvent(Set<SimpleTravelProxy> set) {
+	private ListGridRecord[] passengers;
+	public SelectPassengersEvent(ListGridRecord[] listGridRecords) {
 		super();
-		this.setPassengers(set);
+		this.setPassengers(listGridRecords);
 	}
 
 	public Type<SelectPassengersEventHandler> getAssociatedType() {
@@ -23,11 +24,11 @@ public class SelectPassengersEvent extends GwtEvent<SelectPassengersEventHandler
 		handler.onSelectPassengers(this);
 	}
 
-	private void setPassengers(Set<SimpleTravelProxy>passengers) {
-		this.passengers = passengers;
+	private void setPassengers(ListGridRecord[] listGridRecords) {
+		this.passengers = listGridRecords;
 	}
 
-	public Set<SimpleTravelProxy> getPassengers() {
+	public ListGridRecord[] getPassengers() {
 		return passengers;
 	}
 

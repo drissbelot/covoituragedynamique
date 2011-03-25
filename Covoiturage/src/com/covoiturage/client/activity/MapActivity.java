@@ -3,6 +3,7 @@ package com.covoiturage.client.activity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ListResourceBundle;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
@@ -67,6 +68,7 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
@@ -209,11 +211,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						List<HasDirectionsWaypoint> waypoints = new ArrayList<HasDirectionsWaypoint>();
 						HasDirectionsWaypoint point = new DirectionsWaypoint();
 
-						for (SimpleTravelProxy simpletravel : selectPassengersEvent
+						for (ListGridRecord simpletravel : selectPassengersEvent
 								.getPassengers()) {
 
-							String origin = simpletravel.getSteps().get(0);
-							String destination = simpletravel.getSteps().get(1);
+							String origin = simpletravel.getAttribute("origin");
+							String destination = simpletravel.getAttribute("destination");
 							point.setLocation(origin);
 							waypoints.add(point);
 							point.setLocation(destination);

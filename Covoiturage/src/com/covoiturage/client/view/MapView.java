@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.smartgwt.client.widgets.form.fields.TimeItem;
 
 public interface MapView extends IsWidget{
 
@@ -45,12 +46,12 @@ public interface MapView extends IsWidget{
 
 	public void setDestinationAddress(String destinationAddress) ;
 	
+	public TimeItem getDepartureTime();
 
+
+	public TimeItem getArrivalTime();
 	
-	public ListBox getHours();
-
-
-	public ListBox getMinutes();
+	
 
 
 }

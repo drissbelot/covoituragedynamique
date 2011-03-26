@@ -2,7 +2,8 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
-	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'>
+	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
+	xmlns:s='urn:import:com.smartgwt.client.widgets.form'>
 	
 	<ui:style src="facebook.css"/>
 		
@@ -26,8 +27,8 @@
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<d:DatePicker ui:field="dateOfJourney" styleName='{style.datepicker}'/>
-  						<g:ListBox ui:field="hours" styleName='{style.datepicker}'/>
-  						<g:ListBox ui:field="minutes" styleName='{style.datepicker}'/>
+
+  						<s:DynamicForm ui:field="departureForm"/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<g:RadioButton  ui:field="driverRadioButton" styleName='{style.radiobutton}' ui:name="typeOfUser"/>

@@ -11,14 +11,14 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class EditProfilViewImpl extends Composite implements  EditProfilView{
+public class SettingsViewImpl extends Composite implements  SettingsView{
 	
-	interface MyUiBinder extends UiBinder<FlowPanel, EditProfilViewImpl> { }
+	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> { }
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	
 	@UiField Button submitButton;
 	@UiField FlowPanel flowpanel;
-	@UiField Label login;
+	@UiField TextBox login;
 	@UiField TextBox firstName;
 	@UiField TextBox lastName;
 	@UiField TextBox emailAdress;
@@ -28,7 +28,7 @@ public class EditProfilViewImpl extends Composite implements  EditProfilView{
 	@SuppressWarnings("unused")
 	private Presenter presenter; 
 	
-	public EditProfilViewImpl(){
+	public SettingsViewImpl(){
 		initWidget(binder.createAndBindUi(this));
 		login.setText("login=fix");
 	}

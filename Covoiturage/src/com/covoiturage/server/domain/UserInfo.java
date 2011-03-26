@@ -97,6 +97,7 @@ public class UserInfo{
 
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
+		
 		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam and o.password = :passwordParam");
 		query.setParameter("loginParam",login);
 		query.setParameter("passwordParam",password);
@@ -113,6 +114,10 @@ public class UserInfo{
 			{
 
 				user= results.get(0);
+
+				em.getTransaction().begin();
+				user.setLoggedIn(true);
+				em.getTransaction().commit();
 			}
 		}
 		finally
@@ -121,14 +126,27 @@ public class UserInfo{
 		}
 
 
-		user.setLogin(login);
-		user.setLoggedIn(true);
-		//setUserInSession(user);
+
 		return user;
 
 
 	}
 
+	public static boolean logout(String id) {
+		EntityManager em = entityManager();
+		try
+		{
+			UserInfo user = em.find(UserInfo.class, id);
+				em.getTransaction().begin();
+				user.setLoggedIn(false);
+				em.getTransaction().commit();
+		}
+		finally
+		{
+			em.close();
+		}
+		return true;
+	}
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   

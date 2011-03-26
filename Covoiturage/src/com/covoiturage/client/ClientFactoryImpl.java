@@ -2,12 +2,14 @@ package com.covoiturage.client;
 
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.AddUserViewImpl;
-import com.covoiturage.client.view.EditProfilView;
-import com.covoiturage.client.view.EditProfilViewImpl;
+import com.covoiturage.client.view.SettingsView;
+import com.covoiturage.client.view.SettingsViewImpl;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.LoginViewImpl;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.client.view.MapViewImpl;
+import com.covoiturage.client.view.HeaderView;
+import com.covoiturage.client.view.HeaderViewImpl;
 import com.covoiturage.client.view.MenuView;
 import com.covoiturage.client.view.MenuViewImpl;
 import com.covoiturage.client.view.ValidatePassengersView;
@@ -25,9 +27,10 @@ public class ClientFactoryImpl implements ClientFactory {
     private final LoginView loginView = new LoginViewImpl();
     private final MapView mapView = new MapViewImpl();
     private final AddUserView addUserView = new AddUserViewImpl();
-    private final EditProfilView EditProfilView = new EditProfilViewImpl();
+    private final SettingsView EditProfilView = new SettingsViewImpl();
     private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
     private final MenuView menuView = new MenuViewImpl();
+    private final HeaderView headerView = new HeaderViewImpl();
     private final CovoiturageRequestFactory requestFactory = GWT.create(CovoiturageRequestFactory.class);
 	
     
@@ -75,7 +78,7 @@ public class ClientFactoryImpl implements ClientFactory {
 
 
 	@Override
-	public EditProfilView getEditProfilView() {
+	public SettingsView getSettingsView() {
 		
 		return EditProfilView;
 	}
@@ -85,6 +88,12 @@ public class ClientFactoryImpl implements ClientFactory {
 	public MenuView getMenuView() {
 
 		return menuView ;
+	}
+
+
+	@Override
+	public HeaderView getHeaderView() {
+		return headerView;
 	}
 
 

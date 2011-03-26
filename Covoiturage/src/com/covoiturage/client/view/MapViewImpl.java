@@ -6,21 +6,20 @@ import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
-
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.smartgwt.client.types.TimeFormatter;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.TimeItem;
 
 public class MapViewImpl extends Composite implements MapView {
 
@@ -37,8 +36,10 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField HorizontalPanel directionsPanel;
 	@UiField Button saveJourney;
 	@UiField DatePicker dateOfJourney;
-	@UiField ListBox hours;
-	@UiField ListBox minutes;
+
+	@UiField DynamicForm departureForm;
+	TimeItem departureTimeItem;
+	TimeItem arrivalTimeItem;
 	@UiField RadioButton driverRadioButton;
 	@UiField RadioButton passengerRadioButton;
 	@UiField TextBox distanceMax;
@@ -60,13 +61,14 @@ public class MapViewImpl extends Composite implements MapView {
 
 		driverRadioButton.setText("Driver");
 		passengerRadioButton.setText("Passenger");
-		for (int i = 0; i < 24; i++) {
-			hours.addItem(String.valueOf(i));
-		}
-		for (int i = 0; i < 60; i+=5) {
-			minutes.addItem(String.valueOf(i));
-		}
 
+		departureTimeItem=new TimeItem();
+		departureTimeItem.setTitle("Departure time");
+
+		arrivalTimeItem=new TimeItem();
+		arrivalTimeItem.setTitle("Arrival time");
+		departureForm.setFields(departureTimeItem ,arrivalTimeItem);
+		
 	}
 
 	public RadioButton getPassengerRadioButton() {
@@ -134,13 +136,13 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 	
 
-	public ListBox getHours() {
-		return hours;
+	public TimeItem getDepartureTime() {
+		return departureTimeItem;
 	}
 
 
-	public ListBox getMinutes() {
-		return minutes;
+	public TimeItem getArrivalTime() {
+		return arrivalTimeItem;
 	}
 
 

@@ -4,28 +4,25 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 
 
 
-public class MenuViewImpl extends Composite implements MenuView {
+public class HeaderViewImpl extends Composite implements HeaderView {
 
-	interface MyUiBinder extends UiBinder<VerticalPanel, MenuViewImpl> { }
+	interface MyUiBinder extends UiBinder<HorizontalPanel, HeaderViewImpl> { }
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
     
-    @UiField Label mapLabel;
-    @UiField Label settingsLabel;
-	
-	
 
+	@UiField Anchor logout;
 	
-	public MenuViewImpl() {
+	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
-
 	}
 
 	private Presenter presenter;
@@ -36,14 +33,10 @@ public class MenuViewImpl extends Composite implements MenuView {
 		this.presenter=presenter;
 		
 	}
-	public HasClickHandlers getSettingsLabel() {
 
-		return settingsLabel;
+	public HasClickHandlers getLogout() {
+
+		return logout;
 	}
-	public HasClickHandlers getMapLabel() {
-
-		return mapLabel;
-	}
-
 
 }

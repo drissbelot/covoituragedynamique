@@ -15,7 +15,7 @@ import javax.persistence.Version;
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.EMF;
-import com.covoiturage.shared.UserInfoDetailsProxy;
+
 
 
 
@@ -79,6 +79,7 @@ public class UserInfoDetails {
 			em.close();
 		}
 	}
+	@SuppressWarnings("unchecked")
 	public static UserInfoDetails findPassengerFromUser(String id){
 		EntityManager em = entityManager();
 		try {

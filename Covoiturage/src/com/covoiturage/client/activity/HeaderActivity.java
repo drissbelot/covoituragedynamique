@@ -2,52 +2,68 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 
+import com.covoiturage.client.event.SendLoginEvent;
+import com.covoiturage.client.event.SendLoginEventHandler;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
 
+import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.MenuView;
+
 import com.covoiturage.shared.CovoiturageRequestFactory;
+import com.covoiturage.shared.UserInfoProxy;
+import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.requestfactory.shared.Receiver;
+import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class MenuActivity extends AbstractActivity implements MenuView.Presenter{
+public class HeaderActivity extends AbstractActivity implements HeaderView.Presenter{
 	private final EventBus eventBus;
-	private final MenuView menuView;
+	private final HeaderView headerView;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
+	private UserInfoProxy currentUser;
 
-	public MenuActivity(ClientFactory clientFactory) {
+	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
-		this.menuView = clientFactory.getMenuView();
+		this.headerView = clientFactory.getHeaderView();
 		this.placeController = clientFactory.getPlaceController();
 	}
-	
+
 	private void bind() {
-		menuView.getMapLabel().addClickHandler(new ClickHandler() {
-			
+		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
 			@Override
-			public void onClick(ClickEvent event) {
-				goTo(new MapPlace(null));
-				
+			public void onSendLogin(SendLoginEvent event) {
+				currentUser = event.getCurrentUser();
+
 			}
 		});
-		menuView.getSettingsLabel().addClickHandler(new ClickHandler() {
-			
+		headerView.getLogout().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				goTo(new SettingsPlace(null));
-				
+				UserInfoRequest userReq = requestFactory.userInfoRequest();
+				Request<Boolean> createReq = userReq.logout(currentUser.getId());
+				createReq.fire(new Receiver<Boolean>(){
+					@Override
+					public void onSuccess(Boolean result) {
+
+						goTo(new LoginPlace(null));
+					}
+
+
+				});
 			}
 		});
-		
 	}
-	
+
 	@Override
 	public String mayStop() {
 
@@ -69,8 +85,8 @@ public class MenuActivity extends AbstractActivity implements MenuView.Presenter
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
-		menuView.setPresenter(this);
-		panel.setWidget(menuView.asWidget());
+		headerView.setPresenter(this);
+		panel.setWidget(headerView.asWidget());
 	}
 
 

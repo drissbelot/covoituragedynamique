@@ -34,6 +34,7 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.maps.client.base.ElementProvider;
 import com.google.gwt.maps.client.base.HasElementProvider;
 import com.google.gwt.maps.client.base.HasLatLng;
@@ -70,6 +71,8 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
@@ -159,24 +162,18 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					}
 				});
-		mapView.getHours().addChangeHandler(new ChangeHandler() {
-
+		mapView.getDepartureTime().addChangedHandler(new ChangedHandler() {
+			
 			@Override
-			public void onChange(ChangeEvent event) {
-				date.setHours(Integer.parseInt(mapView.getHours().getItemText(
-						mapView.getHours().getSelectedIndex())));
-
+			public void onChanged(ChangedEvent event) {
+				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
+				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureTime().getValue())));
+				dateFormatterTime = DateTimeFormat.getFormat("mm");
+				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureTime().getValue())));
 			}
 		});
-		mapView.getMinutes().addChangeHandler(new ChangeHandler() {
 
-			@Override
-			public void onChange(ChangeEvent event) {
-				date.setMinutes(Integer.parseInt(mapView.getMinutes()
-						.getItemText(mapView.getMinutes().getSelectedIndex())));
 
-			}
-		});
 		mapView.getDriverRadioButton().addClickHandler(new ClickHandler() {
 
 			@Override
@@ -259,6 +256,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						geocoder = new Geocoder();
 						HasGeocoderRequest request = new GeocoderRequest();
+						request.setRegion("be");
 						request.setAddress(mapView.getOriginAddress()
 								.getTextBox().getText());
 						geocoder.geocode(request, new GeocoderCallback() {
@@ -285,6 +283,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						geocoder = new Geocoder();
 						HasGeocoderRequest request = new GeocoderRequest();
+						request.setRegion("be");
 						request.setAddress(mapView.getDestinationAddress()
 								.getTextBox().getText());
 						geocoder.geocode(request, new GeocoderCallback() {

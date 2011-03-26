@@ -19,7 +19,7 @@ public interface UserInfoRequest extends RequestContext {
 	Request<UserInfoProxy> findUserInfo(String id);
 	
 	Request<UserInfoProxy> login(String login, String password);
-	
+	Request<Boolean> logout(String id);
 
 	InstanceRequest<UserInfoProxy, String> persist();
 

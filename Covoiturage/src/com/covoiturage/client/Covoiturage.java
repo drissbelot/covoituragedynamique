@@ -23,8 +23,9 @@ public class Covoiturage implements EntryPoint {
 	private final DockLayoutPanel layoutPanel = new DockLayoutPanel(Unit.PCT);
 
 	private final ScrollPanel mainPanel = new ScrollPanel();
-	private final ScrollPanel vertMasterPanel = new ScrollPanel();
+
 	private final ScrollPanel horizMasterPanel = new ScrollPanel();
+	private final ScrollPanel vertMasterPanel = new ScrollPanel();
 	private final ScrollPanel asidePanel = new ScrollPanel();
 
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
@@ -63,7 +64,14 @@ public class Covoiturage implements EntryPoint {
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			vertMasterPanel.setVisible(widget != null);
+			SimplePanel temp = new SimplePanel();
+
+			if (mainPanel != null) {
+				temp = mainPanel;
+				layoutPanel.remove(mainPanel);
+			}
 			layoutPanel.addWest(vertMasterPanel, 20);
+			layoutPanel.add(temp);
 			vertMasterPanel.setWidget(widget);
 		}
 	};
@@ -88,26 +96,29 @@ public class Covoiturage implements EntryPoint {
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
 
-		ActivityMapper vertMasterActivityMapper = new VertMasterAppActivityMapper(
-				clientFactory);
+
 		ActivityMapper horizMasterActivityMapper = new HorizMasterAppActivityMapper(
+				clientFactory);
+		ActivityMapper vertMasterActivityMapper = new VertMasterAppActivityMapper(
 				clientFactory);
 		ActivityMapper mainActivityMapper = new MainAppActivityMapper(
 				clientFactory);
 		ActivityMapper asideActivityMapper = new AsideAppActivityMapper(
 				clientFactory);
 
-		ActivityManager vertMasterActivityManager = new ActivityManager(
-				vertMasterActivityMapper, eventBus);
+
 		ActivityManager horizMasterActivityManager = new ActivityManager(
 				horizMasterActivityMapper, eventBus);
+		ActivityManager vertMasterActivityManager = new ActivityManager(
+				vertMasterActivityMapper, eventBus);
 		ActivityManager mainActivityManager = new ActivityManager(
 				mainActivityMapper, eventBus);
 		ActivityManager asideActivityManager = new ActivityManager(
 				asideActivityMapper, eventBus);
 
-		vertMasterActivityManager.setDisplay(vertMasterDisplay);
+
 		horizMasterActivityManager.setDisplay(horizMasterDisplay);
+		vertMasterActivityManager.setDisplay(vertMasterDisplay);
 		asideActivityManager.setDisplay(asideDisplay);
 		mainActivityManager.setDisplay(mainDisplay);
 

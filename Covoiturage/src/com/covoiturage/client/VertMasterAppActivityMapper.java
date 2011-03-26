@@ -1,5 +1,10 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.activity.MenuActivity;
+import com.covoiturage.client.place.MapPlace;
+import com.covoiturage.client.place.MenuPlace;
+import com.covoiturage.client.place.SettingsPlace;
+import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
@@ -13,8 +18,14 @@ public class VertMasterAppActivityMapper implements ActivityMapper {
 	
 	@Override
 	public Activity getActivity(Place place) {
-		// TODO Auto-generated method stub
-		return null;
+		if(place instanceof MapPlace)
+			return new MenuActivity(clientFactory);
+			else if(place instanceof ValidatePassengersPlace)
+				return new MenuActivity(clientFactory);	
+			else if(place instanceof SettingsPlace)
+				return new MenuActivity(clientFactory);
+			return null;
+
 	}
 
 }

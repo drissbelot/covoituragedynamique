@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.event.GetValidateDriversEvent;
+import com.covoiturage.client.event.GetValidateDriversEventHandler;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.PossiblePassengersEvent;
@@ -11,6 +13,7 @@ import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
+import com.covoiturage.shared.JourneyProxy;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
@@ -42,9 +45,13 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private final ValidatePassengersView validatePassengersView;
 	private final CovoiturageRequestFactory requestFactory;
 	private List<SimpleTravelProxy> passengersTravels;
+	private List<JourneyProxy> journeys;
 	private List<UserInfoDetailsProxy> passengersInfo = new ArrayList<UserInfoDetailsProxy>();
+	private List<UserInfoDetailsProxy> driversInfo = new ArrayList<UserInfoDetailsProxy>();
+	
 	private final PlaceController placeController;
 	private List<String> passengers;
+	private List<String> drivers;
 
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
@@ -88,6 +95,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 											rec.setAttribute("destination", passengersTravels.get(i).getDestinationAddress());
 											rec.setAttribute("firstName",passengersInfo.get(i).getFirstName() );
 											rec.setAttribute("lastName",passengersInfo.get(i).getLastName() );
+											rec.setAttribute("originCoords", passengersTravels.get(i).getSteps().get(0));
+											rec.setAttribute("destinationCoords", passengersTravels.get(i).getSteps().get(1));
 											listRecords.add(rec );
 
 										}
@@ -99,6 +108,54 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 					}
 
 				});
+		
+		
+		eventBus.addHandler(GetValidateDriversEvent.TYPE,
+				new GetValidateDriversEventHandler() {
+					@Override
+					public void onGetValidateDrivers(
+							GetValidateDriversEvent event) {
+								
+						journeys = event.getJourneys();
+						drivers= event.getDrivers();
+
+						UserInfoDetailsRequest request = requestFactory
+								.userInfoDetailsRequest();
+
+						Request<List<UserInfoDetailsProxy>> createReq = request.getPassengerList(drivers);
+
+						createReq
+								.fire(new Receiver<List<UserInfoDetailsProxy>>() {
+
+									@Override
+									public void onSuccess(
+											List<UserInfoDetailsProxy> resultPassengers) {
+										driversInfo = resultPassengers;
+										List<ListGridRecord> listRecords = new ArrayList<ListGridRecord>();
+										
+										for (int i = 0; i<journeys.size(); i++) {
+									
+											ListGridRecord rec = new ListGridRecord();
+											rec.setAttribute("login", journeys.get(i).getDriver());
+											rec.setAttribute("origin", journeys.get(i).getOriginAddress());
+											rec.setAttribute("destination", journeys.get(i).getDestinationAddress());
+											rec.setAttribute("firstName",driversInfo.get(i).getFirstName() );
+											rec.setAttribute("lastName",driversInfo.get(i).getLastName() );
+											rec.setAttribute("originCoords", journeys.get(i).getSteps().get(0));
+											rec.setAttribute("destinationCoords", journeys.get(i).getSteps().get(1));
+											listRecords.add(rec );
+
+										}
+										ListGridRecord[] lr = new ListGridRecord[listRecords.size()];
+										validatePassengersView.getListGrid().setData(listRecords.toArray(lr));
+									}
+								});
+
+					}
+
+				});
+		
+		
 		validatePassengersView.getListGrid().addSelectionChangedHandler(
 				new SelectionChangedHandler() {
 					

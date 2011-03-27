@@ -20,12 +20,16 @@ public interface JourneyRequest extends RequestContext{
 
 	Request<JourneyProxy> findJourney(Long id);
 	
-	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, String id);
+	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, String id,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails);
 	
 
 	InstanceRequest<JourneyProxy, Void> persist();
 
 	InstanceRequest<JourneyProxy, Void> remove();
+
+
+	Request<List<JourneyProxy>> getJourneys(List<String> steps,
+			float distanceMax);
 
 
 	

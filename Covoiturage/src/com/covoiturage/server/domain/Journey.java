@@ -13,14 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
+import com.covoiturage.server.MapUtils;
 
 
 
 @Entity
 
 public class Journey {
-	
-	
+
+
 	public static long countJourneys() {
 		EntityManager em = entityManager();
 		try {
@@ -43,6 +44,11 @@ public class Journey {
 		}
 	}
 
+	public static List<Journey> getJourneys(List<String> steps,
+			float distanceMax) {
+		return MapUtils.bufferRouteJourney(steps, distanceMax);
+
+	}
 	public static Journey findJourney(Long id) {
 		if (id == null) {
 			return null;
@@ -56,7 +62,7 @@ public class Journey {
 		}
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date, String driver){
+	public static Journey saveJourneyDriver(List<String> steps, Date date, String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails){
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 		try
@@ -64,6 +70,10 @@ public class Journey {
 			journey.setSteps(steps);
 			journey.setDate(date);
 			journey.setDriver(driver);
+			journey.setOriginAddress(originAddress);
+			journey.setDestinationAddress(destinationAddress);
+			journey.setWaypoints(waypoints);
+			journey.setStepsDetails(stepsDetails);
 			em.persist(journey);
 
 
@@ -76,7 +86,7 @@ public class Journey {
 
 		return journey;
 	}
-	
+
 	public  void persist() {
 		EntityManager em = entityManager();
 		try {
@@ -100,10 +110,10 @@ public class Journey {
 	public static final EntityManager entityManager() {
 		return EMF.get().createEntityManager();
 	}
-	
-	  @Id
-	  @Column(name = "id")
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	public Long id;
 
@@ -122,13 +132,48 @@ public class Journey {
 	public List<String> steps;
 
 	public Date date;
+	public List<String> stepsDetails;
+	public List<String> getStepsDetails() {
+		return stepsDetails;
+	}
+
+	public void setStepsDetails(List<String> stepsDetails) {
+		this.stepsDetails = stepsDetails;
+	}
+
+	public List<String> waypoints;
+	public String getOriginAddress() {
+		return originAddress;
+	}
+
+	public void setOriginAddress(String originAddress) {
+		this.originAddress = originAddress;
+	}
+
+	public String getDestinationAddress() {
+		return destinationAddress;
+	}
+
+	public void setDestinationAddress(String destinationAddress) {
+		this.destinationAddress = destinationAddress;
+	}
+
+	private String originAddress;
+	private String destinationAddress;
+
+	public List<String> getWaypoints() {
+		return waypoints;
+	}
+
+	public void setWaypoints(List<String> waypoints) {
+		this.waypoints = waypoints;
+	}
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
 
 
-	  @Version
-	  @Column(name = "version")
-	  private Integer version;
-
-	
 
 	public Integer getVersion() {
 		return version;
@@ -140,12 +185,15 @@ public class Journey {
 
 	public Journey() {}
 
-	public Journey(Long id, String driver, List<String> passengers, List<String> steps) {
+	public Journey(Long id, String driver, List<String> passengers, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
 		super();
 		this.id = id;
 		this.driver = driver;
 		this.passengers = passengers;
 		this.steps = steps;
+		this.originAddress=originAddress;
+		this.destinationAddress=destinationAddress;
+		this.stepsDetails=stepsDetails;
 	}
 
 	public Date getDate() {
@@ -180,6 +228,6 @@ public class Journey {
 		this.steps = steps;
 	}
 
-	
+
 }
 

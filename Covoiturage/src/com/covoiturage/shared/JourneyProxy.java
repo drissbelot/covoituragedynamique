@@ -17,7 +17,8 @@ public interface JourneyProxy extends EntityProxy{
 
 	public void setDate(Date date);
 
-	
+	public String getOriginAddress();
+	 public String getDestinationAddress();
 	public String getDriver();
 
 	public void setDriver(String driver);
@@ -31,5 +32,8 @@ public interface JourneyProxy extends EntityProxy{
 	public void setSteps(List<String> steps);
 
 	EntityProxyId<JourneyProxy> stableId();
+	public List<String> getWaypoints();
+
+	public void setWaypoints(List<String> waypoints);
 }
 

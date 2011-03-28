@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.smartgwt.client.widgets.Label;
+
 
 
 
@@ -20,9 +22,12 @@ public class HeaderViewImpl extends Composite implements HeaderView {
     
 
 	@UiField Anchor logout;
+	@UiField Label currentUser;
+	@UiField Label messages;
 	
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
+		messages.setTitle("Messages :");
 	}
 
 	private Presenter presenter;
@@ -38,5 +43,13 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 
 		return logout;
 	}
+	public Label getCurrentUser() {
 
+		return currentUser;
+	}
+
+	@Override
+	public Label getMessages() {
+		return messages;
+	}
 }

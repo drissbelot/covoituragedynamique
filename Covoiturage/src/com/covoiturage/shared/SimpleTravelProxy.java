@@ -46,4 +46,5 @@ public interface SimpleTravelProxy extends EntityProxy{
 	public Date getArrival();
 
 	public void setArrival(Date arrival);
+	public Long getId();
 }

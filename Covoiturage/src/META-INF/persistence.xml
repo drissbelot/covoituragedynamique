@@ -9,6 +9,8 @@
                         <property name="datanucleus.NontransactionalWrite" value="true" />
                         <property name="datanucleus.ConnectionURL" value="appengine" />
                         <property name="datanucleus.appengine.allowMultipleRelationsOfSameType" value="true"/>
+                        <property name="datanucleus.DetachOnClose" value="true"/>
+                        <property name="datanucleus.DetachOnCommit" value="true" />
                 </properties>
         </persistence-unit>
 </persistence>    

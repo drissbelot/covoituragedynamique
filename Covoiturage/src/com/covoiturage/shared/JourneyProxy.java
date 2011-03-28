@@ -40,6 +40,18 @@ public interface JourneyProxy extends EntityProxy{
 
 	public void setStepsDetails(List<String> stepsDetails);
 	
+	public Date getDepartureStart();
+
+	public void setDepartureStart(Date departureStart);
+
+	public Date getDepartureEnd();
+
+	public void setDepartureEnd(Date departureEnd);
+
+	public Date getArrival();
+
+	public void setArrival(Date arrival);
+
 	
 }
 

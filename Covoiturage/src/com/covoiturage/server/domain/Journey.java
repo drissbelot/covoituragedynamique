@@ -64,7 +64,7 @@ public class Journey {
 		}
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date, String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails){
+	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails){
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 		try
@@ -76,6 +76,9 @@ public class Journey {
 			journey.setDestinationAddress(destinationAddress);
 			journey.setWaypoints(waypoints);
 			journey.setStepsDetails(stepsDetails);
+			journey.setDepartureStart(departureStart);
+			journey.setDepartureEnd(departureEnd);
+			journey.setArrival(arrival);
 			em.persist(journey);
 
 
@@ -135,6 +138,35 @@ public class Journey {
 
 	public Date date;
 	public List<String> stepsDetails;
+	public Date getDepartureStart() {
+		return departureStart;
+	}
+
+	public void setDepartureStart(Date departureStart) {
+		this.departureStart = departureStart;
+	}
+
+	public Date getDepartureEnd() {
+		return departureEnd;
+	}
+
+	public void setDepartureEnd(Date departureEnd) {
+		this.departureEnd = departureEnd;
+	}
+
+	public Date getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
+	}
+
+	public Date departureStart;
+	public Date departureEnd;
+	public Date arrival;
+	
+	
 	public List<String> getStepsDetails() {
 		return stepsDetails;
 	}

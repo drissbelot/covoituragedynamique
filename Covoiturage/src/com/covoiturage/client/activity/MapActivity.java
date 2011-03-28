@@ -3,7 +3,6 @@ package com.covoiturage.client.activity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ListResourceBundle;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.GetValidateDriversEvent;
@@ -18,16 +17,12 @@ import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
 import com.covoiturage.shared.JourneyRequest;
-
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -359,21 +354,35 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getLocation().toString());
 
 						if (isDriver) {
-	
-							JourneyRequest request = requestFactory
-							.journeyRequest();
-							Request<JourneyProxy> createReq = request
-							.saveJourneyDriver(listAddress, date,
-									currentUser.getId(),mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), waypointsCoords, steps);
-							createReq.fire(new Receiver<JourneyProxy>() {
+							UserInfoDetailsRequest requestPassenger = requestFactory
+							.userInfoDetailsRequest();
+							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
+							.findPassengerFromUser(currentUser.getId());
+
+							createReqPassenger
+							.fire(new Receiver<UserInfoDetailsProxy>() {
 
 								@Override
-								public void onSuccess(JourneyProxy response) {
+								public void onSuccess(
+										UserInfoDetailsProxy response) {
+									JourneyRequest request = requestFactory
+									.journeyRequest();
+									Request<JourneyProxy> createReq = request
+									.saveJourneyDriver(listAddress, date,
+											response.getId(),mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), waypointsCoords, steps);
+									createReq.fire(new Receiver<JourneyProxy>() {
 
-									Window.alert("savec");
+										@Override
+										public void onSuccess(JourneyProxy response) {
 
+											Window.alert("savec");
+
+										}
+									});
 								}
 							});
+							
+	
 
 						} else if (isPassenger) {
 							UserInfoDetailsRequest requestPassenger = requestFactory
@@ -508,6 +517,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							}
 
 						}
+						
+				
+						
 					});
 					
 				}

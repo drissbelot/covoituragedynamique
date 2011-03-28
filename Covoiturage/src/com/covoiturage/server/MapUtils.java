@@ -24,24 +24,26 @@ public class MapUtils {
 			i++;
 		}
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
+
 		return journeyNearBuffer(polyline, distance);
 	}
 
 	public static List<Journey> journeyNearBuffer(Geometry buffer, float distance){
 		EntityManager em = EMF.get().createEntityManager();
+		em.getTransaction().begin();
 		List<Journey> journeys= new ArrayList<Journey>();
 		try
 		{
-
+			
 			@SuppressWarnings("unchecked")
 			List<Journey> results = em.createQuery("select o from Journey o").getResultList();
 			for (Journey journey : results) {
-				List<String> steps = journey.getStepsDetails();
+				List<String> stepsDetails = journey.getStepsDetails();
 				if(journey.getWaypoints()!=null)
-				steps.addAll(journey.getWaypoints());
+				stepsDetails.addAll(journey.getWaypoints());
 				int i=0;
-				Coordinate[] coordArray=new Coordinate[steps.size()];
-				for (String singleCoord : steps) {
+				Coordinate[] coordArray=new Coordinate[stepsDetails.size()];
+				for (String singleCoord : stepsDetails) {
 					Coordinate coord= new Coordinate(Double.parseDouble(singleCoord.substring(singleCoord.indexOf("(")+1,singleCoord.indexOf(",") )),Double.parseDouble(singleCoord.substring(singleCoord.indexOf(",")+1,singleCoord.indexOf(")")-1 )));
 					coordArray[i]= coord;
 					i++;	
@@ -50,16 +52,23 @@ public class MapUtils {
 				Geometry geom=new GeometryFactory().createLineString(coordArray);
 				
 				if(geom.buffer(distance/111).contains(buffer)){
+					journey.getSteps();
+					journey.getPassengers();
 					journeys.add(journey);
 					
 				}
 			}
+			em.getTransaction().commit();
+			em.close();
+			return journeys;
 			}
 			finally{
-				em.close();
 				
+		//		em.close();
+
 			}
-			return journeys;
+
+
 	}
 	
 	

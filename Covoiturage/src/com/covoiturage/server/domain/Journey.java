@@ -46,7 +46,9 @@ public class Journey {
 
 	public static List<Journey> getJourneys(List<String> steps,
 			float distanceMax) {
+		
 		return MapUtils.bufferRouteJourney(steps, distanceMax);
+		
 
 	}
 	public static Journey findJourney(Long id) {

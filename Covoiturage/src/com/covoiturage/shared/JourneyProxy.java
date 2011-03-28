@@ -35,5 +35,11 @@ public interface JourneyProxy extends EntityProxy{
 	public List<String> getWaypoints();
 
 	public void setWaypoints(List<String> waypoints);
+	
+	public List<String> getStepsDetails();
+
+	public void setStepsDetails(List<String> stepsDetails);
+	
+	
 }
 

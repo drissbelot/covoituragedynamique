@@ -19,6 +19,7 @@ public class MenuViewImpl extends Composite implements MenuView {
     
     @UiField Label mapLabel;
     @UiField Label settingsLabel;
+    @UiField Label historyLabel;
 	
 	
 

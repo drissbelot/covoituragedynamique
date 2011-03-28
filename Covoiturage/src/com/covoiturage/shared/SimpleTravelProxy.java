@@ -35,5 +35,15 @@ public interface SimpleTravelProxy extends EntityProxy{
 	public void setSteps(List<String> steps);
 	
 	EntityProxyId<SimpleTravelProxy> stableId();
-	
+	public Date getDepartureStart();
+
+	public void setDepartureStart(Date departureStart);
+
+	public Date getDepartureEnd();
+
+	public void setDepartureEnd(Date departureEnd);
+
+	public Date getArrival();
+
+	public void setArrival(Date arrival);
 }

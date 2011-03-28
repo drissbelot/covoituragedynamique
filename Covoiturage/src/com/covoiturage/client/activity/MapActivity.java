@@ -78,6 +78,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private HasGeocoder geocoder;
 	private Date date = new Date();
+	private Date departureStart;
+	private Date departureEnd;
+	private Date arrival;
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
@@ -165,11 +168,32 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void onChanged(ChangedEvent event) {
 				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
+				departureStart.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
 				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
+				departureStart.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
 			}
 		});
+		mapView.getDepartureEndTime().addChangedHandler(new ChangedHandler() {
+
+			@Override
+			public void onChanged(ChangedEvent event) {
+				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
+				departureEnd.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureEndTime().getValue())));
+				dateFormatterTime = DateTimeFormat.getFormat("mm");
+				departureEnd.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureEndTime().getValue())));
+			}
+		});
+		mapView.getArrivalTime().addChangedHandler(new ChangedHandler() {
+
+			@Override
+			public void onChanged(ChangedEvent event) {
+				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
+				arrival.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getValue())));
+				dateFormatterTime = DateTimeFormat.getFormat("mm");
+				arrival.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getValue())));
+			}
+		});
+		
 
 
 		mapView.getDriverRadioButton().addClickHandler(new ClickHandler() {
@@ -368,7 +392,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									JourneyRequest request = requestFactory
 									.journeyRequest();
 									Request<JourneyProxy> createReq = request
-									.saveJourneyDriver(listAddress, date,
+									.saveJourneyDriver(listAddress, date,departureStart,departureEnd,arrival,
 											response.getId(),mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), waypointsCoords, steps);
 									createReq.fire(new Receiver<JourneyProxy>() {
 
@@ -401,7 +425,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									.simpleTravelRequest();
 									Request<SimpleTravelProxy> createReq = request
 									.saveJourneyPassenger(
-											listAddress,mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), date,
+											listAddress,mapView.getOriginAddress().getText(),mapView.getDestinationAddress().getText(), date,departureStart,departureEnd,arrival,
 											response.getId().toString());
 									createReq
 									.fire(new Receiver<SimpleTravelProxy>() {

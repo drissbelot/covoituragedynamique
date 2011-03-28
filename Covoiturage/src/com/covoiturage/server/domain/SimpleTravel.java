@@ -66,7 +66,7 @@ public class SimpleTravel {
 	}
 
 	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
-			Date date, String passenger) {
+			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		EntityManager em = entityManager();
 		try {
@@ -75,6 +75,9 @@ public class SimpleTravel {
 			simpleTravel.setPassenger(passenger);
 			simpleTravel.setOriginAddress(originAddress);
 			simpleTravel.setDestinationAddress(destinationAddress);
+			simpleTravel.setDepartureStart(departureStart);
+			simpleTravel.setDepartureEnd(departureEnd);
+			simpleTravel.setArrival(arrival);
 			em.persist(simpleTravel);
 
 		} finally {
@@ -100,6 +103,35 @@ public class SimpleTravel {
 	@Column(name = "version")
 	private Integer version;
 	private List<String> steps;
+	
+	public Date getDepartureStart() {
+		return departureStart;
+	}
+
+	public void setDepartureStart(Date departureStart) {
+		this.departureStart = departureStart;
+	}
+
+	public Date getDepartureEnd() {
+		return departureEnd;
+	}
+
+	public void setDepartureEnd(Date departureEnd) {
+		this.departureEnd = departureEnd;
+	}
+
+	public Date getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
+	}
+
+	public Date departureStart;
+	public Date departureEnd;
+	public Date arrival;
+	
 	public String getOriginAddress() {
 		return originAddress;
 	}

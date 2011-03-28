@@ -1,8 +1,10 @@
 package com.covoiturage.client.view;
 
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.event.dom.client.HasClickHandlers;
+
+import com.smartgwt.client.widgets.Label;
 
 public interface MenuView extends IsWidget{
     void setPresenter(Presenter presenter);

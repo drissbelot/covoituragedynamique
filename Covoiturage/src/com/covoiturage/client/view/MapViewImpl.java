@@ -38,7 +38,8 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField DatePicker dateOfJourney;
 
 	@UiField DynamicForm departureForm;
-	TimeItem departureTimeItem;
+	TimeItem departureStartTimeItem;
+	TimeItem departureEndTimeItem;
 	TimeItem arrivalTimeItem;
 	@UiField RadioButton driverRadioButton;
 	@UiField RadioButton passengerRadioButton;
@@ -62,14 +63,17 @@ public class MapViewImpl extends Composite implements MapView {
 		driverRadioButton.setText("Driver");
 		passengerRadioButton.setText("Passenger");
 
-		departureTimeItem=new TimeItem();
-		departureTimeItem.setTitle("Departure time");
-
+		departureStartTimeItem=new TimeItem();
+		departureStartTimeItem.setTitle("Departure time between :");
+		departureEndTimeItem=new TimeItem();
+		departureEndTimeItem.setTitle("and :");
 		arrivalTimeItem=new TimeItem();
-		arrivalTimeItem.setTitle("Arrival time");
-		departureForm.setFields(departureTimeItem ,arrivalTimeItem);
+		arrivalTimeItem.setTitle("Arrival time :");
+		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
 		
 	}
+
+
 
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
@@ -136,15 +140,17 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 	
 
-	public TimeItem getDepartureTime() {
-		return departureTimeItem;
+	public TimeItem getDepartureStartTime() {
+		return departureStartTimeItem;
 	}
 
 
 	public TimeItem getArrivalTime() {
 		return arrivalTimeItem;
 	}
-
+	public TimeItem getDepartureEndTime() {
+		return departureEndTimeItem;
+	}
 
 
 }

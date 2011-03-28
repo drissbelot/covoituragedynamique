@@ -160,14 +160,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					}
 				});
-		mapView.getDepartureTime().addChangedHandler(new ChangedHandler() {
+		mapView.getDepartureStartTime().addChangedHandler(new ChangedHandler() {
 
 			@Override
 			public void onChanged(ChangedEvent event) {
 				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureTime().getValue())));
+				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
 				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureTime().getValue())));
+				date.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
 			}
 		});
 

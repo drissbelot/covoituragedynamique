@@ -46,8 +46,8 @@ public interface MapView extends IsWidget{
 
 	public void setDestinationAddress(String destinationAddress) ;
 	
-	public TimeItem getDepartureTime();
-
+	public TimeItem getDepartureStartTime();
+	public TimeItem getDepartureEndTime();
 
 	public TimeItem getArrivalTime();
 	

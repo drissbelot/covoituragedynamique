@@ -43,7 +43,7 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-
+				headerView.getCurrentUser().setContents(currentUser.getLogin());
 			}
 		});
 		headerView.getLogout().addClickHandler(new ClickHandler() {

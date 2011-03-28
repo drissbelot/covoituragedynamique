@@ -14,6 +14,7 @@ import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
+import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
@@ -52,6 +53,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private final PlaceController placeController;
 	private List<String> passengers;
 	private List<String> drivers;
+	private boolean isDriver;
 
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
@@ -71,7 +73,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 								
 						passengersTravels = event.getSimpleTravels();
 						passengers = event.getPassengers();
-
+						isDriver=true;
 						UserInfoDetailsRequest request = requestFactory
 								.userInfoDetailsRequest();
 
@@ -97,6 +99,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 											rec.setAttribute("lastName",passengersInfo.get(i).getLastName() );
 											rec.setAttribute("originCoords", passengersTravels.get(i).getSteps().get(0));
 											rec.setAttribute("destinationCoords", passengersTravels.get(i).getSteps().get(1));
+											rec.setAttribute("id", passengersTravels.get(i).getId());
 											listRecords.add(rec );
 
 										}
@@ -118,7 +121,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 								
 						journeys = event.getJourneys();
 						drivers= event.getDrivers();
-
+						isDriver=false;
 						UserInfoDetailsRequest request = requestFactory
 								.userInfoDetailsRequest();
 
@@ -172,6 +175,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 			@Override
 			public void onClick(ClickEvent event) {
 				Window.alert("Passengers saved");
+
 				
 			}
 		});

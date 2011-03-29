@@ -15,7 +15,7 @@
   		
   		<g:HorizontalPanel  horizontalAlignment="ALIGN_LEFT">
   			<g:HorizontalPanel styleName='{style.cartecontainer}'>
-  				<m:MapWidget ui:field='mapWidget' width="350px" height="350px"/> 
+  				<m:MapWidget ui:field='mapWidget' width="400px" height="400px"/> 
    				<g:VerticalPanel >
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' text="From :" width="3em"/>

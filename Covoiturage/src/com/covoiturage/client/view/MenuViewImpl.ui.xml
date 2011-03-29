@@ -5,10 +5,10 @@
 		
 
 
-  	<g:VerticalPanel styleName='{style.menutitre}' width="100%" height="100%">
-  		<g:Label ui:field='mapLabel' text="Map"/>
-  		<g:Label ui:field='settingsLabel' text="Settings"/>
-  		<g:Label ui:field='historyLabel' text="History"/>
-  	</g:VerticalPanel>
+  	<g:FlowPanel  styleName='{style.menucote}' width="98%" height="98%">
+  		<g:Label ui:field='mapLabel' text="Map" styleName='{style.buttontitre}' />
+  		<g:Label ui:field='settingsLabel' text="Settings" styleName='{style.buttontitre}'/>
+  		<g:Label ui:field='historyLabel' text="History" styleName='{style.buttontitre}' />
+  	</g:FlowPanel>
 
   	</ui:UiBinder>

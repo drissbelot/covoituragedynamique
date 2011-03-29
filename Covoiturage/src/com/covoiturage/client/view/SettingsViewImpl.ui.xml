@@ -7,11 +7,9 @@
 	<ui:style src="facebook.css"/>
 		
 
-  	
-  		<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
   		
 	
-  			<g:VerticalPanel ui:field="container" >
+  			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
 				<g:Label styleName='{style.h2}'  text="Modify your personnal data"/>
 				<g:HorizontalPanel width="304px">
 					<g:Label styleName='{style.label}'  text="Username :" width="8em"/>
@@ -42,7 +40,5 @@
 				</g:HorizontalPanel>
 		
 	</g:VerticalPanel>
-  		
-  		</g:FlowPanel>
   	
 </ui:UiBinder>

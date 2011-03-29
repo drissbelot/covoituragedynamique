@@ -27,7 +27,10 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	@UiField SuggestBox vehicleMake;
 	@UiField SuggestBox vehicleModel;
 
-	
+	public AddUserViewImpl() {
+		
+		initWidget(binder.createAndBindUi(this)); 
+	}
 	
 	
 	public String getFirstName() {
@@ -56,10 +59,6 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-
-	public AddUserViewImpl() {
-		initWidget(binder.createAndBindUi(this)); 
-	}
 
 	public HasClickHandlers getAddUserButton() {return addButton;}
 	public Widget asWidget() {return this;}

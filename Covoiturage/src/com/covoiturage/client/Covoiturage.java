@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.Widget;
 public class Covoiturage implements EntryPoint {
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
 	private final DockLayoutPanel layoutPanel = new DockLayoutPanel(Unit.PCT);
-
 	private final ScrollPanel mainPanel = new ScrollPanel();
 
 	private final ScrollPanel horizMasterPanel = new ScrollPanel();
@@ -38,7 +37,7 @@ public class Covoiturage implements EntryPoint {
 				temp = mainPanel;
 				layoutPanel.remove(mainPanel);
 			}
-			layoutPanel.addNorth(horizMasterPanel, 10);
+			layoutPanel.addNorth(horizMasterPanel, 5);
 			layoutPanel.add(temp);
 			horizMasterPanel.setWidget(widget);
 		}
@@ -70,7 +69,7 @@ public class Covoiturage implements EntryPoint {
 				temp = mainPanel;
 				layoutPanel.remove(mainPanel);
 			}
-			layoutPanel.addWest(vertMasterPanel, 20);
+			layoutPanel.addWest(vertMasterPanel, 10);
 			layoutPanel.add(temp);
 			vertMasterPanel.setWidget(widget);
 		}

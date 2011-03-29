@@ -11,41 +11,41 @@
 		<g:Label styleName='{style.h1}'  text="Create a new Account"/>
 	
 	<g:VerticalPanel ui:field="container" styleName='{style.centerpanel}' horizontalAlignment="ALIGN_LEFT">
-		<g:Label styleName='{style.h2}'  text="Enter your personnal data"/>
+		<g:Label styleName='{style.h2}'  ui:field="header"/>
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}'  text="Username :"/>
-			<g:TextBox ui:field="login" text="UserName" styleName='{style.textbox}'/>
+			<g:Label styleName='{style.label}'  ui:field="username"/>
+			<g:TextBox ui:field="login" styleName='{style.textbox}'/>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="FirstName :"/>
-			<g:TextBox ui:field="firstName" text="Firstname" styleName='{style.textbox}'/>
+			<g:Label styleName='{style.label}' ui:field="firstname"/>
+			<g:TextBox ui:field="firstName"  styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="LastName :"/>
-			<g:TextBox ui:field="lastName" text="Lastname" styleName='{style.textbox}'/>
+			<g:Label styleName='{style.label}' ui:field="lastname"/>
+			<g:TextBox ui:field="lastName"  styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="Email :"/>
-			<g:TextBox ui:field="emailAdress" text="EmailAdress" styleName='{style.textbox}'/>
+			<g:Label styleName='{style.label}' ui:field="email"/>
+			<g:TextBox ui:field="emailAdress"  styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="Password :"/>
-			<g:PasswordTextBox ui:field="password" text="Password" styleName='{style.textbox}'/>
+			<g:Label styleName='{style.label}' ui:field="passwordlab"/>
+			<g:PasswordTextBox ui:field="password" styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="Make :"/>
+			<g:Label styleName='{style.label}' ui:field="Make"/>
 			<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}'/>
 		</g:HorizontalPanel>	
 				<g:HorizontalPanel>
-			<g:Label styleName='{style.label}' text="Model :"/>
+			<g:Label styleName='{style.label}' ui:field="Model"/>
 			<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}'/>
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' text="Langue : "/>
-				<g:ListBox ui:field="language"  />
+				<g:Label styleName='{style.label}' ui:field="languelab"/>
+				<g:ListBox ui:field="langue"  />
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
-			<g:Button ui:field="addButton" styleName='{style.button}' text="Register"/>
+			<g:Button ui:field="addButton" styleName='{style.button}' />
 		</g:HorizontalPanel>
 		
 	</g:VerticalPanel>

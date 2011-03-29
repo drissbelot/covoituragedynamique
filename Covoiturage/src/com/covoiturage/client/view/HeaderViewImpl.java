@@ -17,37 +17,34 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 
 	interface MyUiBinder extends UiBinder<HorizontalPanel, HeaderViewImpl> { }
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-    
+    private HeaderViewConstants constants=(HeaderViewConstants)GWT.create(HeaderViewConstants.class);
 
 	@UiField Anchor logout;
-	@UiField Label currentUser;
-	@UiField Label messages;
+	@UiField Label currentUser,messages;
+	@UiField com.google.gwt.user.client.ui.Label titre;
 	@UiField HorizontalPanel menu;
+	private Presenter presenter;
+	
 	
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
-		messages.setTitle("Messages :");
+		//messages.setTitle(constants.message());
+		titre.setTitle(constants.titre());
+		logout.setText(constants.logout());
+		//currentUser.setTitle(constants.username());
 	}
 
-	private Presenter presenter;
-
-
-	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter=presenter;
-		
 	}
 
 	public HasClickHandlers getLogout() {
-
 		return logout;
 	}
 	public Label getCurrentUser() {
-
 		return currentUser;
 	}
 
-	@Override
 	public Label getMessages() {
 		return messages;
 	}

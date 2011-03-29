@@ -42,7 +42,7 @@
 		</g:HorizontalPanel>
 		<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' text="Langue : "/>
-				<g:ListBox ui:field="langue"  />
+				<g:ListBox ui:field="language"  />
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 			<g:Button ui:field="addButton" styleName='{style.button}' text="Register"/>

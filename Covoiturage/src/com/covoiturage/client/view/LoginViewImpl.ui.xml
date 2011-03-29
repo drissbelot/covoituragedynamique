@@ -14,13 +14,13 @@
 		<g:HorizontalPanel styleName='{style.containerphtoto}'>	
 		<g:Image ui:field="image" width="200px" height="200px" />
 		<g:VerticalPanel styleName='{style.panelfullborder}' width="" height="" verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
-			<g:Label styleName='{style.h2}' text="Login"/>
+			<g:Label ui:field="log" styleName='{style.h2}' />
 			<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' text="UserName :"/>
+				<g:Label styleName='{style.label}' ui:field="name"/>
 				<g:TextBox ui:field="nameField" text="UserName" styleName='{style.textbox}'/>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' text="Password :"/>
+				<g:Label styleName='{style.label}' ui:field="pass"/>
 				<g:PasswordTextBox ui:field="passField" text="Password" styleName='{style.textbox}'/>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">

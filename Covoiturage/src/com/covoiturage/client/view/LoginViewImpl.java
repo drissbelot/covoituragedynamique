@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -23,12 +24,22 @@ public class LoginViewImpl extends Composite implements LoginView {
 	@UiField PasswordTextBox passField ;
 	@UiField Button addUserButton;
 	@UiField Image image;
+	@UiField Label name;
+	@UiField Label pass;
+	@UiField Label log;
     @SuppressWarnings("unused")
 	private Presenter presenter;
-
+    
+    private LoginViewConstants constants=(LoginViewConstants)GWT.create(LoginViewConstants.class);
 	
 	public LoginViewImpl(){
+		
 		initWidget(binder.createAndBindUi(this)); 
+		
+		log.setText(constants.login());
+		name.setText(constants.username());
+		pass.setText(constants.password());
+		
 		image.setUrl("http://1.bp.blogspot.com/_q6GXjsy7QfU/SwheN_DnA6I/AAAAAAAACC4/ktKRwE4r3tQ/s1600/D%C3%A9rapage.gif");
 	}
 

@@ -18,11 +18,11 @@
   				<m:MapWidget ui:field='mapWidget' width="400px" height="400px"/> 
    				<g:VerticalPanel >
   					<g:HorizontalPanel>
-  						<g:Label styleName='{style.label}' text="From :" width="3em"/>
+  						<g:Label styleName='{style.label}' ui:field="from" width="3em"/>
 						<g:SuggestBox ui:field="originAddress" text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
-  						<g:Label styleName='{style.label}' text="To :" width="3em"/>
+  						<g:Label styleName='{style.label}' ui:field="to" width="3em"/>
 						<g:SuggestBox ui:field="destinationAddress" text="2,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
@@ -35,12 +35,12 @@
   						<g:RadioButton ui:field="passengerRadioButton"  styleName='{style.radiobutton}' ui:name="typeOfUser"/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
-  						<g:Label styleName='{style.label}' text="Distance Max:" width="7em"/>
+  						<g:Label styleName='{style.label}' ui:field="distmax" width="7em"/>
 						<g:TextBox ui:field="distanceMax" text="0" styleName='{style.textbox}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
-  						<g:Button ui:field="sendAddress" text="Get travelway" styleName='{style.button}'/>
-  						<g:Button ui:field="saveJourney" text="Save Journey" styleName='{style.button}'/>
+  						<g:Button ui:field="sendAddress"  styleName='{style.button}'/>
+  						<g:Button ui:field="saveJourney"  styleName='{style.button}'/>
   					</g:HorizontalPanel>
   				</g:VerticalPanel>
   			</g:HorizontalPanel>

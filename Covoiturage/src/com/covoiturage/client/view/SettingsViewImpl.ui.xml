@@ -35,6 +35,10 @@
 					<g:Label styleName='{style.label}' text="New Password :" width="8em"/>
 					<g:PasswordTextBox ui:field="newpassword" text="Password" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
+				<g:HorizontalPanel>
+				<g:Label styleName='{style.label}' text="Langue : "/>
+				<g:ListBox ui:field="langue"  />
+				</g:HorizontalPanel>
 				<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 					<g:Button ui:field="submitButton" styleName='{style.button}' text="Register"/>
 				</g:HorizontalPanel>

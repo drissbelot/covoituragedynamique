@@ -7,6 +7,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -26,10 +27,17 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	@UiField PasswordTextBox password;
 	@UiField SuggestBox vehicleMake;
 	@UiField SuggestBox vehicleModel;
+	@UiField ListBox langue;
 
 	public AddUserViewImpl() {
 		
 		initWidget(binder.createAndBindUi(this)); 
+		
+		langue.addItem("Francais");
+		langue.addItem("Anglais");
+		langue.addItem("Néerlandais");
+		langue.addItem("Italien");
+		langue.addItem("Chinois");
 	}
 	
 	

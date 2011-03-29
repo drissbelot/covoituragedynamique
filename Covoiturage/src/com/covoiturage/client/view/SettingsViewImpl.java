@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -25,6 +26,7 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	@UiField TextBox emailAdress;
 	@UiField PasswordTextBox prevpassword;
 	@UiField PasswordTextBox newpassword;
+	@UiField ListBox langue;
 	
 	@SuppressWarnings("unused")
 	private Presenter presenter; 
@@ -32,6 +34,12 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	public SettingsViewImpl(){
 		initWidget(binder.createAndBindUi(this));
 		login.setText("login=fix");
+		
+		langue.addItem("Francais");
+		langue.addItem("Anglais");
+		langue.addItem("Néerlandais");
+		langue.addItem("Italien");
+		langue.addItem("Chinois");
 	}
 	
 	public HasClickHandlers getSubmit() {

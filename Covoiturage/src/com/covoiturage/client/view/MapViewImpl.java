@@ -12,12 +12,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.smartgwt.client.types.TimeFormatter;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TimeItem;
 
@@ -30,12 +29,12 @@ public class MapViewImpl extends Composite implements MapView {
 
 	@UiField FlowPanel flowpanel;
 	@UiField(provided=true) MapWidget mapWidget;
-	@UiField Button sendAddress;
+	@UiField Button sendAddress,saveJourney;
 	@UiField SuggestBox originAddress;
 	@UiField SuggestBox destinationAddress;
 	@UiField HorizontalPanel directionsPanel;
-	@UiField Button saveJourney;
 	@UiField DatePicker dateOfJourney;
+	@UiField Label to,from,distmax; 
 
 	@UiField DynamicForm departureForm;
 	TimeItem departureStartTimeItem;
@@ -48,6 +47,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
+	private MapViewConstants constants=(MapViewConstants)GWT.create(MapViewConstants.class);
 
 	public MapViewImpl() {
 		MapOptions options = new MapOptions();
@@ -58,17 +58,24 @@ public class MapViewImpl extends Composite implements MapView {
 	    options.setDraggable(true);
 	    options.setMapTypeControl(true);
 	    mapWidget= new MapWidget(options);
+	    
 	    initWidget(binder.createAndBindUi(this));
+	    
+	    // internationalisation
+	    to.setText(constants.to());
+	    from.setText(constants.from());
+	    sendAddress.setText(constants.gettravelway());
+	    saveJourney.setText(constants.savejourney());
 
-		driverRadioButton.setText("Driver");
-		passengerRadioButton.setText("Passenger");
+		driverRadioButton.setText(constants.driver());
+		passengerRadioButton.setText(constants.passenger());
 
 		departureStartTimeItem=new TimeItem();
-		departureStartTimeItem.setTitle("Departure time between :");
+		departureStartTimeItem.setTitle(constants.departuretime());
 		departureEndTimeItem=new TimeItem();
-		departureEndTimeItem.setTitle("and :");
+		departureEndTimeItem.setTitle(constants.and());
 		arrivalTimeItem=new TimeItem();
-		arrivalTimeItem.setTitle("Arrival time :");
+		arrivalTimeItem.setTitle(constants.arrivaltime());
 		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
 		
 	}

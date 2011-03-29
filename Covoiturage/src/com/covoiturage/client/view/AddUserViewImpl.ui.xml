@@ -39,6 +39,10 @@
 				<g:HorizontalPanel>
 			<g:Label styleName='{style.label}' text="Model :"/>
 			<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}'/>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+				<g:Label styleName='{style.label}' text="Langue : "/>
+				<g:ListBox ui:field="langue"  />
 		</g:HorizontalPanel>	
 		<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 			<g:Button ui:field="addButton" styleName='{style.button}' text="Register"/>

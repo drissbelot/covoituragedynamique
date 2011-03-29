@@ -10,14 +10,15 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements  SettingsView{
 	
-	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> { }
+	interface MyUiBinder extends UiBinder<VerticalPanel, SettingsViewImpl> { }
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	
 	@UiField Button submitButton;
-	@UiField FlowPanel flowpanel;
+	@UiField VerticalPanel flowpanel;
 	@UiField TextBox login;
 	@UiField TextBox firstName;
 	@UiField TextBox lastName;

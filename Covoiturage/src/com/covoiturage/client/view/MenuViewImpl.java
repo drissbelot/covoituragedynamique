@@ -4,22 +4,22 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 
 
 public class MenuViewImpl extends Composite implements MenuView {
 
-	interface MyUiBinder extends UiBinder<VerticalPanel, MenuViewImpl> { }
+	interface MyUiBinder extends UiBinder<FlowPanel, MenuViewImpl> { }
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
     
     @UiField Label mapLabel;
     @UiField Label settingsLabel;
     @UiField Label historyLabel;
+    
 	
 	
 

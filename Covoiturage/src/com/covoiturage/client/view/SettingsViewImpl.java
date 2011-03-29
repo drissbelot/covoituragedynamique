@@ -6,7 +6,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -17,17 +16,14 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	
 	interface MyUiBinder extends UiBinder<VerticalPanel, SettingsViewImpl> { }
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
+	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
 	
 	@UiField Button submitButton;
 	@UiField VerticalPanel flowpanel;
-	@UiField TextBox login;
-	@UiField TextBox firstName;
-	@UiField TextBox lastName;
-	@UiField TextBox emailAdress;
-	@UiField PasswordTextBox prevpassword;
-	@UiField PasswordTextBox newpassword;
+	@UiField TextBox login,firstName,lastName,emailAdress;
+	@UiField PasswordTextBox prevpassword,newpassword;
 	@UiField ListBox langue;
-	
+	@UiField Label header,username,lastname,firstname,email,prevpasswordlab,newpasswordlab,languelab;
 	@SuppressWarnings("unused")
 	private Presenter presenter; 
 	
@@ -35,11 +31,26 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		initWidget(binder.createAndBindUi(this));
 		login.setText("login=fix");
 		
-		langue.addItem("Francais");
-		langue.addItem("Anglais");
-		langue.addItem("Néerlandais");
-		langue.addItem("Italien");
-		langue.addItem("Chinois");
+		//Internationalization
+		header.setText(constants.header()+" :");
+		username.setText(constants.username()+" :");
+		lastname.setText(constants.lastname()+" :");
+		lastName.setText(constants.lastname());
+		firstname.setText(constants.firstname()+" :");
+		firstName.setText(constants.firstname());
+		email.setText(constants.email()+" :");
+		emailAdress.setText(constants.email());
+		prevpasswordlab.setText(constants.prevpasswordlab()+" :");
+		prevpassword.setText(constants.prevpasswordlab());
+		newpasswordlab.setText(constants.newpasswordlab()+" :");
+		newpassword.setText(constants.newpasswordlab());
+		languelab.setText(constants.languelab()+" :");
+		langue.addItem(constants.fr());
+		langue.addItem(constants.en());
+		langue.addItem(constants.nl());
+		langue.addItem(constants.it());
+		langue.addItem(constants.ch());
+		submitButton.setText(constants.submit());
 	}
 	
 	public HasClickHandlers getSubmit() {

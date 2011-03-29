@@ -10,37 +10,37 @@
   		
 	
   			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
-				<g:Label styleName='{style.h2}'  text="Modify your personnal data"/>
+				<g:Label styleName='{style.h2}'  ui:field="header"/>
 				<g:HorizontalPanel width="304px">
-					<g:Label styleName='{style.label}'  text="Username :" width="8em"/>
+					<g:Label styleName='{style.label}'  ui:field="username" width="8em"/>
 					<g:TextBox ui:field="login" styleName='{style.label}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' text="FirstName :" width="8em"/>
-					<g:TextBox ui:field="firstName" text="Firstname" styleName='{style.textbox}'/>
+					<g:Label styleName='{style.label}' ui:field="firstname" width="8em"/>
+					<g:TextBox ui:field="firstName"  styleName='{style.textbox}'/>
 				</g:HorizontalPanel>	
 				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' text="LastName :" width="8em"/>
-					<g:TextBox ui:field="lastName" text="Lastname" styleName='{style.textbox}'/>
+					<g:Label styleName='{style.label}' ui:field="lastname" width="8em"/>
+					<g:TextBox ui:field="lastName"  styleName='{style.textbox}'/>
 				</g:HorizontalPanel>	
 				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' text="Email :" width="8em"/>
-					<g:TextBox ui:field="emailAdress" text="EmailAdress" styleName='{style.textbox}'/>
+					<g:Label styleName='{style.label}' ui:field="email" width="8em"/>
+					<g:TextBox ui:field="emailAdress"  styleName='{style.textbox}'/>
 				</g:HorizontalPanel>	
 				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' text="Previous Password :" width="8em"/>
-					<g:PasswordTextBox ui:field="prevpassword" text="Password" styleName='{style.textbox}'/>
+					<g:Label styleName='{style.label}' ui:field="prevpasswordlab" width="8em"/>
+					<g:PasswordTextBox ui:field="prevpassword"  styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' text="New Password :" width="8em"/>
-					<g:PasswordTextBox ui:field="newpassword" text="Password" styleName='{style.textbox}'/>
+					<g:Label styleName='{style.label}' ui:field="newpasswordlab" width="8em"/>
+					<g:PasswordTextBox ui:field="newpassword" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' text="Langue : "/>
+				<g:Label styleName='{style.label}' ui:field="languelab"/>
 				<g:ListBox ui:field="langue"  />
 				</g:HorizontalPanel>
 				<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
-					<g:Button ui:field="submitButton" styleName='{style.button}' text="Register"/>
+					<g:Button ui:field="submitButton" styleName='{style.button}'/>
 				</g:HorizontalPanel>
 		
 	</g:VerticalPanel>

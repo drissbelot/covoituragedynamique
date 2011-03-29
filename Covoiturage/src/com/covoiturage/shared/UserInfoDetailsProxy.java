@@ -31,6 +31,9 @@ public interface UserInfoDetailsProxy extends EntityProxy{
 	public String getUser();
 	public void setUser(String user);
 	public String getId();
+	public String getLanguage();
+
+	public void setLanguage(String language);
 
 	
 }

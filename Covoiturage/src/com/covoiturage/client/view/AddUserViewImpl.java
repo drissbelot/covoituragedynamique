@@ -27,17 +27,17 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	@UiField PasswordTextBox password;
 	@UiField SuggestBox vehicleMake;
 	@UiField SuggestBox vehicleModel;
-	@UiField ListBox langue;
+	@UiField ListBox language;
 
 	public AddUserViewImpl() {
 		
 		initWidget(binder.createAndBindUi(this)); 
 		
-		langue.addItem("Francais");
-		langue.addItem("Anglais");
-		langue.addItem("Néerlandais");
-		langue.addItem("Italien");
-		langue.addItem("Chinois");
+		language.addItem("Francais");
+		language.addItem("Anglais");
+		language.addItem("Néerlandais");
+		language.addItem("Italien");
+		language.addItem("Chinois");
 	}
 	
 	
@@ -84,5 +84,12 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	public SuggestBox getModelSuggestTextBox() {
 
 		return vehicleModel;
+	}
+
+
+	@Override
+	public ListBox getLanguage() {
+
+		return language;
 	}
 }

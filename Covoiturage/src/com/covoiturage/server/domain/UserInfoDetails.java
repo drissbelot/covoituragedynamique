@@ -130,7 +130,7 @@ public class UserInfoDetails {
 	
 	public UserInfoDetails(String makeOfvehicle, String modelOfvehicle,
 			String countOfPlaces, int rating, int countOfJourneys,
-			String firstName, String lastName) {
+			String firstName, String lastName, String language) {
 		super();
 		this.makeOfvehicle = makeOfvehicle;
 		this.modelOfvehicle = modelOfvehicle;
@@ -139,6 +139,7 @@ public class UserInfoDetails {
 		this.countOfJourneys = countOfJourneys;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.language=language;
 	}
 
 
@@ -173,8 +174,17 @@ public class UserInfoDetails {
 	private String firstName;
 	private String lastName;
 	private String user;
+	private String language;
 
 
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
 	public String getUser() {
 		return user;

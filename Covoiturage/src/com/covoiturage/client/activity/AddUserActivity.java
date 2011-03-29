@@ -130,6 +130,7 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 			newDriver.setLastName(addUserView.getLastName());
 			newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
 			newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
+			newDriver.setLanguage(addUserView.getLanguage().getItemText(addUserView.getLanguage().getSelectedIndex()));
 
 			Request<Void> createReqDriver = requestDriver.persist().using(newDriver);
 

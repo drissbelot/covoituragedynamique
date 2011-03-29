@@ -6,9 +6,9 @@
 
 
   	<g:FlowPanel  styleName='{style.menucote}' width="98%" height="98%">
-  		<g:Label ui:field='mapLabel' text="Map" styleName='{style.buttontitre}' />
-  		<g:Label ui:field='settingsLabel' text="Settings" styleName='{style.buttontitre}'/>
-  		<g:Label ui:field='historyLabel' text="History" styleName='{style.buttontitre}' />
+  		<g:Label ui:field='mapLabel' styleName='{style.buttontitre}' />
+  		<g:Label ui:field='settingsLabel' styleName='{style.buttontitre}'/>
+  		<g:Label ui:field='historyLabel' styleName='{style.buttontitre}' />
   	</g:FlowPanel>
 
   	</ui:UiBinder>

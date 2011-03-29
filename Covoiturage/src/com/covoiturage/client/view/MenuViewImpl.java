@@ -15,6 +15,7 @@ public class MenuViewImpl extends Composite implements MenuView {
 
 	interface MyUiBinder extends UiBinder<FlowPanel, MenuViewImpl> { }
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
+    private MenuViewConstants constants=(MenuViewConstants)GWT.create(MenuViewConstants.class);
     
     @UiField Label mapLabel;
     @UiField Label settingsLabel;
@@ -26,7 +27,12 @@ public class MenuViewImpl extends Composite implements MenuView {
 	
 	public MenuViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
-
+		
+		// internationalisation
+		mapLabel.setText(constants.maplabel());
+		settingsLabel.setText(constants.settings());
+		historyLabel.setText(constants.history());
+		
 	}
 
 	private Presenter presenter;

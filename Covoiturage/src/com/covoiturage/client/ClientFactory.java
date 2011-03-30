@@ -1,5 +1,6 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.SettingsView;
@@ -23,4 +24,5 @@ public interface ClientFactory {
 	SettingsView getSettingsView();
 	MenuView getMenuView();
 	HeaderView getHeaderView();
+	FooterView getFooterView();
 }

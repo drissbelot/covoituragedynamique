@@ -45,7 +45,7 @@
   				</g:VerticalPanel>
   			</g:HorizontalPanel>
   		</g:HorizontalPanel>
-
+		<g:Anchor ui:field="anchor"/>
   		<g:HorizontalPanel ui:field="directionsPanel"/>
   
   	

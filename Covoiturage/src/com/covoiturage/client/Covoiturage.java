@@ -22,10 +22,11 @@ public class Covoiturage implements EntryPoint {
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
 	private final DockLayoutPanel layoutPanel = new DockLayoutPanel(Unit.PCT);
 	private final ScrollPanel mainPanel = new ScrollPanel();
-
+	private final ScrollPanel FooterPanel = new ScrollPanel();
 	private final ScrollPanel horizMasterPanel = new ScrollPanel();
 	private final ScrollPanel vertMasterPanel = new ScrollPanel();
 	private final ScrollPanel asidePanel = new ScrollPanel();
+	
 
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
 		@Override
@@ -87,7 +88,20 @@ public class Covoiturage implements EntryPoint {
 
 		}
 	};
+	AcceptsOneWidget FooterDisplay = new AcceptsOneWidget() {
+		@Override
+		public void setWidget(IsWidget activityWidget) {
+			Widget widget = Widget.asWidgetOrNull(activityWidget);
+			FooterPanel.setVisible(widget != null);
+			if (FooterPanel != null)
+				layoutPanel.remove(FooterPanel);
+			layoutPanel.add(FooterPanel);
+			FooterPanel.setWidget(widget);
 
+		}
+	};
+	
+	
 	@Override
 	public void onModuleLoad() {
 		layoutPanel.setSize("100%", "100%");

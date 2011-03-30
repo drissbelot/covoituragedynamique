@@ -8,6 +8,7 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -30,21 +31,18 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField FlowPanel flowpanel;
 	@UiField(provided=true) MapWidget mapWidget;
 	@UiField Button sendAddress,saveJourney;
-	@UiField SuggestBox originAddress;
-	@UiField SuggestBox destinationAddress;
+	@UiField SuggestBox originAddress,destinationAddress;
 	@UiField HorizontalPanel directionsPanel;
 	@UiField DatePicker dateOfJourney;
 	@UiField Label to,from,distmax; 
-
 	@UiField DynamicForm departureForm;
 	TimeItem departureStartTimeItem;
 	TimeItem departureEndTimeItem;
 	TimeItem arrivalTimeItem;
-	@UiField RadioButton driverRadioButton;
-	@UiField RadioButton passengerRadioButton;
+	@UiField RadioButton driverRadioButton,passengerRadioButton;
 	@UiField TextBox distanceMax;
-
-
+	@UiField Anchor anchor;
+	
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 	private MapViewConstants constants=(MapViewConstants)GWT.create(MapViewConstants.class);
@@ -61,7 +59,7 @@ public class MapViewImpl extends Composite implements MapView {
 	    
 	    initWidget(binder.createAndBindUi(this));
 	    
-	    // internationalisation
+	    // internationalization
 	    to.setText(constants.to());
 	    from.setText(constants.from());
 	    sendAddress.setText(constants.gettravelway());
@@ -77,7 +75,8 @@ public class MapViewImpl extends Composite implements MapView {
 		arrivalTimeItem=new TimeItem();
 		arrivalTimeItem.setTitle(constants.arrivaltime());
 		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
-		
+		anchor.setHref(GWT.getHostPageBaseURL()+"?locale=fr");
+		anchor.setText("french");
 	}
 
 

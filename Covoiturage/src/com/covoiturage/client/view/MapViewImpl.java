@@ -41,7 +41,6 @@ public class MapViewImpl extends Composite implements MapView {
 	TimeItem arrivalTimeItem;
 	@UiField RadioButton driverRadioButton,passengerRadioButton;
 	@UiField TextBox distanceMax;
-	@UiField Anchor anchor;
 	
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -75,8 +74,6 @@ public class MapViewImpl extends Composite implements MapView {
 		arrivalTimeItem=new TimeItem();
 		arrivalTimeItem.setTitle(constants.arrivaltime());
 		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
-		anchor.setHref(GWT.getHostPageBaseURL()+"?locale=fr");
-		anchor.setText("french");
 	}
 
 

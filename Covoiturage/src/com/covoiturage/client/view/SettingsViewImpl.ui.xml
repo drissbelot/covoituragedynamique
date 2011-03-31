@@ -8,12 +8,12 @@
 		
 
   		
-	
+<g:FlowPanel>	
   			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
 				<g:Label styleName='{style.h2}'  ui:field="header"/>
 				<g:HorizontalPanel width="304px">
 					<g:Label styleName='{style.label}'  ui:field="username" width="8em"/>
-					<g:TextBox ui:field="login" styleName='{style.label}'/>
+					<g:TextBox ui:field="login" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
 					<g:Label styleName='{style.label}' ui:field="firstname" width="8em"/>
@@ -36,7 +36,7 @@
 					<g:PasswordTextBox ui:field="newpassword" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' ui:field="languelab"/>
+				<g:Label styleName='{style.label}' ui:field="languelab" width="8em"/>
 				<g:ListBox ui:field="langue"  />
 				</g:HorizontalPanel>
 				<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
@@ -44,5 +44,9 @@
 				</g:HorizontalPanel>
 		
 	</g:VerticalPanel>
+	
+	
+</g:FlowPanel>	
+	
   	
 </ui:UiBinder>

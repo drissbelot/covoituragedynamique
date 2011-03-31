@@ -7,7 +7,13 @@
 			/*border: solid orange 2px;*/
     	}
 		
+		.anchor{
+			font: 120% normal;
+			display:block;
+			color: RGB(59,89,152);
+			margin : 0% 5px 0em 0em;
 		
+		}
 		
 		
 		.button {
@@ -55,7 +61,7 @@
     	}
     	.panelfullborder{
     		border: solid RGB(109,134,183) 3px;
-    		padding: 1.3em;
+    		/*padding: 1.3em;*/
     	}
     	.centerpanel { 
     		border: solid RGB(109,134,183) 3px;
@@ -97,7 +103,13 @@
     	}
     	.containerphtoto{
     		/*border: solid RGB(109,134,183) 3px;*/
-    		margin: 10% 26%;
+    		margin: 10% 22%;
+    		padding : 0em 1em
+    	}
+    	.photo{
+    		width:175px;
+    		height:175px;
+    		margin :0em 1em 0em 1em
     	}
     	.menutitre{
     		background-color: RGB(59,89,152);

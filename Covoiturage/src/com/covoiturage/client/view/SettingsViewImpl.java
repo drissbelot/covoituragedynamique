@@ -4,8 +4,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -14,7 +16,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements  SettingsView{
 	
-	interface MyUiBinder extends UiBinder<VerticalPanel, SettingsViewImpl> { }
+	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> { }
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
 	
@@ -51,6 +53,7 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		langue.addItem(constants.it());
 		langue.addItem(constants.ch());
 		submitButton.setText(constants.submit());
+		
 	}
 	
 	public HasClickHandlers getSubmit() {

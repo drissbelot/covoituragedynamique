@@ -7,5 +7,8 @@ public interface LoginViewConstants extends Constants {
 	String login();
 	String username();
 	String password();
+	String submit();
+	String newuser();
+	String titre();
 
 	}

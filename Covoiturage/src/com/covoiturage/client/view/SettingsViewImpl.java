@@ -4,7 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -22,16 +21,16 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	
 	@UiField Button submitButton;
 	@UiField VerticalPanel flowpanel;
-	@UiField TextBox login,firstName,lastName,emailAdress;
+	@UiField TextBox firstName,lastName,emailAdress;
 	@UiField PasswordTextBox prevpassword,newpassword;
 	@UiField ListBox langue;
-	@UiField Label header,username,lastname,firstname,email,prevpasswordlab,newpasswordlab,languelab;
+	@UiField Label header,usernamefix,username,lastname,firstname,email,prevpasswordlab,newpasswordlab,languelab;
 	@SuppressWarnings("unused")
 	private Presenter presenter; 
 	
 	public SettingsViewImpl(){
 		initWidget(binder.createAndBindUi(this));
-		login.setText("login=fix");
+		usernamefix.setText("login=fix");
 		
 		//Internationalization
 		header.setText(constants.header()+" :");
@@ -43,9 +42,9 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		email.setText(constants.email()+" :");
 		emailAdress.setText(constants.email());
 		prevpasswordlab.setText(constants.prevpasswordlab()+" :");
-		prevpassword.setText(constants.prevpasswordlab());
+		prevpassword.setText(constants.password());
 		newpasswordlab.setText(constants.newpasswordlab()+" :");
-		newpassword.setText(constants.newpasswordlab());
+		newpassword.setText(constants.password());
 		languelab.setText(constants.languelab()+" :");
 		langue.addItem(constants.fr());
 		langue.addItem(constants.en());

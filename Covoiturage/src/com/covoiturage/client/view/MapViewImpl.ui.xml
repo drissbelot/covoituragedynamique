@@ -7,16 +7,14 @@
 	
 	<ui:style src="facebook.css"/>
 		
+		
+  	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 
-  	
-  		<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
-  		
-  	
   		
   		<g:HorizontalPanel  horizontalAlignment="ALIGN_LEFT">
   			<g:HorizontalPanel styleName='{style.cartecontainer}'>
-  				<m:MapWidget ui:field='mapWidget' width="400px" height="400px"/> 
-   				<g:VerticalPanel >
+  				<m:MapWidget ui:field='mapWidget' width="450px" height="450px"/> 
+   				<g:VerticalPanel styleName='{style.horairecontainer}'>
   					<g:HorizontalPanel>
   						<g:Label styleName='{style.label}' ui:field="from" width="3em"/>
 						<g:SuggestBox ui:field="originAddress" text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
@@ -27,10 +25,11 @@
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   						<d:DatePicker ui:field="dateOfJourney" styleName='{style.datepicker}'/>
-
+  					</g:HorizontalPanel>
+  					<g:HorizontalPanel styleName='{style.paddingdown}'>
   						<s:DynamicForm ui:field="departureForm"/>
   					</g:HorizontalPanel>
-  					<g:HorizontalPanel>
+  					<g:HorizontalPanel styleName='{style.paddingdown}'>
   						<g:RadioButton  ui:field="driverRadioButton" styleName='{style.radiobutton}' ui:name="typeOfUser"/>
   						<g:RadioButton ui:field="passengerRadioButton"  styleName='{style.radiobutton}' ui:name="typeOfUser"/>
   					</g:HorizontalPanel>
@@ -49,6 +48,6 @@
   
   	
   	
-  		</g:FlowPanel>
+  	</g:FlowPanel>
   	
   	</ui:UiBinder>

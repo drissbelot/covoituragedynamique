@@ -37,8 +37,10 @@ public class LoginViewImpl extends Composite implements LoginView {
 		initWidget(binder.createAndBindUi(this)); 
 		titre.setText(constants.titre());
 		log.setText(constants.login());
-		name.setText(constants.username());
-		pass.setText(constants.password());
+		name.setText(constants.username()+" :");
+		nameField.setText(constants.username());
+		pass.setText(constants.password()+" :");
+		passField.setText(constants.password());
 		addUserButton.setText(constants.newuser());
 		sendButton.setText(constants.submit());
 		

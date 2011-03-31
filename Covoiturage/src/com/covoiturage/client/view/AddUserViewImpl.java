@@ -4,7 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -34,7 +33,7 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 		initWidget(binder.createAndBindUi(this)); 
 		
 		header.setText(constants.header()+" :");
-		login.setText(constants.header());
+		login.setText(constants.username());
 		username.setText(constants.username()+" :");
 		lastname.setText(constants.lastname()+" :");
 		lastName.setText(constants.lastname());

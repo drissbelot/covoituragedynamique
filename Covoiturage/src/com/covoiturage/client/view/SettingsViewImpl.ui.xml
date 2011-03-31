@@ -13,7 +13,7 @@
 				<g:Label styleName='{style.h2}'  ui:field="header"/>
 				<g:HorizontalPanel width="304px">
 					<g:Label styleName='{style.label}'  ui:field="username" width="8em"/>
-					<g:TextBox ui:field="login" styleName='{style.textbox}'/>
+					<g:Label ui:field="usernamefix" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
 					<g:Label styleName='{style.label}' ui:field="firstname" width="8em"/>

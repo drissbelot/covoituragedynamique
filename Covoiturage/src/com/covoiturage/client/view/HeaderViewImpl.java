@@ -23,15 +23,16 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 	@UiField Label currentUser,messages;
 	@UiField com.google.gwt.user.client.ui.Label titre;
 	@UiField HorizontalPanel menu;
+	@SuppressWarnings("unused")
 	private Presenter presenter;
 	
 	
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
-		//messages.setTitle(constants.message());
-		titre.setTitle(constants.titre());
+		messages.setTitle(constants.message());
+		titre.setText(constants.titre());
 		logout.setText(constants.logout());
-		//currentUser.setTitle(constants.username());
+		currentUser.setTitle(constants.username());
 	}
 
 	public void setPresenter(Presenter presenter) {

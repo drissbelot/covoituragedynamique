@@ -18,6 +18,7 @@ public interface SettingsViewConstants extends Constants {
 	String nl();
 	String languelab();
 	String submit();
+	String password();
 	
 	
 	}

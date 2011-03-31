@@ -8,7 +8,6 @@ import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -59,8 +58,9 @@ public class MapViewImpl extends Composite implements MapView {
 	    initWidget(binder.createAndBindUi(this));
 	    
 	    // internationalization
-	    to.setText(constants.to());
-	    from.setText(constants.from());
+	    to.setText(constants.to()+" :");
+	    from.setText(constants.from()+" :");
+	    distmax.setText(constants.distmax());
 	    sendAddress.setText(constants.gettravelway());
 	    saveJourney.setText(constants.savejourney());
 

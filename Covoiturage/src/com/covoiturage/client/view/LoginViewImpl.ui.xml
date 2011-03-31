@@ -17,11 +17,11 @@
 			<g:Label ui:field="log" styleName='{style.h2}' />
 			<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' ui:field="name"/>
-				<g:TextBox ui:field="nameField" text="UserName" styleName='{style.textbox}'/>
+				<g:TextBox ui:field="nameField"  styleName='{style.textbox}'/>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' ui:field="pass"/>
-				<g:PasswordTextBox ui:field="passField" text="Password" styleName='{style.textbox}'/>
+				<g:PasswordTextBox ui:field="passField" styleName='{style.textbox}'/>
 			</g:HorizontalPanel>
 			<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 				<g:Button ui:field="sendButton"  styleName='{style.button}'/>

@@ -36,5 +36,12 @@
      <when-property-is name="user.agent" value="ie6" />
      </any>
   </replace-with>  
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  
 
+  <extend-property name="locale" values="nl"/>
+    <extend-property name="locale" values="fr"/>
+      <extend-property name="locale" values="it"/>
+        <extend-property name="locale" values="ch"/>
+          
 </module>

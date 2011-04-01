@@ -19,8 +19,14 @@ public class FooterActivity extends AbstractActivity implements FooterView.Prese
 	}
 	
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
+		bind();
 		FooterView.setPresenter(this);
         panel.setWidget(FooterView.asWidget());
+		
+	}
+
+	private void bind() {
+		// TODO Auto-generated method stub
 		
 	}
 

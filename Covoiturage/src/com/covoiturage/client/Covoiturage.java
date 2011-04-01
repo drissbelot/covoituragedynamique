@@ -88,14 +88,18 @@ public class Covoiturage implements EntryPoint {
 
 		}
 	};
-	AcceptsOneWidget FooterDisplay = new AcceptsOneWidget() {
+	AcceptsOneWidget footerDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			FooterPanel.setVisible(widget != null);
-			if (FooterPanel != null)
-				layoutPanel.remove(FooterPanel);
-			layoutPanel.add(FooterPanel);
+			SimplePanel temp = new SimplePanel();
+			if (mainPanel != null) {
+				temp = mainPanel;
+				layoutPanel.remove(mainPanel);
+			}
+			layoutPanel.addSouth(FooterPanel,10);
+			layoutPanel.add(temp);
 			FooterPanel.setWidget(widget);
 
 		}
@@ -118,6 +122,7 @@ public class Covoiturage implements EntryPoint {
 				clientFactory);
 		ActivityMapper asideActivityMapper = new AsideAppActivityMapper(
 				clientFactory);
+		ActivityMapper footerActivityMapper=new FooterAppActivityMapper(clientFactory);
 
 
 		ActivityManager horizMasterActivityManager = new ActivityManager(
@@ -128,12 +133,15 @@ public class Covoiturage implements EntryPoint {
 				mainActivityMapper, eventBus);
 		ActivityManager asideActivityManager = new ActivityManager(
 				asideActivityMapper, eventBus);
+		ActivityManager footerActivityManager=new ActivityManager(footerActivityMapper, eventBus);
 
 
 		horizMasterActivityManager.setDisplay(horizMasterDisplay);
 		vertMasterActivityManager.setDisplay(vertMasterDisplay);
 		asideActivityManager.setDisplay(asideDisplay);
+		footerActivityManager.setDisplay(footerDisplay);
 		mainActivityManager.setDisplay(mainDisplay);
+		
 
 		AppPlaceHistoryMapper historyMapper = GWT
 				.create(AppPlaceHistoryMapper.class);

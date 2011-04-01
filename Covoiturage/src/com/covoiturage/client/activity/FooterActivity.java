@@ -3,6 +3,7 @@ package com.covoiturage.client.activity;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.view.FooterView;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -16,6 +17,7 @@ public class FooterActivity extends AbstractActivity implements FooterView.Prese
 	public FooterActivity(ClientFactory clientFactory) {
 		this.FooterView = clientFactory.getFooterView();
 		this.placeController = clientFactory.getPlaceController();
+
 	}
 	
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
@@ -26,7 +28,7 @@ public class FooterActivity extends AbstractActivity implements FooterView.Prese
 	}
 
 	private void bind() {
-		// TODO Auto-generated method stub
+
 		
 	}
 

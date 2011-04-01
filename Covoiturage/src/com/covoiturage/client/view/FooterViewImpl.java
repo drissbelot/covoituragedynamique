@@ -2,6 +2,7 @@ package com.covoiturage.client.view;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
@@ -36,7 +37,7 @@ public class FooterViewImpl extends Composite implements FooterView{
 		imageit.setSize("30px","25px");
 		imagech.setUrl("http://paysetleurvilledumonde.p.a.pic.centerblog.net/njhnr4lz.png");
 		imagech.setSize("30px","25px");
-		
+
 		anchorfr.setHref(GWT.getHostPageBaseURL()+"?locale=fr");
 		anchorfr.getElement().appendChild(imagefr.getElement());
 		anchornl.setHref(GWT.getHostPageBaseURL()+"?locale=nl");

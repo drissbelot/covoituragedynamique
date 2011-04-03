@@ -28,6 +28,6 @@ public interface SimpleTravelRequest extends RequestContext{
 
 
 	Request<List<SimpleTravelProxy>> getSimpleTravels(List<String> steps,
-			float distanceMax);
+			Date departureStart, Date departureEnd, Date arrival, float distanceMax);
 
 }

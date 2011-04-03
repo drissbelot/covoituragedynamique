@@ -17,7 +17,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.datepicker.client.DatePicker;
+
+import com.smartgwt.client.widgets.DateChooser;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.TimeItem;
 
@@ -33,9 +34,10 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField Button sendAddress,saveJourney;
 	@UiField SuggestBox originAddress,destinationAddress;
 	@UiField HorizontalPanel directionsPanel;
-	@UiField DatePicker dateOfJourney;
+
 	@UiField Label to,from,distmax; 
 	@UiField DynamicForm departureForm;
+	@UiField DateChooser dateOfJourney;
 	TimeItem departureStartTimeItem;
 	TimeItem departureEndTimeItem;
 	TimeItem arrivalTimeItem;
@@ -70,11 +72,16 @@ public class MapViewImpl extends Composite implements MapView {
 
 		departureStartTimeItem=new TimeItem();
 		departureStartTimeItem.setTitle(constants.departuretime());
+		departureStartTimeItem.setRequired(true);
 		departureEndTimeItem=new TimeItem();
 		departureEndTimeItem.setTitle(constants.and());
+		departureEndTimeItem.setRequired(true);
 		arrivalTimeItem=new TimeItem();
 		arrivalTimeItem.setTitle(constants.arrivaltime());
+		arrivalTimeItem.setRequired(true);
 		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
+		driverRadioButton.setValue(true);
+		
 	}
 
 
@@ -87,7 +94,7 @@ public class MapViewImpl extends Composite implements MapView {
 		return driverRadioButton;
 	}
 
-	public DatePicker getDateOfJourney() {
+	public DateChooser getDateOfJourney() {
 		return dateOfJourney;
 	}
 

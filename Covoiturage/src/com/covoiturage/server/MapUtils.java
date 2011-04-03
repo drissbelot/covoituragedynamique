@@ -1,6 +1,8 @@
 package com.covoiturage.server;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,7 +17,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 
 public class MapUtils {
 
-	public static List<Journey> bufferRouteJourney(List<String> coordinates, float distance){
+	public static List<Journey> bufferRouteJourney(List<String> coordinates, float distance, Date departureStart, Date departureEnd, Date arrival){
 		Coordinate[] coordArray=new Coordinate[coordinates.size()];
 		int i=0;
 		for (String singleCoord : coordinates) {
@@ -25,10 +27,10 @@ public class MapUtils {
 		}
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
 
-		return journeyNearBuffer(polyline, distance);
+		return journeyNearBuffer(polyline, distance, departureStart,  departureEnd,  arrival);
 	}
 
-	public static List<Journey> journeyNearBuffer(Geometry buffer, float distance){
+	public static List<Journey> journeyNearBuffer(Geometry buffer, float distance, Date departureStart, Date departureEnd, Date arrival){
 		EntityManager em = EMF.get().createEntityManager();
 		em.getTransaction().begin();
 		List<Journey> journeys= new ArrayList<Journey>();
@@ -52,10 +54,11 @@ public class MapUtils {
 				Geometry geom=new GeometryFactory().createLineString(coordArray);
 				
 				if(geom.buffer(distance/111).contains(buffer)){
+					if(journey.getArrival().before(arrival)&& journey.getDepartureEnd().after(departureStart)){
 					journey.getSteps();
 					journey.getPassengers();
 					journeys.add(journey);
-					
+					}
 				}
 			}
 			em.getTransaction().commit();
@@ -72,7 +75,7 @@ public class MapUtils {
 	}
 	
 	
-	public static List<SimpleTravel> bufferRoute(List<String> coordinates, float distance){
+	public static List<SimpleTravel> bufferRoute(List<String> coordinates, Date departureStart, Date departureEnd, Date arrival, float distance){
 		Coordinate[] coordArray=new Coordinate[coordinates.size()];
 		int i=0;
 		for (String singleCoord : coordinates) {
@@ -81,10 +84,11 @@ public class MapUtils {
 			i++;
 		}
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
-		return simpleTravelsInBuffer(polyline.buffer(distance/111));
+		return simpleTravelsInBuffer(polyline.buffer(distance/111),departureStart,  departureEnd,  arrival);
 	}
 	
-	public static List<SimpleTravel> simpleTravelsInBuffer(Geometry buffer){
+	public static List<SimpleTravel> simpleTravelsInBuffer(Geometry buffer, Date departureStart, Date departureEnd, Date arrival){
+		
 		EntityManager em = EMF.get().createEntityManager();
 		List<SimpleTravel> simpleTravels= new ArrayList<SimpleTravel>();
 		try
@@ -103,6 +107,10 @@ public class MapUtils {
 
 				}
 				if(buffer.contains(new GeometryFactory().createMultiPoint(coordArray))){
+
+
+					
+					if(travel.getArrival().before(arrival)&& travel.getDepartureStart().before(departureEnd))
 					simpleTravels.add(travel);
 					
 				}

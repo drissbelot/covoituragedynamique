@@ -6,10 +6,9 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.datepicker.client.DatePicker;
+import com.smartgwt.client.widgets.DateChooser;
 import com.smartgwt.client.widgets.form.fields.TimeItem;
 
 public interface MapView extends IsWidget{
@@ -18,7 +17,7 @@ public interface MapView extends IsWidget{
 
 	public abstract RadioButton getDriverRadioButton();
 
-	public abstract DatePicker getDateOfJourney();
+	public abstract DateChooser getDateOfJourney();
 
 	public abstract HasClickHandlers getSendAddressButton();
 

@@ -59,9 +59,9 @@ public class SimpleTravel {
 		}
 	}
 
-	public static List<SimpleTravel> getSimpleTravels(List<String> steps,
+	public static List<SimpleTravel> getSimpleTravels(List<String> steps,Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax) {
-		return MapUtils.bufferRoute(steps, distanceMax);
+		return MapUtils.bufferRoute(steps, departureStart,  departureEnd,  arrival, distanceMax);
 
 	}
 

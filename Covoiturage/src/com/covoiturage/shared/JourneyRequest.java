@@ -29,7 +29,7 @@ public interface JourneyRequest extends RequestContext{
 
 
 	Request<List<JourneyProxy>> getJourneys(List<String> steps,
-			float distanceMax);
+			Date departureStart, Date departureEnd, Date arrival, float distanceMax);
 
 
 	

@@ -45,9 +45,10 @@ public class Journey {
 	}
 
 	public static List<Journey> getJourneys(List<String> steps,
+			Date departureStart, Date departureEnd, Date arrival, 
 			float distanceMax) {
 		
-		return MapUtils.bufferRouteJourney(steps, distanceMax);
+		return MapUtils.bufferRouteJourney(steps, distanceMax, departureStart,  departureEnd, arrival);
 		
 
 	}

@@ -1,5 +1,6 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.i18n.LoginViewConstants;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;

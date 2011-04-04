@@ -154,7 +154,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getSaveJourneyButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				if(mapView.getDepartureStartTime().validate() && mapView.getArrivalTime().validate() && mapView.getDepartureEndTime().validate())
+			//	if(mapView.getDepartureStartTime().validate() && mapView.getArrivalTime().validate() && mapView.getDepartureEndTime().validate())
 					saveJourney();
 
 			}

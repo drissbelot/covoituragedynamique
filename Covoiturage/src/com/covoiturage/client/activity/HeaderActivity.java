@@ -5,11 +5,10 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.place.LoginPlace;
-import com.covoiturage.client.place.MapPlace;
-import com.covoiturage.client.place.SettingsPlace;
+
 
 import com.covoiturage.client.view.HeaderView;
-import com.covoiturage.client.view.MenuView;
+
 
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
@@ -43,7 +42,7 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				headerView.getCurrentUser().setContents(currentUser.getLogin());
+				headerView.getCurrentUser().setText(currentUser.getLogin());
 			}
 		});
 		headerView.getLogout().addClickHandler(new ClickHandler() {

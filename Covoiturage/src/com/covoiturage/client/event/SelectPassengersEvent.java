@@ -1,16 +1,16 @@
 package com.covoiturage.client.event;
 
-import java.util.Set;
+import java.util.List;
 
-import com.covoiturage.shared.SimpleTravelProxy;
+import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.google.gwt.event.shared.GwtEvent;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
+
 
 
 public class SelectPassengersEvent extends GwtEvent<SelectPassengersEventHandler> {
 	public static Type<SelectPassengersEventHandler> TYPE = new Type<SelectPassengersEventHandler>();
-	private ListGridRecord[] passengers;
-	public SelectPassengersEvent(ListGridRecord[] listGridRecords) {
+	private List<BaseModelData> passengers;
+	public SelectPassengersEvent(List<BaseModelData> listGridRecords) {
 		super();
 		this.setPassengers(listGridRecords);
 	}
@@ -24,11 +24,11 @@ public class SelectPassengersEvent extends GwtEvent<SelectPassengersEventHandler
 		handler.onSelectPassengers(this);
 	}
 
-	private void setPassengers(ListGridRecord[] listGridRecords) {
+	private void setPassengers(List<BaseModelData> listGridRecords) {
 		this.passengers = listGridRecords;
 	}
 
-	public ListGridRecord[] getPassengers() {
+	public List<BaseModelData> getPassengers() {
 		return passengers;
 	}
 

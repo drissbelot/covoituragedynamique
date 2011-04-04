@@ -1,5 +1,7 @@
 package com.covoiturage.client.view;
 
+import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.place.shared.Place;
@@ -8,8 +10,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.smartgwt.client.widgets.DateChooser;
-import com.smartgwt.client.widgets.form.fields.TimeItem;
 
 public interface MapView extends IsWidget{
 
@@ -17,7 +17,7 @@ public interface MapView extends IsWidget{
 
 	public abstract RadioButton getDriverRadioButton();
 
-	public abstract DateChooser getDateOfJourney();
+	public abstract DateField getDateOfJourney();
 
 	public abstract HasClickHandlers getSendAddressButton();
 
@@ -45,10 +45,10 @@ public interface MapView extends IsWidget{
 
 	public void setDestinationAddress(String destinationAddress) ;
 	
-	public TimeItem getDepartureStartTime();
-	public TimeItem getDepartureEndTime();
+	public TimeField getDepartureStartTime();
+	public TimeField getDepartureEndTime();
 
-	public TimeItem getArrivalTime();
+	public TimeField getArrivalTime();
 	
 	
 

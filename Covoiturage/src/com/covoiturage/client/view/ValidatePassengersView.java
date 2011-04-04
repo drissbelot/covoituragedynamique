@@ -1,12 +1,15 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+
+import com.extjs.gxt.ui.client.widget.Label;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.smartgwt.client.widgets.Label;
-import com.smartgwt.client.widgets.grid.ListGrid;
+
 
 public interface ValidatePassengersView extends IsWidget{
 
@@ -17,7 +20,7 @@ public interface ValidatePassengersView extends IsWidget{
 
 	public abstract void setPresenter(
 			ValidatePassengersActivity validatePassengersActivity);
-	public ListGrid getListGrid();
+	public Grid<BaseModelData> getListGrid();
 	public Button getSaveButton();
 	public Label getDistanceLabel();
 	public Label getDurationLabel();

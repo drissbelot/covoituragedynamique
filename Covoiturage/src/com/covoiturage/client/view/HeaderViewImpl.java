@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.HeaderViewConstants;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -8,7 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.smartgwt.client.widgets.Label;
+
 
 
 

@@ -1,7 +1,9 @@
 <!-- ViewerNvUser.ui.xml -->
 
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+
+	>
 	
 	<ui:style src="facebook.css"/>
 	
@@ -14,6 +16,9 @@
 		<g:HorizontalPanel styleName='{style.containerphtoto}'>	
 		<g:Image ui:field="image" styleName='{style.photo}'  />
 		<g:VerticalPanel styleName='{style.panelfullborder}' width="" height="" verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
+
+		
+		
 			<g:Label ui:field="log" styleName='{style.h2}' />
 			<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' ui:field="name"/>

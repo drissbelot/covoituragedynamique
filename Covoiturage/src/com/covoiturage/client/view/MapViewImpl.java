@@ -1,6 +1,9 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.MapViewConstants;
+import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapOptions;
@@ -18,9 +21,6 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 
-import com.smartgwt.client.widgets.DateChooser;
-import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.TimeItem;
 
 public class MapViewImpl extends Composite implements MapView {
 
@@ -36,11 +36,11 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField HorizontalPanel directionsPanel;
 
 	@UiField Label to,from,distmax; 
-	@UiField DynamicForm departureForm;
-	@UiField DateChooser dateOfJourney;
-	TimeItem departureStartTimeItem;
-	TimeItem departureEndTimeItem;
-	TimeItem arrivalTimeItem;
+	@UiField FormPanel departureForm;
+	@UiField DateField dateOfJourney;
+	TimeField departureStartTimeItem;
+	TimeField departureEndTimeItem;
+	TimeField arrivalTimeItem;
 	@UiField RadioButton driverRadioButton,passengerRadioButton;
 	@UiField TextBox distanceMax;
 	
@@ -70,16 +70,18 @@ public class MapViewImpl extends Composite implements MapView {
 		driverRadioButton.setText(constants.driver());
 		passengerRadioButton.setText(constants.passenger());
 
-		departureStartTimeItem=new TimeItem();
+		departureStartTimeItem=new TimeField();
 		departureStartTimeItem.setTitle(constants.departuretime());
-		departureStartTimeItem.setRequired(true);
-		departureEndTimeItem=new TimeItem();
+		departureStartTimeItem.setAllowBlank(false);
+		departureEndTimeItem=new TimeField();
 		departureEndTimeItem.setTitle(constants.and());
-		departureEndTimeItem.setRequired(true);
-		arrivalTimeItem=new TimeItem();
+		departureEndTimeItem.setAllowBlank(false);
+		arrivalTimeItem=new TimeField();
 		arrivalTimeItem.setTitle(constants.arrivaltime());
-		arrivalTimeItem.setRequired(true);
-		departureForm.setFields(departureStartTimeItem ,departureEndTimeItem,arrivalTimeItem);
+		arrivalTimeItem.setAllowBlank(false);
+		departureForm.add(departureStartTimeItem);
+		departureForm.add(departureEndTimeItem);
+		departureForm.add(arrivalTimeItem);
 		driverRadioButton.setValue(true);
 		
 	}
@@ -94,7 +96,7 @@ public class MapViewImpl extends Composite implements MapView {
 		return driverRadioButton;
 	}
 
-	public DateChooser getDateOfJourney() {
+	public DateField getDateOfJourney() {
 		return dateOfJourney;
 	}
 
@@ -151,15 +153,15 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 	
 
-	public TimeItem getDepartureStartTime() {
+	public TimeField getDepartureStartTime() {
 		return departureStartTimeItem;
 	}
 
 
-	public TimeItem getArrivalTime() {
+	public TimeField getArrivalTime() {
 		return arrivalTimeItem;
 	}
-	public TimeItem getDepartureEndTime() {
+	public TimeField getDepartureEndTime() {
 		return departureEndTimeItem;
 	}
 

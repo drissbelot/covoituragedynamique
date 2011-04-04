@@ -22,13 +22,18 @@ import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
+
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.maps.client.base.ElementProvider;
@@ -67,14 +72,8 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.smartgwt.client.widgets.calendar.events.DateChangedEvent;
-import com.smartgwt.client.widgets.calendar.events.DateChangedHandler;
-import com.smartgwt.client.widgets.events.DataChangedEvent;
-import com.smartgwt.client.widgets.events.DataChangedHandler;
-import com.smartgwt.client.widgets.events.ValueChangedEvent;
-import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
-import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
+
+
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
@@ -160,44 +159,44 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 			}
 		});
-		mapView.getDateOfJourney().addDataChangedHandler(
-				new DataChangedHandler() {
-
-					@Override
-					public void onDataChanged(DataChangedEvent event) {
-						date = mapView.getDateOfJourney().getData();
-
-
-					}
-				});
-		mapView.getDepartureStartTime().addChangedHandler(new ChangedHandler() {
+		mapView.getDateOfJourney().addListener(Events.Change, new Listener<BaseEvent>() {
 
 			@Override
-			public void onChanged(ChangedEvent event) {
-				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				departureStart.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
-				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				departureStart.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureStartTime().getValue())));
+			public void handleEvent(BaseEvent be) {
+				date = mapView.getDateOfJourney().getValue();
+				
+				
 			}
 		});
-		mapView.getDepartureEndTime().addChangedHandler(new ChangedHandler() {
+
+		mapView.getDepartureStartTime().addListener(Events.Change, new Listener<BaseEvent>()  {
 
 			@Override
-			public void onChanged(ChangedEvent event) {
+			public void handleEvent(BaseEvent be) {
 				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				departureEnd.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureEndTime().getValue())));
+				departureStart.setHours(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureStartTime().getDateValue())));
 				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				departureEnd.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getDepartureEndTime().getValue())));
+				departureStart.setMinutes(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureStartTime().getDateValue())));
 			}
 		});
-		mapView.getArrivalTime().addChangedHandler(new ChangedHandler() {
+		mapView.getDepartureEndTime().addListener(Events.Change, new Listener<BaseEvent>() {
 
 			@Override
-			public void onChanged(ChangedEvent event) {
+			public void handleEvent(BaseEvent be) {
 				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				arrival.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getValue())));
+				departureEnd.setHours(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureEndTime().getDateValue())));
 				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				arrival.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getValue())));
+				departureEnd.setMinutes(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureEndTime().getDateValue())));
+			}
+		});
+		mapView.getArrivalTime().addListener(Events.Change, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
+				arrival.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getDateValue())));
+				dateFormatterTime = DateTimeFormat.getFormat("mm");
+				arrival.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getDateValue())));
 			}
 		});
 
@@ -241,15 +240,15 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				waypointsCoords = new ArrayList<String>();
 				HasDirectionsWaypoint point = new DirectionsWaypoint();
 				HasDirectionsWaypoint point1 = new DirectionsWaypoint();
-				for (ListGridRecord simpletravel : selectPassengersEvent
+				for (BaseModelData simpletravel : selectPassengersEvent
 						.getPassengers()) {
 
-					String origin = simpletravel.getAttribute("origin");
-					String destination = simpletravel.getAttribute("destination");
+					String origin = simpletravel.get("origin");
+					String destination = simpletravel.get("destination");
 					point.setLocation(origin);
 					waypoints.add(point);
-					waypointsCoords.add(simpletravel.getAttribute("originCoords"));
-					waypointsCoords.add(simpletravel.getAttribute("destinationCoords"));
+					waypointsCoords.add(simpletravel.get("originCoords").toString());
+					waypointsCoords.add(simpletravel.get("destinationCoords").toString());
 					point1.setLocation(destination);
 					waypoints.add(point1);
 
@@ -514,6 +513,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										&& resultSimpleTravel.size() != 0) {
 									List<String> resultPassengers = new ArrayList<String>();
 									for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
+										//TODO éliminer les détours trop longs
 										resultPassengers.add(simpletravel.getPassenger());
 									}
 

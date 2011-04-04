@@ -11,6 +11,7 @@ import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
+
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -18,6 +19,15 @@ import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.ModelType;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -29,9 +39,7 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
-import com.smartgwt.client.widgets.grid.events.SelectionChangedHandler;
-import com.smartgwt.client.widgets.grid.events.SelectionEvent;
+
 
 public class ValidatePassengersActivity extends AbstractActivity implements
 		ValidatePassengersView.Presenter {
@@ -87,24 +95,28 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 									public void onSuccess(
 											List<UserInfoDetailsProxy> resultPassengers) {
 										passengersInfo = resultPassengers;
-										List<ListGridRecord> listRecords = new ArrayList<ListGridRecord>();
+
+
+										
+										
+										List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 										
 										for (int i = 0; i<passengersTravels.size(); i++) {
 									
-											ListGridRecord rec = new ListGridRecord();
-											rec.setAttribute("login", passengersTravels.get(i).getPassenger());
-											rec.setAttribute("origin", passengersTravels.get(i).getOriginAddress());
-											rec.setAttribute("destination", passengersTravels.get(i).getDestinationAddress());
-											rec.setAttribute("firstName",passengersInfo.get(i).getFirstName() );
-											rec.setAttribute("lastName",passengersInfo.get(i).getLastName() );
-											rec.setAttribute("originCoords", passengersTravels.get(i).getSteps().get(0));
-											rec.setAttribute("destinationCoords", passengersTravels.get(i).getSteps().get(1));
-											rec.setAttribute("id", passengersTravels.get(i).getId());
+											BaseModelData rec = new BaseModelData();
+											rec.set("login", passengersTravels.get(i).getPassenger());
+											rec.set("origin", passengersTravels.get(i).getOriginAddress());
+											rec.set("destination", passengersTravels.get(i).getDestinationAddress());
+											rec.set("firstName",passengersInfo.get(i).getFirstName() );
+											rec.set("lastName",passengersInfo.get(i).getLastName() );
+											rec.set("originCoords", passengersTravels.get(i).getSteps().get(0));
+											rec.set("destinationCoords", passengersTravels.get(i).getSteps().get(1));
+											rec.set("id", passengersTravels.get(i).getId());
 											listRecords.add(rec );
 
 										}
-										ListGridRecord[] lr = new ListGridRecord[listRecords.size()];
-										validatePassengersView.getListGrid().setData(listRecords.toArray(lr));
+										
+										validatePassengersView.getListGrid().getStore().add(listRecords); 
 									}
 								});
 
@@ -134,23 +146,23 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 									public void onSuccess(
 											List<UserInfoDetailsProxy> resultPassengers) {
 										driversInfo = resultPassengers;
-										List<ListGridRecord> listRecords = new ArrayList<ListGridRecord>();
+										List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 										
 										for (int i = 0; i<journeys.size(); i++) {
 									
-											ListGridRecord rec = new ListGridRecord();
-											rec.setAttribute("login", journeys.get(i).getDriver());
-											rec.setAttribute("origin", journeys.get(i).getOriginAddress());
-											rec.setAttribute("destination", journeys.get(i).getDestinationAddress());
-											rec.setAttribute("firstName",driversInfo.get(i).getFirstName() );
-											rec.setAttribute("lastName",driversInfo.get(i).getLastName() );
-											rec.setAttribute("originCoords", journeys.get(i).getSteps().get(0));
-											rec.setAttribute("destinationCoords", journeys.get(i).getSteps().get(1));
+											BaseModelData rec = new BaseModelData();
+											rec.set("login", journeys.get(i).getDriver());
+											rec.set("origin", journeys.get(i).getOriginAddress());
+											rec.set("destination", journeys.get(i).getDestinationAddress());
+											rec.set("firstName",driversInfo.get(i).getFirstName() );
+											rec.set("lastName",driversInfo.get(i).getLastName() );
+											rec.set("originCoords", journeys.get(i).getSteps().get(0));
+											rec.set("destinationCoords", journeys.get(i).getSteps().get(1));
 											listRecords.add(rec );
 
 										}
-										ListGridRecord[] lr = new ListGridRecord[listRecords.size()];
-										validatePassengersView.getListGrid().setData(listRecords.toArray(lr));
+										
+										validatePassengersView.getListGrid().getStore().add(listRecords);
 									}
 								});
 
@@ -159,14 +171,13 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 				});
 		
 		
-		validatePassengersView.getListGrid().addSelectionChangedHandler(
-				new SelectionChangedHandler() {
+		validatePassengersView.getListGrid().addListener(Events.SelectionChange,new Listener<BaseEvent>(){
 					
 					@Override
-					public void onSelectionChanged(SelectionEvent event) {
+					public void handleEvent(BaseEvent be){
 
 						eventBus.fireEvent(new SelectPassengersEvent(
-								validatePassengersView.getListGrid().getSelection()));
+								validatePassengersView.getListGrid().getSelectionModel().getSelectedItems()));
 						
 					}
 				});
@@ -183,8 +194,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 			
 			@Override
 			public void onPossiblePassengers(PossiblePassengersEvent event) {
-				validatePassengersView.getDistanceLabel().setContents((Double.toString(event.getDistance()))+" m");
-				validatePassengersView.getDurationLabel().setContents((Double.toString(event.getDuration()))+" s");
+				validatePassengersView.getDistanceLabel().setText((Double.toString(event.getDistance()))+" m");
+				validatePassengersView.getDurationLabel().setText((Double.toString(event.getDuration()))+" s");
 				
 			}
 		});

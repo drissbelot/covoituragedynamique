@@ -25,10 +25,12 @@
 						<g:SuggestBox ui:field="destinationAddress" text="2,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}'/>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
-  						<gxt:DatePicker ui:field="dateOfJourney" styleName='{style.datepicker}'/>
+  					<f:FormPanel ui:field="departureForm">
+  						<f:DateField ui:field="dateOfJourney" styleName='{style.datepicker}'/>
+  					</f:FormPanel>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel styleName='{style.paddingdown}'>
-  						<f:FormPanel ui:field="departureForm"/>
+
   					</g:HorizontalPanel>
   					<g:HorizontalPanel styleName='{style.paddingdown}'>
   						<g:RadioButton  ui:field="driverRadioButton" styleName='{style.radiobutton}' ui:name="typeOfUser"/>

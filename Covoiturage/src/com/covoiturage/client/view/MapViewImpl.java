@@ -79,6 +79,7 @@ public class MapViewImpl extends Composite implements MapView {
 		arrivalTimeItem=new TimeField();
 		arrivalTimeItem.setTitle(constants.arrivaltime());
 		arrivalTimeItem.setAllowBlank(false);
+		departureForm.add(dateOfJourney);
 		departureForm.add(departureStartTimeItem);
 		departureForm.add(departureEndTimeItem);
 		departureForm.add(arrivalTimeItem);

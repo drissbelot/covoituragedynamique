@@ -1,16 +1,11 @@
 package com.covoiturage.client.view;
 
-import java.util.Date;
-
 import com.covoiturage.client.i18n.MapViewConstants;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
@@ -86,12 +81,11 @@ public class MapViewImpl extends Composite implements MapView {
 		departureEndTimeItem.setFieldLabel(constants.and());
 		departureEndTimeItem.setAllowBlank(false);
 		departureEndTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		
 		arrivalTimeItem.setFieldLabel(constants.arrivaltime());
 		arrivalTimeItem.setAllowBlank(false);
 		arrivalTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		
-
-
 		driverRadioButton.setValue(true);
 		
 	}

@@ -6,7 +6,7 @@ import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
 
 import com.covoiturage.client.view.MenuView;
-import com.covoiturage.shared.CovoiturageRequestFactory;
+
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -16,14 +16,14 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class MenuActivity extends AbstractActivity implements MenuView.Presenter{
-	private final EventBus eventBus;
+
 	private final MenuView menuView;
-	private CovoiturageRequestFactory requestFactory;
+
 	private PlaceController placeController;
 
 	public MenuActivity(ClientFactory clientFactory) {
-		this.requestFactory = clientFactory.getRequestFactory();
-		this.eventBus = clientFactory.getEventBus();
+
+
 		this.menuView = clientFactory.getMenuView();
 		this.placeController = clientFactory.getPlaceController();
 	}

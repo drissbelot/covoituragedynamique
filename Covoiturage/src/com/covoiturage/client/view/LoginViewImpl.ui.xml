@@ -35,13 +35,7 @@
 		</g:VerticalPanel>
 		<g:Image ui:field="image2" styleName='{style.photo}'  />	
 		</g:HorizontalPanel>
-		<g:HorizontalPanel>
-			<g:Anchor ui:field="anchorfr" styleName='{style.anchor}' />
-			<g:Anchor ui:field="anchornl" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchoren" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchorit" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchorch" styleName='{style.anchor}'/>
-		</g:HorizontalPanel>
+
 	</g:FlowPanel>
 		
 

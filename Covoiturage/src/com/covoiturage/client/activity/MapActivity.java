@@ -27,6 +27,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -148,10 +149,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getSaveJourneyButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				if (mapView.getDateOfJourney().validate()
+	/*			if (mapView.getDateOfJourney().validate()
 						&& mapView.getDepartureStartTime().validate()
 						&& mapView.getArrivalTime().validate()
-						&& mapView.getDepartureEndTime().validate())
+						&& mapView.getDepartureEndTime().validate())*/
 					saveJourney();
 
 			}
@@ -200,17 +201,19 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											+ ":");
 					}
 				});
-
+//TODO exceptions
 		mapView.getDepartureStartTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 					@Override
 					public void handleEvent(BaseEvent be) {
+
 						departureStart.setHours(Integer.valueOf(mapView
 								.getDepartureStartTime().getValue()
-								.substring(0, 1)));
+								.substring(0, 2)));
+						
 						departureStart.setMinutes(Integer.valueOf(mapView
 								.getDepartureStartTime().getValue()
-								.substring(3, 4)));
+								.substring(3, 5)));
 					}
 				});
 		mapView.getDepartureEndTime().addListener(Events.Blur,
@@ -220,10 +223,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					public void handleEvent(BaseEvent be) {
 						departureEnd.setHours(Integer.valueOf(mapView
 								.getDepartureEndTime().getValue()
-								.substring(0, 1)));
+								.substring(0, 2)));
 						departureEnd.setMinutes(Integer.valueOf(mapView
 								.getDepartureEndTime().getValue()
-								.substring(3, 4)));
+								.substring(3, 5)));
 					}
 				});
 		mapView.getArrivalTime().addListener(Events.Blur,
@@ -232,9 +235,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void handleEvent(BaseEvent be) {
 						arrival.setHours(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(0, 1)));
+								.getArrivalTime().getValue().substring(0, 2)));
 						arrival.setMinutes(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(3, 4)));
+								.getArrivalTime().getValue().substring(3, 5)));
 
 					}
 				});

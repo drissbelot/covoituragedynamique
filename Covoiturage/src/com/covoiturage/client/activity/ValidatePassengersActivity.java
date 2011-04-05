@@ -11,23 +11,16 @@ import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
-
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
-import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.data.ModelType;
 import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -61,7 +54,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private final PlaceController placeController;
 	private List<String> passengers;
 	private List<String> drivers;
-	private boolean isDriver;
+
 
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
@@ -81,7 +74,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 								
 						passengersTravels = event.getSimpleTravels();
 						passengers = event.getPassengers();
-						isDriver=true;
+
 						UserInfoDetailsRequest request = requestFactory
 								.userInfoDetailsRequest();
 
@@ -133,7 +126,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 								
 						journeys = event.getJourneys();
 						drivers= event.getDrivers();
-						isDriver=false;
+
 						UserInfoDetailsRequest request = requestFactory
 								.userInfoDetailsRequest();
 

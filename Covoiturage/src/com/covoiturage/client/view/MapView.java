@@ -1,6 +1,9 @@
 package com.covoiturage.client.view;
 
+import java.util.Date;
+
 import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TimeField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
@@ -45,10 +48,10 @@ public interface MapView extends IsWidget{
 
 	public void setDestinationAddress(String destinationAddress) ;
 	
-	public TimeField getDepartureStartTime();
-	public TimeField getDepartureEndTime();
+	public TextField<String> getDepartureStartTime();
+	public TextField<String> getDepartureEndTime();
 
-	public TimeField getArrivalTime();
+	public TextField<String> getArrivalTime();
 	
 	
 

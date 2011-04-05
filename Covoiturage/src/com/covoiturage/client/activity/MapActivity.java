@@ -29,6 +29,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -82,9 +83,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private HasGeocoder geocoder;
 	private Date date = new Date();
-	private Date departureStart;
-	private Date departureEnd;
-	private Date arrival;
+	private Date departureStart= new Date();
+	private Date departureEnd=new Date();
+	private Date arrival= new Date();
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
@@ -154,49 +155,66 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getSaveJourneyButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-			//	if(mapView.getDepartureStartTime().validate() && mapView.getArrivalTime().validate() && mapView.getDepartureEndTime().validate())
+				if(mapView.getDateOfJourney().validate() && mapView.getDepartureStartTime().validate() && mapView.getArrivalTime().validate() && mapView.getDepartureEndTime().validate())
 					saveJourney();
 
 			}
 		});
-		mapView.getDateOfJourney().addListener(Events.Change, new Listener<BaseEvent>() {
+		mapView.getDateOfJourney().addListener(Events.Blur, new Listener<BaseEvent>() {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
 				date = mapView.getDateOfJourney().getValue();
+				GWT.log(date.toString());
 				
 				
 			}
 		});
 
-		mapView.getDepartureStartTime().addListener(Events.Change, new Listener<BaseEvent>()  {
-
+		mapView.getDepartureStartTime().addListener(Events.KeyPress, new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
-				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				departureStart.setHours(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureStartTime().getDateValue())));
-				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				departureStart.setMinutes(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureStartTime().getDateValue())));
+				if(mapView.getDepartureStartTime().getRawValue().length()==2)
+					mapView.getDepartureStartTime().setRawValue(mapView.getDepartureStartTime().getRawValue()+":");
 			}
 		});
-		mapView.getDepartureEndTime().addListener(Events.Change, new Listener<BaseEvent>() {
-
+		mapView.getDepartureEndTime().addListener(Events.KeyPress, new Listener<BaseEvent>() {
 			@Override
 			public void handleEvent(BaseEvent be) {
-				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				departureEnd.setHours(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureEndTime().getDateValue())));
-				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				departureEnd.setMinutes(Integer.valueOf(dateFormatterTime.format( mapView.getDepartureEndTime().getDateValue())));
+				if(mapView.getDepartureEndTime().getRawValue().length()==2)
+					mapView.getDepartureEndTime().setRawValue(mapView.getDepartureEndTime().getRawValue()+":");
 			}
 		});
-		mapView.getArrivalTime().addListener(Events.Change, new Listener<BaseEvent>() {
+		mapView.getArrivalTime().addListener(Events.KeyPress, new Listener<BaseEvent>() {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if(mapView.getArrivalTime().getRawValue().length()==2)
+					mapView.getArrivalTime().setRawValue(mapView.getArrivalTime().getRawValue()+":");
+			}
+		});
+		
+		mapView.getDepartureStartTime().addListener(Events.Blur, new Listener<BaseEvent>()  {
+			@Override
+			public void handleEvent(BaseEvent be) {
+				departureStart.setHours(Integer.valueOf(mapView.getDepartureStartTime().getValue().substring(0,1)));
+				departureStart.setMinutes(Integer.valueOf(mapView.getDepartureStartTime().getValue().substring(3,4)));
+			}
+		});
+		mapView.getDepartureEndTime().addListener(Events.Blur, new Listener<BaseEvent>() {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				DateTimeFormat dateFormatterTime = DateTimeFormat.getFormat("HH");
-				arrival.setHours(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getDateValue())));
-				dateFormatterTime = DateTimeFormat.getFormat("mm");
-				arrival.setMinutes(Integer.valueOf(dateFormatterTime.format((Date) mapView.getArrivalTime().getDateValue())));
+				departureEnd.setHours(Integer.valueOf(mapView.getDepartureEndTime().getValue().substring(0,1)));
+				departureEnd.setMinutes(Integer.valueOf(mapView.getDepartureEndTime().getValue().substring(3,4)));
+			}
+		});
+		mapView.getArrivalTime().addListener(Events.Blur, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				arrival.setHours(Integer.valueOf(mapView.getArrivalTime().getValue().substring(0,1)));
+				arrival.setMinutes(Integer.valueOf(mapView.getArrivalTime().getValue().substring(3,4)));
+
 			}
 		});
 

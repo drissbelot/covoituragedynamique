@@ -27,6 +27,9 @@
   					<g:HorizontalPanel>
   					<f:FormPanel ui:field="departureForm">
   						<f:DateField ui:field="dateOfJourney" styleName='{style.datepicker}'/>
+  						<f:TextField ui:field="departureStartTimeItem"/>
+  						<f:TextField ui:field="departureEndTimeItem"/>
+  						<f:TextField ui:field="arrivalTimeItem"/>
   					</f:FormPanel>
   					</g:HorizontalPanel>
   					<g:HorizontalPanel styleName='{style.paddingdown}'>

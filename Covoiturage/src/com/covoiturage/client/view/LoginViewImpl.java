@@ -5,7 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Anchor;
+
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -26,7 +26,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 	@UiField Button addUserButton,sendButton;
 	@UiField Image image,image2;
 	@UiField Label name,pass,log,titre;
-	@UiField Anchor anchorfr,anchornl,anchoren,anchorit,anchorch;
+
     @SuppressWarnings("unused")
 	private Presenter presenter;
 

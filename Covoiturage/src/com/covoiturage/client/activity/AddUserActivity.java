@@ -94,7 +94,7 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		//TODO nombre de places (c'est dans le fichier)
 	}
 
-	@SuppressWarnings("unchecked")
+
 	protected void addUser() {
 		
 		final UserInfoRequest request = requestFactory.userInfoRequest();
@@ -134,9 +134,9 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 
 			Request<Void> createReqDriver = requestDriver.persist().using(newDriver);
 
-			createReqDriver.fire(new Receiver() {
+			createReqDriver.fire(new Receiver<Void>() {
 				@Override
-				public void onSuccess(Object response) {
+				public void onSuccess(Void response) {
 					eventBus.fireEvent(new AddUserEvent());
 					goTo(new LoginPlace(null));
 				}

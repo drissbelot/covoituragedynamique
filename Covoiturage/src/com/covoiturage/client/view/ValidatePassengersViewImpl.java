@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.data.BaseModel;
+
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -47,28 +47,14 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 		check.setSelectionMode(SelectionMode.MULTI);
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 		configs.add(check.getColumn());
-		ColumnConfig coordsOrigin = new ColumnConfig();  
-		coordsOrigin.setId("origin");  
-		coordsOrigin.setHeader("Origin");
-		configs.add(coordsOrigin);  
-		ColumnConfig coordsDestination = new ColumnConfig();  
-		coordsDestination.setId("destination");  
-		coordsDestination.setHeader("Destination");
-		configs.add(coordsDestination); 
+
 		
-		cm = new ColumnModel(configs);  
-
-		store = new ListStore<BaseModelData>(); 
-		listGrid = new Grid<BaseModelData>(store,cm);
-		listGrid.setWidth("30%");  
-		listGrid.setHeight("30%");  
-		listGrid.setSelectionModel(check);
 
 
-		WidgetExpander<BaseModel> expander=new WidgetExpander<BaseModel>(new WidgetRowRenderer<BaseModel>() {
+		WidgetExpander<BaseModelData> expander=new WidgetExpander<BaseModelData>(new WidgetRowRenderer<BaseModelData>() {
 
 			@Override
-			public Widget render(BaseModel model, int rowIdx) {
+			public Widget render(BaseModelData model, int rowIdx) {
 				panel = new ContentPanel();
 				Label firstName = new Label();
 				panel.add(firstName);
@@ -80,8 +66,25 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 			}
 
 		});
+		configs.add(expander);
+		ColumnConfig coordsOrigin = new ColumnConfig();  
+		coordsOrigin.setId("origin");  
+		coordsOrigin.setHeader("Origin");
+		configs.add(coordsOrigin);  
+		ColumnConfig coordsDestination = new ColumnConfig();  
+		coordsDestination.setId("destination");  
+		coordsDestination.setHeader("Destination");
+		configs.add(coordsDestination); 
+
+		cm = new ColumnModel(configs);  
+
+		store = new ListStore<BaseModelData>(); 
+		listGrid = new Grid<BaseModelData>(store,cm);
 		listGrid.addPlugin(expander);  
-		
+		listGrid.setWidth("300px");  
+		listGrid.setHeight("300px");  
+		listGrid.setSelectionModel(check);
+		listGrid.getView().setAutoFill(true);
 
 		saveButton = new Button("Save");
 		distanceLabel=new Label();

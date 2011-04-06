@@ -22,6 +22,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -164,14 +165,14 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 				});
 		
 		
-		validatePassengersView.getListGrid().addListener(Events.SelectionChange,new Listener<BaseEvent>(){
+		validatePassengersView.getListGrid().getSelectionModel().addListener(Events.SelectionChange,new Listener<BaseEvent>(){
 					
 					@Override
 					public void handleEvent(BaseEvent be){
 
 						eventBus.fireEvent(new SelectPassengersEvent(
 								validatePassengersView.getListGrid().getSelectionModel().getSelectedItems()));
-						
+
 					}
 				});
 		validatePassengersView.getSaveButton().addClickHandler(new ClickHandler() {

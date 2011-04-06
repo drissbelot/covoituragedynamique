@@ -5,6 +5,7 @@ import com.extjs.gxt.ui.client.data.BaseModelData;
 
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -24,4 +25,5 @@ public interface ValidatePassengersView extends IsWidget{
 	public Button getSaveButton();
 	public Label getDistanceLabel();
 	public Label getDurationLabel();
+	public WidgetExpander<BaseModelData> getExpander();
 }

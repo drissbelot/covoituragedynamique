@@ -111,6 +111,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 										}
 										
 										validatePassengersView.getListGrid().getStore().add(listRecords); 
+										
 									}
 								});
 

@@ -15,7 +15,7 @@
 <inherits name="com.google.gwt.place.Place"/>
 <inherits name='com.google.gwt.requestfactory.RequestFactory'/>
   <inherits name="com.extjs.gxt.ui.GXT" />
-
+<inherits name="com.extjs.gxt.ui.WidgetExpander" />
   <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 
 <!-- JUnit test -->

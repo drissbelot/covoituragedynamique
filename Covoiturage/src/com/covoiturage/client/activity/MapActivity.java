@@ -163,9 +163,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void handleEvent(BaseEvent be) {
 						date = mapView.getDateOfJourney().getValue();
-						departureStart = date;
-						departureEnd = date;
-						arrival = date;
+
 					}
 				});
 

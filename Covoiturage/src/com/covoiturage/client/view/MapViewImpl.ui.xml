@@ -6,7 +6,7 @@
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget"
 	xmlns:f="urn:import:com.extjs.gxt.ui.client.widget.form">
 	
-	<ui:style src="facebook.css"/>
+	<ui:style src="stylesheet.css"/>
 		
 		
   	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">

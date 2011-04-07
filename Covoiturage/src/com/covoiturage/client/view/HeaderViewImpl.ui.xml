@@ -2,7 +2,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 	
-	<ui:style src="facebook.css"/>
+	<ui:style src="stylesheet.css"/>
 		
 
 

@@ -40,6 +40,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 	public HasClickHandlers getMapLabel() {
 		return mapLabel;
 	}
+	public HasClickHandlers getHistoryLabel(){
+		return historyLabel;
+	}
 
 
 }

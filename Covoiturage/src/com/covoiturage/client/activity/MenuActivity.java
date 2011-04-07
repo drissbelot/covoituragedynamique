@@ -2,6 +2,7 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 
+import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
 
@@ -45,26 +46,18 @@ public class MenuActivity extends AbstractActivity implements MenuView.Presenter
 				
 			}
 		});
-		
+		menuView.getHistoryLabel().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				goTo(new HistoryPlace(null));
+				
+			}
+		});
 	}
+
 	
-	@Override
-	public String mayStop() {
 
-		return null;
-	}
-
-	@Override
-	public void onCancel() {
-
-
-	}
-
-	@Override
-	public void onStop() {
-
-
-	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {

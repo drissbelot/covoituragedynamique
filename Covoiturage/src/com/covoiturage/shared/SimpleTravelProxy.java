@@ -47,4 +47,12 @@ public interface SimpleTravelProxy extends EntityProxy{
 
 	public void setArrival(Date arrival);
 	public Long getId();
+	
+	public String getStatusPassenger();
+
+	public void setStatusPassenger(String statusPassenger);
+
+	public String getStatusDriver();
+
+	public void setStatusDriver(String statusDriver) ;
 }

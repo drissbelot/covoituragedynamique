@@ -13,5 +13,6 @@ public interface MenuView extends IsWidget{
 	}
 	public HasClickHandlers getSettingsLabel();
 	public HasClickHandlers getMapLabel();
+	public HasClickHandlers getHistoryLabel();
 
 }

@@ -1,5 +1,6 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.AddUserView;
@@ -25,4 +26,5 @@ public interface ClientFactory {
 	MenuView getMenuView();
 	HeaderView getHeaderView();
 	FooterView getFooterView();
+	HistoryView getHistoryView();
 }

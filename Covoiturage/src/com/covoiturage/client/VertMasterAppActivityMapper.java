@@ -1,6 +1,8 @@
 package com.covoiturage.client;
 
+import com.covoiturage.client.activity.HistoryActivity;
 import com.covoiturage.client.activity.MenuActivity;
+import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
@@ -23,6 +25,8 @@ public class VertMasterAppActivityMapper implements ActivityMapper {
 				return new MenuActivity(clientFactory);	
 			else if(place instanceof SettingsPlace)
 				return new MenuActivity(clientFactory);
+			else if(place instanceof HistoryPlace)
+				return new HistoryActivity(clientFactory);
 			return null;
 
 	}

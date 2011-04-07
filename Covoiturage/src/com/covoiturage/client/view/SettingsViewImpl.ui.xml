@@ -4,7 +4,7 @@
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
 	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'>
 	
-	<ui:style src="facebook.css"/>
+	<ui:style src="stylesheet.css"/>
 		
 
   		

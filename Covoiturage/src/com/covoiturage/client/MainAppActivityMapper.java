@@ -1,10 +1,12 @@
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.AddUserActivity;
+import com.covoiturage.client.activity.HistoryActivity;
 import com.covoiturage.client.activity.LoginActivity;
 import com.covoiturage.client.activity.MapActivity;
 import com.covoiturage.client.activity.SettingsActivity;
 import com.covoiturage.client.place.AddUserPlace;
+import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
@@ -31,6 +33,8 @@ private ClientFactory clientFactory;
 			return new MapActivity(clientFactory);
 		else if(place instanceof SettingsPlace)
 			return new SettingsActivity(clientFactory);
+		else if(place instanceof HistoryPlace)
+			return new HistoryActivity(clientFactory);
  	return null;
 	}
 

@@ -98,6 +98,26 @@ public class SimpleTravel {
 	public String passenger;
 	private String originAddress;
 	private String destinationAddress;
+	public String getStatusPassenger() {
+		return statusPassenger;
+	}
+
+	public void setStatusPassenger(String statusPassenger) {
+		this.statusPassenger = statusPassenger;
+	}
+
+	public String getStatusDriver() {
+		return statusDriver;
+	}
+
+	public void setStatusDriver(String statusDriver) {
+		this.statusDriver = statusDriver;
+	}
+
+
+
+	private String statusPassenger;
+	private String statusDriver;
 
 	@Version
 	@Column(name = "version")

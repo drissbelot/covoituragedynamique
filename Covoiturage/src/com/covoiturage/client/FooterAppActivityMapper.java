@@ -2,6 +2,7 @@ package com.covoiturage.client;
 
 import com.covoiturage.client.activity.FooterActivity;
 
+import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.SettingsPlace;
@@ -25,6 +26,8 @@ public class FooterAppActivityMapper implements ActivityMapper {
 		else if (place instanceof SettingsPlace)
 			return new FooterActivity(clientFactory);
 		else if(place instanceof LoginPlace)
+			return new FooterActivity(clientFactory);
+		else if(place instanceof HistoryPlace)
 			return new FooterActivity(clientFactory);
 		return null;
 	}

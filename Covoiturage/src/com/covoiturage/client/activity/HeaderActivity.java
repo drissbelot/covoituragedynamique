@@ -2,6 +2,8 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 
+import com.covoiturage.client.event.MessageEvent;
+import com.covoiturage.client.event.MessageEventHandler;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.place.LoginPlace;
@@ -59,6 +61,15 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 
 
 				});
+			}
+		});
+		eventBus.addHandler(MessageEvent.TYPE, new MessageEventHandler() {
+			
+			@Override
+			public void onMessage(MessageEvent event) {
+				headerView.getMessages().setText("Vous avez un message");
+				//TODO réagir
+				
 			}
 		});
 	}

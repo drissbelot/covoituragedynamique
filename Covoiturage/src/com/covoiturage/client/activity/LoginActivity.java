@@ -2,6 +2,7 @@ package com.covoiturage.client.activity;
 
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.event.MessageEvent;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.MapPlace;
@@ -78,19 +79,20 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 								    channel.open(new SocketListener() {
 								      @Override
 								      public void onOpen() {
-								        Window.alert("Channel opened!");
+								        
 								      }
 								      @Override
 								      public void onMessage(String message) {
-								        Window.alert("Received: " + message);
+								    	  eventBus.fireEvent(new MessageEvent(message));
+								      
 								      }
 								      @Override
 								      public void onError(SocketError error) {
-								        Window.alert("Error: " + error.getDescription());
+								        
 								      }
 								      @Override
 								      public void onClose() {
-								        Window.alert("Channel closed!");
+								        
 								      }
 								    });
 								  }

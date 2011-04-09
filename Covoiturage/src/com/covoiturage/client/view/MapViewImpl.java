@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.MapViewConstants;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -15,7 +16,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -33,7 +34,7 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField(provided=true) MapWidget mapWidget;
 	@UiField Button sendAddress,saveJourney;
 	@UiField SuggestBox originAddress,destinationAddress;
-	@UiField HorizontalPanel directionsPanel;
+	@UiField ContentPanel directionsPanel;
 
 	@UiField Label to,from,distmax; 
 	@UiField FormPanel departureForm;
@@ -72,7 +73,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 		dateOfJourney.setFieldLabel("Date of Journey"); //TODO ajouter à l'i18n
 		dateOfJourney.setAllowBlank(false);
-
+		
 		
 		departureStartTimeItem.setFieldLabel(constants.departuretime());
 		departureStartTimeItem.setAllowBlank(false);
@@ -87,7 +88,7 @@ public class MapViewImpl extends Composite implements MapView {
 		arrivalTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		
 		driverRadioButton.setValue(true);
-		
+		directionsPanel.setHeaderVisible(false);
 	}
 
 
@@ -124,7 +125,7 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	@Override
-	public HorizontalPanel getDirectionsPanel() {
+	public ContentPanel getDirectionsPanel() {
 
 		return directionsPanel;
 	}

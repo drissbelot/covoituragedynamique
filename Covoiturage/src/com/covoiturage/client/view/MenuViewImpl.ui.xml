@@ -5,12 +5,12 @@
 		
 
 
-  	<g:VerticalPanel  styleName='{style.menucote}' width="100%" height="100%">
+  	<g:VerticalPanel  styleName='{style.menucote}' width="100%" >
   		<g:Label ui:field='menutitre' styleName='{style.h3}' />
-  		<g:Label ui:field='mapLabel' styleName='{style.buttonmenu}' height="25px"/>
-  		<g:Label ui:field='settingsLabel' styleName='{style.buttonmenu}' height="25px"/>
-  		<g:Label ui:field='historyLabel' styleName='{style.buttonmenu}' height="25px"/>
-  		<g:Label height="393px"/>
+  		<g:Label ui:field='mapLabel' styleName='{style.buttonmenu}' />
+  		<g:Label ui:field='settingsLabel' styleName='{style.buttonmenu}' />
+  		<g:Label ui:field='historyLabel' styleName='{style.buttonmenu}' />
+  		
   	</g:VerticalPanel>
 
   	</ui:UiBinder>

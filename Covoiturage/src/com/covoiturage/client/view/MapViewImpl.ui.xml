@@ -26,7 +26,7 @@
   					</g:HorizontalPanel>
   					<g:HorizontalPanel>
   					<f:FormPanel ui:field="departureForm">
-  						<f:DateField ui:field="dateOfJourney" styleName='{style.datepicker}'/>
+  						<f:DateField ui:field="dateOfJourney" />
   						<f:TextField ui:field="departureStartTimeItem"/>
   						<f:TextField ui:field="departureEndTimeItem"/>
   						<f:TextField ui:field="arrivalTimeItem"/>
@@ -50,7 +50,7 @@
   				</g:VerticalPanel>
   			</g:HorizontalPanel>
   		</g:HorizontalPanel>
-  		<g:HorizontalPanel ui:field="directionsPanel"/>
+  		<gxt:ContentPanel ui:field="directionsPanel" />
   
   	
   	

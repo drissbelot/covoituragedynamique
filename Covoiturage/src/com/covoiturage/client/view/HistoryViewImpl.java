@@ -14,7 +14,7 @@ public class HistoryViewImpl extends Composite implements HistoryView{
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-
+	//TODO mettre quelque chose pour afficher les journeys et les simpletravels
 	
 	public HistoryViewImpl(){
 		initWidget(binder.createAndBindUi(this)); 

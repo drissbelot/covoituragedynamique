@@ -32,5 +32,8 @@ public interface JourneyRequest extends RequestContext{
 			Date departureStart, Date departureEnd, Date arrival, float distanceMax);
 
 
+	Request<List<JourneyProxy>> getJourneysFromUser(String id);
+
+
 	
 }

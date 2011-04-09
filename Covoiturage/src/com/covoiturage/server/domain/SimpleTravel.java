@@ -64,7 +64,22 @@ public class SimpleTravel {
 		return MapUtils.bufferRoute(steps, departureStart,  departureEnd,  arrival, distanceMax);
 
 	}
-
+	@SuppressWarnings("unchecked")
+	public static List<SimpleTravel> getSimpleTravelsFromUser(String userId){
+		EntityManager em = entityManager();
+		try {
+			List<SimpleTravel> list = em.createQuery(
+					"select o from SimpleTravel o where o.passenger = :userId").getResultList();
+			list.size();
+			return list;
+			
+		} finally {
+			em.close();
+		}
+		
+		
+		
+	}
 	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
 			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger) {
 		SimpleTravel simpleTravel = new SimpleTravel();

@@ -1,46 +1,45 @@
 package com.covoiturage.client;
 
 import com.covoiturage.client.place.LoginPlace;
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.Viewport;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class Covoiturage implements EntryPoint {
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
-	private final DockLayoutPanel layoutPanel = new DockLayoutPanel(Unit.PCT);
-	private final ScrollPanel mainPanel = new ScrollPanel();
-	private final ScrollPanel FooterPanel = new ScrollPanel();
-	private final ScrollPanel horizMasterPanel = new ScrollPanel();
-	private final ScrollPanel vertMasterPanel = new ScrollPanel();
-	private final ScrollPanel asidePanel = new ScrollPanel();
-	
+	private LayoutContainer layoutContainer= new LayoutContainer();
+	private final BorderLayout layoutPanel = new BorderLayout();
+	private final ContentPanel mainPanel = new ContentPanel();
+	private final ContentPanel FooterPanel = new ContentPanel();
+	private final ContentPanel horizMasterPanel = new ContentPanel();
+	private final ContentPanel vertMasterPanel = new ContentPanel();
+	private final ContentPanel asidePanel = new ContentPanel();
+
 
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			horizMasterPanel.setVisible(widget != null);
-			SimplePanel temp = new SimplePanel();
-			if (mainPanel != null) {
-				temp = mainPanel;
-				layoutPanel.remove(mainPanel);
-			}
-			layoutPanel.addNorth(horizMasterPanel, 5);
-			layoutPanel.add(temp);
-			horizMasterPanel.setWidget(widget);
+			if(widget!=null)
+				horizMasterPanel.add(widget);
+			layoutContainer.layout();
 		}
 	};
 	AcceptsOneWidget asideDisplay = new AcceptsOneWidget() {
@@ -48,15 +47,10 @@ public class Covoiturage implements EntryPoint {
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			asidePanel.setVisible(widget != null);
-			SimplePanel temp = new SimplePanel();
 
-			if (mainPanel != null) {
-				temp = mainPanel;
-				layoutPanel.remove(mainPanel);
-			}
-			layoutPanel.addEast(asidePanel, 30);
-			layoutPanel.add(temp);
-			asidePanel.setWidget(widget);
+			if(widget!=null)
+				asidePanel.add(widget);
+			layoutContainer.layout();
 		}
 	};
 	AcceptsOneWidget vertMasterDisplay = new AcceptsOneWidget() {
@@ -64,15 +58,11 @@ public class Covoiturage implements EntryPoint {
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			vertMasterPanel.setVisible(widget != null);
-			SimplePanel temp = new SimplePanel();
 
-			if (mainPanel != null) {
-				temp = mainPanel;
-				layoutPanel.remove(mainPanel);
-			}
-			layoutPanel.addWest(vertMasterPanel, 10);
-			layoutPanel.add(temp);
-			vertMasterPanel.setWidget(widget);
+			if(widget!=null)
+				vertMasterPanel.add(widget);
+			layoutContainer.layout();
+
 		}
 	};
 
@@ -81,10 +71,13 @@ public class Covoiturage implements EntryPoint {
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			mainPanel.setVisible(widget != null);
-			if (mainPanel != null)
-				layoutPanel.remove(mainPanel);
-			layoutPanel.add(mainPanel);
-			mainPanel.setWidget(widget);
+			if (mainPanel.getWidget(0) != null)
+				mainPanel.remove(mainPanel.getWidget(0));
+
+			if(widget!=null)
+				mainPanel.add(widget);
+			layoutContainer.layout();
+			hidePanels();
 
 		}
 	};
@@ -93,22 +86,46 @@ public class Covoiturage implements EntryPoint {
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			FooterPanel.setVisible(widget != null);
-			SimplePanel temp = new SimplePanel();
-			if (mainPanel != null) {
-				temp = mainPanel;
-				layoutPanel.remove(mainPanel);
-			}
-			layoutPanel.addSouth(FooterPanel,10);
-			layoutPanel.add(temp);
-			FooterPanel.setWidget(widget);
+
+			if(widget!=null)
+				FooterPanel.add(widget);
+			layoutContainer.layout();
+
 
 		}
 	};
-	
-	
+	private void hidePanels(){
+		if(horizMasterPanel.getWidget(0)==null)
+			horizMasterPanel.hide();
+		if(vertMasterPanel.getWidget(0)==null)
+		vertMasterPanel.hide();
+		if(asidePanel.getWidget(0)==null)
+			asidePanel.hide();
+	}
+
+
 	@Override
 	public void onModuleLoad() {
-		layoutPanel.setSize("100%", "100%");
+		final Viewport v = new Viewport();
+		v.setLayout(new FitLayout());
+		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH, 100);
+		layoutContainer.add(horizMasterPanel, northData);
+		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
+		layoutContainer.add(asidePanel, eastData);
+		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 100);
+		layoutContainer.add(vertMasterPanel, westData);
+		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 50);
+		layoutContainer.add(FooterPanel,southData);
+
+
+		BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
+		layoutContainer.add(mainPanel,centerData);
+
+		FooterPanel.setHeaderVisible(false);
+		mainPanel.setHeaderVisible(false);
+		asidePanel.setHeaderVisible(false);
+		horizMasterPanel.setHeaderVisible(false);
+		vertMasterPanel.setHeaderVisible(false);
 		ClientFactory clientFactory = new ClientFactoryImpl();
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
@@ -139,17 +156,19 @@ public class Covoiturage implements EntryPoint {
 		horizMasterActivityManager.setDisplay(horizMasterDisplay);
 		vertMasterActivityManager.setDisplay(vertMasterDisplay);
 		asideActivityManager.setDisplay(asideDisplay);
-		footerActivityManager.setDisplay(footerDisplay);
 		mainActivityManager.setDisplay(mainDisplay);
-		
+		footerActivityManager.setDisplay(footerDisplay);
+
+
 
 		AppPlaceHistoryMapper historyMapper = GWT
-				.create(AppPlaceHistoryMapper.class);
+		.create(AppPlaceHistoryMapper.class);
 		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
 				historyMapper);
 		historyHandler.register(placeController, eventBus, defaultPlace);
-
-		RootLayoutPanel.get().add(layoutPanel);
+		layoutContainer.setLayout(layoutPanel);
+		v.add(layoutContainer);
+		RootLayoutPanel.get().add(v);
 
 		historyHandler.handleCurrentHistory();
 

@@ -58,10 +58,10 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-
+				searchJourneys();
 			}
 		});
-		searchJourneys();
+		
 		
 	}
 

@@ -37,9 +37,9 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 	private Label durationLabel;
 
 	private ColumnModel cm; 
-	private  ListStore<BaseModelData>  store;
-	private  ContentPanel panel;
-private 		WidgetExpander<BaseModelData> expander;
+	private ListStore<BaseModelData>  store;
+	private ContentPanel panel;
+	private WidgetExpander<BaseModelData> expander;
 
 
 	public ValidatePassengersViewImpl() {
@@ -50,10 +50,10 @@ private 		WidgetExpander<BaseModelData> expander;
 		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 		configs.add(check.getColumn());
 
-		
 
 
-		 expander=new WidgetExpander<BaseModelData>(new WidgetRowRenderer<BaseModelData>() {
+
+		expander=new WidgetExpander<BaseModelData>(new WidgetRowRenderer<BaseModelData>() {
 
 			@Override
 			public Widget render(BaseModelData model, int rowIdx) {
@@ -66,7 +66,7 @@ private 		WidgetExpander<BaseModelData> expander;
 				Label lastName = new Label();
 				lastName.setText(model.get("lastName").toString());
 				panel.add(lastName);
-				
+
 
 				return panel;
 			}

@@ -7,7 +7,7 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.google.gwt.place.shared.Place;
-import com.google.gwt.user.client.ui.Button;
+
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 

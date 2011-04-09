@@ -2,6 +2,7 @@ package com.covoiturage.client;
 
 import com.covoiturage.client.place.LoginPlace;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.Viewport;
@@ -124,7 +125,8 @@ public class Covoiturage implements EntryPoint {
 
 		FooterPanel.setHeaderVisible(false);
 		mainPanel.setHeaderVisible(false);
-		//asidePanel.setHeaderVisible(false);
+		mainPanel.setScrollMode(Scroll.AUTO);
+
 		horizMasterPanel.setHeaderVisible(false);
 		vertMasterPanel.setHeaderVisible(false);
 

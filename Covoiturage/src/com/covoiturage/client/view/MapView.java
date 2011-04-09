@@ -1,12 +1,13 @@
 package com.covoiturage.client.view;
 
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -27,7 +28,7 @@ public interface MapView extends IsWidget{
 
 	public abstract MapWidget getMap();
 
-	public abstract HorizontalPanel getDirectionsPanel();
+	public abstract ContentPanel getDirectionsPanel();
 
 	public abstract HasClickHandlers getSaveJourneyButton();
 

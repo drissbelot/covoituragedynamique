@@ -281,7 +281,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							SelectPassengersEvent selectPassengersEvent) {
 						passengers=new ArrayList<String>();
 						for (BaseModelData  passenger: selectPassengersEvent.getPassengers()) {
-							passengers.add(passenger.get("id").toString());
+							passengers.add(passenger.get("login").toString());
 						}
 						
 						for (HasMarker overlay : overlays) {

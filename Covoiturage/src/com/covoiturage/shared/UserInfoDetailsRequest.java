@@ -30,6 +30,9 @@ public interface UserInfoDetailsRequest extends RequestContext {
 
 	Request<List<UserInfoDetailsProxy>> getPassengerList(List<String> passengers);
 
+
+	Request<UserInfoDetailsProxy> channel(String id);
+
 ;
 
 

@@ -6,10 +6,19 @@ import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.view.LoginView;
+
 import com.covoiturage.shared.CovoiturageRequestFactory;
+import com.covoiturage.shared.UserInfoDetailsProxy;
+import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+
+import com.google.gwt.appengine.channel.client.Channel;
+import com.google.gwt.appengine.channel.client.ChannelFactory;
+import com.google.gwt.appengine.channel.client.ChannelFactory.ChannelCreatedCallback;
+import com.google.gwt.appengine.channel.client.SocketError;
+import com.google.gwt.appengine.channel.client.SocketListener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -39,6 +48,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {   
 			public void onClick(ClickEvent event) {
 				login();
+				
 			}
 		});
 		loginView.getAddUserButton().addClickHandler(new ClickHandler() {   
@@ -56,6 +66,40 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 			public void onSuccess(UserInfoProxy result) {
 				currentUser = result;
 				if(currentUser!=null && currentUser.getLoggedIn()) {
+					UserInfoDetailsRequest requestDetails = requestFactory.userInfoDetailsRequest();
+					Request<UserInfoDetailsProxy> createReqDatails=requestDetails.channel(currentUser.getId());
+					createReqDatails.fire(new Receiver<UserInfoDetailsProxy>() {
+						@Override
+						public void onSuccess(UserInfoDetailsProxy response) {
+							//TODO events
+							ChannelFactory.createChannel(response.getChannelId(), new ChannelCreatedCallback() {
+								  @Override
+								  public void onChannelCreated(Channel channel) {
+								    channel.open(new SocketListener() {
+								      @Override
+								      public void onOpen() {
+								        Window.alert("Channel opened!");
+								      }
+								      @Override
+								      public void onMessage(String message) {
+								        Window.alert("Received: " + message);
+								      }
+								      @Override
+								      public void onError(SocketError error) {
+								        Window.alert("Error: " + error.getDescription());
+								      }
+								      @Override
+								      public void onClose() {
+								        Window.alert("Channel closed!");
+								      }
+								    });
+								  }
+								});
+					
+							
+						}
+					});
+					
 					goTo(new MapPlace(null));
 					eventBus.fireEvent(new SendLoginEvent(currentUser));
 				} else {
@@ -63,6 +107,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 				}
 			}
 		});
+		
 	}
 
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {

@@ -14,6 +14,7 @@ import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
+import com.covoiturage.server.ChannelServer;
 import com.covoiturage.server.EMF;
 
 
@@ -27,6 +28,15 @@ public class UserInfoDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   
 	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
     public String id;
+	public String channelId;
+	public String getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -93,6 +103,26 @@ public class UserInfoDetails {
 		}
 		
 	}
+	@SuppressWarnings("unchecked")
+	public static UserInfoDetails channel(String id){
+		EntityManager em = entityManager();
+		UserInfoDetails userDetails = new UserInfoDetails();
+		try {
+			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");
+			query.setParameter("user", id);
+			List<UserInfoDetails> list =query.getResultList();
+			
+			userDetails=list.get(0);
+			em.getTransaction().begin();
+			String channelId = ChannelServer.createChannel(userDetails.getId());
+			userDetails.setChannelId(channelId);
+			em.getTransaction().commit();
+			return userDetails;
+		} finally {
+			em.close();
+		}
+	}
+	
 	public static List<UserInfoDetails> getPassengerList(List<String> passengers){
 		EntityManager em = entityManager();
 		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();

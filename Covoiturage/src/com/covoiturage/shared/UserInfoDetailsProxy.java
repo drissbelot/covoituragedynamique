@@ -34,6 +34,7 @@ public interface UserInfoDetailsProxy extends EntityProxy{
 	public String getLanguage();
 
 	public void setLanguage(String language);
-
+	public String getChannelId();
+	public void setChannelId(String Id);
 	
 }

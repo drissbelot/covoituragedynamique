@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.NotifyService;
+import com.covoiturage.client.NotifyServiceAsync;
 
 import com.covoiturage.client.event.GetValidateDriversEvent;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
@@ -28,6 +30,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -65,9 +68,12 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
@@ -93,7 +99,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private List<HasDirectionsWaypoint> waypoints;
 	private List<String> waypointsCoords;
 	private List<String> passengers;
-
+	private NotifyServiceAsync notifyService= GWT.create(NotifyService.class);
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -419,6 +425,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			}
 
 		});
+		
 	}
 
 	protected void saveJourney() {
@@ -476,7 +483,25 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 														@Override
 														public void onSuccess(
 																JourneyProxy responseJourney) {
-
+															for (String passenger: passengers) {
+																//TODO mettre un message plus intéressant évidemment
+																notifyService.sendMessage(passenger, "test", new AsyncCallback<Void>() {
+																	
+																	@Override
+																	public void onSuccess(Void result) {
+																		
+																		
+																	}
+																	
+																	@Override
+																	public void onFailure(Throwable caught) {
+																		GWT.log(caught.getMessage());
+																		// TODO Auto-generated method stub
+																		
+																	}
+																});
+															}
+															
 															Window.alert("savec");
 
 														}

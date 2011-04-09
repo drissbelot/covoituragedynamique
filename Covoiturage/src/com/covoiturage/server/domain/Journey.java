@@ -52,6 +52,20 @@ public class Journey {
 		
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Journey> getJourneysFromUser(String id){
+		EntityManager em = entityManager();
+		try {
+			List<Journey> list = em.createQuery(
+					"select o from Journey o where o.driver = :userId").getResultList();
+			list.size();
+			return list;
+			
+		} finally {
+			em.close();
+		}
+	}
 	public static Journey findJourney(Long id) {
 		if (id == null) {
 			return null;

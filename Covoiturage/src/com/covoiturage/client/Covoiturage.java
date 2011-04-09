@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Covoiturage implements EntryPoint {
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
-	private LayoutContainer layoutContainer= new LayoutContainer();
+	private final LayoutContainer layoutContainer= new LayoutContainer();
 	private final BorderLayout layoutPanel = new BorderLayout();
 	private final ContentPanel mainPanel = new ContentPanel();
 	private final ContentPanel FooterPanel = new ContentPanel();
@@ -98,7 +98,7 @@ public class Covoiturage implements EntryPoint {
 		if(horizMasterPanel.getWidget(0)==null)
 			horizMasterPanel.hide();
 		if(vertMasterPanel.getWidget(0)==null)
-		vertMasterPanel.hide();
+			vertMasterPanel.hide();
 		if(asidePanel.getWidget(0)==null)
 			asidePanel.hide();
 	}
@@ -111,6 +111,7 @@ public class Covoiturage implements EntryPoint {
 		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH, 100);
 		layoutContainer.add(horizMasterPanel, northData);
 		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
+		eastData.setCollapsible(true);
 		layoutContainer.add(asidePanel, eastData);
 		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 100);
 		layoutContainer.add(vertMasterPanel, westData);
@@ -123,9 +124,11 @@ public class Covoiturage implements EntryPoint {
 
 		FooterPanel.setHeaderVisible(false);
 		mainPanel.setHeaderVisible(false);
-		asidePanel.setHeaderVisible(false);
+		//asidePanel.setHeaderVisible(false);
 		horizMasterPanel.setHeaderVisible(false);
 		vertMasterPanel.setHeaderVisible(false);
+
+		
 		ClientFactory clientFactory = new ClientFactoryImpl();
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();

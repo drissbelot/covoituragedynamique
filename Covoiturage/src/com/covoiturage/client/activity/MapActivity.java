@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
+
 import com.covoiturage.client.event.GetValidateDriversEvent;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEvent;
@@ -27,7 +28,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.core.client.GWT;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -91,6 +92,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
 	private List<HasDirectionsWaypoint> waypoints;
 	private List<String> waypointsCoords;
+	private List<String> passengers;
 
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -149,11 +151,13 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getSaveJourneyButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-	/*			if (mapView.getDateOfJourney().validate()
-						&& mapView.getDepartureStartTime().validate()
-						&& mapView.getArrivalTime().validate()
-						&& mapView.getDepartureEndTime().validate())*/
-					saveJourney();
+				/*
+				 * if (mapView.getDateOfJourney().validate() &&
+				 * mapView.getDepartureStartTime().validate() &&
+				 * mapView.getArrivalTime().validate() &&
+				 * mapView.getDepartureEndTime().validate())
+				 */
+				saveJourney();
 
 			}
 		});
@@ -199,7 +203,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											+ ":");
 					}
 				});
-//TODO exceptions
+
 		mapView.getDepartureStartTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 					@Override
@@ -208,7 +212,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						departureStart.setHours(Integer.valueOf(mapView
 								.getDepartureStartTime().getValue()
 								.substring(0, 2)));
-						
+
 						departureStart.setMinutes(Integer.valueOf(mapView
 								.getDepartureStartTime().getValue()
 								.substring(3, 5)));
@@ -269,6 +273,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void onSelectPassengers(
 							SelectPassengersEvent selectPassengersEvent) {
+						passengers=new ArrayList<String>();
+						for (BaseModelData  passenger: selectPassengersEvent.getPassengers()) {
+							passengers.add(passenger.get("id").toString());
+						}
+						
 						for (HasMarker overlay : overlays) {
 
 							overlay.setMap(null);
@@ -446,7 +455,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 										@Override
 										public void onSuccess(
-												UserInfoDetailsProxy response) {
+												final UserInfoDetailsProxy responseDriver) {
 											JourneyRequest request = requestFactory
 													.journeyRequest();
 											Request<JourneyProxy> createReq = request.saveJourneyDriver(
@@ -455,18 +464,18 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													departureStart,
 													departureEnd,
 													arrival,
-													response.getId(),
+													responseDriver.getId(),
 													mapView.getOriginAddress()
 															.getText(),
 													mapView.getDestinationAddress()
 															.getText(),
-													waypointsCoords, steps);
+													waypointsCoords, steps,passengers);
 											createReq
 													.fire(new Receiver<JourneyProxy>() {
 
 														@Override
 														public void onSuccess(
-																JourneyProxy response) {
+																JourneyProxy responseJourney) {
 
 															Window.alert("savec");
 

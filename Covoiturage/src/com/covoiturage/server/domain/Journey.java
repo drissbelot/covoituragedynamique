@@ -65,7 +65,7 @@ public class Journey {
 		}
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails){
+	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails, List<String> passengers){
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 		try
@@ -80,6 +80,7 @@ public class Journey {
 			journey.setDepartureStart(departureStart);
 			journey.setDepartureEnd(departureEnd);
 			journey.setArrival(arrival);
+			journey.setPassengers(passengers);
 			em.persist(journey);
 
 

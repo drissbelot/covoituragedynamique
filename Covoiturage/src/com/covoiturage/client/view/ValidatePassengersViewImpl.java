@@ -16,7 +16,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
-import com.google.gwt.user.client.ui.Button;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,7 +30,7 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 	private Presenter presenter;
 
 	private final Grid<BaseModelData> listGrid; 
-	private Button saveButton;
+
 
 	private Label distanceLabel;
 
@@ -92,13 +92,13 @@ private 		WidgetExpander<BaseModelData> expander;
 		listGrid.setSelectionModel(check);
 		listGrid.getView().setAutoFill(true);
 
-		saveButton = new Button("Save");
+
 		distanceLabel=new Label();
 		durationLabel=new Label();
 		pan.add(listGrid);
 		pan.add(distanceLabel);
 		pan.add(durationLabel);
-		pan.add(saveButton);
+
 
 		initWidget(pan);
 	}
@@ -108,9 +108,7 @@ private 		WidgetExpander<BaseModelData> expander;
 		return this;
 	}
 
-	public Button getSaveButton() {
-		return saveButton;
-	}
+
 
 	@Override
 	public void setPresenter(ValidatePassengersActivity validatePassengersActivity) {

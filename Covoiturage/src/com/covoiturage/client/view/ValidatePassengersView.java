@@ -22,7 +22,7 @@ public interface ValidatePassengersView extends IsWidget{
 	public abstract void setPresenter(
 			ValidatePassengersActivity validatePassengersActivity);
 	public Grid<BaseModelData> getListGrid();
-	public Button getSaveButton();
+
 	public Label getDistanceLabel();
 	public Label getDurationLabel();
 	public WidgetExpander<BaseModelData> getExpander();

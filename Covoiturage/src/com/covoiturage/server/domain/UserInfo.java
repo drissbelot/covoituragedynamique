@@ -15,6 +15,7 @@ import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
+import com.covoiturage.server.BCrypt;
 import com.covoiturage.server.EMF;
 
 
@@ -98,9 +99,9 @@ public class UserInfo{
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
 		
-		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam and o.password = :passwordParam");
+		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam ");
 		query.setParameter("loginParam",login);
-		query.setParameter("passwordParam",password);
+
 		try
 		{
 
@@ -112,12 +113,15 @@ public class UserInfo{
 			}
 			else 
 			{
-
+				if(BCrypt.checkpw(password, results.get(0).getPassword())){
 				user= results.get(0);
 
 				em.getTransaction().begin();
 				user.setLoggedIn(true);
 				em.getTransaction().commit();
+				}
+				else
+					return null;
 			}
 		}
 		finally
@@ -220,7 +224,9 @@ public class UserInfo{
 
 
 	public void setPassword(String password) {
-		this.password = password;
+		String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+
+		this.password = hash;
 	}
 
 	public String getPassword() {

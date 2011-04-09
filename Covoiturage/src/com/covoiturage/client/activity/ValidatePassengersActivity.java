@@ -176,15 +176,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 
 					}
 				});
-		validatePassengersView.getSaveButton().addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				Window.alert("Passengers saved");
 
-				
-			}
-		});
 		eventBus.addHandler(PossiblePassengersEvent.TYPE, new PossiblePassengersEventHandler() {
 			
 			@Override

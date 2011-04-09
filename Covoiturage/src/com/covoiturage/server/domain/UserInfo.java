@@ -16,6 +16,7 @@ import javax.persistence.Version;
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.BCrypt;
+import com.covoiturage.server.ChannelServer;
 import com.covoiturage.server.EMF;
 
 
@@ -117,7 +118,9 @@ public class UserInfo{
 				user= results.get(0);
 
 				em.getTransaction().begin();
+				
 				user.setLoggedIn(true);
+
 				em.getTransaction().commit();
 				}
 				else
@@ -131,10 +134,12 @@ public class UserInfo{
 
 
 
+		
 		return user;
 
 
 	}
+
 
 	public static boolean logout(String id) {
 		EntityManager em = entityManager();
@@ -164,6 +169,7 @@ public class UserInfo{
 	private String logoutUrl;
 
 	private String password;
+
 
 	private boolean loggedIn = false;
 

@@ -1,5 +1,8 @@
 package com.covoiturage.server.domain;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +17,12 @@ import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
+import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.urlfetch.HTTPHeader;
+import com.google.appengine.api.urlfetch.HTTPResponse;
+import com.google.appengine.api.urlfetch.URLFetchService;
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
+
 
 @Entity
 public class SimpleTravel {
@@ -82,7 +91,7 @@ public class SimpleTravel {
 
 	}
 	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
-			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger) {
+			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger, String mapImage) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		EntityManager em = entityManager();
 		try {
@@ -94,6 +103,39 @@ public class SimpleTravel {
 			simpleTravel.setDepartureStart(departureStart);
 			simpleTravel.setDepartureEnd(departureEnd);
 			simpleTravel.setArrival(arrival);
+			 URLFetchService fetchService =
+		            URLFetchServiceFactory.getURLFetchService();
+			
+			try {
+				HTTPResponse fetchResponse = fetchService.fetch(new URL(mapImage));
+				String fetchResponseContentType = null;
+		        for (HTTPHeader header : fetchResponse.getHeaders()) {
+		            
+		            if (header.getName().equalsIgnoreCase("content-type")) {
+		                fetchResponseContentType = header.getValue();
+		                break;
+		            }
+		        }
+
+		        if (fetchResponseContentType != null) {
+		            
+		            
+		        	simpleTravel.setMapImageType(fetchResponseContentType);
+	
+		        	simpleTravel.setMapImage(fetchResponse.getContent());;
+				
+				
+		        }
+				
+			} catch (MalformedURLException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+
+			
 			em.persist(simpleTravel);
 
 		} finally {
@@ -150,6 +192,19 @@ public class SimpleTravel {
 	public String passenger;
 	private String originAddress;
 	private String destinationAddress;
+	private Blob mapImage;
+	private String mapImageType;
+	
+
+	
+	public String getMapImageType() {
+		return mapImageType;
+	}
+
+	public void setMapImageType(String mapImageType) {
+		this.mapImageType = mapImageType;
+	}
+
 	public String getStatusPassenger() {
 		return statusPassenger;
 	}
@@ -292,5 +347,13 @@ public class SimpleTravel {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public void setMapImage(byte[] mapImage) {
+		this.mapImage = new Blob(mapImage);
+	}
+
+	public byte[] getMapImage() {
+		return mapImage.getBytes();
 	}
 }

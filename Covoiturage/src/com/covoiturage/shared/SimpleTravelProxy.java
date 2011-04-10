@@ -55,4 +55,11 @@ public interface SimpleTravelProxy extends EntityProxy{
 	public String getStatusDriver();
 
 	public void setStatusDriver(String statusDriver) ;
+	public String getMapImageType();
+
+	public void setMapImageType(String mapImageType);
+	public void setMapImage(byte[] mapImage);
+
+	public byte[] getMapImage();
+	
 }

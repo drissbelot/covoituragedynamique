@@ -35,7 +35,7 @@ public interface JourneyRequest extends RequestContext{
 	Request<List<JourneyProxy>> getJourneysFromUser(String id);
 
 
-	Request<JourneyProxy> updateJourney(String journeyId, Long simpleTravelId,
+	Request<JourneyProxy> updateJourney(String journeyId, String simpleTravelId,
 			List<String> steps);
 
 

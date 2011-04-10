@@ -97,6 +97,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private List<String> passengers;
 	private NotifyServiceAsync notifyService= GWT.create(NotifyService.class);
 	private List<String> passengersTravels;
+	private String mapUrl;
 
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -485,6 +486,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										@Override
 										public void onSuccess(
 												JourneyProxy responseJourney) {
+											if(passengers!=null){
 											for (String passenger: passengers) {
 												//TODO mettre un message plus intéressant évidemment
 												notifyService.sendMessage(passenger, "test", new AsyncCallback<Void>() {
@@ -517,8 +519,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												});
 											}
 
-											Window.alert("savec");
+											
 
+										}
 										}
 									});
 								}
@@ -551,16 +554,16 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											departureEnd,
 											arrival, response
 											.getId()
-											.toString());
+											.toString(),mapUrl);
 									createReq
 									.fire(new Receiver<SimpleTravelProxy>() {
 
 										@Override
 										public void onSuccess(
 												SimpleTravelProxy responseTravel) {
-											if(passengersTravels.size()!=0){
+											if(passengersTravels!=null &&passengersTravels.size()!=0){
 												JourneyRequest requestJourney = requestFactory.journeyRequest();
-												Request<JourneyProxy> createRequestJourney = requestJourney.updateJourney(passengersTravels.get(0), responseTravel.getId(),steps);
+												Request<JourneyProxy> createRequestJourney = requestJourney.updateJourney(passengersTravels.get(0), responseTravel.getId().toString(),steps);
 												createRequestJourney.fire(new Receiver<JourneyProxy>() {
 
 													@Override
@@ -584,7 +587,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 												});
 											}
-											Window.alert("saved");
+											
 
 										}
 									});
@@ -648,6 +651,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getStartPoint().toString());
 
 					}
+					mapUrl="http://maps.google.com/maps/api/staticmap?center="+mapView.getMap().getMap().getCenter().toUrlValue()+"&zoom="+mapView.getMap().getMap().getZoom()+"&size=200x200&sensor=false";
 					if (isDriver) {
 						SimpleTravelRequest request = requestFactory
 						.simpleTravelRequest();

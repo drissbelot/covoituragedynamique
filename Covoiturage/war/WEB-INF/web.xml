@@ -24,8 +24,25 @@
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>vehicleService</servlet-name>
-    <url-pattern>/covoiturage/vehicleService</url-pattern>
+    <servlet-name>notifyService</servlet-name>
+    <url-pattern>/covoiturage/notifyService</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>notifyService</servlet-name>
+    <servlet-class>com.covoiturage.server.NotifyServiceImpl</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>notifyService</servlet-name>
+    <url-pattern>/covoiturage/notifyService</url-pattern>
+  </servlet-mapping>
+ <servlet>
+    <servlet-name>ImageService</servlet-name>
+    <servlet-class>com.covoiturage.server.ImageServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ImageService</servlet-name>
+    <url-pattern>/imageService</url-pattern>
+  </servlet-mapping>
 </web-app>

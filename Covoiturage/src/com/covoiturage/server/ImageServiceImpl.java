@@ -1,7 +1,7 @@
 package com.covoiturage.server;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -23,14 +23,14 @@ public class ImageServiceImpl extends HttpServlet{
 			                                        throws ServletException, IOException
 			{
 		EntityManager em = EMF.get().createEntityManager();
-		Query query= em.createQuery("select o from SimpleTravel o where o.id = :userId");
+		Query query= em.createQuery("select o from SimpleTravel o where o.passenger = :idParam");
 		query.setParameter("idParam",request.getParameter("id"));
 		SimpleTravel travel;
 			        
 			        try
 					{
 					
-						 travel = (SimpleTravel) query.getSingleResult();
+						 travel = (SimpleTravel)query.getResultList().get(0);
 					}
 			        finally
 					{

@@ -18,7 +18,7 @@ public interface SimpleTravelRequest extends RequestContext{
 
 	Request<List<SimpleTravelProxy>> findAllSimpleTravels();
 
-	Request<SimpleTravelProxy> findSimpleTravel(Long id);
+	Request<SimpleTravelProxy> findSimpleTravel(String id);
 	
 	Request<SimpleTravelProxy> saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress, Date date, Date departureStart, Date departureEnd, Date arrival, String id, String mapUrl);
 

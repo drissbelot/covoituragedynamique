@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Version;
 
+import org.datanucleus.jpa.annotations.Extension;
+
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 import com.google.appengine.api.datastore.Blob;
@@ -56,7 +58,7 @@ public class SimpleTravel {
 		}
 	}
 
-	public static SimpleTravel findSimpleTravel(Long id) {
+	public static SimpleTravel findSimpleTravel(String id) {
 		if (id == null) {
 			return null;
 		}
@@ -187,7 +189,8 @@ public class SimpleTravel {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	public String id;
 	private Date date;
 	public String passenger;
 	private String originAddress;
@@ -282,7 +285,7 @@ public class SimpleTravel {
 	public SimpleTravel() {
 	}
 
-	public SimpleTravel(Long id, String passenger, List<String> steps) {
+	public SimpleTravel(String id, String passenger, List<String> steps) {
 
 		this.id = id;
 		this.passenger = passenger;
@@ -293,7 +296,7 @@ public class SimpleTravel {
 		return date;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -332,7 +335,7 @@ public class SimpleTravel {
 		this.date = date;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

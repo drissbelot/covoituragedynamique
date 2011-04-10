@@ -157,10 +157,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				  if (
-				  mapView.getDepartureStartTime().validate()  &&
-				  mapView.getDepartureEndTime().validate()&&
-				  mapView.getArrivalTime().validate())
+//				  if (
+//				  mapView.getDepartureStartTime().validate()  &&
+//				  mapView.getDepartureEndTime().validate()&&
+//				  mapView.getArrivalTime().validate())
 				 		saveJourney();
 
 			}
@@ -622,6 +622,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		if (mapView.getDepartureStartTime().validate()
 				
 				&& mapView.getDepartureEndTime().validate()&& mapView.getArrivalTime().validate()) {
+			mapUrl="";
 			HasDirectionsService directionsService = new DirectionsService();
 			DirectionsRendererImpl.impl.setMap(directionsRenderer.getJso(),
 					null);
@@ -651,7 +652,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getStartPoint().toString());
 
 					}
-					mapUrl="http://maps.google.com/maps/api/staticmap?center="+mapView.getMap().getMap().getCenter().toUrlValue()+"&zoom="+mapView.getMap().getMap().getZoom()+"&size=200x200&sensor=false";
+					mapUrl="http://maps.google.com/maps/api/staticmap?center="+mapView.getMap().getMap().getCenter().toUrlValue()+"&zoom="+mapView.getMap().getMap().getZoom()+"&size=400x400&sensor=false";
+					//TODO ajouter le path
 					if (isDriver) {
 						SimpleTravelRequest request = requestFactory
 						.simpleTravelRequest();

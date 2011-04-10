@@ -20,7 +20,7 @@ public interface SimpleTravelRequest extends RequestContext{
 
 	Request<SimpleTravelProxy> findSimpleTravel(Long id);
 	
-	Request<SimpleTravelProxy> saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress, Date date, Date departureStart, Date departureEnd, Date arrival, String id);
+	Request<SimpleTravelProxy> saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress, Date date, Date departureStart, Date departureEnd, Date arrival, String id, String mapUrl);
 
 	InstanceRequest<SimpleTravelProxy, Void> persist();
 

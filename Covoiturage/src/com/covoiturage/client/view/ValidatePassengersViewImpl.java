@@ -17,7 +17,9 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -59,14 +61,17 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 			public Widget render(BaseModelData model, int rowIdx) {
 				panel = new ContentPanel();
 				Label firstName = new Label();
-
-				firstName.setText(model.get("firstName").toString());
-				panel.add(firstName);
-
 				Label lastName = new Label();
+				Image mapImage= new Image(GWT.getHostPageBaseURL()+"/imageService?id="+model.get("login").toString());
+				mapImage.setSize("200px", "200px");
+				
+				firstName.setText(model.get("firstName").toString());
 				lastName.setText(model.get("lastName").toString());
+				
+				
+				panel.add(firstName);
 				panel.add(lastName);
-
+				panel.add(mapImage);
 
 				return panel;
 			}

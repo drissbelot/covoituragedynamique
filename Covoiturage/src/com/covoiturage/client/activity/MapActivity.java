@@ -7,7 +7,6 @@ import java.util.List;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.NotifyService;
 import com.covoiturage.client.NotifyServiceAsync;
-
 import com.covoiturage.client.event.GetValidateDriversEvent;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEvent;
@@ -31,7 +30,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -68,10 +66,8 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.RequestFactory;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -159,13 +155,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getSaveJourneyButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				/*
-				 * if (mapView.getDateOfJourney().validate() &&
-				 * mapView.getDepartureStartTime().validate() &&
-				 * mapView.getArrivalTime().validate() &&
-				 * mapView.getDepartureEndTime().validate())
-				 */
-				saveJourney();
+				
+				  if (
+				  mapView.getDepartureStartTime().validate()  &&
+				  mapView.getDepartureEndTime().validate()&&
+				  mapView.getArrivalTime().validate())
+				 		saveJourney();
 
 			}
 		});
@@ -622,8 +617,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private void getDirections() {
 
 		if (mapView.getDepartureStartTime().validate()
-				&& mapView.getArrivalTime().validate()
-				&& mapView.getDepartureEndTime().validate()) {
+				
+				&& mapView.getDepartureEndTime().validate()&& mapView.getArrivalTime().validate()) {
 			HasDirectionsService directionsService = new DirectionsService();
 			DirectionsRendererImpl.impl.setMap(directionsRenderer.getJso(),
 					null);
@@ -674,8 +669,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										.size() != 0) {
 									List<String> resultPassengers = new ArrayList<String>();
 									for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
-										// TODO éliminer les
-										// détours trop longs
 										resultPassengers
 										.add(simpletravel
 												.getPassenger());

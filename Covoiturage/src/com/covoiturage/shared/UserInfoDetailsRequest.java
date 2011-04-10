@@ -7,6 +7,7 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
+
 import com.covoiturage.server.domain.UserInfoDetails;
 
 
@@ -32,6 +33,9 @@ public interface UserInfoDetailsRequest extends RequestContext {
 
 
 	Request<UserInfoDetailsProxy> channel(String id);
+
+
+	Request<UserInfoDetailsProxy> modifyUserInfoDetails(String id,String firstName, String lastName, String language);
 
 ;
 

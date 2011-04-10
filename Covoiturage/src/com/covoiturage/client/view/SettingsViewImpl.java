@@ -19,12 +19,14 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> { }
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
-	
+	//TODO conventions de nommage !!!!!!!!!
 	@UiField Button submitButton;
 	@UiField VerticalPanel flowpanel;
-	@UiField TextBox firstName,lastName,emailAdress;
-	@UiField PasswordTextBox prevpassword,newpassword;
-	@UiField ListBox langue;
+	@UiField TextBox firstName,lastName,emailAddress;
+
+
+	@UiField PasswordTextBox prevpassword,newPassword;
+	@UiField ListBox language;
 	@UiField Label header,usernamefix,username,lastname,firstname,email,prevpasswordlab,newpasswordlab,languelab;
 	@SuppressWarnings("unused")
 	private Presenter presenter; 
@@ -41,28 +43,47 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		firstname.setText(constants.firstname()+" :");
 		firstName.setText(constants.firstname());
 		email.setText(constants.email()+" :");
-		emailAdress.setText(constants.email());
+		emailAddress.setText(constants.email());
 		prevpasswordlab.setText(constants.prevpasswordlab()+" :");
 		prevpassword.setText(constants.password());
 		newpasswordlab.setText(constants.newpasswordlab()+" :");
-		newpassword.setText(constants.password());
+		newPassword.setText(constants.password());
 		languelab.setText(constants.languelab()+" :");
-		langue.addItem(constants.fr());
-		langue.addItem(constants.en());
-		langue.addItem(constants.nl());
-		langue.addItem(constants.it());
-		langue.addItem(constants.ch());
+		language.addItem(constants.fr());
+		language.addItem(constants.en());
+		language.addItem(constants.nl());
+		language.addItem(constants.it());
+		language.addItem(constants.ch());
 		submitButton.setText(constants.submit());
 		
 	}
 	
-	public HasClickHandlers getSubmit() {
+	public HasClickHandlers getSubmitButton() {
 
 		return submitButton;
 	}
 	
 	public void setPresenter(Presenter presenter) {
 		this.presenter=presenter;
+	}
+	public TextBox getFirstName() {
+		return firstName;
+	}
+
+	public TextBox getLastName() {
+		return lastName;
+	}
+
+	public PasswordTextBox getNewPassword() {
+		return newPassword;
+	}
+
+	public ListBox getLanguage() {
+		return language;
+	}
+
+	public TextBox getEmailAddress() {
+		return emailAddress;
 	}
 
 }

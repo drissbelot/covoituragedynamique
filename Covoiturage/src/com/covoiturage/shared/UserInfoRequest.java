@@ -26,6 +26,9 @@ public interface UserInfoRequest extends RequestContext {
 	InstanceRequest<UserInfoProxy, Void> remove();
 
 
+	Request<UserInfoProxy> modifyUserInfo(String id,String password, String emailAddress);
+
+
 	
 
 

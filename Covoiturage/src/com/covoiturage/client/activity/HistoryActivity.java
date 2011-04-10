@@ -61,7 +61,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 				searchJourneys();
 			}
 		});
-		
+		//TODO trier un peu tout ça et afficher
 		
 	}
 

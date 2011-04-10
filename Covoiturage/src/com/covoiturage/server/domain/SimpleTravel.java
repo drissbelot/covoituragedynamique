@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Query;
 import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
@@ -21,8 +22,8 @@ public class SimpleTravel {
 		EntityManager em = entityManager();
 		try {
 			return ((Number) em.createQuery(
-					"select count(o) from SimpleTravel o").getSingleResult())
-					.longValue();
+			"select count(o) from SimpleTravel o").getSingleResult())
+			.longValue();
 		} finally {
 			em.close();
 		}
@@ -37,7 +38,7 @@ public class SimpleTravel {
 		EntityManager em = entityManager();
 		try {
 			List<SimpleTravel> list = em.createQuery(
-					"select o from SimpleTravel o").getResultList();
+			"select o from SimpleTravel o").getResultList();
 
 			list.size();
 			return list;
@@ -69,16 +70,16 @@ public class SimpleTravel {
 		EntityManager em = entityManager();
 		try {
 			List<SimpleTravel> list = em.createQuery(
-					"select o from SimpleTravel o where o.passenger = :userId").getResultList();
+			"select o from SimpleTravel o where o.passenger = :userId").getResultList();
 			list.size();
 			return list;
-			
+
 		} finally {
 			em.close();
 		}
-		
-		
-		
+
+
+
 	}
 	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
 			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger) {
@@ -102,7 +103,43 @@ public class SimpleTravel {
 
 		return simpleTravel;
 	}
+	public static void updateSimpleTravel(String id, String statusDriver, String statusPassenger){
 
+		SimpleTravel travel = new SimpleTravel();
+		EntityManager em = entityManager();
+
+		Query query= em.createQuery("select o from SimpleTravel o where o.id = :idParam ");
+		query.setParameter("idParam",id);
+
+		try
+		{
+
+			@SuppressWarnings("unchecked")
+			List<SimpleTravel> results =query.getResultList();
+
+			if(results.size()!=0){
+
+
+				travel= results.get(0);
+
+				em.getTransaction().begin();
+
+				travel.setStatusDriver(statusDriver);
+				travel.setStatusPassenger(statusPassenger);
+
+				em.getTransaction().commit();
+			}
+
+
+		}
+		finally
+		{
+			em.close();
+		}
+
+
+
+	}
 
 
 	@Id
@@ -138,7 +175,7 @@ public class SimpleTravel {
 	@Column(name = "version")
 	private Integer version;
 	private List<String> steps;
-	
+
 	public Date getDepartureStart() {
 		return departureStart;
 	}
@@ -166,7 +203,7 @@ public class SimpleTravel {
 	public Date departureStart;
 	public Date departureEnd;
 	public Date arrival;
-	
+
 	public String getOriginAddress() {
 		return originAddress;
 	}

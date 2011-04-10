@@ -151,6 +151,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 											rec.set("lastName",driversInfo.get(i).getLastName() );
 											rec.set("originCoords", journeys.get(i).getSteps().get(0));
 											rec.set("destinationCoords", journeys.get(i).getSteps().get(1));
+											rec.set("id",journeys.get(i).getId());
 											listRecords.add(rec );
 
 										}

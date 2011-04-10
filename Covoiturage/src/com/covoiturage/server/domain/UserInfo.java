@@ -16,7 +16,7 @@ import javax.persistence.Version;
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.BCrypt;
-import com.covoiturage.server.ChannelServer;
+
 import com.covoiturage.server.EMF;
 
 

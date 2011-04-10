@@ -15,7 +15,12 @@ public class MenuViewImpl extends Composite implements MenuView {
     private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
     private MenuViewConstants constants=(MenuViewConstants)GWT.create(MenuViewConstants.class);
     
-    @UiField Label mapLabel,settingsLabel,historyLabel,menutitre;
+    @UiField Label menutitre;
+    @UiField Label mapLabel;
+    @UiField Label settingsLabel;
+    @UiField Label historyLabel;
+    @UiField Label messagesLabel;
+    
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
@@ -28,6 +33,7 @@ public class MenuViewImpl extends Composite implements MenuView {
 		settingsLabel.setText(constants.settings());
 		historyLabel.setText(constants.history());
 		menutitre.setText(constants.menutitre());
+		messagesLabel.setText("Messages");
 		
 	}
 
@@ -42,6 +48,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 	}
 	public HasClickHandlers getHistoryLabel(){
 		return historyLabel;
+	}
+	public HasClickHandlers getMessagesLabel(){
+		return messagesLabel;
 	}
 
 

@@ -487,9 +487,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										public void onSuccess(
 												JourneyProxy responseJourney) {
 											if(passengers!=null){
+												int i=0;
 											for (String passenger: passengers) {
-												//TODO mettre un message plus intéressant évidemment
-												notifyService.sendMessage(passenger, "test", new AsyncCallback<Void>() {
+												
+												notifyService.sendMessage(passenger,responseJourney.getId()+"/"+passengersTravels.get(i) , new AsyncCallback<Void>() {
 
 													@Override
 													public void onSuccess(Void result) {
@@ -502,7 +503,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 													}
 												});
-
+												i++;
 											}
 											for(String simpleTravel :passengersTravels){
 												SimpleTravelRequest requestTravel = requestFactory.simpleTravelRequest();
@@ -538,7 +539,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 								@Override
 								public void onSuccess(
-										UserInfoDetailsProxy response) {
+										final UserInfoDetailsProxy responseUser) {
 
 									SimpleTravelRequest request = requestFactory
 									.simpleTravelRequest();
@@ -552,7 +553,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											date,
 											departureStart,
 											departureEnd,
-											arrival, response
+											arrival, responseUser
 											.getId()
 											.toString(),mapUrl);
 									createReq
@@ -560,7 +561,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 										@Override
 										public void onSuccess(
-												SimpleTravelProxy responseTravel) {
+												final SimpleTravelProxy responseTravel) {
 											if(passengersTravels!=null &&passengersTravels.size()!=0){
 												JourneyRequest requestJourney = requestFactory.journeyRequest();
 												Request<JourneyProxy> createRequestJourney = requestJourney.updateJourney(passengersTravels.get(0), responseTravel.getId().toString(),steps);
@@ -569,7 +570,19 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													@Override
 													public void onSuccess(
 															JourneyProxy response) {
-														
+														notifyService.sendMessage(responseUser.getId(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<Void>() {
+
+															@Override
+															public void onSuccess(Void result) {
+
+
+															}
+
+															@Override
+															public void onFailure(Throwable caught) {
+
+															}
+														});
 														
 													}
 													
@@ -586,6 +599,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 
 												});
+												
 											}
 											
 

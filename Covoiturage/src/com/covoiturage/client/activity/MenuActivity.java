@@ -4,6 +4,7 @@ import com.covoiturage.client.ClientFactory;
 
 import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
+import com.covoiturage.client.place.MessagesPlace;
 import com.covoiturage.client.place.SettingsPlace;
 
 import com.covoiturage.client.view.MenuView;
@@ -51,6 +52,14 @@ public class MenuActivity extends AbstractActivity implements MenuView.Presenter
 			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new HistoryPlace(null));
+				
+			}
+		});
+		menuView.getMessagesLabel().addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				goTo(new MessagesPlace(null));
 				
 			}
 		});

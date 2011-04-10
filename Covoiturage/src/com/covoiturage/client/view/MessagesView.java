@@ -7,13 +7,10 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 
 
-public interface MenuView extends IsWidget{
+public interface MessagesView extends IsWidget{
     void setPresenter(Presenter presenter);
 	public interface Presenter {
 	    void goTo(Place place);
 	}
-	public HasClickHandlers getSettingsLabel();
-	public HasClickHandlers getMapLabel();
-	public HasClickHandlers getHistoryLabel();
-	public HasClickHandlers getMessagesLabel();
+
 }

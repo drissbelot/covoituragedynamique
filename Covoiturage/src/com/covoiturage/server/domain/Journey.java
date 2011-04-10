@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Version;
 
+import org.datanucleus.jpa.annotations.Extension;
+
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 
@@ -67,7 +69,7 @@ public class Journey {
 			em.close();
 		}
 	}
-	public static Journey findJourney(Long id) {
+	public static Journey findJourney(String id) {
 		if (id == null) {
 			return null;
 		}
@@ -170,14 +172,14 @@ return journey;
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	public String id;
 
-	public Long id;
-
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -270,7 +272,7 @@ return journey;
 
 	public Journey() {}
 
-	public Journey(Long id, String driver, List<String> passengersTravels, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
+	public Journey(String id, String driver, List<String> passengersTravels, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
 		super();
 		this.id = id;
 		this.driver = driver;

@@ -18,7 +18,7 @@ public interface JourneyRequest extends RequestContext{
 
 	Request<List<JourneyProxy>> findAllJourneys();
 
-	Request<JourneyProxy> findJourney(Long id);
+	Request<JourneyProxy> findJourney(String id);
 	
 	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival, String id,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails, List<String> passengers);
 	

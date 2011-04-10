@@ -21,6 +21,7 @@ public class FooterViewImpl extends Composite implements FooterView{
 	public FooterViewImpl(){
 		initWidget(binder.createAndBindUi(this)); 
 		//TODO utiliser des images en local
+		//TODO utiliser le MVP
 		imagefr=new Image();
 		imagenl=new Image();
 		imageen=new Image();

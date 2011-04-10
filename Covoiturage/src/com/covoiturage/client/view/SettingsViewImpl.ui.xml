@@ -25,7 +25,7 @@
 				</g:HorizontalPanel>	
 				<g:HorizontalPanel>
 					<g:Label styleName='{style.label}' ui:field="email" width="8em"/>
-					<g:TextBox ui:field="emailAdress"  styleName='{style.textbox}'/>
+					<g:TextBox ui:field="emailAddress"  styleName='{style.textbox}'/>
 				</g:HorizontalPanel>	
 				<g:HorizontalPanel>
 					<g:Label styleName='{style.label}' ui:field="prevpasswordlab" width="8em"/>
@@ -33,11 +33,11 @@
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
 					<g:Label styleName='{style.label}' ui:field="newpasswordlab" width="8em"/>
-					<g:PasswordTextBox ui:field="newpassword" styleName='{style.textbox}'/>
+					<g:PasswordTextBox ui:field="newPassword" styleName='{style.textbox}'/>
 				</g:HorizontalPanel>
 				<g:HorizontalPanel>
 				<g:Label styleName='{style.label}' ui:field="languelab" width="8em"/>
-				<g:ListBox ui:field="langue"  />
+				<g:ListBox ui:field="language"  />
 				</g:HorizontalPanel>
 				<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
 					<g:Button ui:field="submitButton" styleName='{style.button}'/>

@@ -140,7 +140,47 @@ public class UserInfo{
 
 	}
 
+	public static UserInfo modifyUserInfo(String id,String password, String emailAddress){
+		UserInfo user = new UserInfo();
+		EntityManager em = entityManager();
+		
+		Query query= em.createQuery("select o from UserInfo o where o.id = :idParam ");
+		query.setParameter("idParam",id);
 
+		try
+		{
+
+			@SuppressWarnings("unchecked")
+			List<UserInfo> results =query.getResultList();
+	
+			if(results.size()==0){
+				return null;
+			}
+			else 
+			{
+				
+				user= results.get(0);
+
+				em.getTransaction().begin();
+				
+				user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+				user.setEmailAddress(emailAddress);
+
+				em.getTransaction().commit();
+				
+				
+			}
+		}
+		finally
+		{
+			em.close();
+		}
+
+
+
+		
+		return user;
+	}
 	public static boolean logout(String id) {
 		EntityManager em = entityManager();
 		try

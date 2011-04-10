@@ -14,6 +14,7 @@ import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
+
 import com.covoiturage.server.ChannelServer;
 import com.covoiturage.server.EMF;
 
@@ -122,7 +123,48 @@ public class UserInfoDetails {
 			em.close();
 		}
 	}
+	public static UserInfoDetails modifyUserInfoDetails(String id,String firstName, String lastName, String language){
+		UserInfoDetails user = new UserInfoDetails();
+		EntityManager em = entityManager();
+		
+		Query query= em.createQuery("select o from UserInfoDetails o where o.user = :idParam ");
+		query.setParameter("idParam",id);
+
+		try
+		{
+
+			@SuppressWarnings("unchecked")
+			List<UserInfoDetails> results =query.getResultList();
 	
+			if(results.size()==0){
+				return null;
+			}
+			else 
+			{
+				
+				user= results.get(0);
+
+				em.getTransaction().begin();
+				
+				user.setFirstName(firstName);
+				user.setLastName(lastName);
+				user.setLanguage(language);
+
+				em.getTransaction().commit();
+				
+		}
+		}
+		finally
+		{
+			em.close();
+		}
+
+
+
+		
+		return user;
+		
+	}
 	public static List<UserInfoDetails> getPassengerList(List<String> passengers){
 		EntityManager em = entityManager();
 		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();

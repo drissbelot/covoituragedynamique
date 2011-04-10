@@ -62,7 +62,8 @@ public class ValidatePassengersViewImpl extends Composite implements  ValidatePa
 				panel = new ContentPanel();
 				Label firstName = new Label();
 				Label lastName = new Label();
-				Image mapImage= new Image(GWT.getHostPageBaseURL()+"/imageService?id="+model.get("login").toString());
+				GWT.log(model.get("login").toString());
+				Image mapImage= new Image(GWT.getHostPageBaseURL()+"imageService?id="+model.get("login").toString());
 				mapImage.setSize("200px", "200px");
 				
 				firstName.setText(model.get("firstName").toString());

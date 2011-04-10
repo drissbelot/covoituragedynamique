@@ -69,7 +69,8 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 			public void onMessage(MessageEvent event) {
 				headerView.getMessages().setText("Vous avez un message");
 				//TODO réagir
-				
+				//TODO Jolie Popup
+				//TODO lier avec la messageView au clic
 			}
 		});
 	}

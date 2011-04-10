@@ -90,7 +90,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
-	List<String> steps;
+	private List<String> steps;
 	private List<String> listAddress = null;
 	private final PlaceController placeController;
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
@@ -100,6 +100,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private List<String> waypointsCoords;
 	private List<String> passengers;
 	private NotifyServiceAsync notifyService= GWT.create(NotifyService.class);
+	private List<String> passengersTravels;
+
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -170,85 +172,85 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getDateOfJourney().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 
-					@Override
-					public void handleEvent(BaseEvent be) {
-						date = mapView.getDateOfJourney().getValue();
+			@Override
+			public void handleEvent(BaseEvent be) {
+				date = mapView.getDateOfJourney().getValue();
 
-					}
-				});
+			}
+		});
 
 		mapView.getDepartureStartTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
-					@Override
-					public void handleEvent(BaseEvent be) {
-						if (mapView.getDepartureStartTime().getRawValue()
-								.length() == 2)
-							mapView.getDepartureStartTime().setRawValue(
-									mapView.getDepartureStartTime()
-											.getRawValue() + ":");
-					}
-				});
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if (mapView.getDepartureStartTime().getRawValue()
+						.length() == 2)
+					mapView.getDepartureStartTime().setRawValue(
+							mapView.getDepartureStartTime()
+							.getRawValue() + ":");
+			}
+		});
 		mapView.getDepartureEndTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
-					@Override
-					public void handleEvent(BaseEvent be) {
-						if (mapView.getDepartureEndTime().getRawValue()
-								.length() == 2)
-							mapView.getDepartureEndTime().setRawValue(
-									mapView.getDepartureEndTime().getRawValue()
-											+ ":");
-					}
-				});
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if (mapView.getDepartureEndTime().getRawValue()
+						.length() == 2)
+					mapView.getDepartureEndTime().setRawValue(
+							mapView.getDepartureEndTime().getRawValue()
+							+ ":");
+			}
+		});
 		mapView.getArrivalTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
-					@Override
-					public void handleEvent(BaseEvent be) {
-						if (mapView.getArrivalTime().getRawValue().length() == 2)
-							mapView.getArrivalTime().setRawValue(
-									mapView.getArrivalTime().getRawValue()
-											+ ":");
-					}
-				});
+			@Override
+			public void handleEvent(BaseEvent be) {
+				if (mapView.getArrivalTime().getRawValue().length() == 2)
+					mapView.getArrivalTime().setRawValue(
+							mapView.getArrivalTime().getRawValue()
+							+ ":");
+			}
+		});
 
 		mapView.getDepartureStartTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
-					@Override
-					public void handleEvent(BaseEvent be) {
+			@Override
+			public void handleEvent(BaseEvent be) {
 
-						departureStart.setHours(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(0, 2)));
+				departureStart.setHours(Integer.valueOf(mapView
+						.getDepartureStartTime().getValue()
+						.substring(0, 2)));
 
-						departureStart.setMinutes(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(3, 5)));
-					}
-				});
+				departureStart.setMinutes(Integer.valueOf(mapView
+						.getDepartureStartTime().getValue()
+						.substring(3, 5)));
+			}
+		});
 		mapView.getDepartureEndTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 
-					@Override
-					public void handleEvent(BaseEvent be) {
-						departureEnd.setHours(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(0, 2)));
-						departureEnd.setMinutes(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(3, 5)));
-					}
-				});
+			@Override
+			public void handleEvent(BaseEvent be) {
+				departureEnd.setHours(Integer.valueOf(mapView
+						.getDepartureEndTime().getValue()
+						.substring(0, 2)));
+				departureEnd.setMinutes(Integer.valueOf(mapView
+						.getDepartureEndTime().getValue()
+						.substring(3, 5)));
+			}
+		});
 		mapView.getArrivalTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 
-					@Override
-					public void handleEvent(BaseEvent be) {
-						arrival.setHours(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(0, 2)));
-						arrival.setMinutes(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(3, 5)));
+			@Override
+			public void handleEvent(BaseEvent be) {
+				arrival.setHours(Integer.valueOf(mapView
+						.getArrivalTime().getValue().substring(0, 2)));
+				arrival.setMinutes(Integer.valueOf(mapView
+						.getArrivalTime().getValue().substring(3, 5)));
 
-					}
-				});
+			}
+		});
 
 		mapView.getDriverRadioButton().addClickHandler(new ClickHandler() {
 
@@ -276,132 +278,137 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		eventBus.addHandler(SelectPassengersEvent.TYPE,
 				new SelectPassengersEventHandler() {
 
+			@Override
+			public void onSelectPassengers(
+					SelectPassengersEvent selectPassengersEvent) {
+				passengers=new ArrayList<String>();
+				passengersTravels=new ArrayList<String>();
+				for (BaseModelData  passenger: selectPassengersEvent.getPassengers()) {
+					passengers.add(passenger.get("login").toString());
+					passengersTravels.add(passenger.get("id").toString());
+				}
+
+				for (HasMarker overlay : overlays) {
+
+					overlay.setMap(null);
+					overlays.remove(overlay);
+				}
+				waypoints = new ArrayList<HasDirectionsWaypoint>();
+				waypointsCoords = new ArrayList<String>();
+				HasDirectionsWaypoint point = new DirectionsWaypoint();
+				HasDirectionsWaypoint point1 = new DirectionsWaypoint();
+				for (BaseModelData simpletravel : selectPassengersEvent
+						.getPassengers()) {
+
+					String origin = simpletravel.get("origin");
+					String destination = simpletravel
+					.get("destination");
+					point.setLocation(origin);
+					waypoints.add(point);
+					waypointsCoords.add(simpletravel
+							.get("originCoords").toString());
+					waypointsCoords.add(simpletravel.get(
+					"destinationCoords").toString());
+					point1.setLocation(destination);
+					waypoints.add(point1);
+
+				}
+				DirectionsRendererImpl.impl.setMap(
+						directionsRenderer.getJso(), null);
+				directionsRenderer.setMap(mapView.getMap().getMap());
+				HasDirectionsRequest request = new DirectionsRequest();
+				request.setWaypoints(waypoints);
+				request.setOriginString(mapView.getOriginAddress()
+						.getText());
+				request.setDestinationString(mapView
+						.getDestinationAddress().getText());
+				HasDirectionsTravelMode travelMode = new DirectionsTravelMode();
+				request.setTravelMode(travelMode.Driving());
+				HasDirectionsService service = new DirectionsService();
+				service.route(request, new DirectionsCallback() {
+
 					@Override
-					public void onSelectPassengers(
-							SelectPassengersEvent selectPassengersEvent) {
-						passengers=new ArrayList<String>();
-						for (BaseModelData  passenger: selectPassengersEvent.getPassengers()) {
-							passengers.add(passenger.get("login").toString());
-						}
-						
-						for (HasMarker overlay : overlays) {
-
-							overlay.setMap(null);
-							overlays.remove(overlay);
-						}
-						waypoints = new ArrayList<HasDirectionsWaypoint>();
-						waypointsCoords = new ArrayList<String>();
-						HasDirectionsWaypoint point = new DirectionsWaypoint();
-						HasDirectionsWaypoint point1 = new DirectionsWaypoint();
-						for (BaseModelData simpletravel : selectPassengersEvent
-								.getPassengers()) {
-
-							String origin = simpletravel.get("origin");
-							String destination = simpletravel
-									.get("destination");
-							point.setLocation(origin);
-							waypoints.add(point);
-							waypointsCoords.add(simpletravel
-									.get("originCoords").toString());
-							waypointsCoords.add(simpletravel.get(
-									"destinationCoords").toString());
-							point1.setLocation(destination);
-							waypoints.add(point1);
-
-						}
-						DirectionsRendererImpl.impl.setMap(
-								directionsRenderer.getJso(), null);
-						directionsRenderer.setMap(mapView.getMap().getMap());
-						HasDirectionsRequest request = new DirectionsRequest();
-						request.setWaypoints(waypoints);
-						request.setOriginString(mapView.getOriginAddress()
-								.getText());
-						request.setDestinationString(mapView
-								.getDestinationAddress().getText());
-						HasDirectionsTravelMode travelMode = new DirectionsTravelMode();
-						request.setTravelMode(travelMode.Driving());
-						HasDirectionsService service = new DirectionsService();
-						service.route(request, new DirectionsCallback() {
-
-							@Override
-							public void callback(HasDirectionsResult response,
-									String status) {
-								directionsRenderer.setDirections(response);
-								double distance = response.getRoutes().get(0)
-										.getLegs().get(0).getDistance()
-										.getValue()
-										- directionsDriver.getRoutes().get(0)
-												.getLegs().get(0).getDistance()
-												.getValue();
-								double duration = response.getRoutes().get(0)
-										.getLegs().get(0).getDuration()
-										.getValue()
-										- directionsDriver.getRoutes().get(0)
-												.getLegs().get(0).getDuration()
-												.getValue();
-								eventBus.fireEvent(new PossiblePassengersEvent(
-										distance, duration));
-							}
-						});
+					public void callback(HasDirectionsResult response,
+							String status) {
+						directionsRenderer.setDirections(response);
+						double distance = response.getRoutes().get(0)
+						.getLegs().get(0).getDistance()
+						.getValue()
+						- directionsDriver.getRoutes().get(0)
+						.getLegs().get(0).getDistance()
+						.getValue();
+						double duration = response.getRoutes().get(0)
+						.getLegs().get(0).getDuration()
+						.getValue()
+						- directionsDriver.getRoutes().get(0)
+						.getLegs().get(0).getDuration()
+						.getValue();
+						eventBus.fireEvent(new PossiblePassengersEvent(
+								distance, duration));
 					}
 				});
+			}
+		});
+
+
+
 
 		mapView.getOriginAddress().getTextBox()
-				.addKeyUpHandler(new KeyUpHandler() {
+		.addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+
+				geocoder = new Geocoder();
+				HasGeocoderRequest request = new GeocoderRequest();
+				request.setRegion("be");
+				request.setAddress(mapView.getOriginAddress()
+						.getTextBox().getText());
+				geocoder.geocode(request, new GeocoderCallback() {
+
 					@Override
-					public void onKeyUp(KeyUpEvent event) {
-
-						geocoder = new Geocoder();
-						HasGeocoderRequest request = new GeocoderRequest();
-						request.setRegion("be");
-						request.setAddress(mapView.getOriginAddress()
-								.getTextBox().getText());
-						geocoder.geocode(request, new GeocoderCallback() {
-
-							@Override
-							public void callback(
-									List<HasGeocoderResult> responses,
-									String status) {
-								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
-										.getOriginAddress().getSuggestOracle();
-								for (HasGeocoderResult result : responses) {
-									oracle.add(result.getFormattedAddress());
-								}
-
-							}
-						});
+					public void callback(
+							List<HasGeocoderResult> responses,
+							String status) {
+						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
+						.getOriginAddress().getSuggestOracle();
+						for (HasGeocoderResult result : responses) {
+							oracle.add(result.getFormattedAddress());
+						}
 
 					}
 				});
+
+			}
+		});
 		mapView.getDestinationAddress().getTextBox()
-				.addKeyUpHandler(new KeyUpHandler() {
+		.addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+
+				geocoder = new Geocoder();
+				HasGeocoderRequest request = new GeocoderRequest();
+				request.setRegion("be");
+				request.setAddress(mapView.getDestinationAddress()
+						.getTextBox().getText());
+				geocoder.geocode(request, new GeocoderCallback() {
+
 					@Override
-					public void onKeyUp(KeyUpEvent event) {
-
-						geocoder = new Geocoder();
-						HasGeocoderRequest request = new GeocoderRequest();
-						request.setRegion("be");
-						request.setAddress(mapView.getDestinationAddress()
-								.getTextBox().getText());
-						geocoder.geocode(request, new GeocoderCallback() {
-
-							@Override
-							public void callback(
-									List<HasGeocoderResult> responses,
-									String status) {
-								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
-										.getDestinationAddress()
-										.getSuggestOracle();
-								for (HasGeocoderResult result : responses) {
-									oracle.add(result.getFormattedAddress());
-								}
-
-							}
-
-						});
+					public void callback(
+							List<HasGeocoderResult> responses,
+							String status) {
+						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
+						.getDestinationAddress()
+						.getSuggestOracle();
+						for (HasGeocoderResult result : responses) {
+							oracle.add(result.getFormattedAddress());
+						}
 
 					}
+
 				});
+
+			}
+		});
 	}
 
 	protected void doGeolocate(HasLatLng point) {
@@ -425,7 +432,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			}
 
 		});
-		
+
 	}
 
 	protected void saveJourney() {
@@ -453,106 +460,145 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						if (isDriver) {
 							UserInfoDetailsRequest requestPassenger = requestFactory
-									.userInfoDetailsRequest();
+							.userInfoDetailsRequest();
 							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-									.findPassengerFromUser(currentUser.getId());
+							.findPassengerFromUser(currentUser.getId());
 
 							createReqPassenger
-									.fire(new Receiver<UserInfoDetailsProxy>() {
+							.fire(new Receiver<UserInfoDetailsProxy>() {
+
+								@Override
+								public void onSuccess(
+										final UserInfoDetailsProxy responseDriver) {
+									JourneyRequest request = requestFactory
+									.journeyRequest();
+									Request<JourneyProxy> createReq = request.saveJourneyDriver(
+											listAddress,
+											date,
+											departureStart,
+											departureEnd,
+											arrival,
+											responseDriver.getId(),
+											mapView.getOriginAddress()
+											.getText(),
+											mapView.getDestinationAddress()
+											.getText(),
+											waypointsCoords, steps,passengersTravels);
+									createReq
+									.fire(new Receiver<JourneyProxy>() {
 
 										@Override
 										public void onSuccess(
-												final UserInfoDetailsProxy responseDriver) {
-											JourneyRequest request = requestFactory
-													.journeyRequest();
-											Request<JourneyProxy> createReq = request.saveJourneyDriver(
-													listAddress,
-													date,
-													departureStart,
-													departureEnd,
-													arrival,
-													responseDriver.getId(),
-													mapView.getOriginAddress()
-															.getText(),
-													mapView.getDestinationAddress()
-															.getText(),
-													waypointsCoords, steps,passengers);
-											createReq
-													.fire(new Receiver<JourneyProxy>() {
+												JourneyProxy responseJourney) {
+											for (String passenger: passengers) {
+												//TODO mettre un message plus intéressant évidemment
+												notifyService.sendMessage(passenger, "test", new AsyncCallback<Void>() {
 
-														@Override
-														public void onSuccess(
-																JourneyProxy responseJourney) {
-															for (String passenger: passengers) {
-																//TODO mettre un message plus intéressant évidemment
-																notifyService.sendMessage(passenger, "test", new AsyncCallback<Void>() {
-																	
-																	@Override
-																	public void onSuccess(Void result) {
-																		
-																		
-																	}
-																	
-																	@Override
-																	public void onFailure(Throwable caught) {
-																		GWT.log(caught.getMessage());
-																		// TODO Auto-generated method stub
-																		
-																	}
-																});
-															}
-															
-															Window.alert("savec");
+													@Override
+													public void onSuccess(Void result) {
 
-														}
-													});
+
+													}
+
+													@Override
+													public void onFailure(Throwable caught) {
+
+													}
+												});
+
+											}
+											for(String simpleTravel :passengersTravels){
+												SimpleTravelRequest requestTravel = requestFactory.simpleTravelRequest();
+												Request<Void> createRequestTravel = requestTravel.updateSimpleTravel(simpleTravel,"accepted","pending");
+												createRequestTravel.fire(new Receiver<Void>() {
+													@Override
+													public void onSuccess(
+															Void response) {
+
+
+													}
+
+
+												});
+											}
+
+											Window.alert("savec");
+
 										}
 									});
+								}
+							});
 
 						} else if (isPassenger) {
 							UserInfoDetailsRequest requestPassenger = requestFactory
-									.userInfoDetailsRequest();
+							.userInfoDetailsRequest();
 							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-									.findPassengerFromUser(currentUser.getId());
+							.findPassengerFromUser(currentUser.getId());
 
 							createReqPassenger
-									.fire(new Receiver<UserInfoDetailsProxy>() {
+							.fire(new Receiver<UserInfoDetailsProxy>() {
+
+								@Override
+								public void onSuccess(
+										UserInfoDetailsProxy response) {
+
+									SimpleTravelRequest request = requestFactory
+									.simpleTravelRequest();
+									Request<SimpleTravelProxy> createReq = request
+									.saveJourneyPassenger(
+											listAddress,
+											mapView.getOriginAddress()
+											.getText(),
+											mapView.getDestinationAddress()
+											.getText(),
+											date,
+											departureStart,
+											departureEnd,
+											arrival, response
+											.getId()
+											.toString());
+									createReq
+									.fire(new Receiver<SimpleTravelProxy>() {
 
 										@Override
 										public void onSuccess(
-												UserInfoDetailsProxy response) {
+												SimpleTravelProxy responseTravel) {
+											if(passengersTravels.size()!=0){
+												JourneyRequest requestJourney = requestFactory.journeyRequest();
+												Request<JourneyProxy> createRequestJourney = requestJourney.updateJourney(passengersTravels.get(0), responseTravel.getId(),steps);
+												createRequestJourney.fire(new Receiver<JourneyProxy>() {
 
-											SimpleTravelRequest request = requestFactory
-													.simpleTravelRequest();
-											Request<SimpleTravelProxy> createReq = request
-													.saveJourneyPassenger(
-															listAddress,
-															mapView.getOriginAddress()
-																	.getText(),
-															mapView.getDestinationAddress()
-																	.getText(),
-															date,
-															departureStart,
-															departureEnd,
-															arrival, response
-																	.getId()
-																	.toString());
-											createReq
-													.fire(new Receiver<SimpleTravelProxy>() {
+													@Override
+													public void onSuccess(
+															JourneyProxy response) {
+														
+														
+													}
+													
+												});
+												SimpleTravelRequest requestTravel = requestFactory.simpleTravelRequest();
+												Request<Void> createRequestTravel = requestTravel.updateSimpleTravel(responseTravel.getId().toString(),"pending","accepted");
+												createRequestTravel.fire(new Receiver<Void>() {
+													@Override
+													public void onSuccess(
+															Void response) {
 
-														@Override
-														public void onSuccess(
-																SimpleTravelProxy response) {
 
-															Window.alert("saved");
-															// TODO ajouter le
-															// cas où on trouve
-															// un conducteur
-														}
-													});
+													}
+
+
+												});
+											}
+											Window.alert("saved");
 
 										}
 									});
+
+								}
+
+
+
+							});
 
 						}
 
@@ -594,97 +640,97 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					.getDestinationAddress().getText());
 			directionsService.route(directionsRequest,
 					new DirectionsCallback() {
-						@Override
-						public void callback(HasDirectionsResult response,
-								String status) {
-							directionsRenderer.setDirections(response);
-							directionsDriver = response;
-							steps = new ArrayList<String>();
-							for (int i = 0; i < response.getRoutes().get(0)
-									.getLegs().get(0).getSteps().size(); i++) {
-								steps.add(response.getRoutes().get(0).getLegs()
-										.get(0).getSteps().get(i)
-										.getStartPoint().toString());
+				@Override
+				public void callback(HasDirectionsResult response,
+						String status) {
+					directionsRenderer.setDirections(response);
+					directionsDriver = response;
+					steps = new ArrayList<String>();
+					for (int i = 0; i < response.getRoutes().get(0)
+					.getLegs().get(0).getSteps().size(); i++) {
+						steps.add(response.getRoutes().get(0).getLegs()
+								.get(0).getSteps().get(i)
+								.getStartPoint().toString());
+
+					}
+					if (isDriver) {
+						SimpleTravelRequest request = requestFactory
+						.simpleTravelRequest();
+						Request<List<SimpleTravelProxy>> createReq = request
+						.getSimpleTravels(steps,
+								departureStart, departureEnd,
+								arrival,
+								mapView.getDistanceMax());
+
+						createReq
+						.fire(new Receiver<List<SimpleTravelProxy>>() {
+
+							@Override
+							public void onSuccess(
+									final List<SimpleTravelProxy> resultSimpleTravel) {
+
+								if (resultSimpleTravel != null
+										&& resultSimpleTravel
+										.size() != 0) {
+									List<String> resultPassengers = new ArrayList<String>();
+									for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
+										// TODO éliminer les
+										// détours trop longs
+										resultPassengers
+										.add(simpletravel
+												.getPassenger());
+									}
+
+									goTo(new ValidatePassengersPlace(
+											null));
+									eventBus.fireEvent(new GetValidatePassengersEvent(
+											resultPassengers,
+											resultSimpleTravel));
+
+								}
 
 							}
-							if (isDriver) {
-								SimpleTravelRequest request = requestFactory
-										.simpleTravelRequest();
-								Request<List<SimpleTravelProxy>> createReq = request
-										.getSimpleTravels(steps,
-												departureStart, departureEnd,
-												arrival,
-												mapView.getDistanceMax());
+						});
 
-								createReq
-										.fire(new Receiver<List<SimpleTravelProxy>>() {
+					} else if (isPassenger) {
+						JourneyRequest request = requestFactory
+						.journeyRequest();
+						Request<List<JourneyProxy>> createReq = request
+						.getJourneys(steps, departureStart,
+								departureEnd, arrival,
+								mapView.getDistanceMax());
 
-											@Override
-											public void onSuccess(
-													final List<SimpleTravelProxy> resultSimpleTravel) {
+						createReq
+						.fire(new Receiver<List<JourneyProxy>>() {
 
-												if (resultSimpleTravel != null
-														&& resultSimpleTravel
-																.size() != 0) {
-													List<String> resultPassengers = new ArrayList<String>();
-													for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
-														// TODO éliminer les
-														// détours trop longs
-														resultPassengers
-																.add(simpletravel
-																		.getPassenger());
-													}
+							@Override
+							public void onSuccess(
+									final List<JourneyProxy> resultJourney) {
 
-													goTo(new ValidatePassengersPlace(
-															null));
-													eventBus.fireEvent(new GetValidatePassengersEvent(
-															resultPassengers,
-															resultSimpleTravel));
+								if (resultJourney != null
+										&& resultJourney.size() != 0) {
+									List<String> resultDriver = new ArrayList<String>();
+									for (JourneyProxy journey : resultJourney) {
+										resultDriver.add(journey
+												.getDriver());
+									}
 
-												}
+									goTo(new ValidatePassengersPlace(
+											null));
+									eventBus.fireEvent(new GetValidateDriversEvent(
+											resultDriver,
+											resultJourney));
 
-											}
-										});
-
-							} else if (isPassenger) {
-								JourneyRequest request = requestFactory
-										.journeyRequest();
-								Request<List<JourneyProxy>> createReq = request
-										.getJourneys(steps, departureStart,
-												departureEnd, arrival,
-												mapView.getDistanceMax());
-
-								createReq
-										.fire(new Receiver<List<JourneyProxy>>() {
-
-											@Override
-											public void onSuccess(
-													final List<JourneyProxy> resultJourney) {
-
-												if (resultJourney != null
-														&& resultJourney.size() != 0) {
-													List<String> resultDriver = new ArrayList<String>();
-													for (JourneyProxy journey : resultJourney) {
-														resultDriver.add(journey
-																.getDriver());
-													}
-
-													goTo(new ValidatePassengersPlace(
-															null));
-													eventBus.fireEvent(new GetValidateDriversEvent(
-															resultDriver,
-															resultJourney));
-
-												}
-
-											}
-
-										});
+								}
 
 							}
-						}
 
-					});
+						});
+
+					}
+				}
+
+			});
 		}
 	}
 

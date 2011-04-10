@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Query;
 import javax.persistence.Version;
 
 import com.covoiturage.server.EMF;
@@ -79,7 +80,7 @@ public class Journey {
 		}
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails, List<String> passengers){
+	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails, List<String> passengersTravels){
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 		try
@@ -94,7 +95,7 @@ public class Journey {
 			journey.setDepartureStart(departureStart);
 			journey.setDepartureEnd(departureEnd);
 			journey.setArrival(arrival);
-			journey.setPassengers(passengers);
+			journey.setPassengersTravels(passengersTravels);
 			em.persist(journey);
 
 
@@ -107,7 +108,41 @@ public class Journey {
 
 		return journey;
 	}
+	public static Journey updateJourney(String journeyId, String simpleTravelId,List<String> steps){
+		Journey journey = new Journey();
+		EntityManager em = entityManager();
 
+		Query query= em.createQuery("select o from Journey o where o.id = :idParam ");
+		query.setParameter("idParam",journeyId);
+
+		try
+		{
+
+			@SuppressWarnings("unchecked")
+			List<Journey> results =query.getResultList();
+
+			if(results.size()!=0){
+
+
+				journey= results.get(0);
+
+				em.getTransaction().begin();
+
+				journey.getPassengersTravels().add(simpleTravelId);
+				journey.getWaypoints().addAll(steps);
+
+				em.getTransaction().commit();
+			}
+
+
+		}
+		finally
+		{
+			em.close();
+		}
+return journey;
+		
+	}
 	public  void persist() {
 		EntityManager em = entityManager();
 		try {
@@ -148,7 +183,7 @@ public class Journey {
 
 	public String driver;
 
-	public List<String> passengers;
+	public List<String> passengersTravels;
 
 	public List<String> steps;
 
@@ -235,11 +270,11 @@ public class Journey {
 
 	public Journey() {}
 
-	public Journey(Long id, String driver, List<String> passengers, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
+	public Journey(Long id, String driver, List<String> passengersTravels, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
 		super();
 		this.id = id;
 		this.driver = driver;
-		this.passengers = passengers;
+		this.passengersTravels = passengersTravels;
 		this.steps = steps;
 		this.originAddress=originAddress;
 		this.destinationAddress=destinationAddress;
@@ -262,12 +297,12 @@ public class Journey {
 		this.driver = driver;
 	}
 
-	public List<String> getPassengers() {
-		return passengers;
+	public List<String> getPassengersTravels() {
+		return passengersTravels;
 	}
 
-	public void setPassengers(List<String> passengers) {
-		this.passengers = passengers;
+	public void setPassengersTravels(List<String> passengersTravels) {
+		this.passengersTravels = passengersTravels;
 	}
 
 	public List<String> getSteps() {

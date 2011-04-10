@@ -31,4 +31,8 @@ public interface SimpleTravelRequest extends RequestContext{
 			Date departureStart, Date departureEnd, Date arrival, float distanceMax);
 	Request<List<SimpleTravelProxy>> getSimpleTravelsFromUser(String userId);
 
+
+	Request<Void> updateSimpleTravel(String simpleTravel,
+			String statusDriver, String statusPassenger);
+
 }

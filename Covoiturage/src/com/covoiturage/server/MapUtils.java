@@ -56,7 +56,7 @@ public class MapUtils {
 				if(geom.buffer(distance/111).contains(buffer)){
 					if(journey.getArrival().before(arrival)&& journey.getDepartureEnd().after(departureStart)){
 					journey.getSteps();
-					journey.getPassengers();
+					journey.getPassengersTravels();
 					journeys.add(journey);
 					}
 				}

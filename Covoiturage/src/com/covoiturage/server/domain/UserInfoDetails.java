@@ -247,6 +247,7 @@ public class UserInfoDetails {
 	private String lastName;
 	private String user;
 	private String language;
+	private List<String> messages; 
 
 
 
@@ -299,6 +300,25 @@ public class UserInfoDetails {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public void setMessages(List<String> messages) {
+		this.messages = messages;
+	}
+
+	public List<String> getMessages() {
+		return messages;
+	}
+
+	public void addMessage(String message) {
+		if (messages!=null) 
+			this.messages.add(message);
+		else{
+			messages= new ArrayList<String>();
+			messages.add(message);
+		}
+		
+		
 	}
 	
 	

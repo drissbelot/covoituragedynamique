@@ -12,5 +12,5 @@ public interface CovoiturageRequestFactory extends RequestFactory {
 	
 	UserInfoDetailsRequest userInfoDetailsRequest();
 	
-
+	MessagesRequest messagesRequest();
 }

@@ -86,12 +86,12 @@ public class UserInfo{
 
 
 	public static final EntityManager entityManager() {
-		
+
 		return EMF.get().createEntityManager();
-		
+
 	}
-	
-	
+
+
 
 
 	public static UserInfo login(String login, String password) {
@@ -99,7 +99,7 @@ public class UserInfo{
 
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
-		
+
 		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam ");
 		query.setParameter("loginParam",login);
 
@@ -108,20 +108,20 @@ public class UserInfo{
 
 			@SuppressWarnings("unchecked")
 			List<UserInfo> results =query.getResultList();
-	
+
 			if(results.size()==0){
 				return null;
 			}
 			else 
 			{
 				if(BCrypt.checkpw(password, results.get(0).getPassword())){
-				user= results.get(0);
+					user= results.get(0);
 
-				em.getTransaction().begin();
-				
-				user.setLoggedIn(true);
+					em.getTransaction().begin();
 
-				em.getTransaction().commit();
+					user.setLoggedIn(true);
+
+					em.getTransaction().commit();
 				}
 				else
 					return null;
@@ -134,7 +134,7 @@ public class UserInfo{
 
 
 
-		
+
 		return user;
 
 
@@ -143,7 +143,7 @@ public class UserInfo{
 	public static UserInfo modifyUserInfo(String id,String password, String emailAddress){
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
-		
+
 		Query query= em.createQuery("select o from UserInfo o where o.id = :idParam ");
 		query.setParameter("idParam",id);
 
@@ -152,23 +152,23 @@ public class UserInfo{
 
 			@SuppressWarnings("unchecked")
 			List<UserInfo> results =query.getResultList();
-	
+
 			if(results.size()==0){
 				return null;
 			}
 			else 
 			{
-				
+
 				user= results.get(0);
 
 				em.getTransaction().begin();
-				
+
 				user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
 				user.setEmailAddress(emailAddress);
 
 				em.getTransaction().commit();
-				
-				
+
+
 			}
 		}
 		finally
@@ -178,7 +178,7 @@ public class UserInfo{
 
 
 
-		
+
 		return user;
 	}
 	public static boolean logout(String id) {
@@ -186,9 +186,9 @@ public class UserInfo{
 		try
 		{
 			UserInfo user = em.find(UserInfo.class, id);
-				em.getTransaction().begin();
-				user.setLoggedIn(false);
-				em.getTransaction().commit();
+			em.getTransaction().begin();
+			user.setLoggedIn(false);
+			em.getTransaction().commit();
 		}
 		finally
 		{
@@ -199,8 +199,8 @@ public class UserInfo{
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
-    public String id;
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	public String id;
 
 	public String login;
 

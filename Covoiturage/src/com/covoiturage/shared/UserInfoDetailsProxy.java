@@ -2,6 +2,8 @@ package com.covoiturage.shared;
 
 
 
+import java.util.List;
+
 import com.covoiturage.server.domain.UserInfoDetails;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 
@@ -36,5 +38,8 @@ public interface UserInfoDetailsProxy extends EntityProxy{
 	public void setLanguage(String language);
 	public String getChannelId();
 	public void setChannelId(String Id);
+	public void setMessages(List<String> messages);
+
+	public List<String> getMessages();
 	
 }

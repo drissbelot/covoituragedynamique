@@ -1,8 +1,7 @@
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
-import com.covoiturage.client.event.MessageEvent;
-import com.covoiturage.client.event.MessageEventHandler;
+
 import com.covoiturage.client.view.MessagesView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -27,19 +26,11 @@ public class MessagesActivity extends AbstractActivity implements MessagesView.P
 	}
 
 	private void bind() {
-		
-		
-		eventBus.addHandler(MessageEvent.TYPE, new MessageEventHandler() {
-			
-			@Override
-			public void onMessage(MessageEvent event) {
-				showMessage(event.getMessage());
-			}
-		});
+		showMessages();
 	}
 
 
-	protected void showMessage(String message) {
+	protected void showMessages() {
 		
 		
 	}

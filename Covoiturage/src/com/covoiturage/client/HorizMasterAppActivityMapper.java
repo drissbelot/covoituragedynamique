@@ -4,6 +4,8 @@ import com.covoiturage.client.activity.HeaderActivity;
 import com.covoiturage.client.activity.HistoryActivity;
 import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
+import com.covoiturage.client.place.MessageDetailsPlace;
+import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.SettingsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
@@ -25,6 +27,10 @@ public class HorizMasterAppActivityMapper implements ActivityMapper {
 		else if (place instanceof SettingsPlace)
 			return new HeaderActivity(clientFactory);
 		else if (place instanceof HistoryPlace)
+			return new HistoryActivity(clientFactory);
+		else if(place instanceof MessagesListPlace)
+			return new HistoryActivity(clientFactory);
+		else if(place instanceof MessageDetailsPlace)
 			return new HistoryActivity(clientFactory);
 		return null;
 

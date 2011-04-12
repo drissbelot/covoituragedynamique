@@ -1,12 +1,5 @@
 package com.covoiturage.server;
 
-
-
-
-
-
-
-
 import javax.persistence.EntityManager;
 
 import com.covoiturage.client.NotifyService;
@@ -22,18 +15,17 @@ public class NotifyServiceImpl extends RemoteServiceServlet  implements NotifySe
 
 	public void sendMessage(String userId, String text){
 		UserInfoDetails user=	UserInfoDetails.findUserInfoDetails(userId);
-		
+		EntityManager em = EMF.get().createEntityManager();
 		Messages message=new Messages();
+		em.getTransaction().begin();
 		message.setMessage(text);
 		message.setRead(false);
-		EntityManager em = EMF.get().createEntityManager();
-		em.persist(message);
-
-		
-		em = EMF.get().createEntityManager();
-		em.getTransaction().begin();
-		user.addMessage(message.getId());
+		em.persist(message);		
 		em.getTransaction().commit();
+		EntityManager em2 = EMF.get().createEntityManager();
+		em2.getTransaction().begin();
+		user.addMessage(message.getId());
+		em2.getTransaction().commit();
 		//TODO envoyer mail
 		ChannelServer.sendMessage(user,	text);
 	}

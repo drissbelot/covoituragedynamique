@@ -8,7 +8,8 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.place.MessageDetailsPlace;
-import com.covoiturage.client.view.MessagesListView;
+import com.covoiturage.client.view.MessageDetailsView;
+
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.MessagesProxy;
 import com.covoiturage.shared.MessagesRequest;
@@ -29,23 +30,23 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class MessagesActivity extends AbstractActivity implements MessagesListView.Presenter{
+public class MessageDetailsActivity extends AbstractActivity implements MessageDetailsView.Presenter{
 	private final EventBus eventBus;
-	private final MessagesListView messagesListView;
+	private final MessageDetailsView messagesDetailsView;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 
 	private UserInfoProxy currentUser;
 	private UserInfoDetailsProxy userDetails;
-	private List<MessagesProxy> messages= new ArrayList<MessagesProxy>();
+	private MessagesProxy message;
 	
 
 
 
-	public MessagesActivity(ClientFactory clientFactory) {
+	public MessageDetailsActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
-		this.messagesListView = clientFactory.getMessageView();
+		this.messagesDetailsView = clientFactory.getMessageDetailsView();
 		this.placeController = clientFactory.getPlaceController();
 	}
 
@@ -57,64 +58,47 @@ public class MessagesActivity extends AbstractActivity implements MessagesListVi
 
 			}
 		});
-		showMessages();
+		showMessage();
 	}
 
 
-	protected void showMessages() {
+	protected void showMessage() {
+		
 		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
 		Request<UserInfoDetailsProxy> createReq = request.findDetailsFromUser(currentUser.getId());
 
 		createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 			@Override
 			public void onSuccess(UserInfoDetailsProxy response) {
-				final List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
-				userDetails=response;
-				final BaseModelData rec = new BaseModelData();
-				for (String message : userDetails.getMessages()) {
+				 
+				
 					MessagesRequest requestMessages = requestFactory.messagesRequest();
-					Request<MessagesProxy> createReqMessages=requestMessages.findMessages(message);
+					Request<MessagesProxy> createReqMessages=requestMessages.findMessages(((MessageDetailsPlace)placeController.getWhere()).getMessageDetailsName());
 					createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 						@Override
 						public void onSuccess(MessagesProxy response) {
-							messages.add(response);
-								rec.set("from", response.getFrom());
-								rec.set("subject", response.getSubject());
-								rec.set("date", response.getDate());
-								rec.set("messageId", response.getId());
+							message=response;
+								//TODO afficher ça convenablement
 								
 								
-								listRecords.add(rec );
-
-							
-							
-							messagesListView.getListGrid().getStore().add(listRecords); 
+								
 							
 						}
 						
 					});
 				}
 				
-			}
+			
 		});
-		messagesListView.getListGrid().addListener(Events.RowClick, new Listener<GridEvent<BaseModelData>>() {
-
-			@Override
-			public void handleEvent(GridEvent<BaseModelData> be) {
-				goTo(new MessageDetailsPlace(be.getRecord().get("id").toString()));
-				
-			}
-
 		
-		});
 	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
-		messagesListView.setPresenter(this);
-		panel.setWidget(messagesListView.asWidget());
+		messagesDetailsView.setPresenter(this);
+		panel.setWidget(messagesDetailsView.asWidget());
 	}
 
 

@@ -6,8 +6,8 @@ import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.FooterViewImpl;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.HistoryViewImpl;
-import com.covoiturage.client.view.MessagesView;
-import com.covoiturage.client.view.MessagesViewImpl;
+import com.covoiturage.client.view.MessagesListView;
+import com.covoiturage.client.view.MessagesListViewImpl;
 import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.client.view.SettingsViewImpl;
 import com.covoiturage.client.view.LoginView;
@@ -39,7 +39,7 @@ public class ClientFactoryImpl implements ClientFactory {
     private final HeaderView headerView = new HeaderViewImpl();
     private final FooterView footerView = new FooterViewImpl();
     private final HistoryView historyView = new HistoryViewImpl();
-    private final MessagesView messageView = new MessagesViewImpl();
+    private final MessagesListView messageView = new MessagesListViewImpl();
     private final CovoiturageRequestFactory requestFactory = GWT.create(CovoiturageRequestFactory.class);
 	
     
@@ -120,7 +120,7 @@ public class ClientFactoryImpl implements ClientFactory {
 
 
 	@Override
-	public MessagesView getMessageView() {
+	public MessagesListView getMessageView() {
 		
 		return messageView;
 	}

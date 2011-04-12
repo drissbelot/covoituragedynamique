@@ -26,7 +26,7 @@ public interface UserInfoDetailsRequest extends RequestContext {
 	InstanceRequest<UserInfoDetailsProxy, Void> remove();
 
 
-	Request<UserInfoDetailsProxy> findPassengerFromUser(String id);
+	Request<UserInfoDetailsProxy> findDetailsFromUser(String id);
 
 
 	Request<List<UserInfoDetailsProxy>> getPassengerList(List<String> passengers);

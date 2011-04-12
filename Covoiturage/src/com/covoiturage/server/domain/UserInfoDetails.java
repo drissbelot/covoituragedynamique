@@ -91,7 +91,7 @@ public class UserInfoDetails {
 		}
 	}
 	@SuppressWarnings("unchecked")
-	public static UserInfoDetails findPassengerFromUser(String id){
+	public static UserInfoDetails findDetailsFromUser(String id){
 		EntityManager em = entityManager();
 		try {
 			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");

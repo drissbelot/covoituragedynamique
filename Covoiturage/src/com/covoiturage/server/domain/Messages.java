@@ -1,5 +1,6 @@
 package com.covoiturage.server.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,6 +28,26 @@ public class Messages {
 
 	private String message;
 	private boolean read;
+	private String subject;
+	
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	private String from;
+	private Date date;
 	
 	@Version
 	@Column(name = "version")
@@ -44,10 +65,12 @@ public class Messages {
 	
 	public Messages() {}
 
-	public Messages(String id,String message, boolean read) {
+	public Messages(String id,String message, boolean read, String from, Date date) {
 		this.id = id;
 		this.setMessage(message);
 		this.setRead(read);
+		this.setFrom(from);
+		this.setDate(date);
 	}
 
 	public void setMessage(String message) {
@@ -115,5 +138,13 @@ public class Messages {
 		} finally {
 			em.close();
 		}
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getSubject() {
+		return subject;
 	}
 }

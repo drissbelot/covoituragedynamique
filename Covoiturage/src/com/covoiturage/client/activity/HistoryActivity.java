@@ -69,7 +69,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 
 	private void searchJourneys() {
 		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createreq = request.findPassengerFromUser(currentUser.getId());
+		Request<UserInfoDetailsProxy> createreq = request.findDetailsFromUser(currentUser.getId());
 		createreq.fire(new Receiver<UserInfoDetailsProxy>() {
 
 			@Override

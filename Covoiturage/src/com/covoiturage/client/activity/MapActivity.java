@@ -458,7 +458,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							UserInfoDetailsRequest requestPassenger = requestFactory
 							.userInfoDetailsRequest();
 							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-							.findPassengerFromUser(currentUser.getId());
+							.findDetailsFromUser(currentUser.getId());
 
 							createReqPassenger
 							.fire(new Receiver<UserInfoDetailsProxy>() {
@@ -532,7 +532,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							UserInfoDetailsRequest requestPassenger = requestFactory
 							.userInfoDetailsRequest();
 							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-							.findPassengerFromUser(currentUser.getId());
+							.findDetailsFromUser(currentUser.getId());
 
 							createReqPassenger
 							.fire(new Receiver<UserInfoDetailsProxy>() {

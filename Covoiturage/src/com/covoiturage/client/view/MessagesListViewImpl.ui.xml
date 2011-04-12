@@ -1,12 +1,13 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid">
 	
 	<ui:style src="stylesheet.css"/>
 		
 
 
   	<g:VerticalPanel>
-
+		<grid:Grid ui:field="listGrid" />
   	</g:VerticalPanel>
 
   	</ui:UiBinder>

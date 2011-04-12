@@ -1,5 +1,7 @@
 package com.covoiturage.shared;
 
+import java.util.Date;
+
 import com.covoiturage.server.domain.Messages;
 
 
@@ -19,4 +21,15 @@ public interface MessagesProxy extends EntityProxy{
 	public void setRead(boolean read);
 
 	public boolean isRead(); 
+	public String getFrom();
+
+	public void setFrom(String from);
+
+	public Date getDate();
+
+	public void setDate(Date date);
+	
+	public void setSubject(String subject);
+
+	public String getSubject();
 }

@@ -7,13 +7,19 @@ import com.covoiturage.client.ClientFactory;
 
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
-import com.covoiturage.client.view.MessagesView;
+import com.covoiturage.client.place.MessageDetailsPlace;
+import com.covoiturage.client.view.MessagesListView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.MessagesProxy;
 import com.covoiturage.shared.MessagesRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -23,9 +29,9 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class MessagesActivity extends AbstractActivity implements MessagesView.Presenter{
+public class MessagesActivity extends AbstractActivity implements MessagesListView.Presenter{
 	private final EventBus eventBus;
-	private final MessagesView messageView;
+	private final MessagesListView messagesListView;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 
@@ -39,7 +45,7 @@ public class MessagesActivity extends AbstractActivity implements MessagesView.P
 	public MessagesActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
-		this.messageView = clientFactory.getMessageView();
+		this.messagesListView = clientFactory.getMessageView();
 		this.placeController = clientFactory.getPlaceController();
 	}
 
@@ -57,12 +63,14 @@ public class MessagesActivity extends AbstractActivity implements MessagesView.P
 
 	protected void showMessages() {
 		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createReq = request.findPassengerFromUser(currentUser.getId());
+		Request<UserInfoDetailsProxy> createReq = request.findDetailsFromUser(currentUser.getId());
 
 		createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 			@Override
 			public void onSuccess(UserInfoDetailsProxy response) {
+				final List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 				userDetails=response;
+				final BaseModelData rec = new BaseModelData();
 				for (String message : userDetails.getMessages()) {
 					MessagesRequest requestMessages = requestFactory.messagesRequest();
 					Request<MessagesProxy> createReqMessages=requestMessages.findMessages(message);
@@ -71,7 +79,18 @@ public class MessagesActivity extends AbstractActivity implements MessagesView.P
 						@Override
 						public void onSuccess(MessagesProxy response) {
 							messages.add(response);
-							//TODO maintenant qu'on a les messages, les afficher
+								rec.set("from", response.getFrom());
+								rec.set("subject", response.getSubject());
+								rec.set("date", response.getDate());
+								rec.set("messageId", response.getId());
+								
+								
+								listRecords.add(rec );
+
+							
+							
+							messagesListView.getListGrid().getStore().add(listRecords); 
+							
 						}
 						
 					});
@@ -79,14 +98,23 @@ public class MessagesActivity extends AbstractActivity implements MessagesView.P
 				
 			}
 		});
+		messagesListView.getListGrid().addListener(Events.RowClick, new Listener<GridEvent<BaseModelData>>() {
 
+			@Override
+			public void handleEvent(GridEvent<BaseModelData> be) {
+				goTo(new MessageDetailsPlace(be.getRecord().get("id").toString()));
+				
+			}
+
+		
+		});
 	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
-		messageView.setPresenter(this);
-		panel.setWidget(messageView.asWidget());
+		messagesListView.setPresenter(this);
+		panel.setWidget(messagesListView.asWidget());
 	}
 
 

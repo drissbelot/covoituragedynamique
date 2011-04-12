@@ -20,7 +20,7 @@ public interface MessagesProxy extends EntityProxy{
 
 	public void setRead(boolean read);
 
-	public boolean isRead(); 
+	public boolean getRead(); 
 	public String getFrom();
 
 	public void setFrom(String from);

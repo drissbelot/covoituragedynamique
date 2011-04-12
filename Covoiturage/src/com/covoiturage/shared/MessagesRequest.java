@@ -19,8 +19,6 @@ public interface MessagesRequest extends RequestContext {
 
 	Request<MessagesProxy> findMessages(String id);
 	
-
-
 	InstanceRequest<MessagesProxy, String> persist();
 
 	InstanceRequest<MessagesProxy, Void> remove();

@@ -49,7 +49,7 @@ public class MessageDetailsActivity extends AbstractActivity implements MessageD
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-
+				userDetails=event.getUserDetails();
 			}
 		});
 		showMessage();
@@ -58,14 +58,7 @@ public class MessageDetailsActivity extends AbstractActivity implements MessageD
 
 	protected void showMessage() {
 		
-		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createReq = request.findDetailsFromUser(currentUser.getId());
-
-		createReq.fire(new Receiver<UserInfoDetailsProxy>() {
-			@Override
-			public void onSuccess(UserInfoDetailsProxy response) {
-				 
-				
+		
 					MessagesRequest requestMessages = requestFactory.messagesRequest();
 					Request<MessagesProxy> createReqMessages=requestMessages.findMessages(((MessageDetailsPlace)placeController.getWhere()).getMessageDetailsName());
 					createReqMessages.fire(new Receiver<MessagesProxy>() {
@@ -82,10 +75,7 @@ public class MessageDetailsActivity extends AbstractActivity implements MessageD
 						}
 						
 					});
-				}
-				
 			
-		});
 		
 	}
 

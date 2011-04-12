@@ -58,6 +58,7 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
+				userDetails=event.getUserDetails();
 				searchJourneys();
 			}
 		});
@@ -68,13 +69,6 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 
 
 	private void searchJourneys() {
-		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createreq = request.findDetailsFromUser(currentUser.getId());
-		createreq.fire(new Receiver<UserInfoDetailsProxy>() {
-
-			@Override
-			public void onSuccess(UserInfoDetailsProxy response) {
-				userDetails=response;
 				SimpleTravelRequest requestTravels = requestFactory.simpleTravelRequest();
 				Request<List<SimpleTravelProxy>> createReqTravels = requestTravels.getSimpleTravelsFromUser(userDetails.getId());
 				createReqTravels.fire(new Receiver<List<SimpleTravelProxy>>() {
@@ -97,10 +91,10 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 				});
 				
 				
-			}
 			
 			
-		});
+			
+		
 		
 	}
 

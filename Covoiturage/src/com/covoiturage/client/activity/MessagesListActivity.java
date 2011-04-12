@@ -54,7 +54,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-
+				userDetails=event.getUserDetails();
 			}
 		});
 		showMessages();
@@ -62,14 +62,9 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 
 
 	protected void showMessages() {
-		UserInfoDetailsRequest request = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createReq = request.findDetailsFromUser(currentUser.getId());
-
-		createReq.fire(new Receiver<UserInfoDetailsProxy>() {
-			@Override
-			public void onSuccess(UserInfoDetailsProxy response) {
+		
 				final List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
-				userDetails=response;
+				
 				final BaseModelData rec = new BaseModelData();
 				for (String message : userDetails.getMessages()) {
 					MessagesRequest requestMessages = requestFactory.messagesRequest();
@@ -96,8 +91,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 					});
 				}
 				
-			}
-		});
+		
 		messagesListView.getListGrid().addListener(Events.RowClick, new Listener<GridEvent<BaseModelData>>() {
 
 			@Override

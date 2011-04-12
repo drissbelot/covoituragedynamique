@@ -3,10 +3,10 @@ package com.covoiturage.client.place;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
-public class MessagesPlace extends Place{
+public class MessagesListPlace extends Place{
 	private String messagesName;
 
-    public MessagesPlace(String token) {
+    public MessagesListPlace(String token) {
         this.messagesName = token;
     }
 
@@ -14,15 +14,15 @@ public class MessagesPlace extends Place{
         return messagesName;
     }
 
-    public static class Tokenizer implements PlaceTokenizer<MessagesPlace> {
+    public static class Tokenizer implements PlaceTokenizer<MessagesListPlace> {
         @Override
-        public String getToken(MessagesPlace place) {
+        public String getToken(MessagesListPlace place) {
             return place.getMessagesName();
         }
 
         @Override
-        public MessagesPlace getPlace(String token) {
-            return new MessagesPlace(token);
+        public MessagesListPlace getPlace(String token) {
+            return new MessagesListPlace(token);
         }
     }
 

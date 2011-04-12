@@ -121,7 +121,7 @@ public class UserInfo{
 
 					user.setLoggedIn(true);
 
-					em.getTransaction().commit();
+					em.getTransaction().commit();	
 				}
 				else
 					return null;

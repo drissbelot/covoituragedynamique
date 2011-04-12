@@ -1,5 +1,7 @@
 package com.covoiturage.client.activity;
 
+
+
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
@@ -28,6 +30,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsView.P
 	private CovoiturageRequestFactory requestFactory;
 	private EventBus eventBus;
 	private UserInfoProxy currentUser;
+	private UserInfoDetailsProxy userDetails;
 
 	public SettingsActivity(ClientFactory clientFactory) {
 
@@ -42,7 +45,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsView.P
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				
+				userDetails=event.getUserDetails();
 			}
 		});
 		

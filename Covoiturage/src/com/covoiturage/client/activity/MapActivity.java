@@ -91,6 +91,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final PlaceController placeController;
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
 	private UserInfoProxy currentUser;
+	private UserInfoDetailsProxy userDetails;
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
 	private List<HasDirectionsWaypoint> waypoints;
 	private List<String> waypointsCoords;
@@ -268,7 +269,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-
+				userDetails=event.getUserDetails();
 			}
 		});
 		eventBus.addHandler(SelectPassengersEvent.TYPE,
@@ -455,17 +456,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getLocation().toString());
 
 						if (isDriver) {
-							UserInfoDetailsRequest requestPassenger = requestFactory
-							.userInfoDetailsRequest();
-							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-							.findDetailsFromUser(currentUser.getId());
-
-							createReqPassenger
-							.fire(new Receiver<UserInfoDetailsProxy>() {
-
-								@Override
-								public void onSuccess(
-										final UserInfoDetailsProxy responseDriver) {
 									JourneyRequest request = requestFactory
 									.journeyRequest();
 									Request<JourneyProxy> createReq = request.saveJourneyDriver(
@@ -474,7 +464,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											departureStart,
 											departureEnd,
 											arrival,
-											responseDriver.getId(),
+											userDetails.getId(),
 											mapView.getOriginAddress()
 											.getText(),
 											mapView.getDestinationAddress()
@@ -523,24 +513,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											
 
 										}
-										}
-									});
+									
 								}
 							});
 
 						} else if (isPassenger) {
-							UserInfoDetailsRequest requestPassenger = requestFactory
-							.userInfoDetailsRequest();
-							Request<UserInfoDetailsProxy> createReqPassenger = requestPassenger
-							.findDetailsFromUser(currentUser.getId());
-
-							createReqPassenger
-							.fire(new Receiver<UserInfoDetailsProxy>() {
-
-								@Override
-								public void onSuccess(
-										final UserInfoDetailsProxy responseUser) {
-
+						
 									SimpleTravelRequest request = requestFactory
 									.simpleTravelRequest();
 									Request<SimpleTravelProxy> createReq = request
@@ -553,7 +531,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											date,
 											departureStart,
 											departureEnd,
-											arrival, responseUser
+											arrival, userDetails
 											.getId()
 											.toString(),mapUrl);
 									createReq
@@ -570,7 +548,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													@Override
 													public void onSuccess(
 															JourneyProxy response) {
-														notifyService.sendMessage(responseUser.getId(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<Void>() {
+														notifyService.sendMessage(userDetails.getId(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<Void>() {
 
 															@Override
 															public void onSuccess(Void result) {
@@ -606,11 +584,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										}
 									});
 
-								}
-
-
-
-							});
+							
 
 						}
 

@@ -85,6 +85,7 @@ public class UserInfoDetails {
 		EntityManager em = entityManager();
 		try {
 			UserInfoDetails driver = em.find(UserInfoDetails.class, id);
+			driver.getMessages();
 			return driver;
 		} finally {
 			em.close();
@@ -97,7 +98,7 @@ public class UserInfoDetails {
 			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");
 			query.setParameter("user", id);
 			List<UserInfoDetails> list =query.getResultList();
-			
+			list.get(0).getMessages();
 			return list.get(0);
 		} finally {
 			em.close();
@@ -117,6 +118,7 @@ public class UserInfoDetails {
 			em.getTransaction().begin();
 			String channelId = ChannelServer.createChannel(userDetails.getId());
 			userDetails.setChannelId(channelId);
+			userDetails.getMessages();
 			em.getTransaction().commit();
 			return userDetails;
 		} finally {
@@ -202,7 +204,7 @@ public class UserInfoDetails {
 	
 	public UserInfoDetails(String makeOfvehicle, String modelOfvehicle,
 			String countOfPlaces, int rating, int countOfJourneys,
-			String firstName, String lastName, String language) {
+			String firstName, String lastName, String language, List<String> messages) {
 		super();
 		this.makeOfvehicle = makeOfvehicle;
 		this.modelOfvehicle = modelOfvehicle;
@@ -212,6 +214,7 @@ public class UserInfoDetails {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.language=language;
+		this.messages=messages;
 	}
 
 
@@ -311,12 +314,9 @@ public class UserInfoDetails {
 	}
 
 	public void addMessage(String message) {
-		if (messages!=null) 
-			this.messages.add(message);
-		else{
-			messages= new ArrayList<String>();
+		
 			messages.add(message);
-		}
+		
 		
 		
 	}

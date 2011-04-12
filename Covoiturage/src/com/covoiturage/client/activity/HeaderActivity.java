@@ -13,6 +13,7 @@ import com.covoiturage.client.view.HeaderView;
 
 
 import com.covoiturage.shared.CovoiturageRequestFactory;
+import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -31,6 +32,7 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 	private UserInfoProxy currentUser;
+	private UserInfoDetailsProxy userDetails;
 
 	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -44,6 +46,7 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
+				userDetails=event.getUserDetails();
 				headerView.getCurrentUser().setText(currentUser.getLogin());
 			}
 		});

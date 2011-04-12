@@ -72,7 +72,8 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 					createReqDatails.fire(new Receiver<UserInfoDetailsProxy>() {
 						@Override
 						public void onSuccess(UserInfoDetailsProxy response) {
-							//TODO events
+							eventBus.fireEvent(new SendLoginEvent(currentUser, response));
+							
 							ChannelFactory.createChannel(response.getChannelId(), new ChannelCreatedCallback() {
 								  @Override
 								  public void onChannelCreated(Channel channel) {
@@ -103,7 +104,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 					});
 					
 					goTo(new MapPlace(null));
-					eventBus.fireEvent(new SendLoginEvent(currentUser));
+					
 				} else {
 					Window.alert("Veuillez vous identifiez");
 				}

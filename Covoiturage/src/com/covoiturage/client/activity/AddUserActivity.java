@@ -1,5 +1,6 @@
 package com.covoiturage.client.activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
@@ -102,7 +103,7 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		newUser.setLogin(addUserView.getLogin());
 		newUser.setPassword(addUserView.getPassword());
 		newUser.setEmailAddress(addUserView.getEmailAddress());
-
+		
 		Request<String> createReq = request.persist().using(newUser);
 		createReq.fire(new Receiver<String>() {
 			@Override
@@ -131,7 +132,7 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 			newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
 			newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
 			newDriver.setLanguage(addUserView.getLanguage().getItemText(addUserView.getLanguage().getSelectedIndex()));
-
+			newDriver.setMessages(new ArrayList<String>());
 			Request<Void> createReqDriver = requestDriver.persist().using(newDriver);
 
 			createReqDriver.fire(new Receiver<Void>() {

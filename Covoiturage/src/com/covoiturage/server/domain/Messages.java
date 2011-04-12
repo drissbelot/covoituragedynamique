@@ -85,7 +85,7 @@ public class Messages {
 		this.read = read;
 	}
 
-	public boolean isRead() {
+	public boolean getRead() {
 		return read;
 	}
 	

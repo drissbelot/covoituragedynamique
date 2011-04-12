@@ -4,6 +4,7 @@ import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.AddUserView;
+import com.covoiturage.client.view.MessageDetailsView;
 import com.covoiturage.client.view.MessagesListView;
 import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.client.view.LoginView;
@@ -28,5 +29,6 @@ public interface ClientFactory {
 	HeaderView getHeaderView();
 	FooterView getFooterView();
 	HistoryView getHistoryView();
-	MessagesListView getMessageView();
+	MessagesListView getMessagesListView();
+	MessageDetailsView getMessageDetailsView();
 }

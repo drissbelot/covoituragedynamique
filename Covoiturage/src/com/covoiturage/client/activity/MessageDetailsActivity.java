@@ -1,7 +1,5 @@
 package com.covoiturage.client.activity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
 
@@ -16,11 +14,7 @@ import com.covoiturage.shared.MessagesRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
-import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.GridEvent;
-import com.extjs.gxt.ui.client.event.Listener;
+
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -79,9 +73,10 @@ public class MessageDetailsActivity extends AbstractActivity implements MessageD
 						@Override
 						public void onSuccess(MessagesProxy response) {
 							message=response;
-								//TODO afficher ça convenablement
-								
-								
+								messagesDetailsView.getFromLabel().setText(message.getFrom());
+								messagesDetailsView.getSubjectLabel().setText(message.getSubject());
+								messagesDetailsView.getDateLabel().setText(message.getDate().toString());
+								messagesDetailsView.getMessageText().setText(message.getMessage());
 								
 							
 						}

@@ -1,13 +1,18 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'
-	xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid">
-	
-	<ui:style src="stylesheet.css"/>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+	<ui:style src="stylesheet.css" />
 		
+	<g:VerticalPanel>
+		<g:HorizontalPanel>
+			<g:Label ui:field="subjectLabel"/>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel>
+			<g:Label ui:field="fromLabel"/>
+			<g:Label ui:field="dateLabel"/>
+		</g:HorizontalPanel>
+		<g:TextArea ui:field="messageText"/>
 
+	</g:VerticalPanel>
 
-  	<g:VerticalPanel>
-
-  	</g:VerticalPanel>
-
-  	</ui:UiBinder>
+</ui:UiBinder>

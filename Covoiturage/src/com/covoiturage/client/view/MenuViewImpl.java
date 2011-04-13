@@ -32,7 +32,7 @@ public class MenuViewImpl extends Composite implements MenuView {
 		mapLabel.setText(constants.maplabel());
 		settingsLabel.setText(constants.settings());
 		historyLabel.setText(constants.history());
-		menutitre.setText(constants.menutitre());
+		menutitre.setText(constants.menutitle());
 		messagesLabel.setText("Messages");
 		
 	}

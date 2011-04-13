@@ -39,7 +39,7 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 		lastNameField.setTitle(constants.lastname());
 		firstNameField.setTitle(constants.firstname());
 		emailAdressField.setTitle(constants.email());
-		passwordField.setTitle(constants.passwordlab());
+		passwordField.setTitle(constants.password());
 		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());

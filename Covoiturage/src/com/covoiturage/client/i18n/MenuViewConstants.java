@@ -7,6 +7,6 @@ public interface MenuViewConstants extends Constants {
 	String maplabel();
 	String settings();
 	String history();
-	String menutitre();
+	String menutitle();
 
 	}

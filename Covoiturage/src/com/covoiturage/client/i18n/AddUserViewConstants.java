@@ -9,7 +9,7 @@ public interface AddUserViewConstants extends Constants{
 	String firstname();
 	String lastname();
 	String email();
-	String passwordlab();
+	String password();
 	String fr();
 	String it();
 	String en();

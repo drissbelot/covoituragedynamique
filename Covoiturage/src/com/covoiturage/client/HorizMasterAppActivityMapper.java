@@ -1,7 +1,7 @@
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.HeaderActivity;
-import com.covoiturage.client.activity.HistoryActivity;
+
 import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;

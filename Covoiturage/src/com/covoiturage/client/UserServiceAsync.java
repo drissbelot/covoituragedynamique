@@ -1,7 +1,6 @@
 package com.covoiturage.client;
 
 
-import com.covoiturage.server.domain.UserInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface UserServiceAsync {

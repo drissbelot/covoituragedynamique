@@ -16,7 +16,6 @@ import javax.persistence.Version;
 import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.BCrypt;
-
 import com.covoiturage.server.EMF;
 
 
@@ -94,51 +93,7 @@ public class UserInfo{
 
 
 
-	public static UserInfo login(String login, String password) {
 
-
-		UserInfo user = new UserInfo();
-		EntityManager em = entityManager();
-
-		Query query= em.createQuery("select o from UserInfo o where o.login = :loginParam ");
-		query.setParameter("loginParam",login);
-
-		try
-		{
-
-			@SuppressWarnings("unchecked")
-			List<UserInfo> results =query.getResultList();
-
-			if(results.size()==0){
-				return null;
-			}
-			else 
-			{
-				if(BCrypt.checkpw(password, results.get(0).getPassword())){
-					user= results.get(0);
-
-					em.getTransaction().begin();
-
-					user.setLoggedIn(true);
-
-					em.getTransaction().commit();	
-				}
-				else
-					return null;
-			}
-		}
-		finally
-		{
-			em.close();
-		}
-
-
-
-
-		return user;
-
-
-	}
 
 	public static UserInfo modifyUserInfo(String id,String password, String emailAddress){
 		UserInfo user = new UserInfo();

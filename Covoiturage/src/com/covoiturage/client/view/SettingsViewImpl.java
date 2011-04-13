@@ -20,6 +20,7 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
 	//TODO conventions de nommage !!!!!!!!!
+	//TODO étendre adduserview... c'est un peu du copier-coller inutile là
 	@UiField Button submitButton;
 	@UiField VerticalPanel flowpanel;
 	@UiField TextBox firstName,lastName,emailAddress;

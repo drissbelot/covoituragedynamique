@@ -11,6 +11,7 @@ import com.covoiturage.client.view.MessagesListView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.MessagesProxy;
 import com.covoiturage.shared.MessagesRequest;
+import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
@@ -98,7 +99,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 
 			@Override
 
-			public Object render(BaseModelData model, String property, ColumnData config, int rowIndex,
+			public Object render(final BaseModelData model, String property, ColumnData config, int rowIndex,
 
 					int colIndex, ListStore<BaseModelData> store, Grid<BaseModelData> grid) {
 
@@ -107,7 +108,18 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 					@Override
 
 					public void componentSelected(ButtonEvent ce) {
-						//TODO mettre le simpletravel à jour
+						SimpleTravelRequest requestTravel = requestFactory.simpleTravelRequest();
+						Request<Void> createRequestTravel = requestTravel.updateSimpleTravel(model.get("message").toString().split("/")[0],"accepted","accepted");
+						createRequestTravel.fire(new Receiver<Void>() {
+							@Override
+							public void onSuccess(
+									Void response) {
+
+									//TODO envoyer confirmation?
+							}
+
+
+						});
 						
 					}
 
@@ -144,7 +156,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 							rec.set("subject", response.getSubject());
 							rec.set("date", response.getDate());
 							rec.set("messageId", response.getId());
-
+							rec.set("message", response.getMessage());
 							messagesListView.getListGrid().getStore().add(rec); 
 						}
 

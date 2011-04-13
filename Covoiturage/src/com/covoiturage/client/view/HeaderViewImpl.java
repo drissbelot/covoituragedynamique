@@ -32,7 +32,7 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this)); 
 		messages.setTitle(constants.message());
-		titre.setText(constants.titre());
+		titre.setText(constants.title());
 		logout.setText(constants.logout());
 		currentUser.setTitle(constants.username());
 	}

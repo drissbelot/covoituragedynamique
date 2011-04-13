@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.covoiturage.server.domain.UserInfo;
+
 import com.google.gwt.requestfactory.server.RequestFactoryServlet;
 
 public class CovoiturageRequestFactoryServlet extends RequestFactoryServlet{

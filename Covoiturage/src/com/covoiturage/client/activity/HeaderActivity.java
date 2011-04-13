@@ -1,11 +1,12 @@
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.UserService;
+import com.covoiturage.client.UserServiceAsync;
 
 import com.covoiturage.client.event.MessageEvent;
 import com.covoiturage.client.event.MessageEventHandler;
-import com.covoiturage.client.event.SendLoginEvent;
-import com.covoiturage.client.event.SendLoginEventHandler;
+
 import com.covoiturage.client.place.LoginPlace;
 
 
@@ -13,10 +14,11 @@ import com.covoiturage.client.view.HeaderView;
 
 
 import com.covoiturage.shared.CovoiturageRequestFactory;
-import com.covoiturage.shared.UserInfoDetailsProxy;
+
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -24,6 +26,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HeaderActivity extends AbstractActivity implements HeaderView.Presenter{
@@ -32,8 +35,8 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 	private UserInfoProxy currentUser;
-	private UserInfoDetailsProxy userDetails;
 
+	private final UserServiceAsync userService = GWT.create(UserService.class);
 	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -42,14 +45,33 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 	}
 
 	private void bind() {
-		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
+		userService.getUser(new AsyncCallback<String>() {
+
 			@Override
-			public void onSendLogin(SendLoginEvent event) {
-				currentUser = event.getCurrentUser();
-				userDetails=event.getUserDetails();
-				headerView.getCurrentUser().setText(currentUser.getLogin());
+			public void onSuccess(String result) {
+				UserInfoRequest userReq = requestFactory.userInfoRequest();
+				Request<UserInfoProxy> createReq = userReq.findUserInfo(result);
+				createReq.fire(new Receiver<UserInfoProxy>() {
+
+					@Override
+					public void onSuccess(UserInfoProxy response) {
+						
+						currentUser=response;
+						headerView.getCurrentUser().setText(currentUser.getLogin());
+					}
+				});
+				
+				
+				
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+
+
 			}
 		});
+
 		headerView.getLogout().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

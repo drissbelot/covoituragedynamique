@@ -121,13 +121,14 @@ public class Messages {
 	}
 	
 	
-	public void persist() {
+	public String persist() {
 		EntityManager em = entityManager();
 		try {
 			em.persist(this);
 		} finally {
 			em.close();
 		}
+		return this.id;
 	}
 
 	public void remove() {

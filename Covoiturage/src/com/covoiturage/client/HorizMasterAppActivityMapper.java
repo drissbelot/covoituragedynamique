@@ -27,11 +27,11 @@ public class HorizMasterAppActivityMapper implements ActivityMapper {
 		else if (place instanceof SettingsPlace)
 			return new HeaderActivity(clientFactory);
 		else if (place instanceof HistoryPlace)
-			return new HistoryActivity(clientFactory);
+			return new HeaderActivity(clientFactory);
 		else if(place instanceof MessagesListPlace)
-			return new HistoryActivity(clientFactory);
+			return new HeaderActivity(clientFactory);
 		else if(place instanceof MessageDetailsPlace)
-			return new HistoryActivity(clientFactory);
+			return new HeaderActivity(clientFactory);
 		return null;
 
 	}

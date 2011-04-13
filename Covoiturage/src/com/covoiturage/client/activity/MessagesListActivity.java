@@ -16,12 +16,13 @@ import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.event.BaseEvent;
+
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -54,7 +55,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				userDetails=event.getUserDetails();
+				GWT.log(currentUser.getId());
 			}
 		});
 		showMessages();
@@ -62,7 +63,13 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 
 
 	protected void showMessages() {
-		
+		UserInfoDetailsRequest requestDetails = requestFactory.userInfoDetailsRequest();
+		Request<UserInfoDetailsProxy> createReqDatails=requestDetails.findDetailsFromUser(currentUser.getId());
+		createReqDatails.fire(new Receiver<UserInfoDetailsProxy>() {
+			@Override
+			public void onSuccess(UserInfoDetailsProxy response) {
+				userDetails=response;
+			
 				final List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 				
 				final BaseModelData rec = new BaseModelData();
@@ -90,6 +97,8 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 						
 					});
 				}
+			}
+		});
 				
 		
 		messagesListView.getListGrid().addListener(Events.RowClick, new Listener<GridEvent<BaseModelData>>() {

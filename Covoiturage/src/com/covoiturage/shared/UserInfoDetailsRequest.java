@@ -36,6 +36,8 @@ public interface UserInfoDetailsRequest extends RequestContext {
 
 
 	Request<UserInfoDetailsProxy> modifyUserInfoDetails(String id,String firstName, String lastName, String language);
+	
+	Request<UserInfoDetailsProxy> addMessageToUser(String id, String messageId);
 
 ;
 

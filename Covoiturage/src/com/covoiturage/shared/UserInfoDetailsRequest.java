@@ -39,6 +39,9 @@ public interface UserInfoDetailsRequest extends RequestContext {
 	
 	Request<UserInfoDetailsProxy> addMessageToUser(String id, String messageId);
 
+
+	Request<UserInfoDetailsProxy> deleteMessage(String id, String messageId);
+
 ;
 
 

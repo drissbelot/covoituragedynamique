@@ -54,7 +54,7 @@ public class MapUtils {
 				Geometry geom=new GeometryFactory().createLineString(coordArray);
 				
 				if(geom.buffer(distance/111).contains(buffer)){
-					if(journey.getArrival().before(arrival)&& journey.getDepartureEnd().after(departureStart)){
+					if(journey.getArrival().getTime()<=arrival.getTime()&& journey.getDepartureEnd().getTime()>=departureStart.getTime()){
 					journey.getSteps();
 					journey.getPassengersTravels();
 					journeys.add(journey);
@@ -110,7 +110,7 @@ public class MapUtils {
 
 
 					
-					if(travel.getArrival().before(arrival)&& travel.getDepartureStart().before(departureEnd))
+					if(travel.getArrival().getTime()<=arrival.getTime()&& travel.getDepartureStart().getTime()<=departureEnd.getTime())
 					simpleTravels.add(travel);
 					
 				}

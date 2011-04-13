@@ -1,10 +1,13 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid">
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid"
+	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget.button">
+	
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
 	<ui:style src="stylesheet.css" />
 		
 	<g:VerticalPanel>
-		<grid:Grid store="{store}" ui:field="listGrid" height="300px" width="300px">
+	<gxt:Button ui:field="deleteButton" />
+		<grid:Grid store="{store}" ui:field="listGrid" height="300px" width="500px">
 		
 		<grid:column id="from" header="From" width="75" />
 		<grid:column id="subject" header="Subject" width="75" />

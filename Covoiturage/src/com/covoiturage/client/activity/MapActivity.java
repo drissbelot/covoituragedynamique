@@ -682,8 +682,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getStartPoint().toString());
 
 					}
-					mapUrl="http://maps.google.com/maps/api/staticmap?center="+mapView.getMap().getMap().getCenter().toUrlValue()+"&zoom="+mapView.getMap().getMap().getZoom()+"&size=400x400&sensor=false";
-					//TODO ajouter le path
+					
+				
 					if (isDriver) {
 						SimpleTravelRequest request = requestFactory
 						.simpleTravelRequest();
@@ -760,6 +760,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				}
 
 			});
+			//TODO ajouter le path
+			mapUrl="http://maps.google.com/maps/api/staticmap?center="+mapView.getMap().getMap().getCenter().toUrlValue()+"&zoom="+mapView.getMap().getMap().getZoom()+"&size=400x400&sensor=false";
 		}
 	}
 

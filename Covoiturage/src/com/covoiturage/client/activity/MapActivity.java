@@ -478,13 +478,25 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												JourneyProxy responseJourney) {
 											if(passengers!=null){
 												int i=0;
-											for (String passenger: passengers) {
+											for (final String passenger: passengers) {
 												
-												notifyService.sendMessage(passenger,responseJourney.getId()+"/"+passengersTravels.get(i) , new AsyncCallback<Void>() {
+												notifyService.sendMessage(passenger,responseJourney.getId()+"/"+passengersTravels.get(i) , new AsyncCallback<String>() {
 
 													@Override
-													public void onSuccess(Void result) {
+													public void onSuccess(String result) {
+														
+														UserInfoDetailsRequest requestMessageUser = requestFactory.userInfoDetailsRequest();
+														Request<UserInfoDetailsProxy> createReqMessageUser=requestMessageUser.addMessageToUser(passenger, result);
+														createReqMessageUser.fire(new Receiver<UserInfoDetailsProxy>() {
 
+															@Override
+															public void onSuccess(
+																	UserInfoDetailsProxy response) {
+																
+																
+															}
+															
+														});
 
 													}
 
@@ -547,12 +559,23 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 													@Override
 													public void onSuccess(
-															JourneyProxy response) {
-														notifyService.sendMessage(userDetails.getId(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<Void>() {
+															final JourneyProxy response) {
+														notifyService.sendMessage(response.getDriver(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<String>() {
 
 															@Override
-															public void onSuccess(Void result) {
+															public void onSuccess(String result) {
+																UserInfoDetailsRequest requestMessageUser = requestFactory.userInfoDetailsRequest();
+																Request<UserInfoDetailsProxy> createReqMessageUser=requestMessageUser.addMessageToUser(response.getDriver(), result);
+																createReqMessageUser.fire(new Receiver<UserInfoDetailsProxy>() {
 
+																	@Override
+																	public void onSuccess(
+																			UserInfoDetailsProxy response) {
+																		
+																		
+																	}
+																	
+																});
 
 															}
 

@@ -3,6 +3,7 @@ package com.covoiturage.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -88,6 +89,7 @@ public class UserInfoDetails {
 			driver.getMessages();
 			return driver;
 		} finally {
+
 			em.close();
 		}
 	}
@@ -124,6 +126,22 @@ public class UserInfoDetails {
 		} finally {
 			em.close();
 		}
+	}
+	
+	public static UserInfoDetails addMessageToUser(String id, String messageId){
+		UserInfoDetails user=findUserInfoDetails(id);
+		EntityManager em = entityManager();
+		try{
+		
+		user.addMessage(messageId);
+		em.merge(user);
+		
+		return user;
+		}
+		finally{
+			em.close();
+		}
+		
 	}
 	public static UserInfoDetails modifyUserInfoDetails(String id,String firstName, String lastName, String language){
 		UserInfoDetails user = new UserInfoDetails();

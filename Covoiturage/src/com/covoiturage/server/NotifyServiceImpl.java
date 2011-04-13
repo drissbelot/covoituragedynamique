@@ -1,5 +1,7 @@
 package com.covoiturage.server;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 
 import com.covoiturage.client.NotifyService;
@@ -15,14 +17,21 @@ public class NotifyServiceImpl extends RemoteServiceServlet  implements NotifySe
 	private static final long serialVersionUID = 1L;
 
 
-	public String sendMessage(String userId, String text){
-		UserInfoDetails user=	UserInfoDetails.findUserInfoDetails(userId);
+	
+
+	@Override
+	public String sendMessage(String userDetails, String subject, String text,
+			String from, Date date) {
+		UserInfoDetails user=	UserInfoDetails.findUserInfoDetails(userDetails);
 		EntityManager em = EMF.get().createEntityManager();
 		Messages message=new Messages();
 		try{
 		em.getTransaction().begin();
 		message.setMessage(text);
 		message.setRead(false);
+		message.setDate(date);
+		message.setFrom(from);
+		message.setSubject(subject);
 		em.persist(message);		
 		em.getTransaction().commit();
 		
@@ -33,6 +42,8 @@ public class NotifyServiceImpl extends RemoteServiceServlet  implements NotifySe
 		//TODO envoyer mail
 		ChannelServer.sendMessage(user,	text);
 		return message.getId();
+
+
 	}
 
 

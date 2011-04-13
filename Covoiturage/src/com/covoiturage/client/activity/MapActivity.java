@@ -7,13 +7,13 @@ import java.util.List;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.NotifyService;
 import com.covoiturage.client.NotifyServiceAsync;
+import com.covoiturage.client.UserService;
+import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.event.GetValidateDriversEvent;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEventHandler;
-import com.covoiturage.client.event.SendLoginEvent;
-import com.covoiturage.client.event.SendLoginEventHandler;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -23,7 +23,6 @@ import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
-import com.covoiturage.shared.UserInfoProxy;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -68,7 +67,6 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
@@ -90,7 +88,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private List<String> listAddress = null;
 	private final PlaceController placeController;
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
-	private UserInfoProxy currentUser;
+
 	private UserInfoDetailsProxy userDetails;
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
 	private List<HasDirectionsWaypoint> waypoints;
@@ -99,7 +97,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private NotifyServiceAsync notifyService= GWT.create(NotifyService.class);
 	private List<String> passengersTravels;
 	private String mapUrl;
-
+	private final UserServiceAsync userService = GWT.create(UserService.class);
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -265,13 +263,33 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				isPassenger = mapView.getPassengerRadioButton().getValue();
 			}
 		});
-		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
+		userService.getUser(new AsyncCallback<String>() {
+
 			@Override
-			public void onSendLogin(SendLoginEvent event) {
-				currentUser = event.getCurrentUser();
-				userDetails=event.getUserDetails();
+			public void onSuccess(String result) {
+				UserInfoDetailsRequest userReq = requestFactory.userInfoDetailsRequest();
+				Request<UserInfoDetailsProxy> createReq = userReq.findDetailsFromUser(result);
+				createReq.fire(new Receiver<UserInfoDetailsProxy>() {
+
+					@Override
+					public void onSuccess(UserInfoDetailsProxy response) {
+						userDetails=response;
+						
+						
+					}
+				});
+				
+				
+				
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+
+
 			}
 		});
+
 		eventBus.addHandler(SelectPassengersEvent.TYPE,
 				new SelectPassengersEventHandler() {
 
@@ -479,8 +497,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											if(passengers!=null){
 												int i=0;
 											for (final String passenger: passengers) {
-												
-												notifyService.sendMessage(passenger,responseJourney.getId()+"/"+passengersTravels.get(i) , new AsyncCallback<String>() {
+												//TODO affiner
+												notifyService.sendMessage(passenger,"Passenger found",responseJourney.getId()+"/"+passengersTravels.get(i),userDetails.getFirstName()+ " "+userDetails.getLastName(),new Date(System.currentTimeMillis()) , new AsyncCallback<String>() {
 
 													@Override
 													public void onSuccess(String result) {
@@ -560,7 +578,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													@Override
 													public void onSuccess(
 															final JourneyProxy response) {
-														notifyService.sendMessage(response.getDriver(),response.getId()+"/"+responseTravel.getId() , new AsyncCallback<String>() {
+														//TODO affiner
+														notifyService.sendMessage(response.getDriver(),"Driver found",response.getId()+"/"+responseTravel.getId() ,userDetails.getFirstName()+" "+userDetails.getLastName(),new Date(System.currentTimeMillis()), new AsyncCallback<String>() {
 
 															@Override
 															public void onSuccess(String result) {

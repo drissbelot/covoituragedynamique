@@ -29,7 +29,7 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-
+//TOD tout mettre dans le formulaire
 	@UiField FlowPanel flowpanel;
 	@UiField(provided=true) MapWidget mapWidget;
 	@UiField Button sendAddress,saveJourney;

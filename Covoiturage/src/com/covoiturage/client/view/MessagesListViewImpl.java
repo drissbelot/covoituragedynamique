@@ -7,7 +7,10 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.MessagesListViewConstants;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
+import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -26,6 +29,8 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 	private Presenter presenter;
 
 	@UiField Grid<BaseModelData> listGrid; 
+	@UiField Button deleteButton;
+
 
 	public MessagesListViewImpl() {
 		//TODO i18n
@@ -34,10 +39,12 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 
 		CheckBoxSelectionModel<BaseModelData> check = new CheckBoxSelectionModel<BaseModelData>();
 		check.setSelectionMode(SelectionMode.MULTI);
+		ColumnConfig checkColumn=check.getColumn();
 		initWidget(binder.createAndBindUi(this)); 
-
+		listGrid.getColumnModel().getColumns().add(checkColumn);
 		listGrid.setSelectionModel(check);
 		listGrid.getView().setAutoFill(true);
+		deleteButton.setText("Delete");
 	}
 
 	public void setPresenter(Presenter presenter) {
@@ -48,5 +55,7 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 		return listGrid;
 	}
 
-
+	public Button getDeleteButton() {
+		return deleteButton;
+	}
 }

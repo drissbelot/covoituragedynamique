@@ -14,12 +14,15 @@ import com.covoiturage.shared.MessagesRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.maps.client.overlay.HasMarker.Event;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
@@ -63,6 +66,17 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 
 			}
 		});
+		messagesListView.getDeleteButton().addListener(Events.Select, new Listener<ButtonEvent>(){
+
+			@Override
+			public void handleEvent(ButtonEvent be) {
+				if(messagesListView.getListGrid().getSelectionModel().getSelectedItems()!=null){
+					
+				}
+				
+			}
+			
+		});
 
 	}
 
@@ -74,6 +88,7 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 			@Override
 			public void onSuccess(UserInfoDetailsProxy response) {
 				userDetails=response;
+				messagesListView.getListGrid().getStore().removeAll();
 				for (String message : userDetails.getMessages()) {
 
 					MessagesRequest requestMessages = requestFactory.messagesRequest();

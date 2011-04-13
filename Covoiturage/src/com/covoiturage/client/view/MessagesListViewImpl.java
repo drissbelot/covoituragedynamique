@@ -7,15 +7,9 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.MessagesListViewConstants;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
-
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -39,7 +33,7 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 
 	public MessagesListViewImpl() {
 		//TODO i18n
-		//TODO boutons pour gérer la suppression et tout ça
+
 
 
 		CheckBoxSelectionModel<BaseModelData> check = new CheckBoxSelectionModel<BaseModelData>();

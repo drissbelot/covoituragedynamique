@@ -100,9 +100,9 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 		
 		final UserInfoRequest request = requestFactory.userInfoRequest();
 		final UserInfoProxy newUser = request.create(UserInfoProxy.class);
-		newUser.setLogin(addUserView.getLogin());
-		newUser.setPassword(addUserView.getPassword());
-		newUser.setEmailAddress(addUserView.getEmailAddress());
+		newUser.setLogin(addUserView.getLogin().getValue());
+		newUser.setPassword(addUserView.getPassword().getValue());
+		newUser.setEmailAddress(addUserView.getEmailAddress().getValue());
 		
 		Request<String> createReq = request.persist().using(newUser);
 		createReq.fire(new Receiver<String>() {
@@ -127,8 +127,8 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 			UserInfoDetailsRequest requestDriver = requestFactory.userInfoDetailsRequest();
 			UserInfoDetailsProxy newDriver = requestDriver.create(UserInfoDetailsProxy.class);
 			newDriver.setUser(newUser);
-			newDriver.setFirstName(addUserView.getFirstName());
-			newDriver.setLastName(addUserView.getLastName());
+			newDriver.setFirstName(addUserView.getFirstName().getValue());
+			newDriver.setLastName(addUserView.getLastName().getValue());
 			newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
 			newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
 			newDriver.setLanguage(addUserView.getLanguage().getItemText(addUserView.getLanguage().getSelectedIndex()));

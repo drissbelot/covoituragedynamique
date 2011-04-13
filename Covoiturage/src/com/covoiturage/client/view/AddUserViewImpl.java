@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -16,78 +17,74 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class AddUserViewImpl extends Composite implements  AddUserView {
-	
+
 	interface MyUiBinder extends UiBinder<FlowPanel, AddUserViewImpl> { }
-    private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-    private AddUserViewConstants constants=(AddUserViewConstants)GWT.create(AddUserViewConstants.class);
-    
+	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
+	private AddUserViewConstants constants=(AddUserViewConstants)GWT.create(AddUserViewConstants.class);
+
 	@UiField FlowPanel flowpanel;
 	@UiField Button addButton;
-	@UiField TextBox firstName,lastName,emailAdress,login;
-	@UiField PasswordTextBox password;
+	@UiField TextField<String> firstNameField,lastNameField,emailAdressField,loginField;
+	@UiField TextField<String> passwordField;
 	@UiField SuggestBox vehicleMake,vehicleModel;
-	@UiField ListBox langue;
-	@UiField Label header,username,lastname,firstname,email,passwordlab,languelab,Make,Model;
+	@UiField ListBox language;
+	@UiField Label header,Make,Model;
 
 	public AddUserViewImpl() {
-		
+
 		initWidget(binder.createAndBindUi(this)); 
-		
-		header.setText(constants.header()+" :");
-		login.setText(constants.username());
-		username.setText(constants.username()+" :");
-		lastname.setText(constants.lastname()+" :");
-		lastName.setText(constants.lastname());
-		firstname.setText(constants.firstname()+" :");
-		firstName.setText(constants.firstname());
-		email.setText(constants.email()+" :");
-		emailAdress.setText(constants.email());
-		passwordlab.setText(constants.passwordlab()+" :");
-		password.setText(constants.passwordlab());
-		languelab.setText(constants.languelab()+" :");
+
+
+		loginField.setTitle(constants.username());
+		lastNameField.setTitle(constants.lastname());
+		firstNameField.setTitle(constants.firstname());
+		emailAdressField.setTitle(constants.email());
+		passwordField.setTitle(constants.passwordlab());
+		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());
-		langue.addItem(constants.fr());
-		langue.addItem(constants.en());
-		langue.addItem(constants.nl());
-		langue.addItem(constants.it());
-		langue.addItem(constants.ch());
+		language.addItem(constants.fr());
+		language.addItem(constants.en());
+		language.addItem(constants.nl());
+		language.addItem(constants.it());
+		language.addItem(constants.ch());
 		addButton.setText(constants.add());
 	}
-	
-	
-	public String getFirstName() {
-		return firstName.getText();
+
+
+	public TextField<String> getFirstName() {
+		return firstNameField;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName.setText(firstName);
+	public TextField<String> getLastName() {
+		return lastNameField;
 	}
 
-	public String getLastName() {
-		return lastName.getText();
+
+	public TextField<String> getEmailAddress() {
+		return emailAdressField;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName.setText(lastName);
-	}
 
-	public String getEmailAddress() {
-		return emailAdress.getText();
-	}
-
-	public void setEmailAddress(String emailAdress) {
-		this.emailAdress.setText(emailAdress);
-	}
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
-	public HasClickHandlers getAddUserButton() {return addButton;}
-	public Widget asWidget() {return this;}
-	public HasClickHandlers getAddButton() {return addButton;}
-	public String getPassword() {return  password.getText();}
-	public String getLogin() {return login.getText();}
+	public HasClickHandlers getAddUserButton() {
+		return addButton;
+		}
+	public Widget asWidget() {
+		return this;
+		}
+	public HasClickHandlers getAddButton() {
+		return addButton;
+		}
+	public TextField<String> getPassword() {
+		return  passwordField;
+		}
+	public TextField<String> getLogin() {
+		return loginField;
+		}
 	public void setPresenter(Presenter presenter) {this.presenter=presenter;}
 
 	@Override
@@ -104,6 +101,6 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 	@Override
 	public ListBox getLanguage() {
 
-		return langue;
+		return language;
 	}
 }

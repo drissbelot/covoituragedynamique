@@ -15,14 +15,18 @@ import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.maps.client.overlay.HasMarker.Event;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
@@ -71,11 +75,48 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 			@Override
 			public void handleEvent(ButtonEvent be) {
 				if(messagesListView.getListGrid().getSelectionModel().getSelectedItems()!=null){
-					
+					for (final BaseModelData message : messagesListView.getListGrid().getSelectionModel().getSelectedItems()) {
+						UserInfoDetailsRequest requestMessagesDelete = requestFactory.userInfoDetailsRequest();
+						Request<UserInfoDetailsProxy> createReqMessagesDelete=requestMessagesDelete.deleteMessage(userDetails.getId(),message.get("messageId").toString());
+						createReqMessagesDelete.fire(new Receiver<UserInfoDetailsProxy>() {
+
+							@Override
+							public void onSuccess(UserInfoDetailsProxy response) {
+								messagesListView.getListGrid().getStore().remove(message);
+
+							}
+
+						});
+					}
+
 				}
-				
+
 			}
-			
+
+		});
+		messagesListView.getAcceptButton().setRenderer(new GridCellRenderer<BaseModelData>() {
+
+			@Override
+
+			public Object render(BaseModelData model, String property, ColumnData config, int rowIndex,
+
+					int colIndex, ListStore<BaseModelData> store, Grid<BaseModelData> grid) {
+
+				Button editButton = new Button("Accept", new SelectionListener<ButtonEvent>() {
+
+					@Override
+
+					public void componentSelected(ButtonEvent ce) {
+						//TODO mettre le simpletravel à jour
+						
+					}
+
+				});
+
+				return editButton;
+
+			}
+
 		});
 
 	}
@@ -120,12 +161,15 @@ public class MessagesListActivity extends AbstractActivity implements MessagesLi
 
 			@Override
 			public void handleEvent(GridEvent<BaseModelData> be) {
-				goTo(new MessageDetailsPlace(be.getModel().get("messageId").toString()));
+				if(be.getColIndex()!=3)
+					goTo(new MessageDetailsPlace(be.getModel().get("messageId").toString()));
 
 			}
 
 
 		});
+		
+
 	}
 
 	@Override

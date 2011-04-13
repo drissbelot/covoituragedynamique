@@ -143,6 +143,21 @@ public class UserInfoDetails {
 		}
 		
 	}
+	 public static UserInfoDetails deleteMessage(String id, String messageId){
+		 UserInfoDetails user=findUserInfoDetails(id);
+		 EntityManager em = entityManager();
+			try{
+			
+			user.removeMessage(messageId);
+			em.merge(user);
+			
+			return user;
+			}
+			finally{
+				em.close();
+			}
+	 }
+	
 	public static UserInfoDetails modifyUserInfoDetails(String id,String firstName, String lastName, String language){
 		UserInfoDetails user = new UserInfoDetails();
 		EntityManager em = entityManager();
@@ -331,14 +346,13 @@ public class UserInfoDetails {
 		return messages;
 	}
 
-	public void addMessage(String message) {
+	protected void addMessage(String message) {
 		
 			messages.add(message);
-		
-		
-		
 	}
-	
+	protected void removeMessage(String message){
+		messages.remove(message);
+	}
 	
 	
 

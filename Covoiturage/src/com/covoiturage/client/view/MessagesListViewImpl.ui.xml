@@ -9,9 +9,9 @@
 	<gxt:Button ui:field="deleteButton" />
 		<grid:Grid store="{store}" ui:field="listGrid" height="300px" width="500px">
 		
-		<grid:column id="from" header="From" width="75" />
-		<grid:column id="subject" header="Subject" width="75" />
-		<grid:column id="date" header="Date" width="75" />
+		<grid:column id="from" header="From"  />
+		<grid:column id="subject" header="Subject" />
+		<grid:column id="date" header="Date" />
 		</grid:Grid>
 
 	</g:VerticalPanel>

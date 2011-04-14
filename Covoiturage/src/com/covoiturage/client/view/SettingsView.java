@@ -4,10 +4,11 @@ package com.covoiturage.client.view;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public interface SettingsView extends AddUserView{
+public interface SettingsView extends IsWidget{
 
 	public abstract HasClickHandlers getSubmitButton();
 	public abstract Widget asWidget();

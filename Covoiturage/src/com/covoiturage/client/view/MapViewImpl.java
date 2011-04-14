@@ -16,11 +16,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.TextBox;
 
 
 public class MapViewImpl extends Composite implements MapView {
@@ -30,20 +28,19 @@ public class MapViewImpl extends Composite implements MapView {
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 //TODO tout mettre dans le formulaire
+
 	@UiField FlowPanel flowpanel;
 	@UiField(provided=true) MapWidget mapWidget;
 	@UiField Button sendAddress,saveJourney;
-	@UiField SuggestBox originAddress,destinationAddress;
+	@UiField SuggestBox originAdress,destinationAdress;
 	@UiField ContentPanel directionsPanel;
 
-	@UiField Label to,from,distmax; 
+	@UiField Label to,from; 
 	@UiField FormPanel departureForm;
 	@UiField DateField dateOfJourney;
-	@UiField TextField<String> departureStartTimeItem;
-	@UiField TextField<String> departureEndTimeItem;
-	@UiField TextField<String> arrivalTimeItem;
+	@UiField TextField<String> departureStartTimeItem,departureEndTimeItem,arrivalTimeItem,distanceMaxField;
 	@UiField RadioButton driverRadioButton,passengerRadioButton;
-	@UiField TextBox distanceMax;
+
 	
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -64,7 +61,7 @@ public class MapViewImpl extends Composite implements MapView {
 	    // internationalization
 	    to.setText(constants.to()+" :");
 	    from.setText(constants.from()+" :");
-	    distmax.setText(constants.distmax());
+	    distanceMaxField.setTitle(constants.distmax());
 	    sendAddress.setText(constants.gettravelway());
 	    saveJourney.setText(constants.savejourney());
 
@@ -91,8 +88,6 @@ public class MapViewImpl extends Composite implements MapView {
 		directionsPanel.setHeaderVisible(false);
 	}
 
-
-
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
 	}
@@ -110,34 +105,28 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	public SuggestBox getOriginAddress() {
-
-		return originAddress;
+		return originAdress;
 	}
 
 	public SuggestBox getDestinationAddress() {
-
-		return destinationAddress;
+		return destinationAdress;
 	}
 
 	public MapWidget getMap() {
-
 		return mapWidget;
 	}
 
 	@Override
 	public ContentPanel getDirectionsPanel() {
-
 		return directionsPanel;
 	}
 
 	public HasClickHandlers getSaveJourneyButton() {
-
 		return saveJourney;
 	}
 
 	public float getDistanceMax() {
-
-		return Float.valueOf(distanceMax.getText());
+		return Float.valueOf(distanceMaxField.getTitle());
 	}
 
 	public FlowPanel getMapDecorator() {
@@ -150,11 +139,11 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	public void setOriginAddress(SuggestBox originAddress) {
-		this.originAddress=originAddress;
+		this.originAdress=originAddress;
 	}
 
 	public void setDestinationAddress(String destinationAddress) {
-		this.destinationAddress.setText(destinationAddress);
+		this.destinationAdress.setText(destinationAddress);
 	}
 	
 

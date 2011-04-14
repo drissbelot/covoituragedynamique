@@ -45,9 +45,9 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		firstName.setText(constants.firstname());
 		email.setText(constants.email()+" :");
 		emailAddress.setText(constants.email());
-		prevpasswordlab.setText(constants.prevpasswordlab()+" :");
+		prevpasswordlab.setText(constants.prevpassword()+" :");
 		prevpassword.setText(constants.password());
-		newpasswordlab.setText(constants.newpasswordlab()+" :");
+		newpasswordlab.setText(constants.newpassword()+" :");
 		newPassword.setText(constants.password());
 		languelab.setText(constants.languelab()+" :");
 		language.addItem(constants.fr());

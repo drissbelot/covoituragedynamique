@@ -9,8 +9,8 @@ public interface SettingsViewConstants extends Constants {
 	String firstname();
 	String lastname();
 	String email();
-	String prevpasswordlab();
-	String newpasswordlab();
+	String prevpassword();
+	String newpassword();
 	String fr();
 	String it();
 	String en();

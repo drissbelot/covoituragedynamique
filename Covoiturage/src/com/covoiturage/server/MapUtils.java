@@ -1,14 +1,36 @@
 package com.covoiturage.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
 import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
+
+import com.google.appengine.api.urlfetch.FetchOptions.Builder;
+import com.google.appengine.api.urlfetch.HTTPMethod;
+import com.google.appengine.api.urlfetch.HTTPRequest;
+import com.google.appengine.api.urlfetch.HTTPResponse;
+import com.google.appengine.api.urlfetch.URLFetchService;
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
+import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONValue;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -82,12 +104,14 @@ public class MapUtils {
 			Coordinate coord= new Coordinate(Double.parseDouble(singleCoord.substring(singleCoord.indexOf("(")+1,singleCoord.indexOf(",") )),Double.parseDouble(singleCoord.substring(singleCoord.indexOf(",")+1,singleCoord.indexOf(")")-1 )));
 			coordArray[i]= coord;
 			i++;
+			
 		}
+		
 		Geometry polyline= new GeometryFactory().createLineString(coordArray);
-		return simpleTravelsInBuffer(polyline.buffer(distance/111),departureStart,  departureEnd,  arrival);
+		return simpleTravelsInBuffer(coordArray,polyline.buffer(distance/111),departureStart,  departureEnd,  arrival);
 	}
 	
-	public static List<SimpleTravel> simpleTravelsInBuffer(Geometry buffer, Date departureStart, Date departureEnd, Date arrival){
+	public static List<SimpleTravel> simpleTravelsInBuffer(Coordinate[] array,Geometry buffer, Date departureStart, Date departureEnd, Date arrival){
 		
 		EntityManager em = EMF.get().createEntityManager();
 		List<SimpleTravel> simpleTravels= new ArrayList<SimpleTravel>();
@@ -108,7 +132,33 @@ public class MapUtils {
 				}
 				if(buffer.contains(new GeometryFactory().createMultiPoint(coordArray))){
 
+					try{
+						URL url = new URL("http://routes.cloudmade.com/8ee2a50541944fb9bcedded5165f09d9/api/0.3/"+array[0].x+","+array[0].y+",%5B"+coordArray[0].x+","+coordArray[0].y+","+coordArray[coordArray.length-1].x+","+coordArray[coordArray.length-1].y+"%5D,"+array[array.length-1].x+","+array[array.length-1].y+"/car/shortest.js");
+			
+						
+					//URL url = new URL("http://openrouteservice.org/index.php?start="+array[0].y+","+array[0].x+"&end="+array[array.length-1].y+","+array[array.length-1].x+"&via="+coordArray[0].y+","+coordArray[0].x+"%20"+coordArray[coordArray.length-1].y+","+coordArray[coordArray.length-1].x+"&pref=Fastest&lang=en");
+						
+				   
+				 
+				   
+				   BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+				   String line;
+				   JSONValue jsonValue;
+		            while ((line = reader.readLine()) != null) {
+		            	//Logger.getLogger("").warning()
+		            }
+		            
+		            reader.close();
 
+					
+		        
+		            		          
+
+					}catch (MalformedURLException e) {
+			            
+			        } catch (IOException e) {
+			           
+			        }
 					
 					if(travel.getArrival().getTime()<=arrival.getTime()&& travel.getDepartureStart().getTime()<=departureEnd.getTime())
 					simpleTravels.add(travel);

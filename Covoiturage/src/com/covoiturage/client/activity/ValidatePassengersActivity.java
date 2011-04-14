@@ -70,7 +70,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 					@Override
 					public void onGetValidatePassengers(
 							GetValidatePassengersEvent event) {
-								
+								validatePassengersView.getListGrid().getStore().removeAll();
 						passengersTravels = event.getSimpleTravels();
 						passengers = event.getPassengers();
 
@@ -124,7 +124,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 					@Override
 					public void onGetValidateDrivers(
 							GetValidateDriversEvent event) {
-								
+						validatePassengersView.getListGrid().getStore().removeAll();
 						journeys = event.getJourneys();
 						drivers= event.getDrivers();
 

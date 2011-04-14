@@ -23,38 +23,25 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private MessagesListViewConstants constants=(MessagesListViewConstants)GWT.create(MessagesListViewConstants.class);
 
-
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-
 	@UiField Grid<BaseModelData> listGrid; 
 	@UiField Button deleteButton;
 	private ColumnConfig acceptButton;
 
 	public MessagesListViewImpl() {
-		//TODO i18n
-
-
 
 		CheckBoxSelectionModel<BaseModelData> check = new CheckBoxSelectionModel<BaseModelData>();
 		check.setSelectionMode(SelectionMode.MULTI);
 		ColumnConfig checkColumn=check.getColumn();
 
 		acceptButton = new ColumnConfig();
-
-		
-
-	
-
-
 		initWidget(binder.createAndBindUi(this)); 
 		listGrid.getColumnModel().getColumns().add(checkColumn);
 		listGrid.getColumnModel().getColumns().add(acceptButton);
 		listGrid.setSelectionModel(check);
 		listGrid.getView().setAutoFill(true);
-		deleteButton.setText("Delete");
-
-
+		deleteButton.setText(constants.Delete());
 
 	}
 
@@ -62,7 +49,6 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 		this.presenter=presenter;
 	}
 	public Grid<BaseModelData> getListGrid() {
-
 		return listGrid;
 	}
 

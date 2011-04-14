@@ -20,7 +20,6 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
 	
-	//TODO conventions de nommage !!!!!!!!!
 	//TODO étendre adduserview... c'est un peu du copier-coller inutile là
 	
 	@UiField Button submitButton;
@@ -58,7 +57,6 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	}
 	
 	public HasClickHandlers getSubmitButton() {
-
 		return submitButton;
 	}
 	
@@ -86,46 +84,15 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 	}
 
 	@Override
-	public HasClickHandlers getAddUserButton() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HasClickHandlers getAddButton() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setPresenter(
-			com.covoiturage.client.view.AddUserView.Presenter presenter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public SuggestBox getMakeSuggestTextBox() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SuggestBox getModelSuggestTextBox() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public TextField<String> getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return passwordField;
 	}
 
 	@Override
 	public TextField<String> getLogin() {
-		// TODO Auto-generated method stub
-		return null;
+	return loginField;
 	}
+
+	
 
 }

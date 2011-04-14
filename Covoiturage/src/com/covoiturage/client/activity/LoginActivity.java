@@ -58,7 +58,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {   
 			public void onClick(ClickEvent event) {
 				login();
-				
+
 			}
 		});
 		loginView.getAddUserButton().addClickHandler(new ClickHandler() {   
@@ -69,9 +69,9 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	} 
 
 	private void login(){
-		
-		userService.login(loginView.getLogin(), loginView.getPassword(), new AsyncCallback<String>() {
-			
+
+		userService.login(loginView.getLogin().getTitle(), loginView.getPassword().getTitle(), new AsyncCallback<String>() {
+
 			@Override
 			public void onSuccess(String result) {
 				String sessionID =result;
@@ -83,7 +83,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
@@ -102,59 +102,59 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 										@Override
 										public void onSuccess(UserInfoDetailsProxy response) {
 											eventBus.fireEvent(new SendLoginEvent(currentUser, response));
-											
+
 											ChannelFactory.createChannel(response.getChannelId(), new ChannelCreatedCallback() {
-												  @Override
-												  public void onChannelCreated(Channel channel) {
-												    channel.open(new SocketListener() {
-												      @Override
-												      public void onOpen() {
-												        
-												      }
-												      @Override
-												      public void onMessage(String message) {
-												    	  eventBus.fireEvent(new MessageEvent(message));
-												      
-												      }
-												      @Override
-												      public void onError(SocketError error) {
-												        
-												      }
-												      @Override
-												      public void onClose() {
-												        
-												      }
-												    });
-												  }
-												});
-									
-											
+												@Override
+												public void onChannelCreated(Channel channel) {
+													channel.open(new SocketListener() {
+														@Override
+														public void onOpen() {
+
+														}
+														@Override
+														public void onMessage(String message) {
+															eventBus.fireEvent(new MessageEvent(message));
+
+														}
+														@Override
+														public void onError(SocketError error) {
+
+														}
+														@Override
+														public void onClose() {
+
+														}
+													});
+												}
+											});
+
+
 										}
 									});
-									
+
 									goTo(new MapPlace(null));
-									
+
 								} else {
 									Window.alert("Veuillez vous identifiez");
 								}
-								
+
 							}
 						});
-						
+
 					}
-					
+
 				});
-		
+
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
-		
+
+
 	}
 
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {

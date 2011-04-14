@@ -63,7 +63,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsView.P
 	protected void modifyUserSettings() {
 		//TODO reste un bug
 		UserInfoDetailsRequest requestDetails = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails.modifyUserInfoDetails(currentUser.getId(),settingsView.getFirstName().getText(),settingsView.getLastName().getText(),settingsView.getLanguage().getItemText(settingsView.getLanguage().getSelectedIndex()));
+		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails.modifyUserInfoDetails(currentUser.getId(),settingsView.getFirstName().getTitle(),settingsView.getLastName().getTitle(),settingsView.getLanguage().getItemText(settingsView.getLanguage().getSelectedIndex()));
 		createRequestDetails.fire(new Receiver<UserInfoDetailsProxy>() {
 
 			@Override
@@ -72,7 +72,7 @@ public class SettingsActivity extends AbstractActivity implements SettingsView.P
 			}
 		});
 		UserInfoRequest request = requestFactory.userInfoRequest();
-		Request<UserInfoProxy> createRequest = request.modifyUserInfo(currentUser.getId(),settingsView.getNewPassword().getText(), settingsView.getEmailAddress().getText());
+		Request<UserInfoProxy> createRequest = request.modifyUserInfo(currentUser.getId(),settingsView.getNewPassword().getTitle(), settingsView.getEmailAddress().getTitle());
 		createRequest.fire(new Receiver<UserInfoProxy>() {
 
 			@Override

@@ -2,51 +2,28 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
-	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'>
+	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
+	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
 	
-	<ui:style src="stylesheet.css"/>
-		
-
-  		
-<g:FlowPanel>	
+<ui:style src="stylesheet.css"/>
+		<g:FlowPanel>	
   			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
 				<g:Label styleName='{style.h2}'  ui:field="header"/>
-				<g:HorizontalPanel width="304px">
-					<g:Label styleName='{style.label}'  ui:field="username" width="8em"/>
-					<g:Label ui:field="usernamefix" styleName='{style.textbox}'/>
-				</g:HorizontalPanel>
-				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' ui:field="firstname" width="8em"/>
-					<g:TextBox ui:field="firstName"  styleName='{style.textbox}'/>
-				</g:HorizontalPanel>	
-				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' ui:field="lastname" width="8em"/>
-					<g:TextBox ui:field="lastName"  styleName='{style.textbox}'/>
-				</g:HorizontalPanel>	
-				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' ui:field="email" width="8em"/>
-					<g:TextBox ui:field="emailAddress"  styleName='{style.textbox}'/>
-				</g:HorizontalPanel>	
-				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' ui:field="prevpasswordlab" width="8em"/>
-					<g:PasswordTextBox ui:field="prevpassword"  styleName='{style.textbox}'/>
-				</g:HorizontalPanel>
-				<g:HorizontalPanel>
-					<g:Label styleName='{style.label}' ui:field="newpasswordlab" width="8em"/>
-					<g:PasswordTextBox ui:field="newPassword" styleName='{style.textbox}'/>
-				</g:HorizontalPanel>
-				<g:HorizontalPanel>
-				<g:Label styleName='{style.label}' ui:field="languelab" width="8em"/>
-				<g:ListBox ui:field="language"  />
-				</g:HorizontalPanel>
-				<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
-					<g:Button ui:field="submitButton" styleName='{style.button}'/>
-				</g:HorizontalPanel>
-		
-	</g:VerticalPanel>
-	
-	
-</g:FlowPanel>	
-	
-  	
+				<form:FormPanel>
+					<form:TextField ui:field="loginField" styleName='{style.textbox}' />
+					<form:TextField ui:field="firstNameField" styleName='{style.textbox}' />
+					<form:TextField ui:field="lastNameField" styleName='{style.textbox}' />
+					<form:TextField ui:field="emailAdressField" styleName='{style.textbox}' />
+					<form:TextField ui:field="passwordField" styleName='{style.textbox}' />
+					<form:TextField ui:field="newpasswordField" styleName='{style.textbox}' />
+					<g:Label styleName='{style.label}' ui:field="Make" />
+					<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}' />
+					<g:Label styleName='{style.label}' ui:field="Model" />
+					<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}' />
+					<g:Label styleName='{style.label}' ui:field="languelab" />
+					<g:ListBox ui:field="language" />
+					<g:Button ui:field="submitButton" styleName='{style.button}' />
+				</form:FormPanel>
+			</g:VerticalPanel>
+		</g:FlowPanel>	
 </ui:UiBinder>

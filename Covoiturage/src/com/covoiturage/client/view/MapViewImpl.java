@@ -71,7 +71,7 @@ public class MapViewImpl extends Composite implements MapView {
 		driverRadioButton.setText(constants.driver());
 		passengerRadioButton.setText(constants.passenger());
 
-		dateOfJourney.setFieldLabel("Date of Journey"); //TODO ajouter à l'i18n
+		dateOfJourney.setFieldLabel(constants.Dateofjourney());
 		dateOfJourney.setAllowBlank(false);
 		
 		

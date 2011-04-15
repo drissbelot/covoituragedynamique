@@ -6,11 +6,12 @@ import com.covoiturage.shared.JourneyProxy;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-
-public class GetValidateDriversEvent extends GwtEvent<GetValidateDriversEventHandler> {
+public class GetValidateDriversEvent extends
+		GwtEvent<GetValidateDriversEventHandler> {
 	public static Type<GetValidateDriversEventHandler> TYPE = new Type<GetValidateDriversEventHandler>();
 	private List<String> drivers;
 	private List<JourneyProxy> journeys;
+
 	public List<JourneyProxy> getJourneys() {
 		return journeys;
 	}
@@ -19,7 +20,8 @@ public class GetValidateDriversEvent extends GwtEvent<GetValidateDriversEventHan
 		this.journeys = journeys;
 	}
 
-	public GetValidateDriversEvent(List<String> result, List<JourneyProxy> resultJourneys) {
+	public GetValidateDriversEvent(List<String> result,
+			List<JourneyProxy> resultJourneys) {
 		super();
 		this.setDrivers(result);
 		this.setJourneys(resultJourneys);

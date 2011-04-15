@@ -1,6 +1,5 @@
 package com.covoiturage.server.domain;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -18,17 +17,14 @@ import org.datanucleus.jpa.annotations.Extension;
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 
-
-
 @Entity
-
 public class Journey {
-
 
 	public static long countJourneys() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from Journey o").getSingleResult()).longValue();
+			return ((Number) em.createQuery("select count(o) from Journey o")
+					.getSingleResult()).longValue();
 		} finally {
 			em.close();
 		}
@@ -38,7 +34,8 @@ public class Journey {
 	public static List<Journey> findAllJourneys() {
 		EntityManager em = entityManager();
 		try {
-			List<Journey> list = em.createQuery("select o from Journey o").getResultList();
+			List<Journey> list = em.createQuery("select o from Journey o")
+					.getResultList();
 
 			list.size();
 			return list;
@@ -48,27 +45,29 @@ public class Journey {
 	}
 
 	public static List<Journey> getJourneys(List<String> steps,
-			Date departureStart, Date departureEnd, Date arrival, 
+			Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax) {
-		
-		return MapUtils.bufferRouteJourney(steps, distanceMax, departureStart,  departureEnd, arrival);
-		
+
+		return MapUtils.bufferRouteJourney(steps, distanceMax, departureStart,
+				departureEnd, arrival);
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static List<Journey> getJourneysFromUser(String id){
+	public static List<Journey> getJourneysFromUser(String id) {
 		EntityManager em = entityManager();
 		try {
 			List<Journey> list = em.createQuery(
-					"select o from Journey o where o.driver = :userId").getResultList();
+					"select o from Journey o where o.driver = :userId")
+					.getResultList();
 			list.size();
 			return list;
-			
+
 		} finally {
 			em.close();
 		}
 	}
+
 	public static Journey findJourney(String id) {
 		if (id == null) {
 			return null;
@@ -82,11 +81,14 @@ public class Journey {
 		}
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date, Date departureStart, Date departureEnd, Date arrival,String driver,String originAddress, String destinationAddress, List<String> waypoints, List<String> stepsDetails, List<String> passengersTravels){
+	public static Journey saveJourneyDriver(List<String> steps, Date date,
+			Date departureStart, Date departureEnd, Date arrival,
+			String driver, String originAddress, String destinationAddress,
+			List<String> waypoints, List<String> stepsDetails,
+			List<String> passengersTravels) {
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
-		try
-		{
+		try {
 			journey.setSteps(steps);
 			journey.setDate(date);
 			journey.setDriver(driver);
@@ -100,33 +102,31 @@ public class Journey {
 			journey.setPassengersTravels(passengersTravels);
 			em.persist(journey);
 
-
-		}
-		finally
-		{
+		} finally {
 
 			em.close();
 		}
 
 		return journey;
 	}
-	public static Journey updateJourney(String journeyId, String simpleTravelId,List<String> steps){
+
+	public static Journey updateJourney(String journeyId,
+			String simpleTravelId, List<String> steps) {
 		Journey journey = new Journey();
 		EntityManager em = entityManager();
 
-		Query query= em.createQuery("select o from Journey o where o.id = :idParam ");
-		query.setParameter("idParam",journeyId);
+		Query query = em
+				.createQuery("select o from Journey o where o.id = :idParam ");
+		query.setParameter("idParam", journeyId);
 
-		try
-		{
+		try {
 
 			@SuppressWarnings("unchecked")
-			List<Journey> results =query.getResultList();
+			List<Journey> results = query.getResultList();
 
-			if(results.size()!=0){
+			if (results.size() != 0) {
 
-
-				journey= results.get(0);
+				journey = results.get(0);
 
 				em.getTransaction().begin();
 
@@ -136,16 +136,14 @@ public class Journey {
 				em.getTransaction().commit();
 			}
 
-
-		}
-		finally
-		{
+		} finally {
 			em.close();
 		}
-return journey;
-		
+		return journey;
+
 	}
-	public  void persist() {
+
+	public void persist() {
 		EntityManager em = entityManager();
 		try {
 			em.persist(this);
@@ -164,7 +162,6 @@ return journey;
 		}
 	}
 
-
 	public static final EntityManager entityManager() {
 		return EMF.get().createEntityManager();
 	}
@@ -172,7 +169,7 @@ return journey;
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	public String id;
 
 	public String getId() {
@@ -191,6 +188,7 @@ return journey;
 
 	public Date date;
 	public List<String> stepsDetails;
+
 	public Date getDepartureStart() {
 		return departureStart;
 	}
@@ -218,8 +216,7 @@ return journey;
 	public Date departureStart;
 	public Date departureEnd;
 	public Date arrival;
-	
-	
+
 	public List<String> getStepsDetails() {
 		return stepsDetails;
 	}
@@ -229,6 +226,7 @@ return journey;
 	}
 
 	public List<String> waypoints;
+
 	public String getOriginAddress() {
 		return originAddress;
 	}
@@ -260,8 +258,6 @@ return journey;
 	@Column(name = "version")
 	private Integer version;
 
-
-
 	public Integer getVersion() {
 		return version;
 	}
@@ -270,17 +266,20 @@ return journey;
 		this.version = version;
 	}
 
-	public Journey() {}
+	public Journey() {
+	}
 
-	public Journey(String id, String driver, List<String> passengersTravels, List<String> steps, String originAddress, String destinationAddress, List<String> stepsDetails) {
+	public Journey(String id, String driver, List<String> passengersTravels,
+			List<String> steps, String originAddress,
+			String destinationAddress, List<String> stepsDetails) {
 		super();
 		this.id = id;
 		this.driver = driver;
 		this.passengersTravels = passengersTravels;
 		this.steps = steps;
-		this.originAddress=originAddress;
-		this.destinationAddress=destinationAddress;
-		this.stepsDetails=stepsDetails;
+		this.originAddress = originAddress;
+		this.destinationAddress = destinationAddress;
+		this.stepsDetails = stepsDetails;
 	}
 
 	public Date getDate() {
@@ -315,6 +314,4 @@ return journey;
 		this.steps = steps;
 	}
 
-
 }
-

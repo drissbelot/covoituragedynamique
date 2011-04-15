@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Covoiturage implements EntryPoint {
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
-	private final LayoutContainer layoutContainer= new LayoutContainer();
+	private final LayoutContainer layoutContainer = new LayoutContainer();
 	private final BorderLayout layoutPanel = new BorderLayout();
 	private final ContentPanel mainPanel = new ContentPanel();
 	private final ContentPanel FooterPanel = new ContentPanel();
@@ -32,13 +32,12 @@ public class Covoiturage implements EntryPoint {
 	private final ContentPanel vertMasterPanel = new ContentPanel();
 	private final ContentPanel asidePanel = new ContentPanel();
 
-
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			horizMasterPanel.setVisible(widget != null);
-			if(widget!=null)
+			if (widget != null)
 				horizMasterPanel.add(widget);
 			layoutContainer.layout();
 		}
@@ -49,7 +48,7 @@ public class Covoiturage implements EntryPoint {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			asidePanel.setVisible(widget != null);
 
-			if(widget!=null)
+			if (widget != null)
 				asidePanel.add(widget);
 			layoutContainer.layout();
 		}
@@ -60,7 +59,7 @@ public class Covoiturage implements EntryPoint {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			vertMasterPanel.setVisible(widget != null);
 
-			if(widget!=null)
+			if (widget != null)
 				vertMasterPanel.add(widget);
 			layoutContainer.layout();
 
@@ -75,7 +74,7 @@ public class Covoiturage implements EntryPoint {
 			if (mainPanel.getWidget(0) != null)
 				mainPanel.remove(mainPanel.getWidget(0));
 
-			if(widget!=null)
+			if (widget != null)
 				mainPanel.add(widget);
 			layoutContainer.layout();
 			hidePanels();
@@ -88,40 +87,40 @@ public class Covoiturage implements EntryPoint {
 			Widget widget = Widget.asWidgetOrNull(activityWidget);
 			FooterPanel.setVisible(widget != null);
 
-			if(widget!=null)
+			if (widget != null)
 				FooterPanel.add(widget);
 			layoutContainer.layout();
 
-
 		}
 	};
-	private void hidePanels(){
-		if(horizMasterPanel.getWidget(0)==null)
+
+	private void hidePanels() {
+		if (horizMasterPanel.getWidget(0) == null)
 			horizMasterPanel.hide();
-		if(vertMasterPanel.getWidget(0)==null)
+		if (vertMasterPanel.getWidget(0) == null)
 			vertMasterPanel.hide();
-		if(asidePanel.getWidget(0)==null)
+		if (asidePanel.getWidget(0) == null)
 			asidePanel.hide();
 	}
-
 
 	@Override
 	public void onModuleLoad() {
 		final Viewport v = new Viewport();
 		v.setLayout(new FitLayout());
-		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH, 100);
+		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH,
+				100);
 		layoutContainer.add(horizMasterPanel, northData);
 		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
 		eastData.setCollapsible(true);
 		layoutContainer.add(asidePanel, eastData);
 		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 100);
 		layoutContainer.add(vertMasterPanel, westData);
-		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 50);
-		layoutContainer.add(FooterPanel,southData);
-
+		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
+				50);
+		layoutContainer.add(FooterPanel, southData);
 
 		BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
-		layoutContainer.add(mainPanel,centerData);
+		layoutContainer.add(mainPanel, centerData);
 
 		FooterPanel.setHeaderVisible(false);
 		mainPanel.setHeaderVisible(false);
@@ -130,11 +129,9 @@ public class Covoiturage implements EntryPoint {
 		horizMasterPanel.setHeaderVisible(false);
 		vertMasterPanel.setHeaderVisible(false);
 
-		
 		ClientFactory clientFactory = new ClientFactoryImpl();
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
-
 
 		ActivityMapper horizMasterActivityMapper = new HorizMasterAppActivityMapper(
 				clientFactory);
@@ -144,8 +141,8 @@ public class Covoiturage implements EntryPoint {
 				clientFactory);
 		ActivityMapper asideActivityMapper = new AsideAppActivityMapper(
 				clientFactory);
-		ActivityMapper footerActivityMapper=new FooterAppActivityMapper(clientFactory);
-
+		ActivityMapper footerActivityMapper = new FooterAppActivityMapper(
+				clientFactory);
 
 		ActivityManager horizMasterActivityManager = new ActivityManager(
 				horizMasterActivityMapper, eventBus);
@@ -155,8 +152,8 @@ public class Covoiturage implements EntryPoint {
 				mainActivityMapper, eventBus);
 		ActivityManager asideActivityManager = new ActivityManager(
 				asideActivityMapper, eventBus);
-		ActivityManager footerActivityManager=new ActivityManager(footerActivityMapper, eventBus);
-
+		ActivityManager footerActivityManager = new ActivityManager(
+				footerActivityMapper, eventBus);
 
 		horizMasterActivityManager.setDisplay(horizMasterDisplay);
 		vertMasterActivityManager.setDisplay(vertMasterDisplay);
@@ -164,10 +161,8 @@ public class Covoiturage implements EntryPoint {
 		mainActivityManager.setDisplay(mainDisplay);
 		footerActivityManager.setDisplay(footerDisplay);
 
-
-
 		AppPlaceHistoryMapper historyMapper = GWT
-		.create(AppPlaceHistoryMapper.class);
+				.create(AppPlaceHistoryMapper.class);
 		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
 				historyMapper);
 		historyHandler.register(placeController, eventBus, defaultPlace);

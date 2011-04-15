@@ -13,11 +13,9 @@ import com.covoiturage.server.domain.UserInfo;
 public interface UserInfoRequest extends RequestContext {
 	Request<Long> countUsers();
 
-
 	Request<List<UserInfoProxy>> findAllUsers();
 
 	Request<UserInfoProxy> findUserInfo(String id);
-	
 
 	Request<Boolean> logout(String id);
 
@@ -25,12 +23,7 @@ public interface UserInfoRequest extends RequestContext {
 
 	InstanceRequest<UserInfoProxy, Void> remove();
 
-
-	Request<UserInfoProxy> modifyUserInfo(String id,String password, String emailAddress);
-
-
-	
-
-
+	Request<UserInfoProxy> modifyUserInfo(String id, String password,
+			String emailAddress);
 
 }

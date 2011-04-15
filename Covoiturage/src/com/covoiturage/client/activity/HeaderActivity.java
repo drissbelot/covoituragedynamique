@@ -9,9 +9,7 @@ import com.covoiturage.client.event.MessageEventHandler;
 
 import com.covoiturage.client.place.LoginPlace;
 
-
 import com.covoiturage.client.view.HeaderView;
-
 
 import com.covoiturage.shared.CovoiturageRequestFactory;
 
@@ -29,7 +27,8 @@ import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class HeaderActivity extends AbstractActivity implements HeaderView.Presenter{
+public class HeaderActivity extends AbstractActivity implements
+		HeaderView.Presenter {
 	private final EventBus eventBus;
 	private final HeaderView headerView;
 	private CovoiturageRequestFactory requestFactory;
@@ -37,6 +36,7 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 	private UserInfoProxy currentUser;
 
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+
 	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -55,19 +55,17 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 
 					@Override
 					public void onSuccess(UserInfoProxy response) {
-						
-						currentUser=response;
-						headerView.getCurrentUser().setText(currentUser.getLogin());
+
+						currentUser = response;
+						headerView.getCurrentUser().setText(
+								currentUser.getLogin());
 					}
 				});
-				
-				
-				
+
 			}
 
 			@Override
 			public void onFailure(Throwable caught) {
-
 
 			}
 		});
@@ -77,25 +75,24 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 			public void onClick(ClickEvent event) {
 				UserInfoRequest userReq = requestFactory.userInfoRequest();
 				Request<Boolean> createReq = userReq.logout(currentUser.getId());
-				createReq.fire(new Receiver<Boolean>(){
+				createReq.fire(new Receiver<Boolean>() {
 					@Override
 					public void onSuccess(Boolean result) {
 
 						goTo(new LoginPlace(null));
 					}
 
-
 				});
 			}
 		});
 		eventBus.addHandler(MessageEvent.TYPE, new MessageEventHandler() {
-			
+
 			@Override
 			public void onMessage(MessageEvent event) {
 				headerView.getMessages().setText("Vous avez un message");
-				//TODO réagir
-				//TODO Jolie Popup
-				//TODO lier avec la messageView au clic
+				// TODO réagir
+				// TODO Jolie Popup
+				// TODO lier avec la messageView au clic
 			}
 		});
 	}
@@ -109,12 +106,10 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 	@Override
 	public void onCancel() {
 
-
 	}
 
 	@Override
 	public void onStop() {
-
 
 	}
 
@@ -124,8 +119,6 @@ public class HeaderActivity extends AbstractActivity implements HeaderView.Prese
 		headerView.setPresenter(this);
 		panel.setWidget(headerView.asWidget());
 	}
-
-
 
 	@Override
 	public void goTo(Place place) {

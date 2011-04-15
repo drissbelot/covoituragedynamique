@@ -17,7 +17,8 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class MenuActivity extends AbstractActivity implements MenuView.Presenter{
+public class MenuActivity extends AbstractActivity implements
+		MenuView.Presenter {
 
 	private final MenuView menuView;
 
@@ -25,48 +26,44 @@ public class MenuActivity extends AbstractActivity implements MenuView.Presenter
 
 	public MenuActivity(ClientFactory clientFactory) {
 
-
 		this.menuView = clientFactory.getMenuView();
 		this.placeController = clientFactory.getPlaceController();
 	}
-	
+
 	private void bind() {
 		menuView.getMapLabel().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new MapPlace(null));
-				
+
 			}
 		});
 		menuView.getSettingsLabel().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new SettingsPlace(null));
-				
+
 			}
 		});
 		menuView.getHistoryLabel().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new HistoryPlace(null));
-				
+
 			}
 		});
 		menuView.getMessagesLabel().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new MessagesListPlace(null));
-				
+
 			}
 		});
 	}
-
-	
-
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
@@ -74,8 +71,6 @@ public class MenuActivity extends AbstractActivity implements MenuView.Presenter
 		menuView.setPresenter(this);
 		panel.setWidget(menuView.asWidget());
 	}
-
-
 
 	@Override
 	public void goTo(Place place) {

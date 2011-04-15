@@ -1,6 +1,5 @@
 package com.covoiturage.client.activity;
 
-
 import java.util.Date;
 
 import com.covoiturage.client.ClientFactory;
@@ -38,14 +37,15 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class LoginActivity extends AbstractActivity implements LoginView.Presenter {
+public class LoginActivity extends AbstractActivity implements
+		LoginView.Presenter {
 
 	private final EventBus eventBus;
 	private final LoginView loginView;
 	private UserInfoProxy currentUser;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
-	private UserServiceAsync userService= GWT.create(UserService.class);
+	private UserServiceAsync userService = GWT.create(UserService.class);
 
 	public LoginActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -55,26 +55,27 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	}
 
 	private void bind() {
-		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {   
+		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				login();
 
 			}
 		});
-		loginView.getAddUserButton().addClickHandler(new ClickHandler() {   
+		loginView.getAddUserButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				goTo(new AddUserPlace(null));
 			}
 		});
-	} 
+	}
 
-	private void login(){
+	private void login() {
 
-		userService.login(loginView.getLogin().getValue(), loginView.getPassword().getValue(), new AsyncCallback<String>() {
+		userService.login(loginView.getLogin().getValue(), loginView
+				.getPassword().getValue(), new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
-				String sessionID =result;
+				String sessionID = result;
 				final long DURATION = 1000 * 60 * 2;
 				Date expires = new Date(System.currentTimeMillis() + DURATION);
 				Cookies.setCookie("sid", sessionID, expires, null, "/", false);
@@ -82,55 +83,71 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 
 					@Override
 					public void onFailure(Throwable caught) {
-						
 
 					}
 
 					@Override
 					public void onSuccess(String result) {
-						UserInfoRequest request = requestFactory.userInfoRequest();
-						Request<UserInfoProxy> createReq = request.findUserInfo(result);
+						UserInfoRequest request = requestFactory
+								.userInfoRequest();
+						Request<UserInfoProxy> createReq = request
+								.findUserInfo(result);
 						createReq.fire(new Receiver<UserInfoProxy>() {
 
 							@Override
 							public void onSuccess(UserInfoProxy response) {
-								currentUser =response;
-								if(currentUser!=null && currentUser.getLoggedIn()) {
-									UserInfoDetailsRequest requestDetails = requestFactory.userInfoDetailsRequest();
-									Request<UserInfoDetailsProxy> createReqDatails=requestDetails.channel(currentUser.getId());
-									createReqDatails.fire(new Receiver<UserInfoDetailsProxy>() {
-										@Override
-										public void onSuccess(UserInfoDetailsProxy response) {
-											eventBus.fireEvent(new SendLoginEvent(currentUser, response));
-
-											ChannelFactory.createChannel(response.getChannelId(), new ChannelCreatedCallback() {
+								currentUser = response;
+								if (currentUser != null
+										&& currentUser.getLoggedIn()) {
+									UserInfoDetailsRequest requestDetails = requestFactory
+											.userInfoDetailsRequest();
+									Request<UserInfoDetailsProxy> createReqDatails = requestDetails
+											.channel(currentUser.getId());
+									createReqDatails
+											.fire(new Receiver<UserInfoDetailsProxy>() {
 												@Override
-												public void onChannelCreated(Channel channel) {
-													channel.open(new SocketListener() {
-														@Override
-														public void onOpen() {
+												public void onSuccess(
+														UserInfoDetailsProxy response) {
+													eventBus.fireEvent(new SendLoginEvent(
+															currentUser,
+															response));
 
-														}
-														@Override
-														public void onMessage(String message) {
-															eventBus.fireEvent(new MessageEvent(message));
+													ChannelFactory.createChannel(
+															response.getChannelId(),
+															new ChannelCreatedCallback() {
+																@Override
+																public void onChannelCreated(
+																		Channel channel) {
+																	channel.open(new SocketListener() {
+																		@Override
+																		public void onOpen() {
 
-														}
-														@Override
-														public void onError(SocketError error) {
+																		}
 
-														}
-														@Override
-														public void onClose() {
+																		@Override
+																		public void onMessage(
+																				String message) {
+																			eventBus.fireEvent(new MessageEvent(
+																					message));
 
-														}
-													});
+																		}
+
+																		@Override
+																		public void onError(
+																				SocketError error) {
+
+																		}
+
+																		@Override
+																		public void onClose() {
+
+																		}
+																	});
+																}
+															});
+
 												}
 											});
-
-
-										}
-									});
 
 									goTo(new MapPlace(null));
 
@@ -153,7 +170,6 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 
 			}
 		});
-
 
 	}
 

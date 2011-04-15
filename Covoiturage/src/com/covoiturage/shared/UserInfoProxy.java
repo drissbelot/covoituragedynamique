@@ -7,18 +7,19 @@ import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(UserInfo.class)
-public interface UserInfoProxy extends EntityProxy{
-	
-	public boolean getLoggedIn();
+public interface UserInfoProxy extends EntityProxy {
 
+	public boolean getLoggedIn();
 
 	public String getLogin();
 
 	public void setLogin(String login);
+
 	public String getEmailAddress();
+
 	public void setEmailAddress(String emailAddress);
 
-	public UserInfoProxy getDefaultUser(); 
+	public UserInfoProxy getDefaultUser();
 
 	public void setLoggedIn(boolean b);
 
@@ -36,9 +37,6 @@ public interface UserInfoProxy extends EntityProxy{
 
 	EntityProxyId<UserInfoProxy> stableId();
 
-
 	public String getId();
 
-
-	
 }

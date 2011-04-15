@@ -20,70 +20,82 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 
-
 public class MapViewImpl extends Composite implements MapView {
 
 	interface MyUiBinder extends UiBinder<FlowPanel, MapViewImpl> {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-//TODO tout mettre dans le formulaire
+	// TODO tout mettre dans le formulaire
 
-	@UiField FlowPanel flowpanel;
-	@UiField(provided=true) MapWidget mapWidget;
-	@UiField Button sendAddress,saveJourney;
-	@UiField SuggestBox originAdress,destinationAdress;
-	@UiField ContentPanel directionsPanel;
+	@UiField
+	FlowPanel flowpanel;
+	@UiField(provided = true)
+	MapWidget mapWidget;
+	@UiField
+	Button sendAddress, saveJourney;
+	@UiField
+	SuggestBox originAdress, destinationAdress;
+	@UiField
+	ContentPanel directionsPanel;
 
-	@UiField Label to,from; 
-	@UiField FormPanel departureForm;
-	@UiField DateField dateOfJourney;
-	@UiField TextField<String> departureStartTimeItem,departureEndTimeItem,arrivalTimeItem,distanceMaxField;
-	@UiField RadioButton driverRadioButton,passengerRadioButton;
+	@UiField
+	Label to, from;
+	@UiField
+	FormPanel departureForm;
+	@UiField
+	DateField dateOfJourney;
+	@UiField
+	TextField<String> departureStartTimeItem, departureEndTimeItem,
+			arrivalTimeItem, distanceMaxField;
+	@UiField
+	RadioButton driverRadioButton, passengerRadioButton;
 
-	
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-	private MapViewConstants constants=(MapViewConstants)GWT.create(MapViewConstants.class);
+	private MapViewConstants constants = (MapViewConstants) GWT
+			.create(MapViewConstants.class);
 
 	public MapViewImpl() {
 		MapOptions options = new MapOptions();
-		options.setCenter(new LatLng(50.6687,4.57967));
+		options.setCenter(new LatLng(50.6687, 4.57967));
 		options.setZoom(12);
 		options.setMapTypeId(new MapTypeId().getRoadmap());
-	    options.setNavigationControl(true);
-	    options.setDraggable(true);
-	    options.setMapTypeControl(true);
-	    mapWidget= new MapWidget(options);
-	    
-	    initWidget(binder.createAndBindUi(this));
-	    
-	    // internationalization
-	    to.setText(constants.to()+" :");
-	    from.setText(constants.from()+" :");
-	    distanceMaxField.setFieldLabel(constants.distmax());
-	    sendAddress.setText(constants.gettravelway());
-	    saveJourney.setText(constants.savejourney());
+		options.setNavigationControl(true);
+		options.setDraggable(true);
+		options.setMapTypeControl(true);
+		mapWidget = new MapWidget(options);
+
+		initWidget(binder.createAndBindUi(this));
+
+		// internationalization
+		to.setText(constants.to() + " :");
+		from.setText(constants.from() + " :");
+		distanceMaxField.setFieldLabel(constants.distmax());
+		sendAddress.setText(constants.gettravelway());
+		saveJourney.setText(constants.savejourney());
 
 		driverRadioButton.setText(constants.driver());
 		passengerRadioButton.setText(constants.passenger());
 
 		dateOfJourney.setFieldLabel(constants.Dateofjourney());
 		dateOfJourney.setAllowBlank(false);
-		
-		
+
 		departureStartTimeItem.setFieldLabel(constants.departuretime());
 		departureStartTimeItem.setAllowBlank(false);
-		departureStartTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		departureStartTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 
 		departureEndTimeItem.setFieldLabel(constants.and());
 		departureEndTimeItem.setAllowBlank(false);
-		departureEndTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-		
+		departureEndTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+
 		arrivalTimeItem.setFieldLabel(constants.arrivaltime());
 		arrivalTimeItem.setAllowBlank(false);
-		arrivalTimeItem.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-		
+		arrivalTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+
 		driverRadioButton.setValue(true);
 		directionsPanel.setHeaderVisible(false);
 	}
@@ -139,25 +151,23 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	public void setOriginAddress(SuggestBox originAddress) {
-		this.originAdress=originAddress;
+		this.originAdress = originAddress;
 	}
 
 	public void setDestinationAddress(String destinationAddress) {
 		this.destinationAdress.setText(destinationAddress);
 	}
-	
 
 	public TextField<String> getDepartureStartTime() {
 		return departureStartTimeItem;
 	}
 
-
 	public TextField<String> getArrivalTime() {
 		return arrivalTimeItem;
 	}
+
 	public TextField<String> getDepartureEndTime() {
 		return departureEndTimeItem;
 	}
-
 
 }

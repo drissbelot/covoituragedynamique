@@ -14,24 +14,34 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AddUserViewImpl extends Composite implements  AddUserView {
+public class AddUserViewImpl extends Composite implements AddUserView {
 
-	interface MyUiBinder extends UiBinder<FlowPanel, AddUserViewImpl> { }
+	interface MyUiBinder extends UiBinder<FlowPanel, AddUserViewImpl> {
+	}
+
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private AddUserViewConstants constants=(AddUserViewConstants)GWT.create(AddUserViewConstants.class);
+	private AddUserViewConstants constants = (AddUserViewConstants) GWT
+			.create(AddUserViewConstants.class);
 
-	@UiField FlowPanel flowpanel;
-	@UiField Button addButton;
-	@UiField TextField<String> firstNameField,lastNameField,emailAdressField,loginField;
-	@UiField TextField<String> passwordField;
-	@UiField SuggestBox vehicleMake,vehicleModel;
-	@UiField ListBox language;
-	@UiField Label header,Make,Model;
+	@UiField
+	FlowPanel flowpanel;
+	@UiField
+	Button addButton;
+	@UiField
+	TextField<String> firstNameField, lastNameField, emailAdressField,
+			loginField;
+	@UiField
+	TextField<String> passwordField;
+	@UiField
+	SuggestBox vehicleMake, vehicleModel;
+	@UiField
+	ListBox language;
+	@UiField
+	Label header, Make, Model;
 
 	public AddUserViewImpl() {
 
-		initWidget(binder.createAndBindUi(this)); 
-
+		initWidget(binder.createAndBindUi(this));
 
 		loginField.setFieldLabel(constants.username());
 		lastNameField.setFieldLabel(constants.lastname());
@@ -49,7 +59,6 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 		addButton.setText(constants.add());
 	}
 
-
 	public TextField<String> getFirstName() {
 		return firstNameField;
 	}
@@ -58,32 +67,36 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 		return lastNameField;
 	}
 
-
 	public TextField<String> getEmailAddress() {
 		return emailAdressField;
 	}
-
-
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	public HasClickHandlers getAddUserButton() {
 		return addButton;
-		}
+	}
+
 	public Widget asWidget() {
 		return this;
-		}
+	}
+
 	public HasClickHandlers getAddButton() {
 		return addButton;
-		}
+	}
+
 	public TextField<String> getPassword() {
-		return  passwordField;
-		}
+		return passwordField;
+	}
+
 	public TextField<String> getLogin() {
 		return loginField;
-		}
-	public void setPresenter(Presenter presenter) {this.presenter=presenter;}
+	}
+
+	public void setPresenter(Presenter presenter) {
+		this.presenter = presenter;
+	}
 
 	@Override
 	public SuggestBox getMakeSuggestTextBox() {

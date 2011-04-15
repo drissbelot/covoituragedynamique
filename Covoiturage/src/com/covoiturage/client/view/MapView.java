@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 
-public interface MapView extends IsWidget{
+public interface MapView extends IsWidget {
 
 	public abstract RadioButton getPassengerRadioButton();
 
@@ -35,23 +35,21 @@ public interface MapView extends IsWidget{
 	public abstract float getDistanceMax();
 
 	public abstract FlowPanel getMapDecorator();
-	
-    void setPresenter(Presenter presenter);
 
-    public interface Presenter {
-        void goTo(Place place);
-    }
+	void setPresenter(Presenter presenter);
+
+	public interface Presenter {
+		void goTo(Place place);
+	}
 
 	public void setOriginAddress(SuggestBox suggestBox);
 
-	public void setDestinationAddress(String destinationAddress) ;
-	
+	public void setDestinationAddress(String destinationAddress);
+
 	public TextField<String> getDepartureStartTime();
+
 	public TextField<String> getDepartureEndTime();
 
 	public TextField<String> getArrivalTime();
-	
-	
-
 
 }

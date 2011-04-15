@@ -6,17 +6,20 @@ import com.google.gwt.place.shared.Place;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-public interface LoginView extends IsWidget{
+public interface LoginView extends IsWidget {
 
 	public abstract HasClickHandlers getSendLoginButton();
+
 	public abstract HasClickHandlers getAddUserButton();
-	
+
 	public TextField<String> getPassword();
+
 	public TextField<String> getLogin();
-	
-    void setPresenter(Presenter presenter);
-    public interface Presenter {
-        void goTo(Place place);
-    }
+
+	void setPresenter(Presenter presenter);
+
+	public interface Presenter {
+		void goTo(Place place);
+	}
 
 }

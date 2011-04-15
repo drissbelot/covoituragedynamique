@@ -5,11 +5,12 @@ import java.util.List;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.google.gwt.event.shared.GwtEvent;
 
-
-public class GetValidatePassengersEvent extends GwtEvent<GetValidatePassengersEventHandler> {
+public class GetValidatePassengersEvent extends
+		GwtEvent<GetValidatePassengersEventHandler> {
 	public static Type<GetValidatePassengersEventHandler> TYPE = new Type<GetValidatePassengersEventHandler>();
 	private List<String> passengers;
 	private List<SimpleTravelProxy> simpleTravels;
+
 	public List<SimpleTravelProxy> getSimpleTravels() {
 		return simpleTravels;
 	}
@@ -18,7 +19,8 @@ public class GetValidatePassengersEvent extends GwtEvent<GetValidatePassengersEv
 		this.simpleTravels = simpleTravels;
 	}
 
-	public GetValidatePassengersEvent(List<String> result, List<SimpleTravelProxy> resultSimpleTravel) {
+	public GetValidatePassengersEvent(List<String> result,
+			List<SimpleTravelProxy> resultSimpleTravel) {
 		super();
 		this.setPassengers(result);
 		this.setSimpleTravels(resultSimpleTravel);

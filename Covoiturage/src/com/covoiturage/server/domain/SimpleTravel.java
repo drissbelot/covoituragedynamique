@@ -25,7 +25,6 @@ import com.google.appengine.api.urlfetch.HTTPResponse;
 import com.google.appengine.api.urlfetch.URLFetchService;
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 
-
 @Entity
 public class SimpleTravel {
 
@@ -33,8 +32,8 @@ public class SimpleTravel {
 		EntityManager em = entityManager();
 		try {
 			return ((Number) em.createQuery(
-			"select count(o) from SimpleTravel o").getSingleResult())
-			.longValue();
+					"select count(o) from SimpleTravel o").getSingleResult())
+					.longValue();
 		} finally {
 			em.close();
 		}
@@ -49,7 +48,7 @@ public class SimpleTravel {
 		EntityManager em = entityManager();
 		try {
 			List<SimpleTravel> list = em.createQuery(
-			"select o from SimpleTravel o").getResultList();
+					"select o from SimpleTravel o").getResultList();
 
 			list.size();
 			return list;
@@ -71,17 +70,21 @@ public class SimpleTravel {
 		}
 	}
 
-	public static List<SimpleTravel> getSimpleTravels(List<String> steps,Date departureStart, Date departureEnd, Date arrival,
+	public static List<SimpleTravel> getSimpleTravels(List<String> steps,
+			Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax) {
-		return MapUtils.bufferRoute(steps, departureStart,  departureEnd,  arrival, distanceMax);
+		return MapUtils.bufferRoute(steps, departureStart, departureEnd,
+				arrival, distanceMax);
 
 	}
+
 	@SuppressWarnings("unchecked")
-	public static List<SimpleTravel> getSimpleTravelsFromUser(String userId){
+	public static List<SimpleTravel> getSimpleTravelsFromUser(String userId) {
 		EntityManager em = entityManager();
 		try {
 			List<SimpleTravel> list = em.createQuery(
-			"select o from SimpleTravel o where o.passenger = :userId").getResultList();
+					"select o from SimpleTravel o where o.passenger = :userId")
+					.getResultList();
 			list.size();
 			return list;
 
@@ -89,11 +92,12 @@ public class SimpleTravel {
 			em.close();
 		}
 
-
-
 	}
-	public static SimpleTravel saveJourneyPassenger(List<String> steps, String originAddress, String destinationAddress,
-			Date date,Date departureStart, Date departureEnd, Date arrival, String passenger, String mapImage) {
+
+	public static SimpleTravel saveJourneyPassenger(List<String> steps,
+			String originAddress, String destinationAddress, Date date,
+			Date departureStart, Date departureEnd, Date arrival,
+			String passenger, String mapImage) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		EntityManager em = entityManager();
 		try {
@@ -105,39 +109,38 @@ public class SimpleTravel {
 			simpleTravel.setDepartureStart(departureStart);
 			simpleTravel.setDepartureEnd(departureEnd);
 			simpleTravel.setArrival(arrival);
-			 URLFetchService fetchService =
-		            URLFetchServiceFactory.getURLFetchService();
-			
-			try {
-				HTTPResponse fetchResponse = fetchService.fetch(new URL(mapImage));
-				String fetchResponseContentType = null;
-		        for (HTTPHeader header : fetchResponse.getHeaders()) {
-		            
-		            if (header.getName().equalsIgnoreCase("content-type")) {
-		                fetchResponseContentType = header.getValue();
-		                break;
-		            }
-		        }
+			URLFetchService fetchService = URLFetchServiceFactory
+					.getURLFetchService();
 
-		        if (fetchResponseContentType != null) {
-		            
-		            
-		        	simpleTravel.setMapImageType(fetchResponseContentType);
-	
-		        	simpleTravel.setMapImage(fetchResponse.getContent());;
-				
-				
-		        }
-				
+			try {
+				HTTPResponse fetchResponse = fetchService.fetch(new URL(
+						mapImage));
+				String fetchResponseContentType = null;
+				for (HTTPHeader header : fetchResponse.getHeaders()) {
+
+					if (header.getName().equalsIgnoreCase("content-type")) {
+						fetchResponseContentType = header.getValue();
+						break;
+					}
+				}
+
+				if (fetchResponseContentType != null) {
+
+					simpleTravel.setMapImageType(fetchResponseContentType);
+
+					simpleTravel.setMapImage(fetchResponse.getContent());
+					;
+
+				}
+
 			} catch (MalformedURLException e) {
-				
+
 				e.printStackTrace();
 			} catch (IOException e) {
-				
+
 				e.printStackTrace();
 			}
 
-			
 			em.persist(simpleTravel);
 
 		} finally {
@@ -147,24 +150,25 @@ public class SimpleTravel {
 
 		return simpleTravel;
 	}
-	public static void updateSimpleTravel(String id, String statusDriver, String statusPassenger){
+
+	public static void updateSimpleTravel(String id, String statusDriver,
+			String statusPassenger) {
 
 		SimpleTravel travel = new SimpleTravel();
 		EntityManager em = entityManager();
 
-		Query query= em.createQuery("select o from SimpleTravel o where o.id = :idParam ");
-		query.setParameter("idParam",id);
+		Query query = em
+				.createQuery("select o from SimpleTravel o where o.id = :idParam ");
+		query.setParameter("idParam", id);
 
-		try
-		{
+		try {
 
 			@SuppressWarnings("unchecked")
-			List<SimpleTravel> results =query.getResultList();
+			List<SimpleTravel> results = query.getResultList();
 
-			if(results.size()!=0){
+			if (results.size() != 0) {
 
-
-				travel= results.get(0);
+				travel = results.get(0);
 
 				em.getTransaction().begin();
 
@@ -174,22 +178,16 @@ public class SimpleTravel {
 				em.getTransaction().commit();
 			}
 
-
-		}
-		finally
-		{
+		} finally {
 			em.close();
 		}
 
-
-
 	}
-
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	public String id;
 	private Date date;
 	public String passenger;
@@ -197,9 +195,7 @@ public class SimpleTravel {
 	private String destinationAddress;
 	private Blob mapImage;
 	private String mapImageType;
-	
 
-	
 	public String getMapImageType() {
 		return mapImageType;
 	}
@@ -223,8 +219,6 @@ public class SimpleTravel {
 	public void setStatusDriver(String statusDriver) {
 		this.statusDriver = statusDriver;
 	}
-
-
 
 	private String statusPassenger;
 	private String statusDriver;
@@ -277,10 +271,6 @@ public class SimpleTravel {
 	public void setDestinationAddress(String destinationAddress) {
 		this.destinationAddress = destinationAddress;
 	}
-
-
-
-
 
 	public SimpleTravel() {
 	}

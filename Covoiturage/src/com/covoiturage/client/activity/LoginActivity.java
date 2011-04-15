@@ -70,7 +70,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 
 	private void login(){
 
-		userService.login(loginView.getLogin().getTitle(), loginView.getPassword().getTitle(), new AsyncCallback<String>() {
+		userService.login(loginView.getLogin().getValue(), loginView.getPassword().getValue(), new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
@@ -82,7 +82,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
+						
 
 					}
 

@@ -39,12 +39,12 @@ public class MessagesListActivity extends AbstractActivity implements
 		MessagesListView.Presenter {
 
 	private final MessagesListView messagesListView;
-	private CovoiturageRequestFactory requestFactory;
-	private PlaceController placeController;
+	private final CovoiturageRequestFactory requestFactory;
+	private final PlaceController placeController;
 
 	private String currentUser;
 	private UserInfoDetailsProxy userDetails;
-	private List<MessagesProxy> messages = new ArrayList<MessagesProxy>();
+	private final List<MessagesProxy> messages = new ArrayList<MessagesProxy>();
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
 	public MessagesListActivity(ClientFactory clientFactory) {
@@ -126,7 +126,7 @@ public class MessagesListActivity extends AbstractActivity implements
 												.updateSimpleTravel(
 														model.get("message")
 																.toString()
-																.split("/")[0],
+																.split("/")[1],
 														"accepted", "accepted");
 										createRequestTravel
 												.fire(new Receiver<Void>() {

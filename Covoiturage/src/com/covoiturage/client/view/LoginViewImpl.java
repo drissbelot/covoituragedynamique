@@ -32,7 +32,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-	private LoginViewConstants constants = (LoginViewConstants) GWT
+	private final LoginViewConstants constants = (LoginViewConstants) GWT
 			.create(LoginViewConstants.class);
 
 	public LoginViewImpl() {
@@ -41,28 +41,34 @@ public class LoginViewImpl extends Composite implements LoginView {
 		loginField.setFieldLabel(constants.username());
 		title.setText(constants.title());
 		passwordField.setFieldLabel(constants.password());
+		passwordField.setPassword(true);
 		addUserButton.setText(constants.newuser());
 		sendButton.setText(constants.submit());
 		image.setUrl("http://www.cijoint.fr/cj201103/cijYu4R0h9.png");
 		image2.setUrl("http://www.cijoint.fr/cj201103/cijYu4R0h9.png");
 	}
 
+	@Override
 	public HasClickHandlers getSendLoginButton() {
 		return sendButton;
 	}
 
+	@Override
 	public HasClickHandlers getAddUserButton() {
 		return addUserButton;
 	}
 
+	@Override
 	public TextField<String> getPassword() {
 		return passwordField;
 	}
 
+	@Override
 	public TextField<String> getLogin() {
 		return loginField;
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}

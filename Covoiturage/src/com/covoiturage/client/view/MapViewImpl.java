@@ -126,7 +126,7 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	public float getDistanceMax() {
-		return Float.valueOf(distanceMaxField.getTitle());
+		return Float.valueOf(distanceMaxField.getValue());
 	}
 
 	public FlowPanel getMapDecorator() {

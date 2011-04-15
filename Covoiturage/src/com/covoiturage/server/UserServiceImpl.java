@@ -47,7 +47,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements UserService
 
 					em.getTransaction().commit();	
 					HttpSession httpSession= getThreadLocalRequest().getSession();
-					httpSession.setMaxInactiveInterval(1000 * 60 *2);
+					httpSession.setMaxInactiveInterval(1000 * 60 *5);
 					httpSession.setAttribute("LOGGED_IN_USER", results.get(0).getId());
 					return httpSession.getId();
 				}

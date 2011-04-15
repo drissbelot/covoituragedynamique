@@ -37,13 +37,13 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		
 		//Internationalization
 		header.setText(constants.header()+" :");
-		lastNameField.setTitle(constants.lastname());
-		firstNameField.setTitle(constants.firstname());
-		emailAdressField.setTitle(constants.email());
+		lastNameField.setFieldLabel(constants.lastname());
+		firstNameField.setFieldLabel(constants.firstname());
+		emailAdressField.setFieldLabel(constants.email());
 		
-		newpasswordField.setTitle(constants.password());
+		newpasswordField.setFieldLabel(constants.password());
 		newpasswordField.setPassword(true);
-		passwordField.setTitle(constants.password());
+		passwordField.setFieldLabel(constants.password());
 		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());

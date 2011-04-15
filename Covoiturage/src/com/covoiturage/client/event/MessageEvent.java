@@ -5,6 +5,7 @@ import com.google.gwt.event.shared.GwtEvent;
 public class MessageEvent extends GwtEvent<MessageEventHandler> {
 	public static Type<MessageEventHandler> TYPE = new Type<MessageEventHandler>();
 	private String message;
+
 	public MessageEvent(String message) {
 		this.setMessage(message);
 	}

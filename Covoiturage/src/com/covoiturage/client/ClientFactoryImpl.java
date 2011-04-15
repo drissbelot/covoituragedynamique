@@ -28,36 +28,33 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 
-
 public class ClientFactoryImpl implements ClientFactory {
-    private final EventBus eventBus = new SimpleEventBus();
-    private final PlaceController placeController = new PlaceController(eventBus);
-    private final LoginView loginView = new LoginViewImpl();
-    private final MapView mapView = new MapViewImpl();
-    private final AddUserView addUserView = new AddUserViewImpl();
-    private final SettingsView EditProfilView = new SettingsViewImpl();
-    private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
-    private final MenuView menuView = new MenuViewImpl();
-    private final HeaderView headerView = new HeaderViewImpl();
-    private final FooterView footerView = new FooterViewImpl();
-    private final HistoryView historyView = new HistoryViewImpl();
-    private final MessagesListView messagesListView = new MessagesListViewImpl();
-    private final MessageDetailsView messageDetailsView = new MessageDetailsViewImpl();
-    private final CovoiturageRequestFactory requestFactory = GWT.create(CovoiturageRequestFactory.class);
-	
-    
-    
-    public CovoiturageRequestFactory getRequestFactory() {
+	private final EventBus eventBus = new SimpleEventBus();
+	private final PlaceController placeController = new PlaceController(
+			eventBus);
+	private final LoginView loginView = new LoginViewImpl();
+	private final MapView mapView = new MapViewImpl();
+	private final AddUserView addUserView = new AddUserViewImpl();
+	private final SettingsView EditProfilView = new SettingsViewImpl();
+	private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
+	private final MenuView menuView = new MenuViewImpl();
+	private final HeaderView headerView = new HeaderViewImpl();
+	private final FooterView footerView = new FooterViewImpl();
+	private final HistoryView historyView = new HistoryViewImpl();
+	private final MessagesListView messagesListView = new MessagesListViewImpl();
+	private final MessageDetailsView messageDetailsView = new MessageDetailsViewImpl();
+	private final CovoiturageRequestFactory requestFactory = GWT
+			.create(CovoiturageRequestFactory.class);
+
+	public CovoiturageRequestFactory getRequestFactory() {
 		return requestFactory;
 	}
 
-
 	public ClientFactoryImpl() {
-        requestFactory.initialize(eventBus);
+		requestFactory.initialize(eventBus);
 
-      }
+	}
 
-    
 	@Override
 	public EventBus getEventBus() {
 		return eventBus;
@@ -88,32 +85,27 @@ public class ClientFactoryImpl implements ClientFactory {
 		return validatePassengersView;
 	}
 
-
 	@Override
 	public SettingsView getSettingsView() {
-		
+
 		return EditProfilView;
 	}
-
 
 	@Override
 	public MenuView getMenuView() {
 
-		return menuView ;
+		return menuView;
 	}
-
 
 	@Override
 	public HeaderView getHeaderView() {
 		return headerView;
 	}
 
-
 	@Override
 	public FooterView getFooterView() {
 		return footerView;
 	}
-
 
 	@Override
 	public HistoryView getHistoryView() {
@@ -121,21 +113,15 @@ public class ClientFactoryImpl implements ClientFactory {
 		return historyView;
 	}
 
-
 	@Override
 	public MessagesListView getMessagesListView() {
-		
+
 		return messagesListView;
 	}
-
 
 	@Override
 	public MessageDetailsView getMessageDetailsView() {
 		return messageDetailsView;
 	}
-
-
-
-
 
 }

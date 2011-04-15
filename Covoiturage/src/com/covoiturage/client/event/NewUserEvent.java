@@ -4,6 +4,7 @@ import com.google.gwt.event.shared.GwtEvent;
 
 public class NewUserEvent extends GwtEvent<NewUserEventHandler> {
 	public static Type<NewUserEventHandler> TYPE = new Type<NewUserEventHandler>();
+
 	@Override
 	public com.google.gwt.event.shared.GwtEvent.Type<NewUserEventHandler> getAssociatedType() {
 		return TYPE;
@@ -12,7 +13,7 @@ public class NewUserEvent extends GwtEvent<NewUserEventHandler> {
 	@Override
 	protected void dispatch(NewUserEventHandler handler) {
 		handler.onNewUser(this);
-		
+
 	}
 
 }

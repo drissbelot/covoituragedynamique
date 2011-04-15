@@ -3,7 +3,6 @@ package com.covoiturage.server.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -15,22 +14,18 @@ import javax.persistence.Version;
 
 import org.datanucleus.jpa.annotations.Extension;
 
-
 import com.covoiturage.server.ChannelServer;
 import com.covoiturage.server.EMF;
-
-
-
-
 
 @Entity
 public class UserInfoDetails {
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
-    public String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	public String id;
 	public String channelId;
+
 	public String getChannelId() {
 		return channelId;
 	}
@@ -47,32 +42,33 @@ public class UserInfoDetails {
 		return version;
 	}
 
-
-
-
-
 	@Version
 	@Column(name = "version")
 	private Integer version = 0;
+
 	public static final EntityManager entityManager() {
-		
+
 		return EMF.get().createEntityManager();
-		
+
 	}
+
 	public static long countUserInfoDetails() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from UserInfoDetails o").getSingleResult()).longValue();
+			return ((Number) em.createQuery(
+					"select count(o) from UserInfoDetails o").getSingleResult())
+					.longValue();
 		} finally {
 			em.close();
-		} 
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<UserInfoDetails> findAllUserInfoDetails() {
 		EntityManager em = entityManager();
 		try {
-			List<UserInfoDetails> list = em.createQuery("select o from UserInfoDetails o").getResultList();
+			List<UserInfoDetails> list = em.createQuery(
+					"select o from UserInfoDetails o").getResultList();
 
 			list.size();
 			return list;
@@ -93,30 +89,34 @@ public class UserInfoDetails {
 			em.close();
 		}
 	}
+
 	@SuppressWarnings("unchecked")
-	public static UserInfoDetails findDetailsFromUser(String id){
+	public static UserInfoDetails findDetailsFromUser(String id) {
 		EntityManager em = entityManager();
 		try {
-			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");
+			Query query = em
+					.createQuery("select o from UserInfoDetails o where o.user=:user");
 			query.setParameter("user", id);
-			List<UserInfoDetails> list =query.getResultList();
+			List<UserInfoDetails> list = query.getResultList();
 			list.get(0).getMessages();
 			return list.get(0);
 		} finally {
 			em.close();
 		}
-		
+
 	}
+
 	@SuppressWarnings("unchecked")
-	public static UserInfoDetails channel(String id){
+	public static UserInfoDetails channel(String id) {
 		EntityManager em = entityManager();
 		UserInfoDetails userDetails = new UserInfoDetails();
 		try {
-			Query query= em.createQuery("select o from UserInfoDetails o where o.user=:user");
+			Query query = em
+					.createQuery("select o from UserInfoDetails o where o.user=:user");
 			query.setParameter("user", id);
-			List<UserInfoDetails> list =query.getResultList();
-			
-			userDetails=list.get(0);
+			List<UserInfoDetails> list = query.getResultList();
+
+			userDetails = list.get(0);
 			em.getTransaction().begin();
 			String channelId = ChannelServer.createChannel(userDetails.getId());
 			userDetails.setChannelId(channelId);
@@ -127,87 +127,81 @@ public class UserInfoDetails {
 			em.close();
 		}
 	}
-	
-	public static UserInfoDetails addMessageToUser(String id, String messageId){
-		UserInfoDetails user=findUserInfoDetails(id);
+
+	public static UserInfoDetails addMessageToUser(String id, String messageId) {
+		UserInfoDetails user = findUserInfoDetails(id);
 		EntityManager em = entityManager();
-		try{
-		
-		user.addMessage(messageId);
-		em.merge(user);
-		
-		return user;
-		}
-		finally{
+		try {
+
+			user.addMessage(messageId);
+			em.merge(user);
+
+			return user;
+		} finally {
 			em.close();
 		}
-		
+
 	}
-	 public static UserInfoDetails deleteMessage(String id, String messageId){
-		 UserInfoDetails user=findUserInfoDetails(id);
-		 EntityManager em = entityManager();
-			try{
-			
+
+	public static UserInfoDetails deleteMessage(String id, String messageId) {
+		UserInfoDetails user = findUserInfoDetails(id);
+		EntityManager em = entityManager();
+		try {
+
 			user.removeMessage(messageId);
 			em.merge(user);
-			
+
 			return user;
-			}
-			finally{
-				em.close();
-			}
-	 }
-	
-	public static UserInfoDetails modifyUserInfoDetails(String id,String firstName, String lastName, String language){
+		} finally {
+			em.close();
+		}
+	}
+
+	public static UserInfoDetails modifyUserInfoDetails(String id,
+			String firstName, String lastName, String language) {
 		UserInfoDetails user = new UserInfoDetails();
 		EntityManager em = entityManager();
-		
-		Query query= em.createQuery("select o from UserInfoDetails o where o.user = :idParam ");
-		query.setParameter("idParam",id);
 
-		try
-		{
+		Query query = em
+				.createQuery("select o from UserInfoDetails o where o.user = :idParam ");
+		query.setParameter("idParam", id);
+
+		try {
 
 			@SuppressWarnings("unchecked")
-			List<UserInfoDetails> results =query.getResultList();
-	
-			if(results.size()==0){
+			List<UserInfoDetails> results = query.getResultList();
+
+			if (results.size() == 0) {
 				return null;
-			}
-			else 
-			{
-				
-				user= results.get(0);
+			} else {
+
+				user = results.get(0);
 
 				em.getTransaction().begin();
-				
+
 				user.setFirstName(firstName);
 				user.setLastName(lastName);
 				user.setLanguage(language);
 
 				em.getTransaction().commit();
-				
-		}
-		}
-		finally
-		{
+
+			}
+		} finally {
 			em.close();
 		}
 
-
-
-		
 		return user;
-		
+
 	}
-	public static List<UserInfoDetails> getPassengerList(List<String> passengers){
+
+	public static List<UserInfoDetails> getPassengerList(List<String> passengers) {
 		EntityManager em = entityManager();
 		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
 		for (String string : passengers) {
 			result.add(em.find(UserInfoDetails.class, string));
 		}
 		return result;
-		
+
 	}
 
 	public void persist() {
@@ -229,15 +223,14 @@ public class UserInfoDetails {
 		}
 	}
 
+	public UserInfoDetails() {
 
-	public UserInfoDetails(){
-	
 	}
-	
-	
+
 	public UserInfoDetails(String makeOfvehicle, String modelOfvehicle,
 			String countOfPlaces, int rating, int countOfJourneys,
-			String firstName, String lastName, String language, List<String> messages) {
+			String firstName, String lastName, String language,
+			List<String> messages) {
 		super();
 		this.makeOfvehicle = makeOfvehicle;
 		this.modelOfvehicle = modelOfvehicle;
@@ -246,13 +239,9 @@ public class UserInfoDetails {
 		this.countOfJourneys = countOfJourneys;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.language=language;
-		this.messages=messages;
+		this.language = language;
+		this.messages = messages;
 	}
-
-
-
-
 
 	public String getMakeOfvehicle() {
 		return makeOfvehicle;
@@ -270,10 +259,6 @@ public class UserInfoDetails {
 		this.modelOfvehicle = modelOfvehicle;
 	}
 
-
-
-
-
 	private String makeOfvehicle;
 	private String modelOfvehicle;
 	private String countOfPlaces;
@@ -283,9 +268,7 @@ public class UserInfoDetails {
 	private String lastName;
 	private String user;
 	private String language;
-	private List<String> messages; 
-
-
+	private List<String> messages;
 
 	public String getLanguage() {
 		return language;
@@ -306,18 +289,23 @@ public class UserInfoDetails {
 	public void setCountOfPlaces(String countOfPlaces) {
 		this.countOfPlaces = countOfPlaces;
 	}
+
 	public String getCountOfPlaces() {
 		return countOfPlaces;
 	}
+
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+
 	public int getRating() {
 		return rating;
 	}
+
 	public void setCountOfJourneys(int countOfJourneys) {
 		this.countOfJourneys = countOfJourneys;
 	}
+
 	public int getCountOfJourneys() {
 		return countOfJourneys;
 	}
@@ -347,13 +335,12 @@ public class UserInfoDetails {
 	}
 
 	protected void addMessage(String message) {
-		
-			messages.add(message);
+
+		messages.add(message);
 	}
-	protected void removeMessage(String message){
+
+	protected void removeMessage(String message) {
 		messages.remove(message);
 	}
-	
-	
 
 }

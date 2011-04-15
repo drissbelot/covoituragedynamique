@@ -15,22 +15,29 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
 public class LoginViewImpl extends Composite implements LoginView {
-	
-	interface MyUiBinder extends UiBinder<FlowPanel, LoginViewImpl> { }
-    private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	
-    @UiField TextField<String> loginField,passwordField;
-    @UiField Label title;
-	@UiField Button addUserButton,sendButton;
-	@UiField Image image,image2;
 
-    @SuppressWarnings("unused")
+	interface MyUiBinder extends UiBinder<FlowPanel, LoginViewImpl> {
+	}
+
+	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
+
+	@UiField
+	TextField<String> loginField, passwordField;
+	@UiField
+	Label title;
+	@UiField
+	Button addUserButton, sendButton;
+	@UiField
+	Image image, image2;
+
+	@SuppressWarnings("unused")
 	private Presenter presenter;
-    private LoginViewConstants constants=(LoginViewConstants)GWT.create(LoginViewConstants.class);
-	
-	public LoginViewImpl(){
-		
-		initWidget(binder.createAndBindUi(this)); 
+	private LoginViewConstants constants = (LoginViewConstants) GWT
+			.create(LoginViewConstants.class);
+
+	public LoginViewImpl() {
+
+		initWidget(binder.createAndBindUi(this));
 		loginField.setFieldLabel(constants.username());
 		title.setText(constants.title());
 		passwordField.setFieldLabel(constants.password());
@@ -44,21 +51,22 @@ public class LoginViewImpl extends Composite implements LoginView {
 		return sendButton;
 	}
 
-	public HasClickHandlers getAddUserButton(){
+	public HasClickHandlers getAddUserButton() {
 		return addUserButton;
 	}
 
-	public  TextField<String> getPassword() {
+	public TextField<String> getPassword() {
 		return passwordField;
 	}
+
 	public TextField<String> getLogin() {
 		return loginField;
 	}
 
 	public void setPresenter(Presenter presenter) {
-		this.presenter=presenter;
+		this.presenter = presenter;
 	}
-	
+
 	@UiHandler("addUserButton")
 	void onAddUserButtonClick(ClickEvent event) {
 	}

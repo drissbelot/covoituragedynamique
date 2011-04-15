@@ -14,7 +14,7 @@ public class AddUserEvent extends GwtEvent<AddUserEventHandler> {
 	@Override
 	protected void dispatch(AddUserEventHandler handler) {
 		handler.onAddUser(this);
-		
+
 	}
 
 }

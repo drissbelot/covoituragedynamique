@@ -1,7 +1,5 @@
 package com.covoiturage.client.activity;
 
-
-
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
@@ -21,8 +19,8 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class SettingsActivity extends AbstractActivity implements SettingsView.Presenter{
-	
+public class SettingsActivity extends AbstractActivity implements
+		SettingsView.Presenter {
 
 	private SettingsView settingsView;
 
@@ -36,60 +34,67 @@ public class SettingsActivity extends AbstractActivity implements SettingsView.P
 
 		this.settingsView = clientFactory.getSettingsView();
 		this.placeController = clientFactory.getPlaceController();
-		this.requestFactory=clientFactory.getRequestFactory();
-		this.eventBus=clientFactory.getEventBus();
+		this.requestFactory = clientFactory.getRequestFactory();
+		this.eventBus = clientFactory.getEventBus();
 	}
-	
+
 	private void bind() {
 		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				userDetails=event.getUserDetails();
+				userDetails = event.getUserDetails();
 			}
 		});
-		
+
 		settingsView.getSubmitButton().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				modifyUserSettings();
-				
+
 			}
 		});
-		
+
 	}
 
 	protected void modifyUserSettings() {
-		//TODO reste un bug
-		UserInfoDetailsRequest requestDetails = requestFactory.userInfoDetailsRequest();
-		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails.modifyUserInfoDetails(currentUser.getId(),settingsView.getFirstName().getTitle(),settingsView.getLastName().getTitle(),settingsView.getLanguage().getItemText(settingsView.getLanguage().getSelectedIndex()));
+		// TODO reste un bug
+		UserInfoDetailsRequest requestDetails = requestFactory
+				.userInfoDetailsRequest();
+		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails
+				.modifyUserInfoDetails(
+						currentUser.getId(),
+						settingsView.getFirstName().getTitle(),
+						settingsView.getLastName().getTitle(),
+						settingsView.getLanguage().getItemText(
+								settingsView.getLanguage().getSelectedIndex()));
 		createRequestDetails.fire(new Receiver<UserInfoDetailsProxy>() {
 
 			@Override
 			public void onSuccess(UserInfoDetailsProxy response) {
-							
+
 			}
 		});
 		UserInfoRequest request = requestFactory.userInfoRequest();
-		Request<UserInfoProxy> createRequest = request.modifyUserInfo(currentUser.getId(),settingsView.getNewPassword().getTitle(), settingsView.getEmailAddress().getTitle());
+		Request<UserInfoProxy> createRequest = request.modifyUserInfo(
+				currentUser.getId(), settingsView.getNewPassword().getTitle(),
+				settingsView.getEmailAddress().getTitle());
 		createRequest.fire(new Receiver<UserInfoProxy>() {
 
 			@Override
 			public void onSuccess(UserInfoProxy response) {
-							
+
 			}
 		});
-		
+
 	}
 
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
 		settingsView.setPresenter(this);
-        panel.setWidget(settingsView.asWidget());
+		panel.setWidget(settingsView.asWidget());
 	}
-
-
 
 	public void goTo(Place place) {
 		placeController.goTo(place);

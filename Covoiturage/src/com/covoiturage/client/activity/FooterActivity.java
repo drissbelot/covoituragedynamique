@@ -9,8 +9,9 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class FooterActivity extends AbstractActivity implements FooterView.Presenter{
-	
+public class FooterActivity extends AbstractActivity implements
+		FooterView.Presenter {
+
 	FooterView FooterView;
 	private PlaceController placeController;
 
@@ -19,17 +20,16 @@ public class FooterActivity extends AbstractActivity implements FooterView.Prese
 		this.placeController = clientFactory.getPlaceController();
 
 	}
-	
+
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
 		FooterView.setPresenter(this);
-        panel.setWidget(FooterView.asWidget());
-		
+		panel.setWidget(FooterView.asWidget());
+
 	}
 
 	private void bind() {
 
-		
 	}
 
 	public void goTo(Place place) {

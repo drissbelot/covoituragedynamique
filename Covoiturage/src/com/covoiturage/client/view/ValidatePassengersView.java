@@ -11,19 +11,22 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
-
-public interface ValidatePassengersView extends IsWidget{
+public interface ValidatePassengersView extends IsWidget {
 
 	public abstract Widget asWidget();
-    public interface Presenter {
-        void goTo(Place place);
-    }
+
+	public interface Presenter {
+		void goTo(Place place);
+	}
 
 	public abstract void setPresenter(
 			ValidatePassengersActivity validatePassengersActivity);
+
 	public Grid<BaseModelData> getListGrid();
 
 	public Label getDistanceLabel();
+
 	public Label getDurationLabel();
+
 	public WidgetExpander<BaseModelData> getExpander();
 }

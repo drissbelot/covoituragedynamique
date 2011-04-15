@@ -15,25 +15,26 @@ import com.google.gwt.place.shared.Place;
 
 public class FooterAppActivityMapper implements ActivityMapper {
 	private ClientFactory clientFactory;
+
 	public FooterAppActivityMapper(ClientFactory clientFactory) {
-		this.clientFactory=clientFactory;
+		this.clientFactory = clientFactory;
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		if(place instanceof MapPlace)
+		if (place instanceof MapPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof ValidatePassengersPlace)
+		else if (place instanceof ValidatePassengersPlace)
 			return new FooterActivity(clientFactory);
 		else if (place instanceof SettingsPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof LoginPlace)
+		else if (place instanceof LoginPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof HistoryPlace)
+		else if (place instanceof HistoryPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof MessagesListPlace)
+		else if (place instanceof MessagesListPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof MessageDetailsPlace)
+		else if (place instanceof MessageDetailsPlace)
 			return new FooterActivity(clientFactory);
 		return null;
 	}

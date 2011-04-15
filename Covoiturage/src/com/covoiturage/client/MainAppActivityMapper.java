@@ -20,9 +20,10 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 public class MainAppActivityMapper implements ActivityMapper {
-private ClientFactory clientFactory;
+	private ClientFactory clientFactory;
+
 	public MainAppActivityMapper(ClientFactory clientFactory) {
-		this.clientFactory=clientFactory;
+		this.clientFactory = clientFactory;
 	}
 
 	@Override
@@ -30,20 +31,20 @@ private ClientFactory clientFactory;
 		if (place instanceof LoginPlace)
 			return new LoginActivity(clientFactory);
 		else if (place instanceof AddUserPlace)
-			return new AddUserActivity( clientFactory);
+			return new AddUserActivity(clientFactory);
 		else if (place instanceof MapPlace)
 			return new MapActivity(clientFactory);
 		else if (place instanceof ValidatePassengersPlace)
 			return new MapActivity(clientFactory);
-		else if(place instanceof SettingsPlace)
+		else if (place instanceof SettingsPlace)
 			return new SettingsActivity(clientFactory);
-		else if(place instanceof HistoryPlace)
+		else if (place instanceof HistoryPlace)
 			return new HistoryActivity(clientFactory);
-		else if(place instanceof MessagesListPlace)
+		else if (place instanceof MessagesListPlace)
 			return new MessagesListActivity(clientFactory);
-		else if(place instanceof MessageDetailsPlace)
+		else if (place instanceof MessageDetailsPlace)
 			return new MessageDetailsActivity(clientFactory);
- 	return null;
+		return null;
 	}
 
 }

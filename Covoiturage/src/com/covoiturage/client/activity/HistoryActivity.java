@@ -24,15 +24,16 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class HistoryActivity extends AbstractActivity implements HistoryView.Presenter {
+public class HistoryActivity extends AbstractActivity implements
+		HistoryView.Presenter {
 	private final EventBus eventBus;
 	private final HistoryView historyView;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
 	private UserInfoProxy currentUser;
 	private UserInfoDetailsProxy userDetails;
-	private List<JourneyProxy> journeys=new ArrayList<JourneyProxy>();
-	private List<SimpleTravelProxy> simpleTravels=new ArrayList<SimpleTravelProxy>();
+	private List<JourneyProxy> journeys = new ArrayList<JourneyProxy>();
+	private List<SimpleTravelProxy> simpleTravels = new ArrayList<SimpleTravelProxy>();
 
 	public HistoryActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -40,8 +41,6 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 		this.historyView = clientFactory.getHistoryView();
 		this.placeController = clientFactory.getPlaceController();
 	}
-
-
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
@@ -51,54 +50,45 @@ public class HistoryActivity extends AbstractActivity implements HistoryView.Pre
 
 	}
 
-
-
 	private void bind() {
 		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				userDetails=event.getUserDetails();
+				userDetails = event.getUserDetails();
 				searchJourneys();
 			}
 		});
-		//TODO trier un peu tout ça et afficher
-		
+		// TODO trier un peu tout ça et afficher
+
 	}
-
-
 
 	private void searchJourneys() {
-				SimpleTravelRequest requestTravels = requestFactory.simpleTravelRequest();
-				Request<List<SimpleTravelProxy>> createReqTravels = requestTravels.getSimpleTravelsFromUser(userDetails.getId());
-				createReqTravels.fire(new Receiver<List<SimpleTravelProxy>>() {
+		SimpleTravelRequest requestTravels = requestFactory
+				.simpleTravelRequest();
+		Request<List<SimpleTravelProxy>> createReqTravels = requestTravels
+				.getSimpleTravelsFromUser(userDetails.getId());
+		createReqTravels.fire(new Receiver<List<SimpleTravelProxy>>() {
 
-					@Override
-					public void onSuccess(List<SimpleTravelProxy> response) {
-						simpleTravels=response;
-						
-					}
-				});
-				JourneyRequest requestJourneys = requestFactory.journeyRequest();
-				Request<List<JourneyProxy>> createReq = requestJourneys.getJourneysFromUser(userDetails.getId());
-				createReq.fire(new Receiver<List<JourneyProxy>>() {
+			@Override
+			public void onSuccess(List<SimpleTravelProxy> response) {
+				simpleTravels = response;
 
-					@Override
-					public void onSuccess(List<JourneyProxy> response) {
-						journeys=response;
-						
-					}
-				});
-				
-				
-			
-			
-			
-		
-		
+			}
+		});
+		JourneyRequest requestJourneys = requestFactory.journeyRequest();
+		Request<List<JourneyProxy>> createReq = requestJourneys
+				.getJourneysFromUser(userDetails.getId());
+		createReq.fire(new Receiver<List<JourneyProxy>>() {
+
+			@Override
+			public void onSuccess(List<JourneyProxy> response) {
+				journeys = response;
+
+			}
+		});
+
 	}
-
-
 
 	@Override
 	public void goTo(Place place) {

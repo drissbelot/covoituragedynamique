@@ -19,9 +19,10 @@ import com.covoiturage.server.EMF;
 public class Messages {
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	public String id;
+
 	public String getId() {
 		return id;
 	}
@@ -29,7 +30,7 @@ public class Messages {
 	private String message;
 	private boolean read;
 	private String subject;
-	
+
 	public String getFrom() {
 		return from;
 	}
@@ -48,24 +49,26 @@ public class Messages {
 
 	private String from;
 	private Date date;
-	
+
 	@Version
 	@Column(name = "version")
 	private Integer version = 0;
-	
+
 	public Integer getVersion() {
 		return version;
 	}
-	
-	public static final EntityManager entityManager() {
-		
-		return EMF.get().createEntityManager();
-		
-	}
-	
-	public Messages() {}
 
-	public Messages(String id,String message, boolean read, String from, Date date) {
+	public static final EntityManager entityManager() {
+
+		return EMF.get().createEntityManager();
+
+	}
+
+	public Messages() {
+	}
+
+	public Messages(String id, String message, boolean read, String from,
+			Date date) {
 		this.id = id;
 		this.setMessage(message);
 		this.setRead(read);
@@ -88,7 +91,7 @@ public class Messages {
 	public boolean getRead() {
 		return read;
 	}
-	
+
 	public static Messages findMessages(String id) {
 
 		EntityManager em = entityManager();
@@ -99,11 +102,13 @@ public class Messages {
 			em.close();
 		}
 	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Messages> findAllMessages() {
 		EntityManager em = entityManager();
 		try {
-			List<Messages> list = em.createQuery("select o from Messages o").getResultList();
+			List<Messages> list = em.createQuery("select o from Messages o")
+					.getResultList();
 
 			list.size();
 			return list;
@@ -111,16 +116,17 @@ public class Messages {
 			em.close();
 		}
 	}
+
 	public static long countMessages() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from Messages o").getSingleResult()).longValue();
+			return ((Number) em.createQuery("select count(o) from Messages o")
+					.getSingleResult()).longValue();
 		} finally {
 			em.close();
-		} 
+		}
 	}
-	
-	
+
 	public String persist() {
 		EntityManager em = entityManager();
 		try {

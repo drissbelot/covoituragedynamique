@@ -14,33 +14,42 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class SettingsViewImpl extends Composite implements  SettingsView{
-	
-	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> { }
+public class SettingsViewImpl extends Composite implements SettingsView {
+
+	interface MyUiBinder extends UiBinder<FlowPanel, SettingsViewImpl> {
+	}
+
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private SettingsViewConstants constants=(SettingsViewConstants)GWT.create(SettingsViewConstants.class);
-	
-	//TODO étendre adduserview... c'est un peu du copier-coller inutile là
-	
-	@UiField Button submitButton;
-	@UiField VerticalPanel flowpanel;
-	@UiField TextField<String> firstNameField,lastNameField,emailAdressField,loginField,passwordField,newpasswordField;
-	@UiField ListBox language;
-	@UiField Label header,Make,Model;
-	
+	private SettingsViewConstants constants = (SettingsViewConstants) GWT
+			.create(SettingsViewConstants.class);
+
+	// TODO étendre adduserview... c'est un peu du copier-coller inutile là
+
+	@UiField
+	Button submitButton;
+	@UiField
+	VerticalPanel flowpanel;
+	@UiField
+	TextField<String> firstNameField, lastNameField, emailAdressField,
+			loginField, passwordField, newpasswordField;
+	@UiField
+	ListBox language;
+	@UiField
+	Label header, Make, Model;
+
 	@SuppressWarnings("unused")
-	private Presenter presenter; 
-	
-	public SettingsViewImpl(){
+	private Presenter presenter;
+
+	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 		loginField.setTitle("login=fix");
-		
-		//Internationalization
-		header.setText(constants.header()+" :");
+
+		// Internationalization
+		header.setText(constants.header() + " :");
 		lastNameField.setFieldLabel(constants.lastname());
 		firstNameField.setFieldLabel(constants.firstname());
 		emailAdressField.setFieldLabel(constants.email());
-		
+
 		newpasswordField.setFieldLabel(constants.password());
 		newpasswordField.setPassword(true);
 		passwordField.setFieldLabel(constants.password());
@@ -53,16 +62,17 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 		language.addItem(constants.it());
 		language.addItem(constants.ch());
 		submitButton.setText(constants.submit());
-		
+
 	}
-	
+
 	public HasClickHandlers getSubmitButton() {
 		return submitButton;
 	}
-	
+
 	public void setPresenter(Presenter presenter) {
-		this.presenter=presenter;
+		this.presenter = presenter;
 	}
+
 	public TextField<String> getFirstName() {
 		return firstNameField;
 	}
@@ -90,9 +100,7 @@ public class SettingsViewImpl extends Composite implements  SettingsView{
 
 	@Override
 	public TextField<String> getLogin() {
-	return loginField;
+		return loginField;
 	}
-
-	
 
 }

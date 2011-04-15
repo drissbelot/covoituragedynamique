@@ -7,14 +7,14 @@ public class SendAddressEvent extends GwtEvent<SendAddressEventHandler> {
 
 	@Override
 	public Type<SendAddressEventHandler> getAssociatedType() {
-		
+
 		return TYPE;
 	}
 
 	@Override
 	protected void dispatch(SendAddressEventHandler handler) {
 		handler.onSendAddress(this);
-		
+
 	}
 
 }

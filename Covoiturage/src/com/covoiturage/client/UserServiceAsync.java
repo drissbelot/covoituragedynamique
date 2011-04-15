@@ -1,6 +1,5 @@
 package com.covoiturage.client;
 
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface UserServiceAsync {
@@ -9,5 +8,4 @@ public interface UserServiceAsync {
 
 	void getUser(AsyncCallback<String> callback);
 
-	
 }

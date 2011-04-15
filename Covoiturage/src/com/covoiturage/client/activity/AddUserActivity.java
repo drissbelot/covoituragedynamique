@@ -30,13 +30,15 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
-public class AddUserActivity extends AbstractActivity implements AddUserView.Presenter{
+public class AddUserActivity extends AbstractActivity implements
+		AddUserView.Presenter {
 
 	private final EventBus eventBus;
 	AddUserView addUserView;
 	private CovoiturageRequestFactory requestFactory;
 	private PlaceController placeController;
-	private VehicleServiceAsync vehiculeService= GWT.create(VehicleService.class);
+	private VehicleServiceAsync vehiculeService = GWT
+			.create(VehicleService.class);
 
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -46,104 +48,114 @@ public class AddUserActivity extends AbstractActivity implements AddUserView.Pre
 	}
 
 	private void bind() {
-		addUserView.getAddButton().addClickHandler(new ClickHandler() {   
+		addUserView.getAddButton().addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				addUser();
 			}
 		});
-		addUserView.getMakeSuggestTextBox().getTextBox().addKeyUpHandler(new KeyUpHandler() {
-			@Override
-			public void onKeyUp(KeyUpEvent event) {
-
-				vehiculeService.getMakes(addUserView.getMakeSuggestTextBox().getTextBox().getText() , new AsyncCallback<List<String>>() {
+		addUserView.getMakeSuggestTextBox().getTextBox()
+				.addKeyUpHandler(new KeyUpHandler() {
 					@Override
-					public void onSuccess(List<String> result) {
+					public void onKeyUp(KeyUpEvent event) {
 
-						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView.getMakeSuggestTextBox().getSuggestOracle();  
-						for (String string : result) {
-							oracle.add(string);
-						}
-					}
+						vehiculeService.getMakes(
+								addUserView.getMakeSuggestTextBox()
+										.getTextBox().getText(),
+								new AsyncCallback<List<String>>() {
+									@Override
+									public void onSuccess(List<String> result) {
 
-					@Override
-					public void onFailure(Throwable caught) {
-					}
-				});
-			}
-		});
-		addUserView.getModelSuggestTextBox().getTextBox().addKeyUpHandler(new KeyUpHandler() {
-			@Override
-			public void onKeyUp(KeyUpEvent event) {
+										MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
+												.getMakeSuggestTextBox()
+												.getSuggestOracle();
+										for (String string : result) {
+											oracle.add(string);
+										}
+									}
 
-				vehiculeService.getModels(addUserView.getModelSuggestTextBox().getTextBox().getText(),addUserView.getMakeSuggestTextBox().getText() , new AsyncCallback<List<String>>() {
-					@Override
-					public void onSuccess(List<String> result) {
-
-						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView.getModelSuggestTextBox().getSuggestOracle();  
-						for (String string : result) {
-							oracle.add(string);
-						}
-					}
-
-					@Override
-					public void onFailure(Throwable caught) {
+									@Override
+									public void onFailure(Throwable caught) {
+									}
+								});
 					}
 				});
-			}
-		});
-		
-		//TODO nombre de places (c'est dans le fichier)
+		addUserView.getModelSuggestTextBox().getTextBox()
+				.addKeyUpHandler(new KeyUpHandler() {
+					@Override
+					public void onKeyUp(KeyUpEvent event) {
+
+						vehiculeService.getModels(addUserView
+								.getModelSuggestTextBox().getTextBox()
+								.getText(), addUserView.getMakeSuggestTextBox()
+								.getText(), new AsyncCallback<List<String>>() {
+							@Override
+							public void onSuccess(List<String> result) {
+
+								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
+										.getModelSuggestTextBox()
+										.getSuggestOracle();
+								for (String string : result) {
+									oracle.add(string);
+								}
+							}
+
+							@Override
+							public void onFailure(Throwable caught) {
+							}
+						});
+					}
+				});
+
+		// TODO nombre de places (c'est dans le fichier)
 	}
 
-
 	protected void addUser() {
-		
+
 		final UserInfoRequest request = requestFactory.userInfoRequest();
 		final UserInfoProxy newUser = request.create(UserInfoProxy.class);
 		newUser.setLogin(addUserView.getLogin().getValue());
 		newUser.setPassword(addUserView.getPassword().getValue());
 		newUser.setEmailAddress(addUserView.getEmailAddress().getValue());
-		
+
 		Request<String> createReq = request.persist().using(newUser);
 		createReq.fire(new Receiver<String>() {
 			@Override
 			public void onSuccess(String response) {
-				
-						savePassengerDriver(response);
-					}
-		
-					
 
-			
+				savePassengerDriver(response);
+			}
+
 		});
-		
-	
 
 	}
 
 	protected void savePassengerDriver(String newUser) {
-		
 
-			UserInfoDetailsRequest requestDriver = requestFactory.userInfoDetailsRequest();
-			UserInfoDetailsProxy newDriver = requestDriver.create(UserInfoDetailsProxy.class);
-			newDriver.setUser(newUser);
-			newDriver.setFirstName(addUserView.getFirstName().getValue());
-			newDriver.setLastName(addUserView.getLastName().getValue());
-			newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox().getText());
-			newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox().getText());
-			newDriver.setLanguage(addUserView.getLanguage().getItemText(addUserView.getLanguage().getSelectedIndex()));
-			newDriver.setMessages(new ArrayList<String>());
-			Request<Void> createReqDriver = requestDriver.persist().using(newDriver);
+		UserInfoDetailsRequest requestDriver = requestFactory
+				.userInfoDetailsRequest();
+		UserInfoDetailsProxy newDriver = requestDriver
+				.create(UserInfoDetailsProxy.class);
+		newDriver.setUser(newUser);
+		newDriver.setFirstName(addUserView.getFirstName().getValue());
+		newDriver.setLastName(addUserView.getLastName().getValue());
+		newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox()
+				.getText());
+		newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox()
+				.getText());
+		newDriver.setLanguage(addUserView.getLanguage().getItemText(
+				addUserView.getLanguage().getSelectedIndex()));
+		newDriver.setMessages(new ArrayList<String>());
+		Request<Void> createReqDriver = requestDriver.persist()
+				.using(newDriver);
 
-			createReqDriver.fire(new Receiver<Void>() {
-				@Override
-				public void onSuccess(Void response) {
-					eventBus.fireEvent(new AddUserEvent());
-					goTo(new LoginPlace(null));
-				}
-			});
-	
-		
+		createReqDriver.fire(new Receiver<Void>() {
+			@Override
+			public void onSuccess(Void response) {
+				eventBus.fireEvent(new AddUserEvent());
+				goTo(new LoginPlace(null));
+			}
+		});
+
 	}
 
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {

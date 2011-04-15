@@ -11,7 +11,9 @@ import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 
-@WithTokenizers({LoginPlace.Tokenizer.class, MapPlace.Tokenizer.class,AddUserPlace.Tokenizer.class,ValidatePassengersPlace.Tokenizer.class, SettingsPlace.Tokenizer.class, HistoryPlace.Tokenizer.class, MessagesListPlace.Tokenizer.class, MessageDetailsPlace.Tokenizer.class})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper
-{
+@WithTokenizers({ LoginPlace.Tokenizer.class, MapPlace.Tokenizer.class,
+		AddUserPlace.Tokenizer.class, ValidatePassengersPlace.Tokenizer.class,
+		SettingsPlace.Tokenizer.class, HistoryPlace.Tokenizer.class,
+		MessagesListPlace.Tokenizer.class, MessageDetailsPlace.Tokenizer.class })
+public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

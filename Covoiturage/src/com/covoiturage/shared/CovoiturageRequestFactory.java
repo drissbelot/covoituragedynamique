@@ -4,13 +4,12 @@ import com.google.gwt.requestfactory.shared.RequestFactory;
 
 public interface CovoiturageRequestFactory extends RequestFactory {
 	UserInfoRequest userInfoRequest();
-	
+
 	JourneyRequest journeyRequest();
-	
+
 	SimpleTravelRequest simpleTravelRequest();
 
-	
 	UserInfoDetailsRequest userInfoDetailsRequest();
-	
+
 	MessagesRequest messagesRequest();
 }

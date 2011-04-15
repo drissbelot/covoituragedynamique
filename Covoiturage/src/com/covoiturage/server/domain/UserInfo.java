@@ -1,6 +1,5 @@
 package com.covoiturage.server.domain;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,24 +17,25 @@ import org.datanucleus.jpa.annotations.Extension;
 import com.covoiturage.server.BCrypt;
 import com.covoiturage.server.EMF;
 
-
 @Entity
-public class UserInfo{
+public class UserInfo {
 
 	public static long countUsers() {
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery("select count(o) from UserInfo o").getSingleResult()).longValue();
+			return ((Number) em.createQuery("select count(o) from UserInfo o")
+					.getSingleResult()).longValue();
 		} finally {
 			em.close();
-		} 
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<UserInfo> findAllUsers() {
 		EntityManager em = entityManager();
 		try {
-			List<UserInfo> list = em.createQuery("select o from UserInfo o").getResultList();
+			List<UserInfo> list = em.createQuery("select o from UserInfo o")
+					.getResultList();
 
 			list.size();
 			return list;
@@ -83,38 +83,31 @@ public class UserInfo{
 		}
 	}
 
-
 	public static final EntityManager entityManager() {
 
 		return EMF.get().createEntityManager();
 
 	}
 
-
-
-
-
-
-	public static UserInfo modifyUserInfo(String id,String password, String emailAddress){
+	public static UserInfo modifyUserInfo(String id, String password,
+			String emailAddress) {
 		UserInfo user = new UserInfo();
 		EntityManager em = entityManager();
 
-		Query query= em.createQuery("select o from UserInfo o where o.id = :idParam ");
-		query.setParameter("idParam",id);
+		Query query = em
+				.createQuery("select o from UserInfo o where o.id = :idParam ");
+		query.setParameter("idParam", id);
 
-		try
-		{
+		try {
 
 			@SuppressWarnings("unchecked")
-			List<UserInfo> results =query.getResultList();
+			List<UserInfo> results = query.getResultList();
 
-			if(results.size()==0){
+			if (results.size() == 0) {
 				return null;
-			}
-			else 
-			{
+			} else {
 
-				user= results.get(0);
+				user = results.get(0);
 
 				em.getTransaction().begin();
 
@@ -123,38 +116,31 @@ public class UserInfo{
 
 				em.getTransaction().commit();
 
-
 			}
-		}
-		finally
-		{
+		} finally {
 			em.close();
 		}
 
-
-
-
 		return user;
 	}
+
 	public static boolean logout(String id) {
 		EntityManager em = entityManager();
-		try
-		{
+		try {
 			UserInfo user = em.find(UserInfo.class, id);
 			em.getTransaction().begin();
 			user.setLoggedIn(false);
 			em.getTransaction().commit();
-		}
-		finally
-		{
+		} finally {
 			em.close();
 		}
 		return true;
 	}
+
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)   
-	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
 	public String id;
 
 	public String login;
@@ -165,45 +151,59 @@ public class UserInfo{
 
 	private String password;
 
-
 	private boolean loggedIn = false;
 
 	@Version
 	@Column(name = "version")
 	private Integer version = 0;
 
+	public UserInfo() {
+	}
 
-
-	public UserInfo() {}
-
-	public UserInfo(String id, String login, String emailAddress, String password) {
+	public UserInfo(String id, String login, String emailAddress,
+			String password) {
 		this.id = id;
 		this.login = login;
 		this.setPassword(password);
 
 		this.emailAddress = emailAddress;
 	}
+
 	public boolean getLoggedIn() {
 		return loggedIn;
 	}
 
-	public String getId() { return id; }
-	public void setId(String id) { this.id = id; }
-	public String getLogin() { return login; }
+	public String getId() {
+		return id;
+	}
 
-	public void setLogin(String login) { this.login= login; }
-	public String getEmailAddress() { return emailAddress; }
-	public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
+	public void setId(String id) {
+		this.id = id;
+	}
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 
 	public static UserInfo getDefaultUser() {
 
 		return null;
 	}
 
-
 	public void setLoggedIn(boolean b) {
-		loggedIn=b;
+		loggedIn = b;
 
 	}
 
@@ -223,7 +223,6 @@ public class UserInfo{
 		return logoutUrl;
 	}
 
-
 	public void setPassword(String password) {
 		String hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
@@ -237,6 +236,7 @@ public class UserInfo{
 	public Integer getVersion() {
 		return version;
 	}
+
 	public void setVersion(Integer version) {
 		this.version = version;
 	}

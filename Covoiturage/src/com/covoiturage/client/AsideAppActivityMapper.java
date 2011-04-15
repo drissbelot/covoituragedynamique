@@ -8,9 +8,10 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 public class AsideAppActivityMapper implements ActivityMapper {
-private ClientFactory clientFactory;
+	private ClientFactory clientFactory;
+
 	public AsideAppActivityMapper(ClientFactory clientFactory) {
-		this.clientFactory=clientFactory;
+		this.clientFactory = clientFactory;
 	}
 
 	@Override

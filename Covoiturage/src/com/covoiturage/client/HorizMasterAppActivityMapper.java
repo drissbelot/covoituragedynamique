@@ -14,23 +14,24 @@ import com.google.gwt.place.shared.Place;
 
 public class HorizMasterAppActivityMapper implements ActivityMapper {
 	private ClientFactory clientFactory;
+
 	public HorizMasterAppActivityMapper(ClientFactory clientFactory) {
-		this.clientFactory=clientFactory;
+		this.clientFactory = clientFactory;
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		if(place instanceof MapPlace)
+		if (place instanceof MapPlace)
 			return new HeaderActivity(clientFactory);
-		else if(place instanceof ValidatePassengersPlace)
+		else if (place instanceof ValidatePassengersPlace)
 			return new HeaderActivity(clientFactory);
 		else if (place instanceof SettingsPlace)
 			return new HeaderActivity(clientFactory);
 		else if (place instanceof HistoryPlace)
 			return new HeaderActivity(clientFactory);
-		else if(place instanceof MessagesListPlace)
+		else if (place instanceof MessagesListPlace)
 			return new HeaderActivity(clientFactory);
-		else if(place instanceof MessageDetailsPlace)
+		else if (place instanceof MessageDetailsPlace)
 			return new HeaderActivity(clientFactory);
 		return null;
 

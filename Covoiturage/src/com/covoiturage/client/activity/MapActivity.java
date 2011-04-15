@@ -78,9 +78,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private HasGeocoder geocoder;
 	private Date date = new Date();
-	private Date departureStart = new Date();
-	private Date departureEnd = new Date();
-	private Date arrival = new Date();
+	private final Date departureStart = new Date();
+	private final Date departureEnd = new Date();
+	private final Date arrival = new Date();
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
@@ -94,7 +94,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private List<HasDirectionsWaypoint> waypoints;
 	private List<String> waypointsCoords;
 	private List<String> passengers;
-	private NotifyServiceAsync notifyService = GWT.create(NotifyService.class);
+	private final NotifyServiceAsync notifyService = GWT
+			.create(NotifyService.class);
 	private List<String> passengersTravels;
 	private String mapUrl;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
@@ -173,6 +174,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 		mapView.getDepartureStartTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
+
 					@Override
 					public void handleEvent(BaseEvent be) {
 						if (mapView.getDepartureStartTime().getRawValue()
@@ -182,6 +184,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											.getRawValue() + ":");
 					}
 				});
+
 		mapView.getDepartureEndTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
 					@Override

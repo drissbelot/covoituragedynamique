@@ -45,11 +45,9 @@ public class MapViewImpl extends Composite implements MapView {
 	FormPanel departureForm;
 	@UiField
 	DateField dateOfJourney;
-
-	TextFieldMask departureStartTimeItem, departureEndTimeItem,
-			arrivalTimeItem;
 	@UiField
-	TextField<String> distanceMaxField;
+	TextField<String> departureStartTimeItem, departureEndTimeItem,
+			arrivalTimeItem, distanceMaxField;
 	@UiField
 	RadioButton driverRadioButton, passengerRadioButton;
 
@@ -83,29 +81,22 @@ public class MapViewImpl extends Composite implements MapView {
 		dateOfJourney.setFieldLabel(constants.Dateofjourney());
 		dateOfJourney.setAllowBlank(false);
 
-		departureStartTimeItem = new TextFieldMask(
-				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		departureStartTimeItem.setFieldLabel(constants.departuretime());
 		departureStartTimeItem.setAllowBlank(false);
-		// departureStartTimeItem
-		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 
-		departureEndTimeItem = new TextFieldMask(
-				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		departureStartTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+
 		departureEndTimeItem.setFieldLabel(constants.and());
 		departureEndTimeItem.setAllowBlank(false);
-		// departureEndTimeItem
-		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		departureEndTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 
-		arrivalTimeItem = new TextFieldMask(
-				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		arrivalTimeItem.setFieldLabel(constants.arrivaltime());
 		arrivalTimeItem.setAllowBlank(false);
-		// arrivalTimeItem
-		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-		departureForm.add(departureStartTimeItem);
-		departureForm.add(departureEndTimeItem);
-		departureForm.add(arrivalTimeItem);
+		arrivalTimeItem
+				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+
 		driverRadioButton.setValue(true);
 		directionsPanel.setHeaderVisible(false);
 	}

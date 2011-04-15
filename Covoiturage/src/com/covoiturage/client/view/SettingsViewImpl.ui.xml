@@ -10,12 +10,12 @@
   			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
 				<g:Label styleName='{style.h2}'  ui:field="header"/>
 				<form:FormPanel>
-					<form:TextField ui:field="loginField" styleName='{style.textbox}' />
-					<form:TextField ui:field="firstNameField" styleName='{style.textbox}' />
-					<form:TextField ui:field="lastNameField" styleName='{style.textbox}' />
-					<form:TextField ui:field="emailAdressField" styleName='{style.textbox}' />
-					<form:TextField ui:field="passwordField" styleName='{style.textbox}' />
-					<form:TextField ui:field="newpasswordField" styleName='{style.textbox}' />
+					<form:TextField ui:field="loginField" />
+					<form:TextField ui:field="firstNameField"  />
+					<form:TextField ui:field="lastNameField" />
+					<form:TextField ui:field="emailAdressField" />
+					<form:TextField ui:field="passwordField"  />
+					<form:TextField ui:field="newpasswordField"  />
 					<g:Label styleName='{style.label}' ui:field="Make" />
 					<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}' />
 					<g:Label styleName='{style.label}' ui:field="Model" />

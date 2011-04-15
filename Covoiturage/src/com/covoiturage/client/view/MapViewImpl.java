@@ -61,7 +61,7 @@ public class MapViewImpl extends Composite implements MapView {
 	    // internationalization
 	    to.setText(constants.to()+" :");
 	    from.setText(constants.from()+" :");
-	    distanceMaxField.setTitle(constants.distmax());
+	    distanceMaxField.setFieldLabel(constants.distmax());
 	    sendAddress.setText(constants.gettravelway());
 	    saveJourney.setText(constants.savejourney());
 

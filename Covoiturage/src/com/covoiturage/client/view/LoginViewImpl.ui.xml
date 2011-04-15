@@ -16,8 +16,8 @@
 			<g:VerticalPanel styleName='{style.panelfullborder}'  verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
 				<g:Label ui:field="log" styleName='{style.h2}' />
 				<form:FormPanel>
-					<form:TextField ui:field="loginField" styleName='{style.textbox}' />
-					<form:TextField ui:field="passwordField" styleName='{style.textbox}' />
+					<form:TextField ui:field="loginField" />
+					<form:TextField ui:field="passwordField" />
 					<g:HorizontalPanel>
 						<g:Button ui:field="sendButton"  styleName='{style.button}'/>
 						<g:Button ui:field="addUserButton"  styleName='{style.button}'/>

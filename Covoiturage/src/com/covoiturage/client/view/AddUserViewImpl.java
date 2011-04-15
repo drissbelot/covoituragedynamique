@@ -33,11 +33,11 @@ public class AddUserViewImpl extends Composite implements  AddUserView {
 		initWidget(binder.createAndBindUi(this)); 
 
 
-		loginField.setTitle(constants.username());
-		lastNameField.setTitle(constants.lastname());
-		firstNameField.setTitle(constants.firstname());
-		emailAdressField.setTitle(constants.email());
-		passwordField.setTitle(constants.password());
+		loginField.setFieldLabel(constants.username());
+		lastNameField.setFieldLabel(constants.lastname());
+		firstNameField.setFieldLabel(constants.firstname());
+		emailAdressField.setFieldLabel(constants.email());
+		passwordField.setFieldLabel(constants.password());
 		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());

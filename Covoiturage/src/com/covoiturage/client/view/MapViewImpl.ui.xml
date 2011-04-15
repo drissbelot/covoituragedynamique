@@ -40,7 +40,7 @@
   						<g:RadioButton ui:field="passengerRadioButton"  styleName='{style.radiobutton}' ui:name="typeOfUser"/>
   					</g:HorizontalPanel>
   					
-  						<form:TextField ui:field="distanceMaxField" styleName='{style.textbox}'/>
+  						<form:TextField ui:field="distanceMaxField"/>
   						
   					<g:HorizontalPanel>
   						<g:Button ui:field="sendAddress"  styleName='{style.button}'/>

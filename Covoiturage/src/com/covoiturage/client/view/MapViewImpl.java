@@ -45,15 +45,17 @@ public class MapViewImpl extends Composite implements MapView {
 	FormPanel departureForm;
 	@UiField
 	DateField dateOfJourney;
+
+	TextFieldMask departureStartTimeItem, departureEndTimeItem,
+			arrivalTimeItem;
 	@UiField
-	TextField<String> departureStartTimeItem, departureEndTimeItem,
-			arrivalTimeItem, distanceMaxField;
+	TextField<String> distanceMaxField;
 	@UiField
 	RadioButton driverRadioButton, passengerRadioButton;
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-	private MapViewConstants constants = (MapViewConstants) GWT
+	private final MapViewConstants constants = (MapViewConstants) GWT
 			.create(MapViewConstants.class);
 
 	public MapViewImpl() {
@@ -81,49 +83,64 @@ public class MapViewImpl extends Composite implements MapView {
 		dateOfJourney.setFieldLabel(constants.Dateofjourney());
 		dateOfJourney.setAllowBlank(false);
 
+		departureStartTimeItem = new TextFieldMask(
+				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		departureStartTimeItem.setFieldLabel(constants.departuretime());
 		departureStartTimeItem.setAllowBlank(false);
-		departureStartTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		// departureStartTimeItem
+		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 
+		departureEndTimeItem = new TextFieldMask(
+				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		departureEndTimeItem.setFieldLabel(constants.and());
 		departureEndTimeItem.setAllowBlank(false);
-		departureEndTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		// departureEndTimeItem
+		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 
+		arrivalTimeItem = new TextFieldMask(
+				"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 		arrivalTimeItem.setFieldLabel(constants.arrivaltime());
 		arrivalTimeItem.setAllowBlank(false);
-		arrivalTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-
+		// arrivalTimeItem
+		// .setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
+		departureForm.add(departureStartTimeItem);
+		departureForm.add(departureEndTimeItem);
+		departureForm.add(arrivalTimeItem);
 		driverRadioButton.setValue(true);
 		directionsPanel.setHeaderVisible(false);
 	}
 
+	@Override
 	public RadioButton getPassengerRadioButton() {
 		return passengerRadioButton;
 	}
 
+	@Override
 	public RadioButton getDriverRadioButton() {
 		return driverRadioButton;
 	}
 
+	@Override
 	public DateField getDateOfJourney() {
 		return dateOfJourney;
 	}
 
+	@Override
 	public HasClickHandlers getSendAddressButton() {
 		return sendAddress;
 	}
 
+	@Override
 	public SuggestBox getOriginAddress() {
 		return originAdress;
 	}
 
+	@Override
 	public SuggestBox getDestinationAddress() {
 		return destinationAdress;
 	}
 
+	@Override
 	public MapWidget getMap() {
 		return mapWidget;
 	}
@@ -133,39 +150,48 @@ public class MapViewImpl extends Composite implements MapView {
 		return directionsPanel;
 	}
 
+	@Override
 	public HasClickHandlers getSaveJourneyButton() {
 		return saveJourney;
 	}
 
+	@Override
 	public float getDistanceMax() {
 		return Float.valueOf(distanceMaxField.getValue());
 	}
 
+	@Override
 	public FlowPanel getMapDecorator() {
 		return flowpanel;
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 
 	}
 
+	@Override
 	public void setOriginAddress(SuggestBox originAddress) {
 		this.originAdress = originAddress;
 	}
 
+	@Override
 	public void setDestinationAddress(String destinationAddress) {
 		this.destinationAdress.setText(destinationAddress);
 	}
 
+	@Override
 	public TextField<String> getDepartureStartTime() {
 		return departureStartTimeItem;
 	}
 
+	@Override
 	public TextField<String> getArrivalTime() {
 		return arrivalTimeItem;
 	}
 
+	@Override
 	public TextField<String> getDepartureEndTime() {
 		return departureEndTimeItem;
 	}

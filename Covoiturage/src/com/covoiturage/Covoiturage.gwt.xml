@@ -16,6 +16,7 @@
 <inherits name='com.google.gwt.requestfactory.RequestFactory'/>
   <inherits name="com.extjs.gxt.ui.GXT" />
 <inherits name="com.extjs.gxt.ui.WidgetExpander" />
+
   <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 <inherits name="com.google.gwt.appengine.channel.Channel" />
 <!-- JUnit test -->

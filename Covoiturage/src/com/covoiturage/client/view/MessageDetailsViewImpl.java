@@ -2,9 +2,9 @@ package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.MessageDetailsViewConstants;
 import com.google.gwt.core.client.GWT;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
@@ -18,7 +18,7 @@ public class MessageDetailsViewImpl extends Composite implements
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private MessageDetailsViewConstants constants = (MessageDetailsViewConstants) GWT
+	private final MessageDetailsViewConstants constants = (MessageDetailsViewConstants) GWT
 			.create(MessageDetailsViewConstants.class);
 
 	@UiField
@@ -31,6 +31,9 @@ public class MessageDetailsViewImpl extends Composite implements
 	@UiField
 	TextArea messageText;
 
+	@UiField
+	Button answerButton;
+
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
@@ -39,24 +42,34 @@ public class MessageDetailsViewImpl extends Composite implements
 
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
+	@Override
 	public Label getSubjectLabel() {
 		return subjectLabel;
 	}
 
+	@Override
 	public Label getFromLabel() {
 		return fromLabel;
 	}
 
+	@Override
 	public Label getDateLabel() {
 		return dateLabel;
 	}
 
+	@Override
 	public TextArea getMessageText() {
 		return messageText;
+	}
+
+	@Override
+	public Button getAnswerButton() {
+		return answerButton;
 	}
 
 }

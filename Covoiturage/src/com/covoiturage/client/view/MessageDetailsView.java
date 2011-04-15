@@ -19,4 +19,6 @@ public interface MessageDetailsView extends IsWidget {
 	public Label getDateLabel();
 
 	public TextArea getMessageText();
+
+	public com.google.gwt.user.client.ui.Button getAnswerButton();
 }

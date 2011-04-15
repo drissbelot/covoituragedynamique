@@ -10,8 +10,9 @@
 		<g:HorizontalPanel>
 			<g:Label ui:field="fromLabel"/>
 			<g:Label ui:field="dateLabel"/>
+			<g:Button ui:field="answerButton"/>
 		</g:HorizontalPanel>
-		<g:TextArea ui:field="messageText"/>
+		<g:TextArea ui:field="messageText" width="100%" height="100%"/>
 
 	</g:VerticalPanel>
 

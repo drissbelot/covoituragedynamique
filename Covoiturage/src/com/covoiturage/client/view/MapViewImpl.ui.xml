@@ -29,9 +29,7 @@
   					<g:HorizontalPanel>
   						<form:FormPanel ui:field="departureForm">
   							<form:DateField ui:field="dateOfJourney" />
-  							<form:TextField ui:field="departureStartTimeItem"/>
-  							<form:TextField ui:field="departureEndTimeItem"/>
-  							<form:TextField ui:field="arrivalTimeItem"/>
+  							
   						</form:FormPanel>
   					</g:HorizontalPanel>
   					

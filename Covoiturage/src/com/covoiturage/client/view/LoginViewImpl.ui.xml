@@ -14,7 +14,7 @@
 	<g:HorizontalPanel styleName='{style.containerphtoto}'>	
 		<g:Image ui:field="image" styleName='{style.photo}'  />
 			<g:VerticalPanel styleName='{style.panelfullborder}'  verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
-				<g:Label ui:field="log" styleName='{style.h2}' />
+				<!--  g:Label ui:field="log" styleName='{style.h2}' /-->
 				<form:FormPanel>
 					<form:TextField ui:field="loginField" />
 					<form:TextField ui:field="passwordField" />

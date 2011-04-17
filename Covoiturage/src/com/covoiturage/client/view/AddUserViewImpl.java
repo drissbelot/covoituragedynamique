@@ -37,7 +37,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@UiField
 	ListBox language;
 	@UiField
-	Label header, Make, Model;
+	Label Make, Model;
 
 	public AddUserViewImpl() {
 

@@ -89,7 +89,7 @@ public class Covoiturage implements EntryPoint {
 
 			if (widget != null)
 				FooterPanel.add(widget);
-			layoutContainer.layout();
+				layoutContainer.layout();
 
 		}
 	};
@@ -113,10 +113,10 @@ public class Covoiturage implements EntryPoint {
 		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
 		eastData.setCollapsible(true);
 		layoutContainer.add(asidePanel, eastData);
-		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 100);
+		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 120);
 		layoutContainer.add(vertMasterPanel, westData);
 		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
-				50);
+				30);
 		layoutContainer.add(FooterPanel, southData);
 
 		BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);

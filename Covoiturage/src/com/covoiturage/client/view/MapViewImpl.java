@@ -42,7 +42,7 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField
 	Label to, from;
 	@UiField
-	FormPanel departureForm;
+	FormPanel data;
 	@UiField
 	DateField dateOfJourney;
 	@UiField
@@ -69,6 +69,7 @@ public class MapViewImpl extends Composite implements MapView {
 		initWidget(binder.createAndBindUi(this));
 
 		// internationalization
+		data.setHeading(constants.header());
 		to.setText(constants.to() + " :");
 		from.setText(constants.from() + " :");
 		distanceMaxField.setFieldLabel(constants.distmax());

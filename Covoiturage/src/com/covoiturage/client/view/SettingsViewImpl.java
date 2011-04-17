@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.SettingsViewConstants;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -35,7 +36,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	ListBox language;
 	@UiField
-	Label header, Make, Model;
+	Label Make, Model;
+	@UiField 
+	FormPanel header;
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -43,9 +46,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 		loginField.setTitle("login=fix");
-
+		header.setHeading(constants.header());
 		// Internationalization
-		header.setText(constants.header() + " :");
+		//header.setText(constants.header() + " :");
 		lastNameField.setFieldLabel(constants.lastname());
 		firstNameField.setFieldLabel(constants.firstname());
 		emailAdressField.setFieldLabel(constants.email());

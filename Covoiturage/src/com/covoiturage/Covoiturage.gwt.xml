@@ -11,17 +11,15 @@
  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+  
+  
 <inherits name='com.google.gwt.activity.Activity' /> 
 <inherits name="com.google.gwt.place.Place"/>
 <inherits name='com.google.gwt.requestfactory.RequestFactory'/>
-  <inherits name="com.extjs.gxt.ui.GXT" />
+<inherits name="com.extjs.gxt.ui.GXT" />
 <inherits name="com.extjs.gxt.ui.WidgetExpander" />
-
-  <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
+<inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 <inherits name="com.google.gwt.appengine.channel.Channel" />
-<!-- JUnit test -->
-<inherits name="com.google.gwt.junit.JUnit"/>
-
 
   <entry-point class='com.covoiturage.client.Covoiturage'/>
 
@@ -30,22 +28,11 @@
   <source path='shared'/>
   <source path='server.domain'/>
   
-  <!-- IE's implementation -->
-  <replace-with class="com.google.gwt.user.client.view.MapViewSmartImpl">
-  	 <when-type-is class="com.google.gwt.user.client.view.MapViewImpl" />
-  	 <any>
-  	 <when-property-is name="user.agent" value="ie9" />
-     <when-property-is name="user.agent" value="ie8" />
-     <when-property-is name="user.agent" value="ie7" />
-     <when-property-is name="user.agent" value="ie6" />
-     </any>
-  </replace-with>  
+   
   <inherits name="com.google.gwt.i18n.I18N"/>
-  
-
-  <extend-property name="locale" values="nl"/>
-    <extend-property name="locale" values="fr"/>
-      <extend-property name="locale" values="it"/>
-        <extend-property name="locale" values="ch"/>
+<extend-property name="locale" values="nl"/>
+<extend-property name="locale" values="fr"/>
+<extend-property name="locale" values="it"/>
+<extend-property name="locale" values="ch"/>
           
 </module>

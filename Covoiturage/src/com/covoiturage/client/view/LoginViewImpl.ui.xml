@@ -9,13 +9,12 @@
 	
 	
 
-<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
+<g:AbsolutePanel ui:field="flowpanel" width="100%" height="100%">
 	<g:Label styleName='{style.h1}'  ui:field="title"/>	
 	<g:HorizontalPanel styleName='{style.containerphtoto}'>	
 		<g:Image ui:field="image" styleName='{style.photo}'  />
 			<g:VerticalPanel styleName='{style.panelfullborder}'  verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
-				<!--  g:Label ui:field="log" styleName='{style.h2}' /-->
-				<form:FormPanel>
+				<form:FormPanel ui:field="header">
 					<form:TextField ui:field="loginField" />
 					<form:TextField ui:field="passwordField" />
 					<g:HorizontalPanel>
@@ -26,5 +25,5 @@
 			</g:VerticalPanel>
 		<g:Image ui:field="image2" styleName='{style.photo}'  />	
 	</g:HorizontalPanel>
-</g:FlowPanel>
+</g:AbsolutePanel>
 </ui:UiBinder>

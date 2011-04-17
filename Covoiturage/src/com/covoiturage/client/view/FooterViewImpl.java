@@ -24,11 +24,11 @@ public class FooterViewImpl extends Composite implements FooterView {
 		initWidget(binder.createAndBindUi(this));
 		// TODO utiliser des images en local
 		// TODO utiliser le MVP
-		imagefr = new Image("icon_fr.png");
-		imagenl = new Image("icon_nl.png");
-		imageen = new Image("icon_en.png");
-		imageit = new Image("icon_it.png");
-		imagech = new Image("icon_ch.png");
+		imagefr = new Image("LocalPictures/icon_fr.png");
+		imagenl = new Image("LocalPictures/icon_nl.png");
+		imageen = new Image("LocalPictures/icon_en.png");
+		imageit = new Image("LocalPictures/icon_it.png");
+		imagech = new Image("LocalPictures/icon_ch.png");
 	
 		imagefr.setSize("30px", "25px");
 		imagenl.setSize("30px", "25px");

@@ -5,8 +5,9 @@
 			margin : 0% 5px 0em 0em;
 		
 		}
-		
-		
+		.anchorcontainer{
+			margin: 0% 43%;
+		}
 		.button {
 			margin: 1em;
 			background-color: RGB(59,89,152); 

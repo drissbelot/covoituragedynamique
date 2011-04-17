@@ -24,20 +24,16 @@ public class FooterViewImpl extends Composite implements FooterView {
 		initWidget(binder.createAndBindUi(this));
 		// TODO utiliser des images en local
 		// TODO utiliser le MVP
-		imagefr = new Image();
-		imagenl = new Image();
-		imageen = new Image();
-		imageit = new Image();
-		imagech = new Image();
-		imagefr.setUrl("http://www.pubfoot.com/blog/wp-content/uploads/2009/09/france-drapeau.jpg");
+		imagefr = new Image("icon_fr.png");
+		imagenl = new Image("icon_nl.png");
+		imageen = new Image("icon_en.png");
+		imageit = new Image("icon_it.png");
+		imagech = new Image("icon_ch.png");
+	
 		imagefr.setSize("30px", "25px");
-		imagenl.setUrl("http://www.studentsoftheworld.info/infopays/flagsmax/NED_lgflag.gif");
 		imagenl.setSize("30px", "25px");
-		imageen.setUrl("http://www.c3r.fr/images/drapeau_en.jpg");
 		imageen.setSize("30px", "25px");
-		imageit.setUrl("http://www.dinosoria.com/pays/drapeaux/italie.jpg");
 		imageit.setSize("30px", "25px");
-		imagech.setUrl("http://paysetleurvilledumonde.p.a.pic.centerblog.net/njhnr4lz.png");
 		imagech.setSize("30px", "25px");
 
 		anchorfr.setHref(GWT.getHostPageBaseURL() + "?locale=fr");

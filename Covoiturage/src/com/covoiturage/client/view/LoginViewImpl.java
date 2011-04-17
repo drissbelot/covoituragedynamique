@@ -44,8 +44,8 @@ public class LoginViewImpl extends Composite implements LoginView {
 		passwordField.setPassword(true);
 		addUserButton.setText(constants.newuser());
 		sendButton.setText(constants.submit());
-		image.setUrl("http://www.cijoint.fr/cj201103/cijYu4R0h9.png");
-		image2.setUrl("http://www.cijoint.fr/cj201103/cijYu4R0h9.png");
+		image.setUrl("car.png");
+		image2.setUrl("car.png");
 	}
 
 	@Override

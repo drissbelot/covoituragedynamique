@@ -6,7 +6,7 @@
 	
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 
-		<g:HorizontalPanel>
+		<g:HorizontalPanel styleName='{style.anchorcontainer}'>
 			<g:Anchor ui:field="anchorfr" styleName='{style.anchor}' />
 			<g:Anchor ui:field="anchornl" styleName='{style.anchor}'/>
 			<g:Anchor ui:field="anchoren" styleName='{style.anchor}'/>

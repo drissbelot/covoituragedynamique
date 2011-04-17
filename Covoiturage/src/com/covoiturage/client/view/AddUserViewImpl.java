@@ -1,6 +1,7 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -38,11 +39,13 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	ListBox language;
 	@UiField
 	Label Make, Model;
+	@UiField 
+	FormPanel header;
 
 	public AddUserViewImpl() {
 
 		initWidget(binder.createAndBindUi(this));
-
+		header.setHeading(constants.header());
 		loginField.setFieldLabel(constants.username());
 		lastNameField.setFieldLabel(constants.lastname());
 		firstNameField.setFieldLabel(constants.firstname());

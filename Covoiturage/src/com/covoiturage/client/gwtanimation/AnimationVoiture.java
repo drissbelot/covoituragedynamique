@@ -8,13 +8,14 @@ import com.google.gwt.user.client.Window;
 public class AnimationVoiture extends Animation{
 	
 	private final Element element;
-    private int startX;
+    @SuppressWarnings("unused")
+	private int startX;
     private int startY;
     private int milliseconds;
     
     public AnimationVoiture(Element element,int milli){
         this.element = element;
-        this.milliseconds=milli;
+        this.milliseconds=milli*1;
         
     }
 
@@ -26,10 +27,18 @@ public class AnimationVoiture extends Animation{
     
 	@Override
 	protected void onUpdate(double progress){
-		double positionX = progress* Window.getClientWidth();
-		double positionY = startY + (progress * 0);
-		this.element.getStyle().setLeft(positionX, Style.Unit.PX);
-		this.element.getStyle().setTop(positionY, Style.Unit.PX);
+		if (progress<0.5){
+			double positionX = progress*2*Window.getClientWidth();
+			double positionY = startY + (progress * 0);
+			this.element.getStyle().setLeft(positionX, Style.Unit.PX);
+			this.element.getStyle().setTop(positionY, Style.Unit.PX);
+		}
+		else{
+			double positionX = Window.getClientWidth()*2-progress*2.1*Window.getClientWidth();
+			double positionY = startY+ (progress * 0);
+			this.element.getStyle().setLeft(positionX, Style.Unit.PX);
+			this.element.getStyle().setTop(positionY, Style.Unit.PX);
+		}
 	}
 
 }

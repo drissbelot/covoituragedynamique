@@ -7,7 +7,6 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -15,7 +14,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
@@ -60,7 +58,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 		
 		final Image img = new Image(Resources.INSTANCE.gwtLogo());
 		flowpanel.add(img,000,000);
-		AnimationVoiture animation = new AnimationVoiture(img.getElement(),20000);
+		AnimationVoiture animation = new AnimationVoiture(img.getElement(),40000);
 		animation.scrollTo();
 		
 	}

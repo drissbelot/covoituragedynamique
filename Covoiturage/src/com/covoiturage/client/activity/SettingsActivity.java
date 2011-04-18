@@ -22,13 +22,12 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 public class SettingsActivity extends AbstractActivity implements
 		SettingsView.Presenter {
 
-	private SettingsView settingsView;
+	private final SettingsView settingsView;
 
-	private PlaceController placeController;
-	private CovoiturageRequestFactory requestFactory;
-	private EventBus eventBus;
+	private final PlaceController placeController;
+	private final CovoiturageRequestFactory requestFactory;
+	private final EventBus eventBus;
 	private UserInfoProxy currentUser;
-	private UserInfoDetailsProxy userDetails;
 
 	public SettingsActivity(ClientFactory clientFactory) {
 
@@ -43,7 +42,7 @@ public class SettingsActivity extends AbstractActivity implements
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
 				currentUser = event.getCurrentUser();
-				userDetails = event.getUserDetails();
+				event.getUserDetails();
 			}
 		});
 
@@ -59,7 +58,7 @@ public class SettingsActivity extends AbstractActivity implements
 	}
 
 	protected void modifyUserSettings() {
-		// TODO reste un bug
+
 		UserInfoDetailsRequest requestDetails = requestFactory
 				.userInfoDetailsRequest();
 		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails
@@ -90,12 +89,14 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
 		settingsView.setPresenter(this);
 		panel.setWidget(settingsView.asWidget());
 	}
 
+	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);
 	}

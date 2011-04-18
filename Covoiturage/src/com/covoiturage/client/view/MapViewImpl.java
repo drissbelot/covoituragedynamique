@@ -26,7 +26,6 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	// TODO tout mettre dans le formulaire
 
 	@UiField
 	FlowPanel flowpanel;

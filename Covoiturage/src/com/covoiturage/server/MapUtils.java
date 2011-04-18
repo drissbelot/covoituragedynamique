@@ -13,13 +13,12 @@ import javax.persistence.EntityManager;
 
 import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
-
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
 public class MapUtils {
-
+	// TODO gérer le cas où la personne ne répond pas...
 	public static List<Journey> bufferRouteJourney(List<String> coordinates,
 			float distance, Date departureStart, Date departureEnd, Date arrival) {
 		Coordinate[] coordArray = new Coordinate[coordinates.size()];
@@ -249,6 +248,7 @@ public class MapUtils {
 									.getTime())
 						simpleTravels.add(travel);
 				}
+
 			}
 		} finally {
 			em.close();

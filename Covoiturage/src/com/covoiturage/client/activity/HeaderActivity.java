@@ -3,16 +3,11 @@ package com.covoiturage.client.activity;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
-
 import com.covoiturage.client.event.MessageEvent;
 import com.covoiturage.client.event.MessageEventHandler;
-
 import com.covoiturage.client.place.LoginPlace;
-
 import com.covoiturage.client.view.HeaderView;
-
 import com.covoiturage.shared.CovoiturageRequestFactory;
-
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -31,8 +26,8 @@ public class HeaderActivity extends AbstractActivity implements
 		HeaderView.Presenter {
 	private final EventBus eventBus;
 	private final HeaderView headerView;
-	private CovoiturageRequestFactory requestFactory;
-	private PlaceController placeController;
+	private final CovoiturageRequestFactory requestFactory;
+	private final PlaceController placeController;
 	private UserInfoProxy currentUser;
 
 	private final UserServiceAsync userService = GWT.create(UserService.class);
@@ -90,7 +85,7 @@ public class HeaderActivity extends AbstractActivity implements
 			@Override
 			public void onMessage(MessageEvent event) {
 				headerView.getMessages().setText("Vous avez un message");
-				// TODO réagir
+
 				// TODO Jolie Popup
 				// TODO lier avec la messageView au clic
 			}

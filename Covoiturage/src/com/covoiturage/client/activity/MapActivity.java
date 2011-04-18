@@ -491,7 +491,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									if (passengers != null) {
 										int i = 0;
 										for (final String passenger : passengers) {
-											// TODO affiner
+
 											notifyService
 													.sendMessage(
 															passenger,
@@ -599,7 +599,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													@Override
 													public void onSuccess(
 															final JourneyProxy response) {
-														// TODO affiner
+
 														notifyService.sendMessage(
 																response.getDriver(),
 																"Driver found",

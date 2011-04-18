@@ -39,7 +39,7 @@ public class MessageDetailsViewImpl extends Composite implements
 
 	public MessageDetailsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-
+		answerButton.setText(constants.answer());
 	}
 
 	@Override

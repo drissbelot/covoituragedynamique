@@ -1,11 +1,17 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid">
 	
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
 	<ui:style src="stylesheet.css"/>
 	
 	
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
-
+		<grid:Grid store="{store}" ui:field="listGrid" height="500px" width="1000px">
+		<grid:column id="from" header="From"  />
+		<grid:column id="to" header="To" />
+		<grid:column id="date" header="Date" />
+		</grid:Grid>
 	
 	</g:FlowPanel>
 	

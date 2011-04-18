@@ -1,5 +1,6 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.i18n.HeaderViewConstants;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
@@ -18,4 +19,5 @@ public interface HeaderView extends IsWidget {
 
 	public Label getMessages();
 
+	public HeaderViewConstants getConstants();
 }

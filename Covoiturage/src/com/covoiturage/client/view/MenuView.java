@@ -3,6 +3,7 @@ package com.covoiturage.client.view;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
 
 public interface MenuView extends IsWidget {
 	void setPresenter(Presenter presenter);
@@ -17,5 +18,5 @@ public interface MenuView extends IsWidget {
 
 	public HasClickHandlers getHistoryLabel();
 
-	public HasClickHandlers getMessagesLabel();
+	public Label getMessagesLabel();
 }

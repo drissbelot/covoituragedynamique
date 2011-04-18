@@ -16,7 +16,7 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private HeaderViewConstants constants = (HeaderViewConstants) GWT
+	private final HeaderViewConstants constants = (HeaderViewConstants) GWT
 			.create(HeaderViewConstants.class);
 
 	@UiField
@@ -24,7 +24,7 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 	@UiField
 	Label currentUser, messages;
 	@UiField
-	com.google.gwt.user.client.ui.Label titre;
+	Label titre;
 	@UiField
 	HorizontalPanel menu;
 	@SuppressWarnings("unused")
@@ -32,25 +32,33 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		messages.setTitle(constants.message());
+
 		titre.setText(constants.title());
 		logout.setText(constants.logout());
 		currentUser.setTitle(constants.username());
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
+	@Override
 	public HasClickHandlers getLogout() {
 		return logout;
 	}
 
+	@Override
 	public Label getCurrentUser() {
 		return currentUser;
 	}
 
+	@Override
 	public Label getMessages() {
 		return messages;
+	}
+
+	public HeaderViewConstants getConstants() {
+		return constants;
 	}
 }

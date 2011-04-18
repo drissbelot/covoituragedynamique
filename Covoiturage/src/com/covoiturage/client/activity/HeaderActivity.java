@@ -6,6 +6,7 @@ import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.event.MessageEvent;
 import com.covoiturage.client.event.MessageEventHandler;
 import com.covoiturage.client.place.LoginPlace;
+import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
@@ -84,10 +85,18 @@ public class HeaderActivity extends AbstractActivity implements
 
 			@Override
 			public void onMessage(MessageEvent event) {
-				headerView.getMessages().setText("Vous avez un message");
+				headerView.getMessages().setText(
+						headerView.getConstants().message());
 
 				// TODO Jolie Popup
-				// TODO lier avec la messageView au clic
+
+			}
+		});
+		headerView.getLogout().addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				goTo(new MessagesListPlace(null));
 			}
 		});
 	}

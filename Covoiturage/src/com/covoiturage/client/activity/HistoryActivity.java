@@ -13,10 +13,9 @@ import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
-import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
+import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.google.gwt.activity.shared.AbstractActivity;
-
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -28,11 +27,11 @@ public class HistoryActivity extends AbstractActivity implements
 		HistoryView.Presenter {
 	private final EventBus eventBus;
 	private final HistoryView historyView;
-	private CovoiturageRequestFactory requestFactory;
-	private PlaceController placeController;
+	private final CovoiturageRequestFactory requestFactory;
+	private final PlaceController placeController;
 	private UserInfoProxy currentUser;
 	private UserInfoDetailsProxy userDetails;
-	private List<JourneyProxy> journeys = new ArrayList<JourneyProxy>();
+	private final List<JourneyProxy> journeys = new ArrayList<JourneyProxy>();
 	private List<SimpleTravelProxy> simpleTravels = new ArrayList<SimpleTravelProxy>();
 
 	public HistoryActivity(ClientFactory clientFactory) {
@@ -59,7 +58,6 @@ public class HistoryActivity extends AbstractActivity implements
 				searchJourneys();
 			}
 		});
-		// TODO trier un peu tout ça et afficher
 
 	}
 
@@ -83,9 +81,19 @@ public class HistoryActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(List<JourneyProxy> response) {
-				journeys = response;
+				historyView.getListGrid().getStore().removeAll();
+				for (JourneyProxy journey : response) {
 
+					BaseModelData rec = new BaseModelData();
+
+					rec.set("from", journey.getOriginAddress());
+					rec.set("to", journey.getDestinationAddress());
+					rec.set("date", journey.getDate());
+					historyView.getListGrid().getStore().add(rec);
+				}
+				// TODO détails avec un expander
 			}
+
 		});
 
 	}

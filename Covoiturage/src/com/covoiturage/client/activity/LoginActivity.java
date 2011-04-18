@@ -10,15 +10,12 @@ import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.view.LoginView;
-
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
-
 import com.google.gwt.activity.shared.AbstractActivity;
-
 import com.google.gwt.appengine.channel.client.Channel;
 import com.google.gwt.appengine.channel.client.ChannelFactory;
 import com.google.gwt.appengine.channel.client.ChannelFactory.ChannelCreatedCallback;
@@ -43,9 +40,9 @@ public class LoginActivity extends AbstractActivity implements
 	private final EventBus eventBus;
 	private final LoginView loginView;
 	private UserInfoProxy currentUser;
-	private CovoiturageRequestFactory requestFactory;
-	private PlaceController placeController;
-	private UserServiceAsync userService = GWT.create(UserService.class);
+	private final CovoiturageRequestFactory requestFactory;
+	private final PlaceController placeController;
+	private final UserServiceAsync userService = GWT.create(UserService.class);
 
 	public LoginActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -56,12 +53,14 @@ public class LoginActivity extends AbstractActivity implements
 
 	private void bind() {
 		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {
+			@Override
 			public void onClick(ClickEvent event) {
 				login();
 
 			}
 		});
 		loginView.getAddUserButton().addClickHandler(new ClickHandler() {
+			@Override
 			public void onClick(ClickEvent event) {
 				goTo(new AddUserPlace(null));
 			}
@@ -166,19 +165,20 @@ public class LoginActivity extends AbstractActivity implements
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
 
 			}
 		});
 
 	}
 
+	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
 		loginView.setPresenter(this);
 		containerWidget.setWidget(loginView.asWidget());
 	}
 
+	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);
 	}

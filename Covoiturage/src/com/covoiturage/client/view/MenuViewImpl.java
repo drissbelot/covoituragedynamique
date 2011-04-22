@@ -3,7 +3,6 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.MenuViewConstants;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -40,7 +39,7 @@ public class MenuViewImpl extends Composite implements MenuView {
 		historyLabel.setText(constants.history());
 		menuPanel.setHeaderVisible(true);
 		menuPanel.setHeading(constants.menutitle());
-		messagesLabel.setText("Messages");
+		messagesLabel.setText(constants.message());
 
 	}
 
@@ -50,23 +49,28 @@ public class MenuViewImpl extends Composite implements MenuView {
 	}
 
 	@Override
-	public HasClickHandlers getSettingsLabel() {
+	public Label getSettingsLabel() {
 		return settingsLabel;
 	}
 
 	@Override
-	public HasClickHandlers getMapLabel() {
+	public Label getMapLabel() {
 		return mapLabel;
 	}
 
 	@Override
-	public HasClickHandlers getHistoryLabel() {
+	public Label getHistoryLabel() {
 		return historyLabel;
 	}
 
 	@Override
 	public Label getMessagesLabel() {
 		return messagesLabel;
+	}
+
+	@Override
+	public MenuViewConstants getConstants() {
+		return constants;
 	}
 
 }

@@ -1,15 +1,16 @@
 package com.covoiturage.client;
 
-import com.covoiturage.client.view.HistoryView;
+import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.HeaderView;
-import com.covoiturage.client.view.AddUserView;
-import com.covoiturage.client.view.MessageDetailsView;
-import com.covoiturage.client.view.MessagesListView;
-import com.covoiturage.client.view.SettingsView;
+import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.client.view.MenuView;
+import com.covoiturage.client.view.MessageDetailsView;
+import com.covoiturage.client.view.MessagesListView;
+import com.covoiturage.client.view.ReplyMessageView;
+import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.google.gwt.event.shared.EventBus;
@@ -43,4 +44,6 @@ public interface ClientFactory {
 	MessagesListView getMessagesListView();
 
 	MessageDetailsView getMessageDetailsView();
+
+	ReplyMessageView getReplyMessageView();
 }

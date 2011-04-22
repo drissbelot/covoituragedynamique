@@ -1,6 +1,6 @@
 package com.covoiturage.client.view;
 
-import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.covoiturage.client.i18n.MenuViewConstants;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
@@ -12,11 +12,13 @@ public interface MenuView extends IsWidget {
 		void goTo(Place place);
 	}
 
-	public HasClickHandlers getSettingsLabel();
+	public Label getSettingsLabel();
 
-	public HasClickHandlers getMapLabel();
+	public Label getMapLabel();
 
-	public HasClickHandlers getHistoryLabel();
+	public Label getHistoryLabel();
 
 	public Label getMessagesLabel();
+
+	public MenuViewConstants getConstants();
 }

@@ -57,8 +57,10 @@ public class MenuActivity extends AbstractActivity implements
 
 						userDetails = response;
 						menuView.getMessagesLabel().setText(
-								menuView.getMessagesLabel().getText()
-										+ userDetails.getMessages().size());
+								menuView.getConstants().message() + " ("
+										+ userDetails.getMessages().size()
+										+ ")");
+
 						// TODO se limiter aux messages non lus
 					}
 				});

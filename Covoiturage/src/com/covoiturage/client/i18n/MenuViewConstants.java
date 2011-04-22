@@ -12,4 +12,6 @@ public interface MenuViewConstants extends Constants {
 
 	String menutitle();
 
+	String message();
+
 }

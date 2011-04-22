@@ -1,13 +1,13 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
-	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
+	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 	
 	<ui:style src="stylesheet.css"/>
 		
-	<form:FormPanel ui:field='menutitre' styleName='{style.menucote}' width="100%">
+	<gxt:ContentPanel ui:field='menuPanel'>
 		<g:Label ui:field='mapLabel' styleName='{style.buttonmenu}' />
   		<g:Label ui:field='settingsLabel' styleName='{style.buttonmenu}' />
   		<g:Label ui:field='messagesLabel' styleName='{style.buttonmenu}' />
   		<g:Label ui:field='historyLabel' styleName='{style.buttonmenu}' />
-	</form:FormPanel>
+	</gxt:ContentPanel>
 </ui:UiBinder>

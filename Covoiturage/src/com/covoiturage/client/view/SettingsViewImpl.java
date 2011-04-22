@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements SettingsView {
@@ -21,7 +20,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private SettingsViewConstants constants = (SettingsViewConstants) GWT
+	private final SettingsViewConstants constants = (SettingsViewConstants) GWT
 			.create(SettingsViewConstants.class);
 
 	// TODO étendre adduserview... c'est un peu du copier-coller inutile là
@@ -37,7 +36,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	ListBox language;
 	@UiField
 	Label Make, Model;
-	@UiField 
+	@UiField
 	FormPanel header;
 
 	@SuppressWarnings("unused")
@@ -48,7 +47,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		loginField.setTitle("login=fix");
 		header.setHeading(constants.header());
 		// Internationalization
-		//header.setText(constants.header() + " :");
+		// header.setText(constants.header() + " :");
 		lastNameField.setFieldLabel(constants.lastname());
 		firstNameField.setFieldLabel(constants.firstname());
 		emailAdressField.setFieldLabel(constants.email());
@@ -68,30 +67,37 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 
 	}
 
+	@Override
 	public HasClickHandlers getSubmitButton() {
 		return submitButton;
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
+	@Override
 	public TextField<String> getFirstName() {
 		return firstNameField;
 	}
 
+	@Override
 	public TextField<String> getLastName() {
 		return lastNameField;
 	}
 
+	@Override
 	public TextField<String> getNewPassword() {
 		return newpasswordField;
 	}
 
+	@Override
 	public ListBox getLanguage() {
 		return language;
 	}
 
+	@Override
 	public TextField<String> getEmailAddress() {
 		return emailAdressField;
 	}

@@ -194,6 +194,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							mapView.getDepartureEndTime().setRawValue(
 									mapView.getDepartureEndTime().getRawValue()
 											+ ":");
+
 					}
 				});
 		mapView.getArrivalTime().addListener(Events.KeyPress,
@@ -369,56 +370,57 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				.addKeyUpHandler(new KeyUpHandler() {
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
+						if (mapView.getOriginAddress().getText().length() == 3) {
+							geocoder = new Geocoder();
+							HasGeocoderRequest request = new GeocoderRequest();
+							request.setRegion("be");
+							request.setAddress(mapView.getOriginAddress()
+									.getTextBox().getText());
+							geocoder.geocode(request, new GeocoderCallback() {
 
-						geocoder = new Geocoder();
-						HasGeocoderRequest request = new GeocoderRequest();
-						request.setRegion("be");
-						request.setAddress(mapView.getOriginAddress()
-								.getTextBox().getText());
-						geocoder.geocode(request, new GeocoderCallback() {
+								@Override
+								public void callback(
+										List<HasGeocoderResult> responses,
+										String status) {
+									MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
+											.getOriginAddress()
+											.getSuggestOracle();
+									for (HasGeocoderResult result : responses) {
+										oracle.add(result.getFormattedAddress());
+									}
 
-							@Override
-							public void callback(
-									List<HasGeocoderResult> responses,
-									String status) {
-								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
-										.getOriginAddress().getSuggestOracle();
-								for (HasGeocoderResult result : responses) {
-									oracle.add(result.getFormattedAddress());
 								}
-
-							}
-						});
-
+							});
+						}
 					}
 				});
 		mapView.getDestinationAddress().getTextBox()
 				.addKeyUpHandler(new KeyUpHandler() {
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
+						if (mapView.getDestinationAddress().getText().length() == 3) {
+							geocoder = new Geocoder();
+							HasGeocoderRequest request = new GeocoderRequest();
+							request.setRegion("be");
+							request.setAddress(mapView.getDestinationAddress()
+									.getTextBox().getText());
+							geocoder.geocode(request, new GeocoderCallback() {
 
-						geocoder = new Geocoder();
-						HasGeocoderRequest request = new GeocoderRequest();
-						request.setRegion("be");
-						request.setAddress(mapView.getDestinationAddress()
-								.getTextBox().getText());
-						geocoder.geocode(request, new GeocoderCallback() {
+								@Override
+								public void callback(
+										List<HasGeocoderResult> responses,
+										String status) {
+									MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
+											.getDestinationAddress()
+											.getSuggestOracle();
+									for (HasGeocoderResult result : responses) {
+										oracle.add(result.getFormattedAddress());
+									}
 
-							@Override
-							public void callback(
-									List<HasGeocoderResult> responses,
-									String status) {
-								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) mapView
-										.getDestinationAddress()
-										.getSuggestOracle();
-								for (HasGeocoderResult result : responses) {
-									oracle.add(result.getFormattedAddress());
 								}
 
-							}
-
-						});
-
+							});
+						}
 					}
 				});
 	}

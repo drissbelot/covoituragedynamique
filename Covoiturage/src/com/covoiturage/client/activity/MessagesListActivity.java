@@ -1,9 +1,12 @@
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.NotifyService;
+import com.covoiturage.client.NotifyServiceAsync;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.place.MessageDetailsPlace;
@@ -46,6 +49,8 @@ public class MessagesListActivity extends AbstractActivity implements
 	private UserInfoDetailsProxy userDetails;
 	private final List<MessagesProxy> messages = new ArrayList<MessagesProxy>();
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	private final NotifyServiceAsync notifyService = GWT
+			.create(NotifyService.class);
 
 	public MessagesListActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -134,8 +139,58 @@ public class MessagesListActivity extends AbstractActivity implements
 													public void onSuccess(
 															Void response) {
 
-														// TODO envoyer
-														// confirmation?
+														notifyService
+																.sendMessage(
+																		model.get(
+																				"message")
+																				.toString()
+																				.split("/")[0],
+																		"Travel confirmed",
+																		model.get(
+																				"message")
+																				.toString()
+																				.split("/")[1],
+																		userDetails
+																				.getFirstName()
+																				+ " "
+																				+ userDetails
+																						.getLastName(),
+																		new Date(
+																				System.currentTimeMillis()),
+																		new AsyncCallback<String>() {
+
+																			@Override
+																			public void onSuccess(
+																					String result) {
+																				UserInfoDetailsRequest requestMessageUser = requestFactory
+																						.userInfoDetailsRequest();
+																				Request<UserInfoDetailsProxy> createReqMessageUser = requestMessageUser
+																						.addMessageToUser(
+																								model.get(
+																										"message")
+																										.toString()
+																										.split("/")[0],
+																								result);
+																				createReqMessageUser
+																						.fire(new Receiver<UserInfoDetailsProxy>() {
+
+																							@Override
+																							public void onSuccess(
+																									UserInfoDetailsProxy response) {
+
+																							}
+
+																						});
+
+																			}
+
+																			@Override
+																			public void onFailure(
+																					Throwable caught) {
+
+																			}
+																		});
+
 													}
 
 												});

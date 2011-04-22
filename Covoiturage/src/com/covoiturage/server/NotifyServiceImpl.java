@@ -1,14 +1,22 @@
 package com.covoiturage.server;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 
 import com.covoiturage.client.NotifyService;
-
 import com.covoiturage.server.domain.Messages;
+import com.covoiturage.server.domain.UserInfo;
 import com.covoiturage.server.domain.UserInfoDetails;
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class NotifyServiceImpl extends RemoteServiceServlet implements
@@ -17,9 +25,11 @@ public class NotifyServiceImpl extends RemoteServiceServlet implements
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String sendMessage(String userDetails, String subject, String text,
-			String from, Date date) {
-		UserInfoDetails user = UserInfoDetails.findUserInfoDetails(userDetails);
+	public String sendMessage(String userDetailsId, String subject,
+			String text, String from, Date date) {
+		UserInfoDetails userDetails = UserInfoDetails
+				.findUserInfoDetails(userDetailsId);
+		UserInfo user = UserInfo.findUserInfo(userDetails.getUser());
 		EntityManager em = EMF.get().createEntityManager();
 		Messages message = new Messages();
 		try {
@@ -35,8 +45,32 @@ public class NotifyServiceImpl extends RemoteServiceServlet implements
 		} finally {
 			em.close();
 		}
-		// TODO envoyer mail
-		ChannelServer.sendMessage(user, text);
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+
+		String msgBody = text;
+
+		try {
+			Message msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress("dontreply@covdyn.appspot.com",
+					"Covdyn Admin"));
+			msg.addRecipient(
+					Message.RecipientType.TO,
+					new InternetAddress(user.getEmailAddress(), userDetails
+							.getFirstName() + " " + userDetails.getLastName()));
+			msg.setSubject(subject);
+			msg.setText(msgBody);
+			Transport.send(msg);
+
+		} catch (AddressException e) {
+
+		} catch (MessagingException e) {
+
+		} catch (UnsupportedEncodingException e) {
+
+		}
+
+		ChannelServer.sendMessage(userDetails, text);
 		return message.getId();
 
 	}

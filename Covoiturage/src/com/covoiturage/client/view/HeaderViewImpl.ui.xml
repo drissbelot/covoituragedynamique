@@ -8,7 +8,7 @@
 
   	<g:HorizontalPanel ui:field='menu' styleName='{style.menutitre}' width="100%" height="100%">
   	
-  		<g:Label styleName='{style.h1titre}'  ui:field="titre" width="16em" />
+  		<gxt:Label styleName='{style.h1titre}'  ui:field="titre" width="16em" />
   		<gxt:Label ui:field='currentUser'/>
   		<gxt:Label ui:field='messages'/>
   		<g:Anchor ui:field='logout' styleName='{style.buttontitre}' width="42px" height="30px"/>

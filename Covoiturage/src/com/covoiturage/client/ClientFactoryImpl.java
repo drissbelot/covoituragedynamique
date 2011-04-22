@@ -4,22 +4,24 @@ import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.AddUserViewImpl;
 import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.FooterViewImpl;
+import com.covoiturage.client.view.HeaderView;
+import com.covoiturage.client.view.HeaderViewImpl;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.HistoryViewImpl;
-import com.covoiturage.client.view.MessageDetailsView;
-import com.covoiturage.client.view.MessageDetailsViewImpl;
-import com.covoiturage.client.view.MessagesListView;
-import com.covoiturage.client.view.MessagesListViewImpl;
-import com.covoiturage.client.view.SettingsView;
-import com.covoiturage.client.view.SettingsViewImpl;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.LoginViewImpl;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.client.view.MapViewImpl;
-import com.covoiturage.client.view.HeaderView;
-import com.covoiturage.client.view.HeaderViewImpl;
 import com.covoiturage.client.view.MenuView;
 import com.covoiturage.client.view.MenuViewImpl;
+import com.covoiturage.client.view.MessageDetailsView;
+import com.covoiturage.client.view.MessageDetailsViewImpl;
+import com.covoiturage.client.view.MessagesListView;
+import com.covoiturage.client.view.MessagesListViewImpl;
+import com.covoiturage.client.view.ReplyMessageView;
+import com.covoiturage.client.view.ReplyMessageViewImpl;
+import com.covoiturage.client.view.SettingsView;
+import com.covoiturage.client.view.SettingsViewImpl;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.client.view.ValidatePassengersViewImpl;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -43,9 +45,11 @@ public class ClientFactoryImpl implements ClientFactory {
 	private final HistoryView historyView = new HistoryViewImpl();
 	private final MessagesListView messagesListView = new MessagesListViewImpl();
 	private final MessageDetailsView messageDetailsView = new MessageDetailsViewImpl();
+	private final ReplyMessageView replyMessageView = new ReplyMessageViewImpl();
 	private final CovoiturageRequestFactory requestFactory = GWT
 			.create(CovoiturageRequestFactory.class);
 
+	@Override
 	public CovoiturageRequestFactory getRequestFactory() {
 		return requestFactory;
 	}
@@ -122,6 +126,12 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public MessageDetailsView getMessageDetailsView() {
 		return messageDetailsView;
+	}
+
+	@Override
+	public ReplyMessageView getReplyMessageView() {
+
+		return replyMessageView;
 	}
 
 }

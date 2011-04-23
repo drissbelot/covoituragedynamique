@@ -106,7 +106,6 @@ public class Journey {
 
 			em.close();
 		}
-
 		return journey;
 	}
 

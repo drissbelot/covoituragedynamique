@@ -18,7 +18,7 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
 public class MapUtils {
-	// TODO gérer le cas où la personne ne répond pas...
+
 	public static List<Journey> bufferRouteJourney(List<String> coordinates,
 			float distance, Date departureStart, Date departureEnd, Date arrival) {
 		Coordinate[] coordArray = new Coordinate[coordinates.size()];

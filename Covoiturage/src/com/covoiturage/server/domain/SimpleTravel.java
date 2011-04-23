@@ -20,6 +20,9 @@ import org.datanucleus.jpa.annotations.Extension;
 import com.covoiturage.server.EMF;
 import com.covoiturage.server.MapUtils;
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.appengine.api.urlfetch.HTTPHeader;
 import com.google.appengine.api.urlfetch.HTTPResponse;
 import com.google.appengine.api.urlfetch.URLFetchService;
@@ -180,6 +183,15 @@ public class SimpleTravel {
 
 		} finally {
 			em.close();
+		}
+		if (statusDriver == "pending" || statusPassenger == "pending") {
+			Queue reminderQueue = QueueFactory.getDefaultQueue();
+			TaskOptions taskOptions = TaskOptions.Builder
+					.withUrl("/reminderService");
+			taskOptions.param("passengers", travel.getPassenger());
+			taskOptions.countdownMillis(travel.getDepartureStart().getTime()
+					- System.currentTimeMillis() - 60 * 60 * 1000);
+			reminderQueue.add(taskOptions);
 		}
 
 	}

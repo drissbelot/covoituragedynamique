@@ -12,6 +12,7 @@ public interface AddUserView extends IsWidget {
 
 	public abstract HasClickHandlers getAddUserButton();
 
+	@Override
 	public abstract Widget asWidget();
 
 	public abstract HasClickHandlers getAddButton();
@@ -37,5 +38,7 @@ public interface AddUserView extends IsWidget {
 	public TextField<String> getPassword();
 
 	public TextField<String> getLogin();
+
+	public TextField<Integer> getSeatsField();
 
 }

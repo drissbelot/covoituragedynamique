@@ -1,44 +1,45 @@
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.covoiturage.client.ClientFactory;
-import com.covoiturage.client.VehicleService;
-import com.covoiturage.client.VehicleServiceAsync;
 import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
-
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
+import com.covoiturage.shared.VehiclesProxy;
+import com.covoiturage.shared.VehiclesRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestOracle;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 public class AddUserActivity extends AbstractActivity implements
 		AddUserView.Presenter {
 
 	private final EventBus eventBus;
 	AddUserView addUserView;
-	private CovoiturageRequestFactory requestFactory;
-	private PlaceController placeController;
-	private VehicleServiceAsync vehiculeService = GWT
-			.create(VehicleService.class);
+	private final CovoiturageRequestFactory requestFactory;
+	private final PlaceController placeController;
 
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -49,6 +50,7 @@ public class AddUserActivity extends AbstractActivity implements
 
 	private void bind() {
 		addUserView.getAddButton().addClickHandler(new ClickHandler() {
+			@Override
 			public void onClick(ClickEvent event) {
 				addUser();
 			}
@@ -57,37 +59,40 @@ public class AddUserActivity extends AbstractActivity implements
 				.addKeyUpHandler(new KeyUpHandler() {
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
-
-						vehiculeService.getMakes(
-								addUserView.getMakeSuggestTextBox()
-										.getTextBox().getText(),
-								new AsyncCallback<List<String>>() {
+						VehiclesRequest vehiclesRequest = requestFactory
+								.vehiclesRequest();
+						Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
+								.findAllVehicles();
+						createReqVehicles
+								.fire(new Receiver<List<VehiclesProxy>>() {
 									@Override
-									public void onSuccess(List<String> result) {
-
+									public void onSuccess(
+											List<VehiclesProxy> response) {
 										MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
 												.getMakeSuggestTextBox()
 												.getSuggestOracle();
-										for (String string : result) {
-											oracle.add(string);
+										Set<VehiclesProxy> setVehicles = new HashSet<VehiclesProxy>(
+												response);
+										for (VehiclesProxy vehiclesProxy : setVehicles) {
+											oracle.add(vehiclesProxy.getMake());
+
 										}
+
 									}
 
-									@Override
-									public void onFailure(Throwable caught) {
-									}
 								});
+
 					}
 				});
 		addUserView.getModelSuggestTextBox().getTextBox()
 				.addKeyUpHandler(new KeyUpHandler() {
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
-
-						vehiculeService.getModels(addUserView
-								.getModelSuggestTextBox().getTextBox()
-								.getText(), addUserView.getMakeSuggestTextBox()
-								.getText(), new AsyncCallback<List<String>>() {
+						VehiclesRequest vehiclesRequest = requestFactory
+								.vehiclesRequest();
+						Request<List<String>> createReqModels = vehiclesRequest
+								.getModelsFromMake();
+						createReqModels.fire(new Receiver<List<String>>() {
 							@Override
 							public void onSuccess(List<String> result) {
 
@@ -99,20 +104,42 @@ public class AddUserActivity extends AbstractActivity implements
 								}
 							}
 
-							@Override
-							public void onFailure(Throwable caught) {
-							}
 						});
 					}
 				});
 
-		// TODO nombre de places (c'est dans le fichier)
+		addUserView.getModelSuggestTextBox().addSelectionHandler(
+				new SelectionHandler<SuggestOracle.Suggestion>() {
+
+					@Override
+					public void onSelection(SelectionEvent<Suggestion> event) {
+						VehiclesRequest vehiclesRequest = requestFactory
+								.vehiclesRequest();
+						Request<Integer> createReqSeats = vehiclesRequest
+								.getSeatsFromModel(addUserView
+										.getMakeSuggestTextBox().getTextBox()
+										.getText(), addUserView
+										.getModelSuggestTextBox().getTextBox()
+										.getText());
+						createReqSeats.fire(new Receiver<Integer>() {
+
+							@Override
+							public void onSuccess(Integer response) {
+								addUserView.getSeatsField().setValue(response);
+								// TODO enregistrer ça
+
+							}
+
+						});
+
+					}
+				});
 	}
 
 	protected void addUser() {
 
-		final UserInfoRequest request = requestFactory.userInfoRequest();
-		final UserInfoProxy newUser = request.create(UserInfoProxy.class);
+		UserInfoRequest request = requestFactory.userInfoRequest();
+		UserInfoProxy newUser = request.create(UserInfoProxy.class);
 		newUser.setLogin(addUserView.getLogin().getValue());
 		newUser.setPassword(addUserView.getPassword().getValue());
 		newUser.setEmailAddress(addUserView.getEmailAddress().getValue());
@@ -158,12 +185,14 @@ public class AddUserActivity extends AbstractActivity implements
 
 	}
 
+	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
 		addUserView.setPresenter(this);
 		panel.setWidget(addUserView.asWidget());
 	}
 
+	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);
 	}

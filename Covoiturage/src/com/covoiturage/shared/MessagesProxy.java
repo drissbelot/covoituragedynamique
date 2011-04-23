@@ -3,13 +3,13 @@ package com.covoiturage.shared;
 import java.util.Date;
 
 import com.covoiturage.server.domain.Messages;
-
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(Messages.class)
 public interface MessagesProxy extends EntityProxy {
+	@Override
 	EntityProxyId<MessagesProxy> stableId();
 
 	public String getId();

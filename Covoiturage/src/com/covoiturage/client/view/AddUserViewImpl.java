@@ -21,7 +21,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private AddUserViewConstants constants = (AddUserViewConstants) GWT
+	private final AddUserViewConstants constants = (AddUserViewConstants) GWT
 			.create(AddUserViewConstants.class);
 
 	@UiField
@@ -39,8 +39,10 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	ListBox language;
 	@UiField
 	Label Make, Model;
-	@UiField 
+	@UiField
 	FormPanel header;
+	@UiField
+	TextField<Integer> seatsField;
 
 	public AddUserViewImpl() {
 
@@ -62,14 +64,17 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		addButton.setText(constants.add());
 	}
 
+	@Override
 	public TextField<String> getFirstName() {
 		return firstNameField;
 	}
 
+	@Override
 	public TextField<String> getLastName() {
 		return lastNameField;
 	}
 
+	@Override
 	public TextField<String> getEmailAddress() {
 		return emailAdressField;
 	}
@@ -77,26 +82,32 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
+	@Override
 	public HasClickHandlers getAddUserButton() {
 		return addButton;
 	}
 
+	@Override
 	public Widget asWidget() {
 		return this;
 	}
 
+	@Override
 	public HasClickHandlers getAddButton() {
 		return addButton;
 	}
 
+	@Override
 	public TextField<String> getPassword() {
 		return passwordField;
 	}
 
+	@Override
 	public TextField<String> getLogin() {
 		return loginField;
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
@@ -116,5 +127,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	public ListBox getLanguage() {
 
 		return language;
+	}
+
+	public TextField<Integer> getSeatsField() {
+		return seatsField;
 	}
 }

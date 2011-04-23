@@ -18,6 +18,7 @@
 				<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}' />
 				<g:Label styleName='{style.label}' ui:field="Model" />
 				<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}' />
+				<form:TextField ui:field="seatsField" styleName='{style.textbox}'/>
 				<g:Label styleName='{style.label}' ui:field="languelab" />
 				<g:ListBox ui:field="language" />
 				<g:Button ui:field="addButton" styleName='{style.button}' />

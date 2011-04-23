@@ -1,6 +1,7 @@
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -78,9 +79,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private HasGeocoder geocoder;
 	private Date date = new Date();
-	private final Date departureStart = new Date();
-	private final Date departureEnd = new Date();
-	private final Date arrival = new Date();
+	private Date departureStart = new Date();
+	private Date departureEnd = new Date();
+	private Date arrival = new Date();
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
@@ -212,14 +213,16 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				new Listener<BaseEvent>() {
 					@Override
 					public void handleEvent(BaseEvent be) {
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						cal.set(Calendar.HOUR_OF_DAY,
+								Integer.valueOf(mapView.getDepartureStartTime()
+										.getValue().substring(0, 2)));
+						cal.set(Calendar.MINUTE,
+								Integer.valueOf(mapView.getDepartureStartTime()
+										.getValue().substring(3, 5)));
+						departureStart = cal.getTime();
 
-						departureStart.setHours(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(0, 2)));
-
-						departureStart.setMinutes(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(3, 5)));
 					}
 				});
 		mapView.getDepartureEndTime().addListener(Events.Blur,
@@ -227,12 +230,15 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					@Override
 					public void handleEvent(BaseEvent be) {
-						departureEnd.setHours(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(0, 2)));
-						departureEnd.setMinutes(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(3, 5)));
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						cal.set(Calendar.HOUR_OF_DAY,
+								Integer.valueOf(mapView.getDepartureEndTime()
+										.getValue().substring(0, 2)));
+						cal.set(Calendar.MINUTE,
+								Integer.valueOf(mapView.getDepartureEndTime()
+										.getValue().substring(3, 5)));
+						departureEnd = cal.getTime();
 					}
 				});
 		mapView.getArrivalTime().addListener(Events.Blur,
@@ -240,10 +246,15 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					@Override
 					public void handleEvent(BaseEvent be) {
-						arrival.setHours(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(0, 2)));
-						arrival.setMinutes(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(3, 5)));
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						cal.set(Calendar.HOUR_OF_DAY,
+								Integer.valueOf(mapView.getArrivalTime()
+										.getValue().substring(0, 2)));
+						cal.set(Calendar.MINUTE,
+								Integer.valueOf(mapView.getArrivalTime()
+										.getValue().substring(3, 5)));
+						arrival = cal.getTime();
 
 					}
 				});
@@ -377,6 +388,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						request.setAddress(mapView.getOriginAddress()
 								.getTextBox().getText());
 						geocoder.geocode(request, new GeocoderCallback() {
+							@SuppressWarnings("deprecation")
 							@Override
 							public void callback(
 									List<HasGeocoderResult> responses,
@@ -405,6 +417,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getTextBox().getText());
 						geocoder.geocode(request, new GeocoderCallback() {
 
+							@SuppressWarnings("deprecation")
 							@Override
 							public void callback(
 									List<HasGeocoderResult> responses,
@@ -431,6 +444,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		request.setLatLng(point);
 		geocoder.geocode(request, new GeocoderCallback() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void callback(List<HasGeocoderResult> responses,
 					String status) {

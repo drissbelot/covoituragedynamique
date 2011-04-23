@@ -188,7 +188,7 @@ public class SimpleTravel {
 			Queue reminderQueue = QueueFactory.getDefaultQueue();
 			TaskOptions taskOptions = TaskOptions.Builder
 					.withUrl("/reminderService");
-			taskOptions.param("passengers", travel.getPassenger());
+			taskOptions.param("passenger", travel.getPassenger());
 			taskOptions.countdownMillis(travel.getDepartureStart().getTime()
 					- System.currentTimeMillis() - 60 * 60 * 1000);
 			reminderQueue.add(taskOptions);

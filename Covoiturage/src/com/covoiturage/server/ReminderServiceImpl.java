@@ -1,5 +1,6 @@
 package com.covoiturage.server;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
@@ -12,33 +13,37 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.covoiturage.client.ReminderService;
 import com.covoiturage.server.domain.Messages;
 import com.covoiturage.server.domain.UserInfo;
 import com.covoiturage.server.domain.UserInfoDetails;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class ReminderServiceImpl extends RemoteServiceServlet implements
-		ReminderService {
+public class ReminderServiceImpl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String sendMessage(String userDetailsId, String subject,
-			String text, String from, Date date) {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userDetailsId = request.getParameter("passenger");
 		UserInfoDetails userDetails = UserInfoDetails
 				.findUserInfoDetails(userDetailsId);
 		UserInfo user = UserInfo.findUserInfo(userDetails.getUser());
+		String text = "Someone not replying";
 		EntityManager em = EMF.get().createEntityManager();
 		Messages message = new Messages();
 		try {
 			em.getTransaction().begin();
 			message.setMessage(text);
 			message.setRead(false);
-			message.setDate(date);
-			message.setFrom(from);
-			message.setSubject(subject);
+			message.setDate(new Date(System.currentTimeMillis()));
+			message.setFrom("Covdyn Admin");
+			// TODO affiner (peut-être en passant plus de paramètres)
+			message.setSubject(text);
 			em.persist(message);
 			em.getTransaction().commit();
 
@@ -58,7 +63,7 @@ public class ReminderServiceImpl extends RemoteServiceServlet implements
 					Message.RecipientType.TO,
 					new InternetAddress(user.getEmailAddress(), userDetails
 							.getFirstName() + " " + userDetails.getLastName()));
-			msg.setSubject(subject);
+			msg.setSubject(text);
 			msg.setText(msgBody);
 			Transport.send(msg);
 
@@ -71,7 +76,6 @@ public class ReminderServiceImpl extends RemoteServiceServlet implements
 		}
 
 		ChannelServer.sendMessage(userDetails, text);
-		return message.getId();
 
 	}
 

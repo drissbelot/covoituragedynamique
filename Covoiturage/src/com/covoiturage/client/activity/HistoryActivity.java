@@ -1,6 +1,5 @@
 package com.covoiturage.client.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
@@ -13,7 +12,6 @@ import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
-import com.covoiturage.shared.UserInfoProxy;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -29,10 +27,8 @@ public class HistoryActivity extends AbstractActivity implements
 	private final HistoryView historyView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
-	private UserInfoProxy currentUser;
+
 	private UserInfoDetailsProxy userDetails;
-	private final List<JourneyProxy> journeys = new ArrayList<JourneyProxy>();
-	private List<SimpleTravelProxy> simpleTravels = new ArrayList<SimpleTravelProxy>();
 
 	public HistoryActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -53,7 +49,7 @@ public class HistoryActivity extends AbstractActivity implements
 		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
 			@Override
 			public void onSendLogin(SendLoginEvent event) {
-				currentUser = event.getCurrentUser();
+
 				userDetails = event.getUserDetails();
 				searchJourneys();
 			}
@@ -70,8 +66,15 @@ public class HistoryActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(List<SimpleTravelProxy> response) {
-				simpleTravels = response;
 
+				for (SimpleTravelProxy simpleTravel : response) {
+					BaseModelData rec = new BaseModelData();
+
+					rec.set("from", simpleTravel.getOriginAddress());
+					rec.set("to", simpleTravel.getDestinationAddress());
+					rec.set("date", simpleTravel.getDate());
+					historyView.getListGrid().getStore().add(rec);
+				}
 			}
 		});
 		JourneyRequest requestJourneys = requestFactory.journeyRequest();

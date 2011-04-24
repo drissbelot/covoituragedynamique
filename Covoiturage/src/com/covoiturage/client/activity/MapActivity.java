@@ -15,6 +15,7 @@ import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEventHandler;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -68,6 +69,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
@@ -213,16 +215,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				new Listener<BaseEvent>() {
 					@Override
 					public void handleEvent(BaseEvent be) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(date);
-						cal.set(Calendar.HOUR_OF_DAY,
-								Integer.valueOf(mapView.getDepartureStartTime()
-										.getValue().substring(0, 2)));
-						cal.set(Calendar.MINUTE,
-								Integer.valueOf(mapView.getDepartureStartTime()
-										.getValue().substring(3, 5)));
-						departureStart = cal.getTime();
 
+						departureStart.setHours(Integer.valueOf(mapView
+								.getDepartureStartTime().getValue()
+								.substring(0, 2)));
+
+						departureStart.setMinutes(Integer.valueOf(mapView
+								.getDepartureStartTime().getValue()
+								.substring(3, 5)));
 					}
 				});
 		mapView.getDepartureEndTime().addListener(Events.Blur,
@@ -230,15 +230,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					@Override
 					public void handleEvent(BaseEvent be) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(date);
-						cal.set(Calendar.HOUR_OF_DAY,
-								Integer.valueOf(mapView.getDepartureEndTime()
-										.getValue().substring(0, 2)));
-						cal.set(Calendar.MINUTE,
-								Integer.valueOf(mapView.getDepartureEndTime()
-										.getValue().substring(3, 5)));
-						departureEnd = cal.getTime();
+						departureEnd.setHours(Integer.valueOf(mapView
+								.getDepartureEndTime().getValue()
+								.substring(0, 2)));
+						departureEnd.setMinutes(Integer.valueOf(mapView
+								.getDepartureEndTime().getValue()
+								.substring(3, 5)));
 					}
 				});
 		mapView.getArrivalTime().addListener(Events.Blur,
@@ -246,15 +243,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					@Override
 					public void handleEvent(BaseEvent be) {
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(date);
-						cal.set(Calendar.HOUR_OF_DAY,
-								Integer.valueOf(mapView.getArrivalTime()
-										.getValue().substring(0, 2)));
-						cal.set(Calendar.MINUTE,
-								Integer.valueOf(mapView.getArrivalTime()
-										.getValue().substring(3, 5)));
-						arrival = cal.getTime();
+						arrival.setHours(Integer.valueOf(mapView
+								.getArrivalTime().getValue().substring(0, 2)));
+						arrival.setMinutes(Integer.valueOf(mapView
+								.getArrivalTime().getValue().substring(3, 5)));
 
 					}
 				});
@@ -288,6 +280,13 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void onSuccess(UserInfoDetailsProxy response) {
 						userDetails = response;
+
+					}
+
+					@Override
+					public void onFailure(ServerFailure error) {
+						if (error.getMessage().contains("not logged in"))
+							goTo(new LoginPlace(null));
 
 					}
 				});
@@ -579,6 +578,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									}
 
 								}
+
+								@Override
+								public void onFailure(ServerFailure error) {
+									if (error.getMessage().contains(
+											"not logged in"))
+										goTo(new LoginPlace(null));
+
+								}
 							});
 
 						} else if (isPassenger) {
@@ -684,6 +691,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 									}
 
 								}
+
+								@Override
+								public void onFailure(ServerFailure error) {
+									if (error.getMessage().contains(
+											"not logged in"))
+										goTo(new LoginPlace(null));
+
+								}
 							});
 
 						}
@@ -777,6 +792,17 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												}
 
 											}
+
+											@Override
+											public void onFailure(
+													ServerFailure error) {
+												if (error
+														.getMessage()
+														.contains(
+																"not logged in"))
+													goTo(new LoginPlace(null));
+
+											}
 										});
 
 							} else if (isPassenger) {
@@ -809,6 +835,17 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 															resultJourney));
 
 												}
+
+											}
+
+											@Override
+											public void onFailure(
+													ServerFailure error) {
+												if (error
+														.getMessage()
+														.contains(
+																"not logged in"))
+													goTo(new LoginPlace(null));
 
 											}
 

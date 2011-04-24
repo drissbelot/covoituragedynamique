@@ -9,6 +9,7 @@ import com.covoiturage.client.NotifyService;
 import com.covoiturage.client.NotifyServiceAsync;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.view.MessagesListView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -35,6 +36,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -99,6 +101,17 @@ public class MessagesListActivity extends AbstractActivity implements
 												messagesListView.getListGrid()
 														.getStore()
 														.remove(message);
+
+											}
+
+											@Override
+											public void onFailure(
+													ServerFailure error) {
+												if (error
+														.getMessage()
+														.contains(
+																"not logged in"))
+													goTo(new LoginPlace(null));
 
 											}
 
@@ -193,6 +206,18 @@ public class MessagesListActivity extends AbstractActivity implements
 
 													}
 
+													@Override
+													public void onFailure(
+															ServerFailure error) {
+														if (error
+																.getMessage()
+																.contains(
+																		"not logged in"))
+															goTo(new LoginPlace(
+																	null));
+
+													}
+
 												});
 
 									}
@@ -237,9 +262,23 @@ public class MessagesListActivity extends AbstractActivity implements
 							messagesListView.getListGrid().getStore().add(rec);
 						}
 
+						@Override
+						public void onFailure(ServerFailure error) {
+							if (error.getMessage().contains("not logged in"))
+								goTo(new LoginPlace(null));
+
+						}
+
 					});
 
 				}
+
+			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
 
 			}
 		});

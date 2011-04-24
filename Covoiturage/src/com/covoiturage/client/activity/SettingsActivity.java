@@ -3,6 +3,7 @@ package com.covoiturage.client.activity;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoDetailsProxy;
@@ -17,6 +18,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class SettingsActivity extends AbstractActivity implements
@@ -74,6 +76,13 @@ public class SettingsActivity extends AbstractActivity implements
 			public void onSuccess(UserInfoDetailsProxy response) {
 
 			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
+
+			}
 		});
 		UserInfoRequest request = requestFactory.userInfoRequest();
 		Request<UserInfoProxy> createRequest = request.modifyUserInfo(
@@ -83,6 +92,13 @@ public class SettingsActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(UserInfoProxy response) {
+
+			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
 
 			}
 		});

@@ -18,10 +18,7 @@
   <welcome-file-list>
     <welcome-file>Covoiturage.html</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>vehicleService</servlet-name>
-    <servlet-class>com.covoiturage.server.VehicleServiceImpl</servlet-class>
-  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>notifyService</servlet-name>

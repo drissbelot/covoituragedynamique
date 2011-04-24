@@ -18,38 +18,60 @@ public class FooterViewImpl extends Composite implements FooterView {
 	private Presenter presenter;
 	@UiField
 	Anchor anchorfr, anchornl, anchoren, anchorit, anchorch;
-	private Image imagefr, imagenl, imageen, imageit, imagech;
+	private final Image imagefr, imagenl, imageen, imageit, imagech;
 
 	public FooterViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		// TODO utiliser le MVP
+		// TODO ça marchera pas sur l'appengine, faut mettre des fichiers
+		// statiques ou un clientbundle !
 		imagefr = new Image("LocalPictures/icon_fr.png");
 		imagenl = new Image("LocalPictures/icon_nl.png");
 		imageen = new Image("LocalPictures/icon_en.png");
 		imageit = new Image("LocalPictures/icon_it.png");
 		imagech = new Image("LocalPictures/icon_ch.png");
-	
+
 		imagefr.setSize("30px", "25px");
 		imagenl.setSize("30px", "25px");
 		imageen.setSize("30px", "25px");
 		imageit.setSize("30px", "25px");
 		imagech.setSize("30px", "25px");
 
-		anchorfr.setHref(GWT.getHostPageBaseURL() + "?locale=fr");
 		anchorfr.getElement().appendChild(imagefr.getElement());
-		anchornl.setHref(GWT.getHostPageBaseURL() + "?locale=nl");
 		anchornl.getElement().appendChild(imagenl.getElement());
-		anchoren.setHref(GWT.getHostPageBaseURL() + "?locale=en");
 		anchoren.getElement().appendChild(imageen.getElement());
-		anchorit.setHref(GWT.getHostPageBaseURL() + "?locale=it");
 		anchorit.getElement().appendChild(imageit.getElement());
-		anchorch.setHref(GWT.getHostPageBaseURL() + "?locale=ch");
 		anchorch.getElement().appendChild(imagech.getElement());
 
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
+	}
+
+	@Override
+	public Anchor getAnchorfr() {
+		return anchorfr;
+	}
+
+	@Override
+	public Anchor getAnchornl() {
+		return anchornl;
+	}
+
+	@Override
+	public Anchor getAnchoren() {
+		return anchoren;
+	}
+
+	@Override
+	public Anchor getAnchorit() {
+		return anchorit;
+	}
+
+	@Override
+	public Anchor getAnchorch() {
+		return anchorch;
 	}
 
 }

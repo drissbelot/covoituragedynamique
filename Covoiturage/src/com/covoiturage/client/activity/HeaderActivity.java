@@ -106,8 +106,6 @@ public class HeaderActivity extends AbstractActivity implements
 				headerView.getMessages().setText(
 						headerView.getConstants().message());
 
-				// TODO Jolie Popup
-
 			}
 		});
 		headerView.getMessages().addListener(Events.OnClick,

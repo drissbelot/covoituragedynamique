@@ -1,6 +1,8 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.SettingsViewConstants;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
@@ -11,7 +13,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements SettingsView {
@@ -23,8 +24,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	private final SettingsViewConstants constants = (SettingsViewConstants) GWT
 			.create(SettingsViewConstants.class);
 
-	// TODO étendre adduserview... c'est un peu du copier-coller inutile là
-
 	@UiField
 	Button submitButton;
 	@UiField
@@ -33,13 +32,12 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	TextField<String> firstNameField, lastNameField, emailAdressField,
 			loginField, passwordField, newpasswordField;
 	@UiField
-	ListBox language;
+	ComboBox<BaseModelData> language;
 	@UiField
 	Label Make, Model;
 	@UiField
 	FormPanel header;
 
-	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	public SettingsViewImpl() {
@@ -47,7 +45,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		loginField.setTitle("login=fix");
 		header.setHeading(constants.header());
 		// Internationalization
-		// header.setText(constants.header() + " :");
+
 		lastNameField.setFieldLabel(constants.lastname());
 		firstNameField.setFieldLabel(constants.firstname());
 		emailAdressField.setFieldLabel(constants.email());
@@ -58,11 +56,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());
-		language.addItem(constants.fr());
-		language.addItem(constants.en());
-		language.addItem(constants.nl());
-		language.addItem(constants.it());
-		language.addItem(constants.ch());
+		language.setTemplate(getFlagTemplate());
 		submitButton.setText(constants.submit());
 
 	}
@@ -93,7 +87,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	}
 
 	@Override
-	public ListBox getLanguage() {
+	public ComboBox<BaseModelData> getLanguage() {
 		return language;
 	}
 
@@ -112,4 +106,15 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		return loginField;
 	}
 
+	@Override
+	public SettingsViewConstants getConstants() {
+		return constants;
+	}
+
+	private native String getFlagTemplate() /*-{
+		return [
+				'<tpl for=".">',
+				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
+				'</tpl>' ].join("");
+	}-*/;
 }

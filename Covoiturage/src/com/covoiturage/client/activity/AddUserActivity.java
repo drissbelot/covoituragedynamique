@@ -55,7 +55,6 @@ public class AddUserActivity extends AbstractActivity implements
 	}
 
 	private void bind() {
-		GWT.log(addUserView.getLanguage().toString());
 
 		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 		BaseModelData recEn = new BaseModelData();

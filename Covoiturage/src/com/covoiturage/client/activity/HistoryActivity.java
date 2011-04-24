@@ -5,6 +5,7 @@ import java.util.List;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.SendLoginEvent;
 import com.covoiturage.client.event.SendLoginEventHandler;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -19,6 +20,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HistoryActivity extends AbstractActivity implements
@@ -76,6 +78,13 @@ public class HistoryActivity extends AbstractActivity implements
 					historyView.getListGrid().getStore().add(rec);
 				}
 			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
+
+			}
 		});
 		JourneyRequest requestJourneys = requestFactory.journeyRequest();
 		Request<List<JourneyProxy>> createReq = requestJourneys
@@ -95,6 +104,13 @@ public class HistoryActivity extends AbstractActivity implements
 					historyView.getListGrid().getStore().add(rec);
 				}
 				// TODO détails avec un expander
+			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
+
 			}
 
 		});

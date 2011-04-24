@@ -1,6 +1,7 @@
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.place.ReplyMessagePlace;
 import com.covoiturage.client.view.ReplyMessageView;
@@ -15,6 +16,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class ReplyMessageActivity extends AbstractActivity implements
@@ -35,17 +37,16 @@ public class ReplyMessageActivity extends AbstractActivity implements
 
 	private void bind() {
 		showMessage();
-		replyMessageView.getAnswerButton().addClickHandler(
-				new ClickHandler() {
+		replyMessageView.getAnswerButton().addClickHandler(new ClickHandler() {
 
-					@Override
-					public void onClick(ClickEvent event) {
-						goTo(new ReplyMessagePlace(
-								((MessageDetailsPlace) placeController
-										.getWhere()).getMessageDetailsName()));
+			@Override
+			public void onClick(ClickEvent event) {
+				goTo(new ReplyMessagePlace(
+						((MessageDetailsPlace) placeController.getWhere())
+								.getMessageDetailsName()));
 
-					}
-				});
+			}
+		});
 	}
 
 	protected void showMessage() {
@@ -60,12 +61,18 @@ public class ReplyMessageActivity extends AbstractActivity implements
 			public void onSuccess(MessagesProxy response) {
 				message = response;
 				replyMessageView.getFromLabel().setText(message.getFrom());
-				replyMessageView.getSubjectLabel().setText(
-						message.getSubject());
+				replyMessageView.getSubjectLabel()
+						.setText(message.getSubject());
 				replyMessageView.getDateLabel().setText(
 						message.getDate().toString());
-				replyMessageView.getMessageText().setText(
-						message.getMessage());
+				replyMessageView.getMessageText().setText(message.getMessage());
+
+			}
+
+			@Override
+			public void onFailure(ServerFailure error) {
+				if (error.getMessage().contains("not logged in"))
+					goTo(new LoginPlace(null));
 
 			}
 

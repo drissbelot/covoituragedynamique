@@ -11,6 +11,7 @@ import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -22,13 +23,12 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
-
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -121,6 +121,14 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 												.getStore().add(listRecords);
 
 									}
+
+									@Override
+									public void onFailure(ServerFailure error) {
+										if (error.getMessage().contains(
+												"not logged in"))
+											goTo(new LoginPlace(null));
+
+									}
 								});
 
 					}
@@ -179,6 +187,14 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 
 										validatePassengersView.getListGrid()
 												.getStore().add(listRecords);
+									}
+
+									@Override
+									public void onFailure(ServerFailure error) {
+										if (error.getMessage().contains(
+												"not logged in"))
+											goTo(new LoginPlace(null));
+
 									}
 								});
 

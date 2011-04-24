@@ -4,6 +4,7 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.place.HistoryPlace;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.SettingsPlace;
@@ -20,6 +21,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -62,6 +64,13 @@ public class MenuActivity extends AbstractActivity implements
 										+ ")");
 
 						// TODO se limiter aux messages non lus
+					}
+
+					@Override
+					public void onFailure(ServerFailure error) {
+						if (error.getMessage().contains("not logged in"))
+							goTo(new LoginPlace(null));
+
 					}
 				});
 

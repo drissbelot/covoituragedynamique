@@ -11,6 +11,9 @@ import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -20,6 +23,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -56,6 +60,13 @@ public class HeaderActivity extends AbstractActivity implements
 						headerView.getCurrentUser().setText(
 								currentUser.getLogin());
 					}
+
+					@Override
+					public void onFailure(ServerFailure error) {
+						if (error.getMessage().contains("not logged in"))
+							goTo(new LoginPlace(null));
+
+					}
 				});
 
 			}
@@ -78,6 +89,13 @@ public class HeaderActivity extends AbstractActivity implements
 						goTo(new LoginPlace(null));
 					}
 
+					@Override
+					public void onFailure(ServerFailure error) {
+						if (error.getMessage().contains("not logged in"))
+							goTo(new LoginPlace(null));
+
+					}
+
 				});
 			}
 		});
@@ -92,13 +110,16 @@ public class HeaderActivity extends AbstractActivity implements
 
 			}
 		});
-		headerView.getLogout().addClickHandler(new ClickHandler() {
+		headerView.getMessages().addListener(Events.OnClick,
+				new Listener<BaseEvent>() {
 
-			@Override
-			public void onClick(ClickEvent event) {
-				goTo(new MessagesListPlace(null));
-			}
-		});
+					@Override
+					public void handleEvent(BaseEvent be) {
+						goTo(new MessagesListPlace(null));
+
+					}
+				});
+
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.SettingsPlace;
 import com.covoiturage.client.view.MenuView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
+import com.covoiturage.shared.MessagesProxy;
+import com.covoiturage.shared.MessagesRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
@@ -34,6 +36,7 @@ public class MenuActivity extends AbstractActivity implements
 	private UserInfoDetailsProxy userDetails;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 	private final CovoiturageRequestFactory requestFactory;
+	private int messagesUnread;
 
 	public MenuActivity(ClientFactory clientFactory) {
 
@@ -58,12 +61,28 @@ public class MenuActivity extends AbstractActivity implements
 					public void onSuccess(UserInfoDetailsProxy response) {
 
 						userDetails = response;
+
+						for (String message : userDetails.getMessages()) {
+							MessagesRequest messageReq = requestFactory
+									.messagesRequest();
+							Request<MessagesProxy> createMessageReq = messageReq
+									.findMessages(message);
+							createMessageReq
+									.fire(new Receiver<MessagesProxy>() {
+
+										@Override
+										public void onSuccess(
+												MessagesProxy response) {
+											if (!response.getRead())
+												messagesUnread++;
+
+										}
+									});
+						}
 						menuView.getMessagesLabel().setText(
 								menuView.getConstants().message() + " ("
-										+ userDetails.getMessages().size()
-										+ ")");
+										+ messagesUnread + ")");
 
-						// TODO se limiter aux messages non lus
 					}
 
 					@Override

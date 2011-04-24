@@ -162,7 +162,6 @@ public class AddUserActivity extends AbstractActivity implements
 							@Override
 							public void onSuccess(Integer response) {
 								addUserView.getSeatsField().setValue(response);
-								// TODO enregistrer ça
 
 							}
 
@@ -205,6 +204,7 @@ public class AddUserActivity extends AbstractActivity implements
 				.getText());
 		newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox()
 				.getText());
+		newDriver.setCountOfPlaces(addUserView.getSeatsField().getRawValue());
 		newDriver.setLanguage(addUserView.getLanguage().getSelectedText());
 		newDriver.setMessages(new ArrayList<String>());
 		Request<Void> createReqDriver = requestDriver.persist()

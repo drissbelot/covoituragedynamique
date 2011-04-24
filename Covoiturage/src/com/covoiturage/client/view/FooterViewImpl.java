@@ -1,5 +1,6 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.images.LanguageFlagsRessources;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -22,13 +23,14 @@ public class FooterViewImpl extends Composite implements FooterView {
 
 	public FooterViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		// TODO ça marchera pas sur l'appengine, faut mettre des fichiers
-		// statiques ou un clientbundle !
-		imagefr = new Image("LocalPictures/icon_fr.png");
-		imagenl = new Image("LocalPictures/icon_nl.png");
-		imageen = new Image("LocalPictures/icon_en.png");
-		imageit = new Image("LocalPictures/icon_it.png");
-		imagech = new Image("LocalPictures/icon_ch.png");
+		LanguageFlagsRessources languageFlags = GWT
+				.create(LanguageFlagsRessources.class);
+
+		imagefr = new Image(languageFlags.flag_fr());
+		imagenl = new Image(languageFlags.flag_nl());
+		imageen = new Image(languageFlags.flag_en());
+		imageit = new Image(languageFlags.flag_it());
+		imagech = new Image(languageFlags.flag_ch());
 
 		imagefr.setSize("30px", "25px");
 		imagenl.setSize("30px", "25px");

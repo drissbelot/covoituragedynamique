@@ -1,7 +1,6 @@
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -81,9 +80,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final MapView mapView;
 	private HasGeocoder geocoder;
 	private Date date = new Date();
-	private Date departureStart = new Date();
-	private Date departureEnd = new Date();
-	private Date arrival = new Date();
+	private final Date departureStart = new Date();
+	private final Date departureEnd = new Date();
+	private final Date arrival = new Date();
 	private boolean isDriver = true, isPassenger;
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
 	private int counter;
@@ -213,6 +212,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 		mapView.getDepartureStartTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
+					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
 
@@ -228,6 +228,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getDepartureEndTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
 						departureEnd.setHours(Integer.valueOf(mapView
@@ -241,6 +242,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		mapView.getArrivalTime().addListener(Events.Blur,
 				new Listener<BaseEvent>() {
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
 						arrival.setHours(Integer.valueOf(mapView

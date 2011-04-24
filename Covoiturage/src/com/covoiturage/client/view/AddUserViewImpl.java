@@ -1,6 +1,8 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
+import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
@@ -11,7 +13,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,7 +37,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@UiField
 	SuggestBox vehicleMake, vehicleModel;
 	@UiField
-	ListBox language;
+	ComboBox<BaseModelData> language;
 	@UiField
 	Label Make, Model;
 	@UiField
@@ -56,11 +57,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		passwordField.setPassword(true);
 		Make.setText(constants.make());
 		Model.setText(constants.model());
-		language.addItem(constants.fr());
-		language.addItem(constants.en());
-		language.addItem(constants.nl());
-		language.addItem(constants.it());
-		language.addItem(constants.ch());
+		language.setTemplate(getFlagTemplate());
 		addButton.setText(constants.add());
 	}
 
@@ -79,7 +76,6 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return emailAdressField;
 	}
 
-	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	@Override
@@ -124,12 +120,25 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	}
 
 	@Override
-	public ListBox getLanguage() {
+	public ComboBox<BaseModelData> getLanguage() {
 
 		return language;
 	}
 
+	@Override
 	public TextField<Integer> getSeatsField() {
 		return seatsField;
 	}
+
+	@Override
+	public AddUserViewConstants getConstants() {
+		return constants;
+	}
+
+	private native String getFlagTemplate() /*-{
+		return [
+				'<tpl for=".">',
+				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
+				'</tpl>' ].join("");
+	}-*/;
 }

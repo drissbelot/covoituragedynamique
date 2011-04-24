@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
+import com.covoiturage.client.images.LanguageFlagsRessources;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -16,7 +17,9 @@ import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.covoiturage.shared.VehiclesProxy;
 import com.covoiturage.shared.VehiclesRequest;
+import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -28,6 +31,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle;
@@ -40,6 +44,8 @@ public class AddUserActivity extends AbstractActivity implements
 	AddUserView addUserView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
+	LanguageFlagsRessources languageFlags = GWT
+			.create(LanguageFlagsRessources.class);
 
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -49,6 +55,36 @@ public class AddUserActivity extends AbstractActivity implements
 	}
 
 	private void bind() {
+		GWT.log(addUserView.getLanguage().toString());
+
+		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
+		BaseModelData recEn = new BaseModelData();
+		recEn.set("name", addUserView.getConstants().en());
+		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
+				.getHTML());
+		BaseModelData recFr = new BaseModelData();
+		recFr.set("name", addUserView.getConstants().fr());
+		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
+				.getHTML());
+		BaseModelData recNl = new BaseModelData();
+		recNl.set("name", addUserView.getConstants().nl());
+		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
+				.getHTML());
+		BaseModelData recIt = new BaseModelData();
+		recIt.set("name", addUserView.getConstants().it());
+		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
+				.getHTML());
+		BaseModelData recCh = new BaseModelData();
+		recCh.set("name", addUserView.getConstants().ch());
+		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
+				.getHTML());
+		listRecords.add(recEn);
+		listRecords.add(recFr);
+		listRecords.add(recIt);
+		listRecords.add(recNl);
+		listRecords.add(recCh);
+		addUserView.getLanguage().getStore().add(listRecords);
+
 		addUserView.getAddButton().addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -169,8 +205,7 @@ public class AddUserActivity extends AbstractActivity implements
 				.getText());
 		newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox()
 				.getText());
-		newDriver.setLanguage(addUserView.getLanguage().getItemText(
-				addUserView.getLanguage().getSelectedIndex()));
+		newDriver.setLanguage(addUserView.getLanguage().getSelectedText());
 		newDriver.setMessages(new ArrayList<String>());
 		Request<Void> createReqDriver = requestDriver.persist()
 				.using(newDriver);

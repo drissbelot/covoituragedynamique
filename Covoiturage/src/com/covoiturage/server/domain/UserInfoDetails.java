@@ -16,90 +16,19 @@ import org.datanucleus.jpa.annotations.Extension;
 
 import com.covoiturage.server.ChannelServer;
 import com.covoiturage.server.EMF;
+import com.google.appengine.api.datastore.Blob;
 
 @Entity
 public class UserInfoDetails {
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
-	public String id;
-	public String channelId;
-
-	public String getChannelId() {
-		return channelId;
-	}
-
-	public void setChannelId(String channelId) {
-		this.channelId = channelId;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	@Version
-	@Column(name = "version")
-	private Integer version = 0;
-
-	public static final EntityManager entityManager() {
-
-		return EMF.get().createEntityManager();
-
-	}
-
-	public static long countUserInfoDetails() {
+	public static UserInfoDetails addMessageToUser(String id, String messageId) {
+		UserInfoDetails user = findUserInfoDetails(id);
 		EntityManager em = entityManager();
 		try {
-			return ((Number) em.createQuery(
-					"select count(o) from UserInfoDetails o").getSingleResult())
-					.longValue();
-		} finally {
-			em.close();
-		}
-	}
 
-	@SuppressWarnings("unchecked")
-	public static List<UserInfoDetails> findAllUserInfoDetails() {
-		EntityManager em = entityManager();
-		try {
-			List<UserInfoDetails> list = em.createQuery(
-					"select o from UserInfoDetails o").getResultList();
+			user.addMessage(messageId);
+			em.merge(user);
 
-			list.size();
-			return list;
-		} finally {
-			em.close();
-		}
-	}
-
-	public static UserInfoDetails findUserInfoDetails(String id) {
-
-		EntityManager em = entityManager();
-		try {
-			UserInfoDetails driver = em.find(UserInfoDetails.class, id);
-			driver.getMessages();
-			return driver;
-		} finally {
-
-			em.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static UserInfoDetails findDetailsFromUser(String id) {
-		EntityManager em = entityManager();
-		try {
-			Query query = em
-					.createQuery("select o from UserInfoDetails o where o.user=:user");
-			query.setParameter("user", id);
-			List<UserInfoDetails> list = query.getResultList();
-			list.get(0).getMessages();
-			return list.get(0);
+			return user;
 		} finally {
 			em.close();
 		}
@@ -128,19 +57,15 @@ public class UserInfoDetails {
 		}
 	}
 
-	public static UserInfoDetails addMessageToUser(String id, String messageId) {
-		UserInfoDetails user = findUserInfoDetails(id);
+	public static long countUserInfoDetails() {
 		EntityManager em = entityManager();
 		try {
-
-			user.addMessage(messageId);
-			em.merge(user);
-
-			return user;
+			return ((Number) em.createQuery(
+					"select count(o) from UserInfoDetails o").getSingleResult())
+					.longValue();
 		} finally {
 			em.close();
 		}
-
 	}
 
 	public static UserInfoDetails deleteMessage(String id, String messageId) {
@@ -155,6 +80,65 @@ public class UserInfoDetails {
 		} finally {
 			em.close();
 		}
+	}
+
+	public static final EntityManager entityManager() {
+
+		return EMF.get().createEntityManager();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<UserInfoDetails> findAllUserInfoDetails() {
+		EntityManager em = entityManager();
+		try {
+			List<UserInfoDetails> list = em.createQuery(
+					"select o from UserInfoDetails o").getResultList();
+
+			list.size();
+			return list;
+		} finally {
+			em.close();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static UserInfoDetails findDetailsFromUser(String id) {
+		EntityManager em = entityManager();
+		try {
+			Query query = em
+					.createQuery("select o from UserInfoDetails o where o.user=:user");
+			query.setParameter("user", id);
+			List<UserInfoDetails> list = query.getResultList();
+			list.get(0).getMessages();
+			return list.get(0);
+		} finally {
+			em.close();
+		}
+
+	}
+
+	public static UserInfoDetails findUserInfoDetails(String id) {
+
+		EntityManager em = entityManager();
+		try {
+			UserInfoDetails driver = em.find(UserInfoDetails.class, id);
+			driver.getMessages();
+			return driver;
+		} finally {
+
+			em.close();
+		}
+	}
+
+	public static List<UserInfoDetails> getPassengerList(List<String> passengers) {
+		EntityManager em = entityManager();
+		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
+		for (String string : passengers) {
+			result.add(em.find(UserInfoDetails.class, string));
+		}
+		return result;
+
 	}
 
 	public static UserInfoDetails modifyUserInfoDetails(String id,
@@ -194,14 +178,122 @@ public class UserInfoDetails {
 
 	}
 
-	public static List<UserInfoDetails> getPassengerList(List<String> passengers) {
-		EntityManager em = entityManager();
-		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
-		for (String string : passengers) {
-			result.add(em.find(UserInfoDetails.class, string));
-		}
-		return result;
+	public String channelId;
 
+	private int countOfJourneys;
+
+	private String countOfPlaces;
+
+	private String firstName;
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	public String id;
+
+	private String language;
+
+	private String lastName;
+
+	private String vehicle;
+
+	private List<String> messages;
+
+	private int rating;
+
+	private String user;
+
+	private String colorOfVehicle;
+
+	private Blob personalPicture;
+
+	private Blob vehiclePicture;
+
+	private int comfort;
+
+	private String mobilePhoneNumber;
+
+	private String homePhoneNumber;
+
+	private String workPhoneNumber;
+
+	@Version
+	@Column(name = "version")
+	private final Integer version = 0;
+
+	public UserInfoDetails() {
+
+	}
+
+	public UserInfoDetails(String vehicle, String countOfPlaces, int rating,
+			int countOfJourneys, String firstName, String lastName,
+			String language, List<String> messages, String colorOfVehicle,
+			int comfort) {
+		super();
+		this.vehicle = vehicle;
+		this.countOfPlaces = countOfPlaces;
+		this.rating = rating;
+		this.countOfJourneys = countOfJourneys;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.language = language;
+		this.messages = messages;
+		this.setColorOfVehicle(colorOfVehicle);
+		this.setComfort(comfort);
+	}
+
+	protected void addMessage(String message) {
+
+		messages.add(message);
+	}
+
+	public String getChannelId() {
+		return channelId;
+	}
+
+	public int getCountOfJourneys() {
+		return countOfJourneys;
+	}
+
+	public String getCountOfPlaces() {
+		return countOfPlaces;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getVehicle() {
+		return vehicle;
+	}
+
+	public List<String> getMessages() {
+		return messages;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public Integer getVersion() {
+		return version;
 	}
 
 	public void persist() {
@@ -223,124 +315,100 @@ public class UserInfoDetails {
 		}
 	}
 
-	public UserInfoDetails() {
-
+	protected void removeMessage(String message) {
+		messages.remove(message);
 	}
 
-	public UserInfoDetails(String makeOfvehicle, String modelOfvehicle,
-			String countOfPlaces, int rating, int countOfJourneys,
-			String firstName, String lastName, String language,
-			List<String> messages) {
-		super();
-		this.makeOfvehicle = makeOfvehicle;
-		this.modelOfvehicle = modelOfvehicle;
-		this.countOfPlaces = countOfPlaces;
-		this.rating = rating;
-		this.countOfJourneys = countOfJourneys;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.language = language;
-		this.messages = messages;
-	}
-
-	public String getMakeOfvehicle() {
-		return makeOfvehicle;
-	}
-
-	public void setMakeOfvehicle(String makeOfvehicle) {
-		this.makeOfvehicle = makeOfvehicle;
-	}
-
-	public String getModelOfvehicle() {
-		return modelOfvehicle;
-	}
-
-	public void setModelOfvehicle(String modelOfvehicle) {
-		this.modelOfvehicle = modelOfvehicle;
-	}
-
-	private String makeOfvehicle;
-	private String modelOfvehicle;
-	private String countOfPlaces;
-	private int rating;
-	private int countOfJourneys;
-	private String firstName;
-	private String lastName;
-	private String user;
-	private String language;
-	private List<String> messages;
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public void setCountOfPlaces(String countOfPlaces) {
-		this.countOfPlaces = countOfPlaces;
-	}
-
-	public String getCountOfPlaces() {
-		return countOfPlaces;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public int getRating() {
-		return rating;
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
 	}
 
 	public void setCountOfJourneys(int countOfJourneys) {
 		this.countOfJourneys = countOfJourneys;
 	}
 
-	public int getCountOfJourneys() {
-		return countOfJourneys;
+	public void setCountOfPlaces(String countOfPlaces) {
+		this.countOfPlaces = countOfPlaces;
 	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
 	public void setMessages(List<String> messages) {
 		this.messages = messages;
 	}
 
-	public List<String> getMessages() {
-		return messages;
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
-	protected void addMessage(String message) {
-
-		messages.add(message);
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	protected void removeMessage(String message) {
-		messages.remove(message);
+	public void setColorOfVehicle(String colorOfVehicle) {
+		this.colorOfVehicle = colorOfVehicle;
+	}
+
+	public String getColorOfVehicle() {
+		return colorOfVehicle;
+	}
+
+	public void setPersonalPicture(Blob personalPicture) {
+		this.personalPicture = personalPicture;
+	}
+
+	public Blob getPersonalPicture() {
+		return personalPicture;
+	}
+
+	public void setVehiclePicture(Blob vehiclePicture) {
+		this.vehiclePicture = vehiclePicture;
+	}
+
+	public Blob getVehiclePicture() {
+		return vehiclePicture;
+	}
+
+	public void setComfort(int comfort) {
+		this.comfort = comfort;
+	}
+
+	public int getComfort() {
+		return comfort;
+	}
+
+	public void setMobilePhoneNumber(String mobilePhoneNumber) {
+		this.mobilePhoneNumber = mobilePhoneNumber;
+	}
+
+	public String getMobilePhoneNumber() {
+		return mobilePhoneNumber;
+	}
+
+	public void setHomePhoneNumber(String homePhoneNumber) {
+		this.homePhoneNumber = homePhoneNumber;
+	}
+
+	public String getHomePhoneNumber() {
+		return homePhoneNumber;
+	}
+
+	public void setWorkPhoneNumber(String workPhoneNumber) {
+		this.workPhoneNumber = workPhoneNumber;
+	}
+
+	public String getWorkPhoneNumber() {
+		return workPhoneNumber;
 	}
 
 }

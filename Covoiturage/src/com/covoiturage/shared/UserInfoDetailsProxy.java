@@ -3,8 +3,8 @@ package com.covoiturage.shared;
 import java.util.List;
 
 import com.covoiturage.server.domain.UserInfoDetails;
+import com.google.appengine.api.datastore.Blob;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(UserInfoDetails.class)
@@ -55,5 +55,33 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 	public void setMessages(List<String> messages);
 
 	public List<String> getMessages();
+
+	public void setColorOfVehicle(String colorOfVehicle);
+
+	public String getColorOfVehicle();
+
+	public void setPersonalPicture(Blob personalPicture);
+
+	public Blob getPersonalPicture();
+
+	public void setVehiclePicture(Blob vehiclePicture);
+
+	public Blob getVehiclePicture();
+
+	public void setComfort(int comfort);
+
+	public int getComfort();
+
+	public void setMobilePhoneNumber(String mobilePhoneNumber);
+
+	public String getMobilePhoneNumber();
+
+	public void setHomePhoneNumber(String homePhoneNumber);
+
+	public String getHomePhoneNumber();
+
+	public void setWorkPhoneNumber(String workPhoneNumber);
+
+	public String getWorkPhoneNumber();
 
 }

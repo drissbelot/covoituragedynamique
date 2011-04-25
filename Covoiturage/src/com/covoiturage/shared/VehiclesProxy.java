@@ -27,4 +27,12 @@ public interface VehiclesProxy extends EntityProxy {
 	public int getSeats();
 
 	public void setSeats(int seats);
+
+	public void setFuelMixedDrive(float fuelMixedDrive);
+
+	public float getFuelMixedDrive();
+
+	public void setEmissionsCO2(float emissionsCO2);
+
+	public float getEmissionsCO2();
 }

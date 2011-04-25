@@ -15,20 +15,6 @@
 				<form:TextField ui:field="emailAdressField"
 					styleName='{style.textbox}' />
 				<form:TextField ui:field="passwordField" styleName='{style.textbox}' />
-				<form:ComboBox ui:field="vehicleMakeField" store="{store}"
-					fieldLabel="{constants.make}" />
-				<form:ComboBox ui:field="vehicleModelField" store="{store}"
-					fieldLabel="{constants.model}" />
-				<form:TextField ui:field="vehicleDateField"
-					fieldLabel="{constants.vehicleDate}" />
-				<form:TextField ui:field="seatsNumberField"
-					fieldLabel="{constants.seatsNumber}" />
-				<form:ComboBox ui:field="comfortField" store="{store}" />
-				<form:TextField ui:field="fuelMixedDriveField"
-					fieldLabel="{constants.fuelMixedDrive}" />
-				<form:TextField ui:field="emissionsCO2Field"
-					fieldLabel="{constants.emissionsCO2}" />
-				<form:ComboBox store="{store}" ui:field="language" />
 				<g:Button ui:field="addButton" styleName='{style.button}' />
 			</form:FormPanel>
 		</g:VerticalPanel>

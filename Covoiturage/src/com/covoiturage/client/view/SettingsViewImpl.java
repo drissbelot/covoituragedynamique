@@ -12,7 +12,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements SettingsView {
@@ -34,10 +33,11 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	ComboBox<BaseModelData> language;
 	@UiField
-	Label Make, Model;
+	ComboBox<BaseModelData> vehicleMakeField, vehicleModelField;
 	@UiField
 	TextField<String> vehicleDateField;
-
+	@UiField
+	ComboBox<BaseModelData> comfortField;
 	@UiField
 	TextField<Integer> seatsNumberField;
 	@UiField
@@ -47,6 +47,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	TextField<String> mobilePhoneNumberField, homePhoneNumberField,
 			workPhoneNumberField;
+
 	@UiField
 	FormPanel personalForm;
 
@@ -110,4 +111,15 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
 				'</tpl>' ].join("");
 	}-*/;
+
+	@Override
+	public ComboBox<BaseModelData> getVehicleMake() {
+		return vehicleMakeField;
+	}
+
+	@Override
+	public ComboBox<BaseModelData> getVehicleModel() {
+
+		return vehicleModelField;
+	}
 }

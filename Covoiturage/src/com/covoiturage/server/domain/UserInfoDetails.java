@@ -363,20 +363,20 @@ public class UserInfoDetails {
 		return colorOfVehicle;
 	}
 
-	public void setPersonalPicture(Blob personalPicture) {
-		this.personalPicture = personalPicture;
+	public void setPersonalPicture(byte[] personalPicture) {
+		this.personalPicture = new Blob(personalPicture);
 	}
 
-	public Blob getPersonalPicture() {
-		return personalPicture;
+	public byte[] getPersonalPicture() {
+		return personalPicture.getBytes();
 	}
 
-	public void setVehiclePicture(Blob vehiclePicture) {
-		this.vehiclePicture = vehiclePicture;
+	public void setVehiclePicture(byte[] vehiclePicture) {
+		this.vehiclePicture = new Blob(vehiclePicture);
 	}
 
-	public Blob getVehiclePicture() {
-		return vehiclePicture;
+	public byte[] getVehiclePicture() {
+		return vehiclePicture.getBytes();
 	}
 
 	public void setComfort(int comfort) {

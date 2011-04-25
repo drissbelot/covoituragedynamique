@@ -199,10 +199,8 @@ public class AddUserActivity extends AbstractActivity implements
 		newDriver.setUser(newUser);
 		newDriver.setFirstName(addUserView.getFirstName().getValue());
 		newDriver.setLastName(addUserView.getLastName().getValue());
-		newDriver.setMakeOfvehicle(addUserView.getMakeSuggestTextBox()
-				.getText());
-		newDriver.setModelOfvehicle(addUserView.getModelSuggestTextBox()
-				.getText());
+		newDriver.setVehicle(addUserView.getMakeSuggestTextBox().getText());
+		// TODO c'est pas ça qu'il faut sauver
 		newDriver.setCountOfPlaces(addUserView.getSeatsField().getRawValue());
 		newDriver.setLanguage(addUserView.getLanguage().getSelectedText());
 		newDriver.setMessages(new ArrayList<String>());

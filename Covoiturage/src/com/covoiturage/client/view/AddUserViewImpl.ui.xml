@@ -5,17 +5,15 @@
 	<ui:style src="stylesheet.css" />
 		
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
-		<g:Label styleName='{style.h1}' text="Create a new Account" />
 		<g:VerticalPanel ui:field="container" styleName='{style.centerpanel}'
 			horizontalAlignment="ALIGN_LEFT">
-			<form:FormPanel ui:field="header">
-				<form:TextField ui:field="loginField" styleName='{style.textbox}' />
-				<form:TextField ui:field="firstNameField" styleName='{style.textbox}' />
-				<form:TextField ui:field="lastNameField" styleName='{style.textbox}' />
-				<form:TextField ui:field="emailAdressField"
-					styleName='{style.textbox}' />
-				<form:TextField ui:field="passwordField" styleName='{style.textbox}' />
-				<g:Button ui:field="addButton" styleName='{style.button}' />
+			<form:FormPanel ui:field="addUserForm" heading="{constants.header}">
+				<form:TextField ui:field="loginField"  fieldLabel="{constants.username}"/>
+				<form:TextField ui:field="firstNameField" fieldLabel="{constants.firstname}" />
+				<form:TextField ui:field="lastNameField"  fieldLabel="{constants.lastname}"/>
+				<form:TextField ui:field="emailAdressField" fieldLabel="{constants.email}"/>
+				<form:TextField ui:field="passwordField" fieldLabel="{constants.password}"/>
+				<g:Button ui:field="addButton" styleName='{style.button}' text="{constants.add}"/>
 			</form:FormPanel>
 		</g:VerticalPanel>
 	</g:FlowPanel>

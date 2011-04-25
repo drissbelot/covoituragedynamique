@@ -32,12 +32,6 @@ public class FooterViewImpl extends Composite implements FooterView {
 		imageit = new Image(languageFlags.flag_it());
 		imagech = new Image(languageFlags.flag_ch());
 
-		imagefr.setSize("30px", "25px");
-		imagenl.setSize("30px", "25px");
-		imageen.setSize("30px", "25px");
-		imageit.setSize("30px", "25px");
-		imagech.setSize("30px", "25px");
-
 		anchorfr.getElement().appendChild(imagefr.getElement());
 		anchornl.getElement().appendChild(imagenl.getElement());
 		anchoren.getElement().appendChild(imageen.getElement());

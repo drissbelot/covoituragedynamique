@@ -1,6 +1,5 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.i18n.MessagesListViewConstants;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -19,8 +18,6 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private MessagesListViewConstants constants = (MessagesListViewConstants) GWT
-			.create(MessagesListViewConstants.class);
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -28,7 +25,7 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 	Grid<BaseModelData> listGrid;
 	@UiField
 	Button deleteButton;
-	private ColumnConfig acceptButton;
+	private final ColumnConfig acceptButton;
 
 	public MessagesListViewImpl() {
 
@@ -42,22 +39,25 @@ public class MessagesListViewImpl extends Composite implements MessagesListView 
 		listGrid.getColumnModel().getColumns().add(acceptButton);
 		listGrid.setSelectionModel(check);
 		listGrid.getView().setAutoFill(true);
-		deleteButton.setText(constants.Delete());
 
 	}
 
+	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
+	@Override
 	public Grid<BaseModelData> getListGrid() {
 		return listGrid;
 	}
 
+	@Override
 	public Button getDeleteButton() {
 		return deleteButton;
 	}
 
+	@Override
 	public ColumnConfig getAcceptButton() {
 		return acceptButton;
 	}

@@ -36,15 +36,17 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	Label Make, Model;
 	@UiField
-	TextField<String> vehicleDate;
+	TextField<String> vehicleDateField;
 
 	@UiField
-	TextField<Integer> seatsNumber;
+	TextField<Integer> seatsNumberField;
 	@UiField
-	TextField<Float> emissionsCO2;
+	TextField<Float> emissionsCO2Field;
 	@UiField
-	TextField<Float> fuelMixedDrive;
-
+	TextField<Float> fuelMixedDriveField;
+	@UiField
+	TextField<String> mobilePhoneNumberField, homePhoneNumberField,
+			workPhoneNumberField;
 	@UiField
 	FormPanel personalForm;
 
@@ -54,6 +56,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		initWidget(binder.createAndBindUi(this));
 
 		language.setTemplate(getFlagTemplate());
+		// TODO mettre des validators
 	}
 
 	@Override

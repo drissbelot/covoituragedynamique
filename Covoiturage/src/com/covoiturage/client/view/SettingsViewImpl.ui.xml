@@ -17,7 +17,9 @@
 						<form:TextField ui:field="emailAdressField" fieldLabel="{constants.email}"/>
 						<form:TextField ui:field="passwordField" fieldLabel="{constants.password}" password="true"/>
 						<form:TextField ui:field="newpasswordField" fieldLabel="{constants.password}" password="true"/>
-
+						<form:TextField ui:field="mobilePhoneNumberField"/>
+						<form:TextField ui:field="homePhoneNumberField"/>
+						<form:TextField ui:field="workPhoneNumberField"/>
 						<form:ComboBox store="{store}" ui:field="language" fieldLabel="{constants.languelab}"/>
 						<g:Button ui:field="submitButton" styleName='{style.button}' text="{constants.submit}" />
 					</form:FormPanel>
@@ -30,10 +32,10 @@
 						<g:Label styleName='{style.label}' ui:field="Model" text="{constants.model}"/>
 						<g:SuggestBox ui:field="vehicleModel" 
 							styleName='{style.textbox}' />
-						<form:TextField ui:field="vehicleDate"/>
-						<form:TextField ui:field="seatsNumber"/>
-						<form:TextField ui:field="fuelMixedDrive"/>
-						<form:TextField ui:field="emissionsCO2" fieldLabel="{constants.emissionsCO2}"/>
+						<form:TextField ui:field="vehicleDateField"/>
+						<form:TextField ui:field="seatsNumberField"/>
+						<form:TextField ui:field="fuelMixedDriveField"/>
+						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 					</form:FormPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>

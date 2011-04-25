@@ -17,28 +17,26 @@
 						<form:TextField ui:field="emailAdressField" fieldLabel="{constants.email}"/>
 						<form:TextField ui:field="passwordField" fieldLabel="{constants.password}" password="true"/>
 						<form:TextField ui:field="newpasswordField" fieldLabel="{constants.password}" password="true"/>
-						<form:TextField ui:field="mobilePhoneNumberField"/>
-						<form:TextField ui:field="homePhoneNumberField"/>
-						<form:TextField ui:field="workPhoneNumberField"/>
+						<form:TextField ui:field="mobilePhoneNumberField" fieldLabel="{constants.mobilePhoneNumber}"/>
+						<form:TextField ui:field="homePhoneNumberField" fieldLabel="{constants.homePhoneNumber}"/>
+						<form:TextField ui:field="workPhoneNumberField" fieldLabel="{constants.workPhoneNumber}"/>
 						<form:ComboBox store="{store}" ui:field="language" fieldLabel="{constants.languelab}"/>
-						<g:Button ui:field="submitButton" styleName='{style.button}' text="{constants.submit}" />
 					</form:FormPanel>
 				</gxt:TabItem>
 				<gxt:TabItem text="Vehicle Informations">
 					<form:FormPanel ui:field="vehicleForm">
-						<g:Label styleName='{style.label}' ui:field="Make" text="{constants.make}"/>
-						<g:SuggestBox ui:field="vehicleMake" 
-							styleName='{style.textbox}' />
-						<g:Label styleName='{style.label}' ui:field="Model" text="{constants.model}"/>
-						<g:SuggestBox ui:field="vehicleModel" 
-							styleName='{style.textbox}' />
-						<form:TextField ui:field="vehicleDateField"/>
-						<form:TextField ui:field="seatsNumberField"/>
-						<form:TextField ui:field="fuelMixedDriveField"/>
+						<form:ComboBox ui:field="vehicleMakeField" store="{store}" fieldLabel="{constants.make}"/>
+						<form:ComboBox ui:field="vehicleModelField" store="{store}" fieldLabel="{constants.model}"/>
+						<form:TextField ui:field="vehicleDateField" fieldLabel="{constants.vehicleDate}"/>
+						<form:TextField ui:field="seatsNumberField" fieldLabel="{constants.seatsNumber}"/>
+						<form:ComboBox ui:field="comfortField" store="{store}"/>
+						<form:TextField ui:field="fuelMixedDriveField" fieldLabel="{constants.fuelMixedDrive}"/>
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
+						
 					</form:FormPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>
+			<g:Button ui:field="submitButton" styleName='{style.button}' text="{constants.submit}" />
 		</g:VerticalPanel>
 	</g:FlowPanel>
 </ui:UiBinder>

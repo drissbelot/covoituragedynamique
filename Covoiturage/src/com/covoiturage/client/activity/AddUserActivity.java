@@ -56,33 +56,7 @@ public class AddUserActivity extends AbstractActivity implements
 
 	private void bind() {
 
-		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
-		BaseModelData recEn = new BaseModelData();
-		recEn.set("name", addUserView.getConstants().en());
-		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
-				.getHTML());
-		BaseModelData recFr = new BaseModelData();
-		recFr.set("name", addUserView.getConstants().fr());
-		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
-				.getHTML());
-		BaseModelData recNl = new BaseModelData();
-		recNl.set("name", addUserView.getConstants().nl());
-		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
-				.getHTML());
-		BaseModelData recIt = new BaseModelData();
-		recIt.set("name", addUserView.getConstants().it());
-		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
-				.getHTML());
-		BaseModelData recCh = new BaseModelData();
-		recCh.set("name", addUserView.getConstants().ch());
-		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
-				.getHTML());
-		listRecords.add(recEn);
-		listRecords.add(recFr);
-		listRecords.add(recIt);
-		listRecords.add(recNl);
-		listRecords.add(recCh);
-		addUserView.getLanguage().getStore().add(listRecords);
+		languageComboBox();
 
 		addUserView.getAddButton().addClickHandler(new ClickHandler() {
 			@Override
@@ -168,6 +142,37 @@ public class AddUserActivity extends AbstractActivity implements
 
 					}
 				});
+	}
+
+	private void languageComboBox() {
+		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
+		BaseModelData recEn = new BaseModelData();
+		recEn.set("name", addUserView.getConstants().en());
+		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
+				.getHTML());
+		BaseModelData recFr = new BaseModelData();
+		recFr.set("name", addUserView.getConstants().fr());
+		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
+				.getHTML());
+		BaseModelData recNl = new BaseModelData();
+		recNl.set("name", addUserView.getConstants().nl());
+		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
+				.getHTML());
+		BaseModelData recIt = new BaseModelData();
+		recIt.set("name", addUserView.getConstants().it());
+		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
+				.getHTML());
+		BaseModelData recCh = new BaseModelData();
+		recCh.set("name", addUserView.getConstants().ch());
+		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
+				.getHTML());
+		listRecords.add(recEn);
+		listRecords.add(recFr);
+		listRecords.add(recIt);
+		listRecords.add(recNl);
+		listRecords.add(recCh);
+		addUserView.getLanguage().getStore().add(listRecords);
+
 	}
 
 	protected void addUser() {

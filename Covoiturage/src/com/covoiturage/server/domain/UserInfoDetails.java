@@ -411,4 +411,8 @@ public class UserInfoDetails {
 		return workPhoneNumber;
 	}
 
+	public void setVehicle(String vehicle) {
+		this.vehicle = vehicle;
+	}
+
 }

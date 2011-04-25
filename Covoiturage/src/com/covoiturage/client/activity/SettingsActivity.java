@@ -1,7 +1,9 @@
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
@@ -14,11 +16,16 @@ import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
+import com.covoiturage.shared.VehiclesProxy;
+import com.covoiturage.shared.VehiclesRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.KeyListener;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -28,6 +35,7 @@ import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 public class SettingsActivity extends AbstractActivity implements
 		SettingsView.Presenter {
@@ -52,33 +60,8 @@ public class SettingsActivity extends AbstractActivity implements
 	}
 
 	private void bind() {
-		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
-		BaseModelData recEn = new BaseModelData();
-		recEn.set("name", settingsView.getConstants().en());
-		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
-				.getHTML());
-		BaseModelData recFr = new BaseModelData();
-		recFr.set("name", settingsView.getConstants().fr());
-		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
-				.getHTML());
-		BaseModelData recNl = new BaseModelData();
-		recNl.set("name", settingsView.getConstants().nl());
-		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
-				.getHTML());
-		BaseModelData recIt = new BaseModelData();
-		recIt.set("name", settingsView.getConstants().it());
-		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
-				.getHTML());
-		BaseModelData recCh = new BaseModelData();
-		recCh.set("name", settingsView.getConstants().ch());
-		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
-				.getHTML());
-		listRecords.add(recEn);
-		listRecords.add(recFr);
-		listRecords.add(recIt);
-		listRecords.add(recNl);
-		listRecords.add(recCh);
-		settingsView.getLanguage().getStore().add(listRecords);
+		languageComboBox();
+
 		userService.getUser(new AsyncCallback<String>() {
 
 			@Override
@@ -111,7 +94,32 @@ public class SettingsActivity extends AbstractActivity implements
 			}
 
 		});
+		settingsView.getVehicleMake().addKeyListener(new KeyListener());
+		addKeyUpHandler(new KeyUpHandler() {
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				VehiclesRequest vehiclesRequest = requestFactory
+						.vehiclesRequest();
+				Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
+						.findAllVehicles();
+				createReqVehicles.fire(new Receiver<List<VehiclesProxy>>() {
+					@Override
+					public void onSuccess(List<VehiclesProxy> response) {
+						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
+								.getMakeSuggestTextBox().getSuggestOracle();
+						Set<VehiclesProxy> setVehicles = new HashSet<VehiclesProxy>(
+								response);
+						for (VehiclesProxy vehiclesProxy : setVehicles) {
+							oracle.add(vehiclesProxy.getMake());
 
+						}
+
+					}
+
+				});
+
+			}
+		});
 		settingsView.getSubmitButton().addClickHandler(new ClickHandler() {
 
 			@Override
@@ -121,6 +129,36 @@ public class SettingsActivity extends AbstractActivity implements
 			}
 		});
 
+	}
+
+	private void languageComboBox() {
+		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
+		BaseModelData recEn = new BaseModelData();
+		recEn.set("name", settingsView.getConstants().en());
+		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
+				.getHTML());
+		BaseModelData recFr = new BaseModelData();
+		recFr.set("name", settingsView.getConstants().fr());
+		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
+				.getHTML());
+		BaseModelData recNl = new BaseModelData();
+		recNl.set("name", settingsView.getConstants().nl());
+		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
+				.getHTML());
+		BaseModelData recIt = new BaseModelData();
+		recIt.set("name", settingsView.getConstants().it());
+		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
+				.getHTML());
+		BaseModelData recCh = new BaseModelData();
+		recCh.set("name", settingsView.getConstants().ch());
+		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
+				.getHTML());
+		listRecords.add(recEn);
+		listRecords.add(recFr);
+		listRecords.add(recIt);
+		listRecords.add(recNl);
+		listRecords.add(recCh);
+		settingsView.getLanguage().getStore().add(listRecords);
 	}
 
 	protected void modifyUserSettings() {

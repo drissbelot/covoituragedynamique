@@ -36,4 +36,8 @@ public interface SettingsView extends IsWidget {
 
 	public SettingsViewConstants getConstants();
 
+	public ComboBox<BaseModelData> getVehicleMake();
+
+	public ComboBox<BaseModelData> getVehicleModel();
+
 }

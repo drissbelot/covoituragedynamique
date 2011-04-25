@@ -40,4 +40,15 @@ public interface SettingsViewConstants extends Constants {
 
 	String emissionsCO2();
 
+	String vehicleDate();
+
+	String seatsNumber();
+
+	String fuelMixedDrive();
+
+	String mobilePhoneNumber();
+
+	String homePhoneNumber();
+
+	String workPhoneNumber();
 }

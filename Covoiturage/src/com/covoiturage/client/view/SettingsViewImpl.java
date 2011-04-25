@@ -36,6 +36,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	Label Make, Model;
 	@UiField
+	TextField<String> vehicleDate;
+
+	@UiField
 	TextField<Integer> seatsNumber;
 	@UiField
 	TextField<Float> emissionsCO2;
@@ -50,23 +53,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 
-		personalForm.setHeading(constants.header());
-		// Internationalization
-
-		lastNameField.setFieldLabel(constants.lastname());
-		firstNameField.setFieldLabel(constants.firstname());
-		emailAdressField.setFieldLabel(constants.email());
-
-		newpasswordField.setFieldLabel(constants.password());
-		newpasswordField.setPassword(true);
-		passwordField.setFieldLabel(constants.password());
-		passwordField.setPassword(true);
-		Make.setText(constants.make());
-		Model.setText(constants.model());
 		language.setTemplate(getFlagTemplate());
-		language.setFieldLabel(constants.languelab());
-		submitButton.setText(constants.submit());
-
 	}
 
 	@Override

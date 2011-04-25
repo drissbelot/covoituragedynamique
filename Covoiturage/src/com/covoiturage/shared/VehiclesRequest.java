@@ -20,7 +20,7 @@ public interface VehiclesRequest extends RequestContext {
 
 	InstanceRequest<VehiclesProxy, Void> remove();
 
-	Request<List<String>> getModelsFromMake();
+	Request<List<VehiclesProxy>> getModelsFromMake(String make);
 
 	Request<Integer> getSeatsFromModel(String make, String model);
 

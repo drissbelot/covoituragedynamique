@@ -19,13 +19,14 @@ import com.covoiturage.shared.UserInfoRequest;
 import com.covoiturage.shared.VehiclesProxy;
 import com.covoiturage.shared.VehiclesRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.KeyEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionEvent;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -35,7 +36,6 @@ import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 public class SettingsActivity extends AbstractActivity implements
 		SettingsView.Presenter {
@@ -94,32 +94,92 @@ public class SettingsActivity extends AbstractActivity implements
 			}
 
 		});
-		settingsView.getVehicleMake().addKeyListener(new KeyListener());
-		addKeyUpHandler(new KeyUpHandler() {
-			@Override
-			public void onKeyUp(KeyUpEvent event) {
-				VehiclesRequest vehiclesRequest = requestFactory
-						.vehiclesRequest();
-				Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
-						.findAllVehicles();
-				createReqVehicles.fire(new Receiver<List<VehiclesProxy>>() {
-					@Override
-					public void onSuccess(List<VehiclesProxy> response) {
-						MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
-								.getMakeSuggestTextBox().getSuggestOracle();
-						Set<VehiclesProxy> setVehicles = new HashSet<VehiclesProxy>(
-								response);
-						for (VehiclesProxy vehiclesProxy : setVehicles) {
-							oracle.add(vehiclesProxy.getMake());
+		settingsView.getVehicleMake().addListener(Events.KeyPress,
+				new Listener<KeyEvent>() {
 
-						}
+					@Override
+					public void handleEvent(KeyEvent be) {
+						VehiclesRequest vehiclesRequest = requestFactory
+								.vehiclesRequest();
+						Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
+								.findAllVehicles();
+						createReqVehicles
+								.fire(new Receiver<List<VehiclesProxy>>() {
+									@Override
+									public void onSuccess(
+											List<VehiclesProxy> response) {
+										settingsView.getVehicleMake()
+												.getStore().removeAll();
+										Set<VehiclesProxy> setVehicles = new HashSet<VehiclesProxy>(
+												response);
+										for (VehiclesProxy vehiclesProxy : setVehicles) {
+											BaseModelData rec = new BaseModelData();
+											rec.set("name",
+													vehiclesProxy.getMake());
+											rec.set("make",
+													vehiclesProxy.getMake());
+											settingsView.getVehicleMake()
+													.getStore().add(rec);
+
+										}
+									}
+
+								});
 
 					}
-
 				});
+		settingsView.getVehicleModel().addListener(Events.KeyPress,
+				new Listener<KeyEvent>() {
 
-			}
-		});
+					@Override
+					public void handleEvent(KeyEvent be) {
+						VehiclesRequest vehiclesRequest = requestFactory
+								.vehiclesRequest();
+						Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
+								.getModelsFromMake(settingsView
+										.getVehicleMake().getSelection().get(0)
+										.get("make").toString());
+						createReqVehicles
+								.fire(new Receiver<List<VehiclesProxy>>() {
+									@Override
+									public void onSuccess(
+											List<VehiclesProxy> response) {
+										settingsView.getVehicleModel()
+												.getStore().removeAll();
+
+										for (VehiclesProxy model : response) {
+											BaseModelData rec = new BaseModelData();
+											rec.set("name", model.getModel());
+											rec.set("vehicleId", model.getId());
+											rec.set("seatsNumber",
+													model.getSeats());
+											rec.set("emissionsCO2",
+													model.getEmissionsCO2());
+											rec.set("fuelMixedDrive",
+													model.getFuelMixedDrive());
+											settingsView.getVehicleModel()
+													.getStore().add(rec);
+
+										}
+									}
+
+								});
+
+					}
+				});
+		settingsView.getVehicleModel().addListener(Events.Select,
+				new Listener<SelectionEvent<BaseModelData>>() {
+
+					@Override
+					public void handleEvent(SelectionEvent<BaseModelData> be) {
+						settingsView.getSeatsNumberField().setValue(
+								(Integer) be.getModel().get("seatsNumber"));
+						settingsView.getEmissionsCO2Field().setValue(
+								(Float) be.getModel().get("emissionsCO2"));
+						settingsView.getFuelMixedDriveField().setValue(
+								(Float) be.getModel().get("fuelMixedDrive"));
+					}
+				});
 		settingsView.getSubmitButton().addClickHandler(new ClickHandler() {
 
 			@Override

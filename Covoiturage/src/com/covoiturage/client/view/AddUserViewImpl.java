@@ -12,8 +12,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class AddUserViewImpl extends Composite implements AddUserView {
@@ -35,15 +33,18 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@UiField
 	TextField<String> passwordField;
 	@UiField
-	SuggestBox vehicleMake, vehicleModel;
+	ComboBox<BaseModelData> vehicleMakeField, vehicleModelField;
 	@UiField
 	ComboBox<BaseModelData> language;
-	@UiField
-	Label Make, Model;
+
 	@UiField
 	FormPanel header;
 	@UiField
-	TextField<Integer> seatsField;
+	TextField<Integer> seatsNumberField;
+	@UiField
+	TextField<Float> emissionsCO2Field;
+	@UiField
+	TextField<Float> fuelMixedDriveField;
 
 	public AddUserViewImpl() {
 
@@ -55,8 +56,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		emailAdressField.setFieldLabel(constants.email());
 		passwordField.setFieldLabel(constants.password());
 		passwordField.setPassword(true);
-		Make.setText(constants.make());
-		Model.setText(constants.model());
+
 		language.setTemplate(getFlagTemplate());
 		addButton.setText(constants.add());
 	}
@@ -109,25 +109,20 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	}
 
 	@Override
-	public SuggestBox getMakeSuggestTextBox() {
-		return vehicleMake;
+	public ComboBox<BaseModelData> getVehicleMake() {
+		return vehicleMakeField;
 	}
 
 	@Override
-	public SuggestBox getModelSuggestTextBox() {
+	public ComboBox<BaseModelData> getVehicleModel() {
 
-		return vehicleModel;
+		return vehicleModelField;
 	}
 
 	@Override
 	public ComboBox<BaseModelData> getLanguage() {
 
 		return language;
-	}
-
-	@Override
-	public TextField<Integer> getSeatsField() {
-		return seatsField;
 	}
 
 	@Override
@@ -141,4 +136,19 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
 				'</tpl>' ].join("");
 	}-*/;
+
+	@Override
+	public TextField<Integer> getSeatsNumberField() {
+		return seatsNumberField;
+	}
+
+	@Override
+	public TextField<Float> getEmissionsCO2Field() {
+		return emissionsCO2Field;
+	}
+
+	@Override
+	public TextField<Float> getFuelMixedDriveField() {
+		return fuelMixedDriveField;
+	}
 }

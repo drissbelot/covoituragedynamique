@@ -40,4 +40,10 @@ public interface SettingsView extends IsWidget {
 
 	public ComboBox<BaseModelData> getVehicleModel();
 
+	public TextField<Integer> getSeatsNumberField();
+
+	public TextField<Float> getEmissionsCO2Field();
+
+	public TextField<Float> getFuelMixedDriveField();
+
 }

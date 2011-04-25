@@ -57,6 +57,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		initWidget(binder.createAndBindUi(this));
 
 		language.setTemplate(getFlagTemplate());
+		vehicleMakeField.setTypeAhead(true);
+		vehicleModelField.setTypeAhead(true);
+
 		// TODO mettre des validators
 	}
 
@@ -121,5 +124,20 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	public ComboBox<BaseModelData> getVehicleModel() {
 
 		return vehicleModelField;
+	}
+
+	@Override
+	public TextField<Integer> getSeatsNumberField() {
+		return seatsNumberField;
+	}
+
+	@Override
+	public TextField<Float> getEmissionsCO2Field() {
+		return emissionsCO2Field;
+	}
+
+	@Override
+	public TextField<Float> getFuelMixedDriveField() {
+		return fuelMixedDriveField;
 	}
 }

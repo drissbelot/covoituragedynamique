@@ -34,6 +34,8 @@ public class Vehicles {
 	private String model;
 	private String date;
 	private int seats;
+	private float fuelMixedDrive;
+	private float emissionsCO2;
 
 	public Integer getVersion() {
 		return version;
@@ -179,5 +181,21 @@ public class Vehicles {
 			em.close();
 		}
 
+	}
+
+	public void setFuelMixedDrive(float fuelMixedDrive) {
+		this.fuelMixedDrive = fuelMixedDrive;
+	}
+
+	public float getFuelMixedDrive() {
+		return fuelMixedDrive;
+	}
+
+	public void setEmissionsCO2(float emissionsCO2) {
+		this.emissionsCO2 = emissionsCO2;
+	}
+
+	public float getEmissionsCO2() {
+		return emissionsCO2;
 	}
 }

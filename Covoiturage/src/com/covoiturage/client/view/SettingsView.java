@@ -34,8 +34,6 @@ public interface SettingsView extends IsWidget {
 
 	public TextField<String> getPassword();
 
-	public TextField<String> getLogin();
-
 	public SettingsViewConstants getConstants();
 
 }

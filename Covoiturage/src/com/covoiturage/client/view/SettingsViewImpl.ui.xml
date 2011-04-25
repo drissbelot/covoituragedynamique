@@ -11,25 +11,26 @@
 			width="30%" height="100%">
 			<gxt:TabPanel width="450" autoHeight="true">
 				<gxt:TabItem text="Personal Informations">
-					<form:FormPanel ui:field="personalForm">
-						<form:TextField ui:field="firstNameField" />
-						<form:TextField ui:field="lastNameField" />
-						<form:TextField ui:field="emailAdressField" />
-						<form:TextField ui:field="passwordField" />
-						<form:TextField ui:field="newpasswordField" />
-						<g:Label styleName='{style.label}' ui:field="languelab" />
-						<form:ComboBox store="{store}" ui:field="language" />
-						<g:Button ui:field="submitButton" styleName='{style.button}' />
+					<form:FormPanel ui:field="personalForm" heading="{constants.header}">
+						<form:TextField ui:field="firstNameField" fieldLabel="{constants.firstname}"/>
+						<form:TextField ui:field="lastNameField" fieldLabel="{constants.lastname}"/>
+						<form:TextField ui:field="emailAdressField" fieldLabel="{constants.email}"/>
+						<form:TextField ui:field="passwordField" fieldLabel="{constants.password}" password="true"/>
+						<form:TextField ui:field="newpasswordField" fieldLabel="{constants.password}" password="true"/>
+
+						<form:ComboBox store="{store}" ui:field="language" fieldLabel="{constants.languelab}"/>
+						<g:Button ui:field="submitButton" styleName='{style.button}' text="{constants.submit}" />
 					</form:FormPanel>
 				</gxt:TabItem>
 				<gxt:TabItem text="Vehicle Informations">
 					<form:FormPanel ui:field="vehicleForm">
-						<g:Label styleName='{style.label}' ui:field="Make" />
-						<g:SuggestBox ui:field="vehicleMake" text=""
+						<g:Label styleName='{style.label}' ui:field="Make" text="{constants.make}"/>
+						<g:SuggestBox ui:field="vehicleMake" 
 							styleName='{style.textbox}' />
-						<g:Label styleName='{style.label}' ui:field="Model" />
-						<g:SuggestBox ui:field="vehicleModel" text=""
+						<g:Label styleName='{style.label}' ui:field="Model" text="{constants.model}"/>
+						<g:SuggestBox ui:field="vehicleModel" 
 							styleName='{style.textbox}' />
+						<form:TextField ui:field="vehicleDate"/>
 						<form:TextField ui:field="seatsNumber"/>
 						<form:TextField ui:field="fuelMixedDrive"/>
 						<form:TextField ui:field="emissionsCO2" fieldLabel="{constants.emissionsCO2}"/>

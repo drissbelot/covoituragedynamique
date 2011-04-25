@@ -1,28 +1,38 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'
-	xmlns:m='urn:import:com.google.gwt.maps.client'
-	xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
-	xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
-	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
-	
-<ui:style src="stylesheet.css"/>
-		<g:FlowPanel>	
-  			<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}' width="30%" height="100%">
-				<form:FormPanel ui:field="header">
-					<form:TextField ui:field="loginField" />
-					<form:TextField ui:field="firstNameField"  />
-					<form:TextField ui:field="lastNameField" />
-					<form:TextField ui:field="emailAdressField" />
-					<form:TextField ui:field="passwordField"  />
-					<form:TextField ui:field="newpasswordField"  />
-					<g:Label styleName='{style.label}' ui:field="Make" />
-					<g:SuggestBox ui:field="vehicleMake" text="" styleName='{style.textbox}' />
-					<g:Label styleName='{style.label}' ui:field="Model" />
-					<g:SuggestBox ui:field="vehicleModel" text="" styleName='{style.textbox}' />
-					<g:Label styleName='{style.label}' ui:field="languelab" />
-					<g:ListBox ui:field="language" />
-					<g:Button ui:field="submitButton" styleName='{style.button}' />
-				</form:FormPanel>
-			</g:VerticalPanel>
-		</g:FlowPanel>	
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m='urn:import:com.google.gwt.maps.client'
+	xmlns:d='urn:import:com.google.gwt.user.datepicker.client' xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
+	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form" xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
+	<ui:style src="stylesheet.css" />
+		
+	<g:FlowPanel>
+		<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}'
+			width="30%" height="100%">
+			<gxt:TabPanel width="450" autoHeight="true">
+				<gxt:TabItem text="Personal Informations">
+					<form:FormPanel ui:field="personalForm">
+						<form:TextField ui:field="loginField" />
+						<form:TextField ui:field="firstNameField" />
+						<form:TextField ui:field="lastNameField" />
+						<form:TextField ui:field="emailAdressField" />
+						<form:TextField ui:field="passwordField" />
+						<form:TextField ui:field="newpasswordField" />
+						<g:Label styleName='{style.label}' ui:field="languelab" />
+						<form:ComboBox store="{store}" ui:field="language" />
+						<g:Button ui:field="submitButton" styleName='{style.button}' />
+					</form:FormPanel>
+				</gxt:TabItem>
+				<gxt:TabItem text="Vehicle Informations">
+					<form:FormPanel ui:field="vehicleForm">
+						<g:Label styleName='{style.label}' ui:field="Make" />
+						<g:SuggestBox ui:field="vehicleMake" text=""
+							styleName='{style.textbox}' />
+						<g:Label styleName='{style.label}' ui:field="Model" />
+						<g:SuggestBox ui:field="vehicleModel" text=""
+							styleName='{style.textbox}' />
+					</form:FormPanel>
+				</gxt:TabItem>
+			</gxt:TabPanel>
+		</g:VerticalPanel>
+	</g:FlowPanel>
 </ui:UiBinder>

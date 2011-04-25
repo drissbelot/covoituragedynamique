@@ -36,14 +36,14 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	Label Make, Model;
 	@UiField
-	FormPanel header;
+	FormPanel personalForm;
 
 	private Presenter presenter;
 
 	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 		loginField.setTitle("login=fix");
-		header.setHeading(constants.header());
+		personalForm.setHeading(constants.header());
 		// Internationalization
 
 		lastNameField.setFieldLabel(constants.lastname());

@@ -38,4 +38,6 @@ public interface SettingsViewConstants extends Constants {
 
 	String model();
 
+	String emissionsCO2();
+
 }

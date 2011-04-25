@@ -30,11 +30,18 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	VerticalPanel flowpanel;
 	@UiField
 	TextField<String> firstNameField, lastNameField, emailAdressField,
-			loginField, passwordField, newpasswordField;
+			passwordField, newpasswordField;
 	@UiField
 	ComboBox<BaseModelData> language;
 	@UiField
 	Label Make, Model;
+	@UiField
+	TextField<Integer> seatsNumber;
+	@UiField
+	TextField<Float> emissionsCO2;
+	@UiField
+	TextField<Float> fuelMixedDrive;
+
 	@UiField
 	FormPanel personalForm;
 
@@ -42,7 +49,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 
 	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		loginField.setTitle("login=fix");
+
 		personalForm.setHeading(constants.header());
 		// Internationalization
 
@@ -57,6 +64,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		Make.setText(constants.make());
 		Model.setText(constants.model());
 		language.setTemplate(getFlagTemplate());
+		language.setFieldLabel(constants.languelab());
 		submitButton.setText(constants.submit());
 
 	}
@@ -99,11 +107,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@Override
 	public TextField<String> getPassword() {
 		return passwordField;
-	}
-
-	@Override
-	public TextField<String> getLogin() {
-		return loginField;
 	}
 
 	@Override

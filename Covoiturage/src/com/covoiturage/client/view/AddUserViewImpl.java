@@ -1,8 +1,6 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
-import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
@@ -32,19 +30,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 			loginField;
 	@UiField
 	TextField<String> passwordField;
-	@UiField
-	ComboBox<BaseModelData> vehicleMakeField, vehicleModelField;
-	@UiField
-	ComboBox<BaseModelData> language;
 
 	@UiField
 	FormPanel header;
-	@UiField
-	TextField<Integer> seatsNumberField;
-	@UiField
-	TextField<Float> emissionsCO2Field;
-	@UiField
-	TextField<Float> fuelMixedDriveField;
 
 	public AddUserViewImpl() {
 
@@ -57,7 +45,6 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		passwordField.setFieldLabel(constants.password());
 		passwordField.setPassword(true);
 
-		language.setTemplate(getFlagTemplate());
 		addButton.setText(constants.add());
 	}
 
@@ -76,6 +63,7 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return emailAdressField;
 	}
 
+	@SuppressWarnings("unused")
 	private Presenter presenter;
 
 	@Override
@@ -109,46 +97,8 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	}
 
 	@Override
-	public ComboBox<BaseModelData> getVehicleMake() {
-		return vehicleMakeField;
-	}
-
-	@Override
-	public ComboBox<BaseModelData> getVehicleModel() {
-
-		return vehicleModelField;
-	}
-
-	@Override
-	public ComboBox<BaseModelData> getLanguage() {
-
-		return language;
-	}
-
-	@Override
 	public AddUserViewConstants getConstants() {
 		return constants;
 	}
 
-	private native String getFlagTemplate() /*-{
-		return [
-				'<tpl for=".">',
-				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
-				'</tpl>' ].join("");
-	}-*/;
-
-	@Override
-	public TextField<Integer> getSeatsNumberField() {
-		return seatsNumberField;
-	}
-
-	@Override
-	public TextField<Float> getEmissionsCO2Field() {
-		return emissionsCO2Field;
-	}
-
-	@Override
-	public TextField<Float> getFuelMixedDriveField() {
-		return fuelMixedDriveField;
-	}
 }

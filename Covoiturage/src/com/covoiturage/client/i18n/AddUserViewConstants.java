@@ -6,16 +6,6 @@ public interface AddUserViewConstants extends Constants {
 
 	String header();
 
-	String fr();
-
-	String it();
-
-	String en();
-
-	String ch();
-
-	String nl();
-
 	String username();
 
 	String firstname();
@@ -26,26 +16,6 @@ public interface AddUserViewConstants extends Constants {
 
 	String password();
 
-	String languelab();
-
 	String add();
-
-	String make();
-
-	String model();
-
-	String emissionsCO2();
-
-	String vehicleDate();
-
-	String seatsNumber();
-
-	String fuelMixedDrive();
-
-	String mobilePhoneNumber();
-
-	String homePhoneNumber();
-
-	String workPhoneNumber();
 
 }

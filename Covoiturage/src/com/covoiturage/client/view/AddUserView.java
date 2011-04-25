@@ -7,7 +7,6 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public interface AddUserView extends IsWidget {
@@ -25,9 +24,9 @@ public interface AddUserView extends IsWidget {
 		void goTo(Place place);
 	}
 
-	public abstract SuggestBox getMakeSuggestTextBox();
+	public ComboBox<BaseModelData> getVehicleMake();
 
-	public abstract SuggestBox getModelSuggestTextBox();
+	public ComboBox<BaseModelData> getVehicleModel();
 
 	public TextField<String> getFirstName();
 
@@ -35,14 +34,18 @@ public interface AddUserView extends IsWidget {
 
 	public TextField<String> getEmailAddress();
 
-	public abstract ComboBox<BaseModelData> getLanguage();
+	public ComboBox<BaseModelData> getLanguage();
 
 	public TextField<String> getPassword();
 
 	public TextField<String> getLogin();
 
-	public TextField<Integer> getSeatsField();
-
 	public AddUserViewConstants getConstants();
+
+	public TextField<Integer> getSeatsNumberField();
+
+	public TextField<Float> getEmissionsCO2Field();
+
+	public TextField<Float> getFuelMixedDriveField();
 
 }

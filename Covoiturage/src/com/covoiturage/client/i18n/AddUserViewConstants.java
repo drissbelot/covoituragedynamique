@@ -34,4 +34,18 @@ public interface AddUserViewConstants extends Constants {
 
 	String model();
 
+	String emissionsCO2();
+
+	String vehicleDate();
+
+	String seatsNumber();
+
+	String fuelMixedDrive();
+
+	String mobilePhoneNumber();
+
+	String homePhoneNumber();
+
+	String workPhoneNumber();
+
 }

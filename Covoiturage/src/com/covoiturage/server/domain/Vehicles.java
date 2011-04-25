@@ -1,6 +1,5 @@
 package com.covoiturage.server.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -148,22 +147,20 @@ public class Vehicles {
 		this.seats = seats;
 	}
 
-	public static List<String> getModelsFromMake(String make) {
+	public static List<Vehicles> getModelsFromMake(String make) {
 		EntityManager em = entityManager();
-		List<String> models = new ArrayList<String>();
+
 		try {
 			@SuppressWarnings("unchecked")
 			List<Vehicles> vehicles = em.createQuery(
 					"select o from Vehicles o where o.make = :make")
 					.getResultList();
-			for (Vehicles vehicle : vehicles) {
-				models.add(vehicle.getModel());
-			}
+			return vehicles;
 
 		} finally {
 			em.close();
 		}
-		return models;
+
 	}
 
 	Integer getSeatsFromModel(String make, String model) {

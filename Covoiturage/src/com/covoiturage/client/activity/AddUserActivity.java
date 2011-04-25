@@ -18,14 +18,14 @@ import com.covoiturage.shared.UserInfoRequest;
 import com.covoiturage.shared.VehiclesProxy;
 import com.covoiturage.shared.VehiclesRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.KeyEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionEvent;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -33,9 +33,6 @@ import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 public class AddUserActivity extends AbstractActivity implements
 		AddUserView.Presenter {
@@ -64,10 +61,11 @@ public class AddUserActivity extends AbstractActivity implements
 				addUser();
 			}
 		});
-		addUserView.getMakeSuggestTextBox().getTextBox()
-				.addKeyUpHandler(new KeyUpHandler() {
+		addUserView.getVehicleMake().addListener(Events.KeyPress,
+				new Listener<KeyEvent>() {
+
 					@Override
-					public void onKeyUp(KeyUpEvent event) {
+					public void handleEvent(KeyEvent be) {
 						VehiclesRequest vehiclesRequest = requestFactory
 								.vehiclesRequest();
 						Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
@@ -77,69 +75,76 @@ public class AddUserActivity extends AbstractActivity implements
 									@Override
 									public void onSuccess(
 											List<VehiclesProxy> response) {
-										MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
-												.getMakeSuggestTextBox()
-												.getSuggestOracle();
+										addUserView.getVehicleMake().getStore()
+												.removeAll();
 										Set<VehiclesProxy> setVehicles = new HashSet<VehiclesProxy>(
 												response);
 										for (VehiclesProxy vehiclesProxy : setVehicles) {
-											oracle.add(vehiclesProxy.getMake());
+											BaseModelData rec = new BaseModelData();
+											rec.set("name",
+													vehiclesProxy.getMake());
+											rec.set("make",
+													vehiclesProxy.getMake());
+											addUserView.getVehicleMake()
+													.getStore().add(rec);
 
 										}
-
 									}
 
 								});
 
 					}
 				});
-		addUserView.getModelSuggestTextBox().getTextBox()
-				.addKeyUpHandler(new KeyUpHandler() {
+		addUserView.getVehicleModel().addListener(Events.KeyPress,
+				new Listener<KeyEvent>() {
+
 					@Override
-					public void onKeyUp(KeyUpEvent event) {
+					public void handleEvent(KeyEvent be) {
 						VehiclesRequest vehiclesRequest = requestFactory
 								.vehiclesRequest();
-						Request<List<String>> createReqModels = vehiclesRequest
-								.getModelsFromMake();
-						createReqModels.fire(new Receiver<List<String>>() {
-							@Override
-							public void onSuccess(List<String> result) {
+						Request<List<VehiclesProxy>> createReqVehicles = vehiclesRequest
+								.getModelsFromMake(addUserView.getVehicleMake()
+										.getSelection().get(0).get("make")
+										.toString());
+						createReqVehicles
+								.fire(new Receiver<List<VehiclesProxy>>() {
+									@Override
+									public void onSuccess(
+											List<VehiclesProxy> response) {
+										addUserView.getVehicleModel()
+												.getStore().removeAll();
 
-								MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) addUserView
-										.getModelSuggestTextBox()
-										.getSuggestOracle();
-								for (String string : result) {
-									oracle.add(string);
-								}
-							}
+										for (VehiclesProxy model : response) {
+											BaseModelData rec = new BaseModelData();
+											rec.set("name", model.getModel());
+											rec.set("vehicleId", model.getId());
+											rec.set("seatsNumber",
+													model.getSeats());
+											rec.set("emissionsCO2",
+													model.getEmissionsCO2());
+											rec.set("fuelMixedDrive",
+													model.getFuelMixedDrive());
+											addUserView.getVehicleModel()
+													.getStore().add(rec);
 
-						});
+										}
+									}
+
+								});
+
 					}
 				});
-
-		addUserView.getModelSuggestTextBox().addSelectionHandler(
-				new SelectionHandler<SuggestOracle.Suggestion>() {
+		addUserView.getVehicleModel().addListener(Events.Select,
+				new Listener<SelectionEvent<BaseModelData>>() {
 
 					@Override
-					public void onSelection(SelectionEvent<Suggestion> event) {
-						VehiclesRequest vehiclesRequest = requestFactory
-								.vehiclesRequest();
-						Request<Integer> createReqSeats = vehiclesRequest
-								.getSeatsFromModel(addUserView
-										.getMakeSuggestTextBox().getTextBox()
-										.getText(), addUserView
-										.getModelSuggestTextBox().getTextBox()
-										.getText());
-						createReqSeats.fire(new Receiver<Integer>() {
-
-							@Override
-							public void onSuccess(Integer response) {
-								addUserView.getSeatsField().setValue(response);
-
-							}
-
-						});
-
+					public void handleEvent(SelectionEvent<BaseModelData> be) {
+						addUserView.getSeatsNumberField().setValue(
+								(Integer) be.getModel().get("seatsNumber"));
+						addUserView.getEmissionsCO2Field().setValue(
+								(Float) be.getModel().get("emissionsCO2"));
+						addUserView.getFuelMixedDriveField().setValue(
+								(Float) be.getModel().get("fuelMixedDrive"));
 					}
 				});
 	}
@@ -204,9 +209,11 @@ public class AddUserActivity extends AbstractActivity implements
 		newDriver.setUser(newUser);
 		newDriver.setFirstName(addUserView.getFirstName().getValue());
 		newDriver.setLastName(addUserView.getLastName().getValue());
-		newDriver.setVehicle(addUserView.getMakeSuggestTextBox().getText());
-		// TODO c'est pas ça qu'il faut sauver
-		newDriver.setCountOfPlaces(addUserView.getSeatsField().getRawValue());
+		newDriver.setVehicle(addUserView.getVehicleModel().getValue()
+				.get("vehicleId").toString());
+
+		newDriver.setCountOfPlaces(addUserView.getSeatsNumberField()
+				.getRawValue());
 		newDriver.setLanguage(addUserView.getLanguage().getSelectedText());
 		newDriver.setMessages(new ArrayList<String>());
 		Request<Void> createReqDriver = requestDriver.persist()

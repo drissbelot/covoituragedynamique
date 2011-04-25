@@ -1,6 +1,5 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.i18n.MapViewConstants;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
@@ -52,8 +51,6 @@ public class MapViewImpl extends Composite implements MapView {
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
-	private final MapViewConstants constants = (MapViewConstants) GWT
-			.create(MapViewConstants.class);
 
 	public MapViewImpl() {
 		MapOptions options = new MapOptions();
@@ -63,37 +60,20 @@ public class MapViewImpl extends Composite implements MapView {
 		options.setNavigationControl(true);
 		options.setDraggable(true);
 		options.setMapTypeControl(true);
+		options.setScrollwheel(true);
 		mapWidget = new MapWidget(options);
 
 		initWidget(binder.createAndBindUi(this));
 
-		// internationalization
-		data.setHeading(constants.header());
-		to.setText(constants.to() + " :");
-		from.setText(constants.from() + " :");
-		distanceMaxField.setFieldLabel(constants.distmax());
-		sendAddress.setText(constants.gettravelway());
-		saveJourney.setText(constants.savejourney());
-
-		driverRadioButton.setText(constants.driver());
-		passengerRadioButton.setText(constants.passenger());
-
-		dateOfJourney.setFieldLabel(constants.Dateofjourney());
 		dateOfJourney.setAllowBlank(false);
-
-		departureStartTimeItem.setFieldLabel(constants.departuretime());
 		departureStartTimeItem.setAllowBlank(false);
+		departureEndTimeItem.setAllowBlank(false);
+		arrivalTimeItem.setAllowBlank(false);
 
 		departureStartTimeItem
 				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-
-		departureEndTimeItem.setFieldLabel(constants.and());
-		departureEndTimeItem.setAllowBlank(false);
 		departureEndTimeItem
 				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-
-		arrivalTimeItem.setFieldLabel(constants.arrivaltime());
-		arrivalTimeItem.setAllowBlank(false);
 		arrivalTimeItem
 				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
 

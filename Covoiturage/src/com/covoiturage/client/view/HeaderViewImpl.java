@@ -32,10 +32,6 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 
 	public HeaderViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-
-		titre.setText(constants.title());
-		logout.setText(constants.logout());
-		currentUser.setTitle(constants.username());
 	}
 
 	@Override
@@ -58,6 +54,7 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 		return messages;
 	}
 
+	@Override
 	public HeaderViewConstants getConstants() {
 		return constants;
 	}

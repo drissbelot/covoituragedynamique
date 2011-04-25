@@ -4,22 +4,22 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form"
 	>
-	
+		<ui:with type="com.covoiturage.client.i18n.LoginViewConstants" field="constants"/>
 	<ui:style src="stylesheet.css"/>
 	
 	
 
 <g:AbsolutePanel ui:field="flowpanel" width="100%" height="100%">
-	<g:Label styleName='{style.h1}'  ui:field="title"/>	
+	<g:Label styleName='{style.h1}'  ui:field="title" text="{constants.login}"/>	
 	<g:HorizontalPanel styleName='{style.containerphtoto}'>	
 		<g:Image ui:field="image" styleName='{style.photo}'  />
 			<g:VerticalPanel styleName='{style.panelfullborder}'  verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
-				<form:FormPanel ui:field="header">
-					<form:TextField ui:field="loginField" />
-					<form:TextField ui:field="passwordField" />
+				<form:FormPanel ui:field="header" heading="{constants.login}">
+					<form:TextField ui:field="loginField" fieldLabel="{constants.username}"/>
+					<form:TextField ui:field="passwordField" fieldLabel="{constants.password}"/>
 					<g:HorizontalPanel>
-						<g:Button ui:field="sendButton"  styleName='{style.button}'/>
-						<g:Button ui:field="addUserButton"  styleName='{style.button}'/>
+						<g:Button ui:field="sendButton"  styleName='{style.button}' text="{constants.submit}"/>
+						<g:Button ui:field="addUserButton"  styleName='{style.button}' text="{constants.newuser}"/>
 					</g:HorizontalPanel>
 				</form:FormPanel>	
 			</g:VerticalPanel>

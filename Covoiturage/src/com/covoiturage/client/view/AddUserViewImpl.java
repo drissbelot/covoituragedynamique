@@ -1,7 +1,6 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -20,9 +19,6 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 	private final AddUserViewConstants constants = (AddUserViewConstants) GWT
 			.create(AddUserViewConstants.class);
-
-	@UiField
-	FlowPanel flowpanel;
 	@UiField
 	Button addButton;
 	@UiField
@@ -31,21 +27,10 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@UiField
 	TextField<String> passwordField;
 
-	@UiField
-	FormPanel header;
-
 	public AddUserViewImpl() {
 
 		initWidget(binder.createAndBindUi(this));
-		header.setHeading(constants.header());
-		loginField.setFieldLabel(constants.username());
-		lastNameField.setFieldLabel(constants.lastname());
-		firstNameField.setFieldLabel(constants.firstname());
-		emailAdressField.setFieldLabel(constants.email());
-		passwordField.setFieldLabel(constants.password());
 		passwordField.setPassword(true);
-
-		addButton.setText(constants.add());
 	}
 
 	@Override

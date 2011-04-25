@@ -3,7 +3,6 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.SettingsViewConstants;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -12,7 +11,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class SettingsViewImpl extends Composite implements SettingsView {
 
@@ -25,8 +23,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 
 	@UiField
 	Button submitButton;
-	@UiField
-	VerticalPanel flowpanel;
 	@UiField
 	TextField<String> firstNameField, lastNameField, emailAdressField,
 			passwordField, newpasswordField;
@@ -47,9 +43,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	TextField<String> mobilePhoneNumberField, homePhoneNumberField,
 			workPhoneNumberField;
-
-	@UiField
-	FormPanel personalForm;
 
 	private Presenter presenter;
 

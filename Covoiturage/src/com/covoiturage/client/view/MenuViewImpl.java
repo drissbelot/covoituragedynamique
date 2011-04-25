@@ -33,13 +33,7 @@ public class MenuViewImpl extends Composite implements MenuView {
 	public MenuViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 
-		// internationalization
-		mapLabel.setText(constants.maplabel());
-		settingsLabel.setText(constants.settings());
-		historyLabel.setText(constants.history());
 		menuPanel.setHeaderVisible(true);
-		menuPanel.setHeading(constants.menutitle());
-		messagesLabel.setText(constants.message());
 
 	}
 

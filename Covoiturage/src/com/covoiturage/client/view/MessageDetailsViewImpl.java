@@ -1,6 +1,5 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.i18n.MessageDetailsViewConstants;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -18,8 +17,6 @@ public class MessageDetailsViewImpl extends Composite implements
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	private final MessageDetailsViewConstants constants = (MessageDetailsViewConstants) GWT
-			.create(MessageDetailsViewConstants.class);
 
 	@UiField
 	Label subjectLabel;
@@ -39,7 +36,7 @@ public class MessageDetailsViewImpl extends Composite implements
 
 	public MessageDetailsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		answerButton.setText(constants.answer());
+
 	}
 
 	@Override

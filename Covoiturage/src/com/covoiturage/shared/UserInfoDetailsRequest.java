@@ -2,12 +2,11 @@ package com.covoiturage.shared;
 
 import java.util.List;
 
+import com.covoiturage.server.domain.UserInfoDetails;
 import com.google.gwt.requestfactory.shared.InstanceRequest;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
-
-import com.covoiturage.server.domain.UserInfoDetails;
 
 @Service(UserInfoDetails.class)
 public interface UserInfoDetailsRequest extends RequestContext {
@@ -33,7 +32,5 @@ public interface UserInfoDetailsRequest extends RequestContext {
 	Request<UserInfoDetailsProxy> addMessageToUser(String id, String messageId);
 
 	Request<UserInfoDetailsProxy> deleteMessage(String id, String messageId);
-
-	;
 
 }

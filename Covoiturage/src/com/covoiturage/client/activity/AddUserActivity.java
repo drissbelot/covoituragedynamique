@@ -82,6 +82,7 @@ public class AddUserActivity extends AbstractActivity implements
 		newDriver.setLastName(addUserView.getLastName().getValue());
 
 		newDriver.setMessages(new ArrayList<String>());
+
 		Request<Void> createReqDriver = requestDriver.persist()
 				.using(newDriver);
 

@@ -178,6 +178,12 @@ public class UserInfoDetails {
 
 	}
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	public String id;
+
 	public String channelId;
 
 	private int countOfJourneys;
@@ -185,12 +191,6 @@ public class UserInfoDetails {
 	private String countOfPlaces;
 
 	private String firstName;
-
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
-	public String id;
 
 	private String language;
 
@@ -220,27 +220,16 @@ public class UserInfoDetails {
 
 	@Version
 	@Column(name = "version")
-	private final Integer version = 0;
+	private final Integer version = 1;
 
 	public UserInfoDetails() {
 
 	}
 
-	public UserInfoDetails(String vehicle, String countOfPlaces, int rating,
-			int countOfJourneys, String firstName, String lastName,
-			String language, List<String> messages, String colorOfVehicle,
-			int comfort) {
-		super();
-		this.vehicle = vehicle;
-		this.countOfPlaces = countOfPlaces;
-		this.rating = rating;
-		this.countOfJourneys = countOfJourneys;
+	public UserInfoDetails(String id, String firstName, String lastName) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.language = language;
-		this.messages = messages;
-		this.setColorOfVehicle(colorOfVehicle);
-		this.setComfort(comfort);
 	}
 
 	protected void addMessage(String message) {

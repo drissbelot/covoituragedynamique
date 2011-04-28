@@ -215,14 +215,15 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
+						if (mapView.getDepartureStartTime().getValue().length() == 5) {
+							departureStart.setHours(Integer.valueOf(mapView
+									.getDepartureStartTime().getValue()
+									.substring(0, 2)));
 
-						departureStart.setHours(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(0, 2)));
-
-						departureStart.setMinutes(Integer.valueOf(mapView
-								.getDepartureStartTime().getValue()
-								.substring(3, 5)));
+							departureStart.setMinutes(Integer.valueOf(mapView
+									.getDepartureStartTime().getValue()
+									.substring(3, 5)));
+						}
 					}
 				});
 		mapView.getDepartureEndTime().addListener(Events.Blur,
@@ -231,12 +232,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
-						departureEnd.setHours(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(0, 2)));
-						departureEnd.setMinutes(Integer.valueOf(mapView
-								.getDepartureEndTime().getValue()
-								.substring(3, 5)));
+						if (mapView.getDepartureEndTime().getValue().length() == 5) {
+							departureEnd.setHours(Integer.valueOf(mapView
+									.getDepartureEndTime().getValue()
+									.substring(0, 2)));
+							departureEnd.setMinutes(Integer.valueOf(mapView
+									.getDepartureEndTime().getValue()
+									.substring(3, 5)));
+						}
 					}
 				});
 		mapView.getArrivalTime().addListener(Events.Blur,
@@ -245,11 +248,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
-						arrival.setHours(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(0, 2)));
-						arrival.setMinutes(Integer.valueOf(mapView
-								.getArrivalTime().getValue().substring(3, 5)));
-
+						if (mapView.getArrivalTime().getValue().length() == 5) {
+							arrival.setHours(Integer.valueOf(mapView
+									.getArrivalTime().getValue()
+									.substring(0, 2)));
+							arrival.setMinutes(Integer.valueOf(mapView
+									.getArrivalTime().getValue()
+									.substring(3, 5)));
+						}
 					}
 				});
 

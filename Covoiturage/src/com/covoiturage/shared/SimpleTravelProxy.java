@@ -27,6 +27,7 @@ public interface SimpleTravelProxy extends EntityProxy {
 
 	public void setSteps(List<String> steps);
 
+	@Override
 	EntityProxyId<SimpleTravelProxy> stableId();
 
 	public Date getDepartureStart();

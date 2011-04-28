@@ -146,8 +146,6 @@ public class UserInfo {
 	public String login;
 
 	public String emailAddress;
-	private String loginUrl;
-	private String logoutUrl;
 
 	private String password;
 
@@ -205,22 +203,6 @@ public class UserInfo {
 	public void setLoggedIn(boolean b) {
 		loggedIn = b;
 
-	}
-
-	public void setLoginUrl(String loginUrl) {
-		this.loginUrl = loginUrl;
-	}
-
-	public String getLoginUrl() {
-		return loginUrl;
-	}
-
-	public void setLogoutUrl(String logoutUrl) {
-		this.logoutUrl = logoutUrl;
-	}
-
-	public String getLogoutUrl() {
-		return logoutUrl;
 	}
 
 	public void setPassword(String password) {

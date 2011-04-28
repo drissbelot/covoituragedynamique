@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.covoiturage.server.domain.UserInfoDetails;
 import com.google.gwt.requestfactory.shared.EntityProxy;
+import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
 @ProxyFor(UserInfoDetails.class)
 public interface UserInfoDetailsProxy extends EntityProxy {
+	@Override
+	EntityProxyId<UserInfoDetailsProxy> stableId();
 
 	public void setVehicle(String vehicle);
 

@@ -3,16 +3,15 @@ package com.covoiturage.shared;
 import java.util.Date;
 
 import com.covoiturage.server.domain.Messages;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
+
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(Messages.class)
+@ProxyFor(value=Messages.class,  locator=ObjectifyLocator.class)
 public interface MessagesProxy extends EntityProxy {
-	@Override
-	EntityProxyId<MessagesProxy> stableId();
 
-	public String getId();
+	public Long getId();
 
 	public void setMessage(String message);
 

@@ -84,7 +84,7 @@ public class LoginActivity extends AbstractActivity implements
 						UserInfoRequest request = requestFactory
 								.userInfoRequest();
 						Request<UserInfoProxy> createReq = request
-								.findUserInfo(result);
+								.findUserInfo(Long.parseLong(result));
 						createReq.fire(new Receiver<UserInfoProxy>() {
 
 							@Override

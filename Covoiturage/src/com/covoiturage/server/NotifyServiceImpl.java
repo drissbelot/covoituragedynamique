@@ -11,13 +11,16 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.persistence.EntityManager;
+
 
 import com.covoiturage.client.NotifyService;
 import com.covoiturage.server.domain.Messages;
 import com.covoiturage.server.domain.UserInfo;
 import com.covoiturage.server.domain.UserInfoDetails;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 public class NotifyServiceImpl extends RemoteServiceServlet implements
 		NotifyService {
@@ -25,26 +28,22 @@ public class NotifyServiceImpl extends RemoteServiceServlet implements
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public String sendMessage(String userDetailsId, String subject,
+	public long sendMessage(Long userDetailsId, String subject,
 			String text, String from, Date date) {
-		UserInfoDetails userDetails = UserInfoDetails
-				.findUserInfoDetails(userDetailsId);
-		UserInfo user = UserInfo.findUserInfo(userDetails.getUser());
-		EntityManager em = EMF.get().createEntityManager();
+		Objectify ofy=  ObjectifyService.begin();
+		UserInfoDetails userDetails = ofy.find(UserInfoDetails.class,userDetailsId);
+		UserInfo user = ofy.find(UserInfo.class,userDetails.getUser());
 		Messages message = new Messages();
-		try {
-			em.getTransaction().begin();
+	
+
 			message.setMessage(text);
 			message.setRead(false);
 			message.setDate(date);
 			message.setFrom(from);
 			message.setSubject(subject);
-			em.persist(message);
-			em.getTransaction().commit();
 
-		} finally {
-			em.close();
-		}
+			ofy.put(message);
+	
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 

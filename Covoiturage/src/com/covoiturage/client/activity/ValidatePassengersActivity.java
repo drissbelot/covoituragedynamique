@@ -50,8 +50,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private List<UserInfoDetailsProxy> driversInfo = new ArrayList<UserInfoDetailsProxy>();
 
 	private final PlaceController placeController;
-	private List<String> passengers;
-	private List<String> drivers;
+	private List<Long> passengers;
+	private List<Long> drivers;
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();

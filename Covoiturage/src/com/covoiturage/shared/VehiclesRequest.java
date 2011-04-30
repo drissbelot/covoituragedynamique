@@ -2,23 +2,25 @@ package com.covoiturage.shared;
 
 import java.util.List;
 
-import com.covoiturage.server.domain.Vehicles;
-import com.google.gwt.requestfactory.shared.InstanceRequest;
+
+import com.covoiturage.server.locator.DaoServiceLocator;
+import com.covoiturage.server.service.VehiclesDao;
+
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-@Service(Vehicles.class)
+@Service(value=VehiclesDao.class,locator = DaoServiceLocator.class)
 public interface VehiclesRequest extends RequestContext {
 	Request<Long> countVehicles();
 
 	Request<List<VehiclesProxy>> findAllVehicles();
 
-	Request<VehiclesProxy> findVehicles(String id);
+	Request<VehiclesProxy> findVehicles(Long id);
 
-	InstanceRequest<VehiclesProxy, String> persist();
+	Request<String> persist(VehiclesProxy vehicle);
 
-	InstanceRequest<VehiclesProxy, Void> remove();
+	Request<Void> remove(VehiclesProxy vehicle);
 
 	Request<List<VehiclesProxy>> getModelsFromMake(String make);
 

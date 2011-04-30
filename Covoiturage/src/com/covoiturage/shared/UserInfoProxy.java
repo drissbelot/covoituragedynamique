@@ -1,11 +1,12 @@
 package com.covoiturage.shared;
 
 import com.covoiturage.server.domain.UserInfo;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
+
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(UserInfo.class)
+@ProxyFor(value=UserInfo.class,locator=ObjectifyLocator.class)
 public interface UserInfoProxy extends EntityProxy {
 
 	public boolean getLoggedIn();
@@ -26,9 +27,7 @@ public interface UserInfoProxy extends EntityProxy {
 
 	public String getPassword();
 
-	@Override
-	EntityProxyId<UserInfoProxy> stableId();
 
-	public String getId();
+	public Long getId();
 
 }

@@ -1,188 +1,21 @@
 package com.covoiturage.server.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Query;
-import javax.persistence.Version;
 
-import org.datanucleus.jpa.annotations.Extension;
 
-import com.covoiturage.server.ChannelServer;
-import com.covoiturage.server.EMF;
+
+
+
+
+
 import com.google.appengine.api.datastore.Blob;
 
 @Entity
-public class UserInfoDetails {
-	public static UserInfoDetails addMessageToUser(String id, String messageId) {
-		UserInfoDetails user = findUserInfoDetails(id);
-		EntityManager em = entityManager();
-		try {
+public class UserInfoDetails extends DatastoreObject{
 
-			user.addMessage(messageId);
-			em.merge(user);
-
-			return user;
-		} finally {
-			em.close();
-		}
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public static UserInfoDetails channel(String id) {
-		EntityManager em = entityManager();
-		UserInfoDetails userDetails = new UserInfoDetails();
-		try {
-			Query query = em
-					.createQuery("select o from UserInfoDetails o where o.user=:user");
-			query.setParameter("user", id);
-			List<UserInfoDetails> list = query.getResultList();
-
-			userDetails = list.get(0);
-			em.getTransaction().begin();
-			String channelId = ChannelServer.createChannel(userDetails.getId());
-			userDetails.setChannelId(channelId);
-			userDetails.getMessages();
-			em.getTransaction().commit();
-			return userDetails;
-		} finally {
-			em.close();
-		}
-	}
-
-	public static long countUserInfoDetails() {
-		EntityManager em = entityManager();
-		try {
-			return ((Number) em.createQuery(
-					"select count(o) from UserInfoDetails o").getSingleResult())
-					.longValue();
-		} finally {
-			em.close();
-		}
-	}
-
-	public static UserInfoDetails deleteMessage(String id, String messageId) {
-		UserInfoDetails user = findUserInfoDetails(id);
-		EntityManager em = entityManager();
-		try {
-
-			user.removeMessage(messageId);
-			em.merge(user);
-
-			return user;
-		} finally {
-			em.close();
-		}
-	}
-
-	public static final EntityManager entityManager() {
-
-		return EMF.get().createEntityManager();
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public static List<UserInfoDetails> findAllUserInfoDetails() {
-		EntityManager em = entityManager();
-		try {
-			List<UserInfoDetails> list = em.createQuery(
-					"select o from UserInfoDetails o").getResultList();
-
-			list.size();
-			return list;
-		} finally {
-			em.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static UserInfoDetails findDetailsFromUser(String id) {
-		EntityManager em = entityManager();
-		try {
-			Query query = em
-					.createQuery("select o from UserInfoDetails o where o.user=:user");
-			query.setParameter("user", id);
-			List<UserInfoDetails> list = query.getResultList();
-			list.get(0).getMessages();
-			return list.get(0);
-		} finally {
-			em.close();
-		}
-
-	}
-
-	public static UserInfoDetails findUserInfoDetails(String id) {
-
-		EntityManager em = entityManager();
-		try {
-			UserInfoDetails driver = em.find(UserInfoDetails.class, id);
-			driver.getMessages();
-			return driver;
-		} finally {
-
-			em.close();
-		}
-	}
-
-	public static List<UserInfoDetails> getPassengerList(List<String> passengers) {
-		EntityManager em = entityManager();
-		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
-		for (String string : passengers) {
-			result.add(em.find(UserInfoDetails.class, string));
-		}
-		return result;
-
-	}
-
-	public static UserInfoDetails modifyUserInfoDetails(String id,
-			String firstName, String lastName, String language) {
-		UserInfoDetails user = new UserInfoDetails();
-		EntityManager em = entityManager();
-
-		Query query = em
-				.createQuery("select o from UserInfoDetails o where o.user = :idParam ");
-		query.setParameter("idParam", id);
-
-		try {
-
-			@SuppressWarnings("unchecked")
-			List<UserInfoDetails> results = query.getResultList();
-
-			if (results.size() == 0) {
-				return null;
-			} else {
-
-				user = results.get(0);
-
-				em.getTransaction().begin();
-
-				user.setFirstName(firstName);
-				user.setLastName(lastName);
-				user.setLanguage(language);
-
-				em.getTransaction().commit();
-
-			}
-		} finally {
-			em.close();
-		}
-
-		return user;
-
-	}
-
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
-	public String id;
 
 	public String channelId;
 
@@ -198,7 +31,8 @@ public class UserInfoDetails {
 
 	private String vehicle;
 
-	private List<String> messages;
+
+	private List<Long> messages;
 
 	private int rating;
 
@@ -218,21 +52,19 @@ public class UserInfoDetails {
 
 	private String workPhoneNumber;
 
-	@Version
-	@Column(name = "version")
-	private final Integer version = 1;
+
 
 	public UserInfoDetails() {
 
 	}
 
-	public UserInfoDetails(String id, String firstName, String lastName) {
-		this.id = id;
+	public UserInfoDetails( String firstName, String lastName) {
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
-	protected void addMessage(String message) {
+	public void addMessage(Long message) {
 
 		messages.add(message);
 	}
@@ -253,9 +85,7 @@ public class UserInfoDetails {
 		return firstName;
 	}
 
-	public String getId() {
-		return id;
-	}
+
 
 	public String getLanguage() {
 		return language;
@@ -269,7 +99,7 @@ public class UserInfoDetails {
 		return vehicle;
 	}
 
-	public List<String> getMessages() {
+	public List<Long> getMessages() {
 		return messages;
 	}
 
@@ -281,30 +111,10 @@ public class UserInfoDetails {
 		return user;
 	}
 
-	public Integer getVersion() {
-		return version;
-	}
 
-	public void persist() {
-		EntityManager em = entityManager();
-		try {
-			em.persist(this);
-		} finally {
-			em.close();
-		}
-	}
+	
 
-	public void remove() {
-		EntityManager em = entityManager();
-		try {
-			UserInfoDetails attached = em.find(UserInfoDetails.class, this.id);
-			em.remove(attached);
-		} finally {
-			em.close();
-		}
-	}
-
-	protected void removeMessage(String message) {
+	public void removeMessage(Long message) {
 		messages.remove(message);
 	}
 
@@ -332,7 +142,7 @@ public class UserInfoDetails {
 		this.lastName = lastName;
 	}
 
-	public void setMessages(List<String> messages) {
+	public void setMessages(List<Long> messages) {
 		this.messages = messages;
 	}
 

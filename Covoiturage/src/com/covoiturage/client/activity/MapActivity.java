@@ -95,10 +95,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
 	private List<HasDirectionsWaypoint> waypoints;
 	private List<String> waypointsCoords;
-	private List<String> passengers;
+	private List<Long> passengers;
 	private final NotifyServiceAsync notifyService = GWT
 			.create(NotifyService.class);
-	private List<String> passengersTravels;
+	private List<Long> passengersTravels;
 	private String mapUrl;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
@@ -282,7 +282,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				UserInfoDetailsRequest userReq = requestFactory
 						.userInfoDetailsRequest();
 				Request<UserInfoDetailsProxy> createReq = userReq
-						.findDetailsFromUser(result);
+						.findDetailsFromUser(Long.parseLong(result));
 				createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 
 					@Override
@@ -313,13 +313,13 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void onSelectPassengers(
 							SelectPassengersEvent selectPassengersEvent) {
-						passengers = new ArrayList<String>();
-						passengersTravels = new ArrayList<String>();
+						passengers = new ArrayList<Long>();
+						passengersTravels = new ArrayList<Long>();
 						for (BaseModelData passenger : selectPassengersEvent
 								.getPassengers()) {
-							passengers.add(passenger.get("login").toString());
-							passengersTravels.add(passenger.get("id")
-									.toString());
+							passengers.add(Long.valueOf(passenger.get("login").toString()));
+							passengersTravels.add(Long.valueOf(passenger.get("id")
+									.toString()));
 						}
 
 						for (HasMarker overlay : overlays) {
@@ -513,7 +513,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										JourneyProxy responseJourney) {
 									if (passengers != null) {
 										int i = 0;
-										for (final String passenger : passengers) {
+										for (final Long passenger : passengers) {
 
 											notifyService
 													.sendMessage(
@@ -531,11 +531,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 																			.getLastName(),
 															new Date(
 																	System.currentTimeMillis()),
-															new AsyncCallback<String>() {
+															new AsyncCallback<Long>() {
 
 																@Override
 																public void onSuccess(
-																		String result) {
+																		Long result) {
 
 																	UserInfoDetailsRequest requestMessageUser = requestFactory
 																			.userInfoDetailsRequest();
@@ -564,7 +564,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 															});
 											i++;
 										}
-										for (String simpleTravel : passengersTravels) {
+										for (Long simpleTravel : passengersTravels) {
 											SimpleTravelRequest requestTravel = requestFactory
 													.simpleTravelRequest();
 											Request<Void> createRequestTravel = requestTravel
@@ -607,7 +607,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													.getText(), date,
 											departureStart, departureEnd,
 											arrival, userDetails.getId()
-													.toString(), mapUrl);
+													, mapUrl);
 							createReq.fire(new Receiver<SimpleTravelProxy>() {
 
 								@Override
@@ -622,7 +622,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 														passengersTravels
 																.get(0),
 														responseTravel.getId()
-																.toString(),
+																,
 														steps);
 										createRequestJourney
 												.fire(new Receiver<JourneyProxy>() {
@@ -645,11 +645,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 																				.getLastName(),
 																new Date(
 																		System.currentTimeMillis()),
-																new AsyncCallback<String>() {
+																new AsyncCallback<Long>() {
 
 																	@Override
 																	public void onSuccess(
-																			String result) {
+																			Long result) {
 																		UserInfoDetailsRequest requestMessageUser = requestFactory
 																				.userInfoDetailsRequest();
 																		Request<UserInfoDetailsProxy> createReqMessageUser = requestMessageUser
@@ -684,7 +684,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										Request<Void> createRequestTravel = requestTravel
 												.updateSimpleTravel(
 														responseTravel.getId()
-																.toString(),
+																,
 														"pending", "accepted");
 										createRequestTravel
 												.fire(new Receiver<Void>() {
@@ -784,7 +784,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												if (resultSimpleTravel != null
 														&& resultSimpleTravel
 																.size() != 0) {
-													List<String> resultPassengers = new ArrayList<String>();
+													List<Long> resultPassengers = new ArrayList<Long>();
 													for (SimpleTravelProxy simpletravel : resultSimpleTravel) {
 														resultPassengers
 																.add(simpletravel
@@ -830,7 +830,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 												if (resultJourney != null
 														&& resultJourney.size() != 0) {
-													List<String> resultDriver = new ArrayList<String>();
+													List<Long> resultDriver = new ArrayList<Long>();
 													for (JourneyProxy journey : resultJourney) {
 														resultDriver.add(journey
 																.getDriver());

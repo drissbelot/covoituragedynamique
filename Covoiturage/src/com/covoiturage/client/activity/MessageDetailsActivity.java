@@ -54,8 +54,8 @@ public class MessageDetailsActivity extends AbstractActivity implements
 
 		MessagesRequest requestMessages = requestFactory.messagesRequest();
 		Request<MessagesProxy> createReqMessages = requestMessages
-				.findMessages(((MessageDetailsPlace) placeController.getWhere())
-						.getMessageDetailsName());
+				.findMessages(Long.valueOf(((MessageDetailsPlace) placeController.getWhere())
+						.getMessageDetailsName()));
 		createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 			@Override

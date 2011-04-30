@@ -68,7 +68,7 @@ public class SettingsActivity extends AbstractActivity implements
 			public void onSuccess(String result) {
 
 				UserInfoRequest userReq = requestFactory.userInfoRequest();
-				Request<UserInfoProxy> createReq = userReq.findUserInfo(result);
+				Request<UserInfoProxy> createReq = userReq.findUserInfo(Long.valueOf(result));
 				createReq.fire(new Receiver<UserInfoProxy>() {
 
 					@Override

@@ -1,25 +1,18 @@
 package com.covoiturage.server.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Entity;
-
-
-
-
-
-
 
 import com.google.appengine.api.datastore.Blob;
 
 @Entity
-public class UserInfoDetails extends DatastoreObject{
-
+public class UserInfoDetails extends DatastoreObject {
 
 	public String channelId;
 
-	private int countOfJourneys;
+	private Integer countOfJourneys;
 
 	private String countOfPlaces;
 
@@ -31,10 +24,9 @@ public class UserInfoDetails extends DatastoreObject{
 
 	private String vehicle;
 
+	private List<Long> messages = new ArrayList<Long>();
 
-	private List<Long> messages;
-
-	private int rating;
+	private Integer rating;
 
 	private String user;
 
@@ -44,7 +36,7 @@ public class UserInfoDetails extends DatastoreObject{
 
 	private Blob vehiclePicture;
 
-	private int comfort;
+	private Integer comfort;
 
 	private String mobilePhoneNumber;
 
@@ -52,13 +44,11 @@ public class UserInfoDetails extends DatastoreObject{
 
 	private String workPhoneNumber;
 
-
-
 	public UserInfoDetails() {
 
 	}
 
-	public UserInfoDetails( String firstName, String lastName) {
+	public UserInfoDetails(String firstName, String lastName) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -73,7 +63,7 @@ public class UserInfoDetails extends DatastoreObject{
 		return channelId;
 	}
 
-	public int getCountOfJourneys() {
+	public Integer getCountOfJourneys() {
 		return countOfJourneys;
 	}
 
@@ -84,8 +74,6 @@ public class UserInfoDetails extends DatastoreObject{
 	public String getFirstName() {
 		return firstName;
 	}
-
-
 
 	public String getLanguage() {
 		return language;
@@ -103,16 +91,13 @@ public class UserInfoDetails extends DatastoreObject{
 		return messages;
 	}
 
-	public int getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
 	public String getUser() {
 		return user;
 	}
-
-
-	
 
 	public void removeMessage(Long message) {
 		messages.remove(message);
@@ -122,7 +107,7 @@ public class UserInfoDetails extends DatastoreObject{
 		this.channelId = channelId;
 	}
 
-	public void setCountOfJourneys(int countOfJourneys) {
+	public void setCountOfJourneys(Integer countOfJourneys) {
 		this.countOfJourneys = countOfJourneys;
 	}
 
@@ -146,7 +131,7 @@ public class UserInfoDetails extends DatastoreObject{
 		this.messages = messages;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 
@@ -178,11 +163,11 @@ public class UserInfoDetails extends DatastoreObject{
 		return vehiclePicture.getBytes();
 	}
 
-	public void setComfort(int comfort) {
+	public void setComfort(Integer comfort) {
 		this.comfort = comfort;
 	}
 
-	public int getComfort() {
+	public Integer getComfort() {
 		return comfort;
 	}
 

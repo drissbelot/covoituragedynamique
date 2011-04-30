@@ -172,21 +172,18 @@ public class Covoiturage implements EntryPoint {
 		RootLayoutPanel.get().add(v);
 
 		historyHandler.handleCurrentHistory();
-		 UserServiceAsync userService = GWT.create(UserService.class);
+		UserServiceAsync userService = GWT.create(UserService.class);
 		userService.registerClasses(new AsyncCallback<Void>() {
-			
+
 			@Override
 			public void onSuccess(Void result) {
 
-				
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 
-				
 			}
 		});
-
 	}
 }

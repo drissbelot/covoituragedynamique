@@ -5,12 +5,10 @@ import java.util.List;
 import com.covoiturage.server.domain.UserInfoDetails;
 import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(value=UserInfoDetails.class,locator=ObjectifyLocator.class)
+@ProxyFor(value = UserInfoDetails.class, locator = ObjectifyLocator.class)
 public interface UserInfoDetailsProxy extends EntityProxy {
-
 
 	public void setVehicle(String vehicle);
 
@@ -20,13 +18,13 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public String getCountOfPlaces();
 
-	public void setRating(int rating);
+	public void setRating(Integer rating);
 
-	public int getRating();
+	public Integer getRating();
 
-	public void setCountOfJourneys(int countOfJourneys);
+	public void setCountOfJourneys(Integer countOfJourneys);
 
-	public int getCountOfJourneys();
+	public Integer getCountOfJourneys();
 
 	public void setFirstName(String firstName);
 
@@ -66,9 +64,9 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public byte[] getVehiclePicture();
 
-	public void setComfort(int comfort);
+	public void setComfort(Integer comfort);
 
-	public int getComfort();
+	public Integer getComfort();
 
 	public void setMobilePhoneNumber(String mobilePhoneNumber);
 

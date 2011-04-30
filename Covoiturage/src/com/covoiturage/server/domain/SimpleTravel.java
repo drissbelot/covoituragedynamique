@@ -1,26 +1,17 @@
 package com.covoiturage.server.domain;
 
-
 import java.util.Date;
 import java.util.List;
 
-
 import javax.persistence.Entity;
-
-
-
-
 
 import com.google.appengine.api.datastore.Blob;
 
 @Entity
-public class SimpleTravel extends DatastoreObject{
+public class SimpleTravel extends DatastoreObject {
 
-	
-
-	
 	private Date date;
-	public String passenger;
+	public Long passenger;
 	private String originAddress;
 	private String destinationAddress;
 	private Blob mapImage;
@@ -53,7 +44,6 @@ public class SimpleTravel extends DatastoreObject{
 	private String statusPassenger;
 	private String statusDriver;
 
-	
 	private List<String> steps;
 
 	public Date getDepartureStart() {
@@ -103,8 +93,7 @@ public class SimpleTravel extends DatastoreObject{
 	public SimpleTravel() {
 	}
 
-	public SimpleTravel( String passenger, List<String> steps) {
-
+	public SimpleTravel(Long passenger, List<String> steps) {
 
 		this.passenger = passenger;
 		this.steps = steps;
@@ -114,9 +103,7 @@ public class SimpleTravel extends DatastoreObject{
 		return date;
 	}
 
-
-
-	public String getPassenger() {
+	public Long getPassenger() {
 		return passenger;
 	}
 
@@ -124,14 +111,11 @@ public class SimpleTravel extends DatastoreObject{
 		return steps;
 	}
 
-	
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-
-	public void setPassenger(String passenger) {
+	public void setPassenger(Long passenger) {
 		this.passenger = passenger;
 	}
 
@@ -139,8 +123,6 @@ public class SimpleTravel extends DatastoreObject{
 		this.steps = steps;
 
 	}
-
-
 
 	public void setMapImage(byte[] mapImage) {
 		this.mapImage = new Blob(mapImage);

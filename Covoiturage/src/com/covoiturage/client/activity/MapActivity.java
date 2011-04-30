@@ -271,8 +271,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 			@Override
 			public void onClick(ClickEvent event) {
+
 				isDriver = mapView.getDriverRadioButton().getValue();
 				isPassenger = mapView.getPassengerRadioButton().getValue();
+				GWT.log("test" + isPassenger);
 			}
 		});
 		userService.getUser(new AsyncCallback<String>() {
@@ -317,9 +319,10 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						passengersTravels = new ArrayList<Long>();
 						for (BaseModelData passenger : selectPassengersEvent
 								.getPassengers()) {
-							passengers.add(Long.valueOf(passenger.get("login").toString()));
-							passengersTravels.add(Long.valueOf(passenger.get("id")
+							passengers.add(Long.valueOf(passenger.get("login")
 									.toString()));
+							passengersTravels.add(Long.valueOf(passenger.get(
+									"id").toString()));
 						}
 
 						for (HasMarker overlay : overlays) {
@@ -606,13 +609,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											mapView.getDestinationAddress()
 													.getText(), date,
 											departureStart, departureEnd,
-											arrival, userDetails.getId()
-													, mapUrl);
+											arrival, userDetails.getId(),
+											mapUrl);
 							createReq.fire(new Receiver<SimpleTravelProxy>() {
 
 								@Override
 								public void onSuccess(
 										final SimpleTravelProxy responseTravel) {
+
 									if (passengersTravels != null
 											&& passengersTravels.size() != 0) {
 										JourneyRequest requestJourney = requestFactory
@@ -621,8 +625,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												.updateJourney(
 														passengersTravels
 																.get(0),
-														responseTravel.getId()
-																,
+														responseTravel.getId(),
 														steps);
 										createRequestJourney
 												.fire(new Receiver<JourneyProxy>() {
@@ -683,8 +686,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 												.simpleTravelRequest();
 										Request<Void> createRequestTravel = requestTravel
 												.updateSimpleTravel(
-														responseTravel.getId()
-																,
+														responseTravel.getId(),
 														"pending", "accepted");
 										createRequestTravel
 												.fire(new Receiver<Void>() {

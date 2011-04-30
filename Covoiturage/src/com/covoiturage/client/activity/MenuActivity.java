@@ -61,28 +61,28 @@ public class MenuActivity extends AbstractActivity implements
 					public void onSuccess(UserInfoDetailsProxy response) {
 
 						userDetails = response;
+						if (userDetails.getMessages() != null) {
+							for (String message : userDetails.getMessages()) {
+								MessagesRequest messageReq = requestFactory
+										.messagesRequest();
+								Request<MessagesProxy> createMessageReq = messageReq
+										.findMessages(Long.valueOf(message));
+								createMessageReq
+										.fire(new Receiver<MessagesProxy>() {
 
-						for (String message : userDetails.getMessages()) {
-							MessagesRequest messageReq = requestFactory
-									.messagesRequest();
-							Request<MessagesProxy> createMessageReq = messageReq
-									.findMessages(Long.valueOf(message));
-							createMessageReq
-									.fire(new Receiver<MessagesProxy>() {
+											@Override
+											public void onSuccess(
+													MessagesProxy response) {
+												if (!response.getRead())
+													messagesUnread++;
 
-										@Override
-										public void onSuccess(
-												MessagesProxy response) {
-											if (!response.getRead())
-												messagesUnread++;
-
-										}
-									});
+											}
+										});
+							}
+							menuView.getMessagesLabel().setText(
+									menuView.getConstants().message() + " ("
+											+ messagesUnread + ")");
 						}
-						menuView.getMessagesLabel().setText(
-								menuView.getConstants().message() + " ("
-										+ messagesUnread + ")");
-
 					}
 
 					@Override

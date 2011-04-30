@@ -9,7 +9,7 @@ import com.google.gwt.event.shared.GwtEvent;
 public class GetValidateDriversEvent extends
 		GwtEvent<GetValidateDriversEventHandler> {
 	public static Type<GetValidateDriversEventHandler> TYPE = new Type<GetValidateDriversEventHandler>();
-	private List<String> drivers;
+	private List<Long> drivers;
 	private List<JourneyProxy> journeys;
 
 	public List<JourneyProxy> getJourneys() {
@@ -20,10 +20,10 @@ public class GetValidateDriversEvent extends
 		this.journeys = journeys;
 	}
 
-	public GetValidateDriversEvent(List<String> result,
+	public GetValidateDriversEvent(List<Long> resultDriver,
 			List<JourneyProxy> resultJourneys) {
 		super();
-		this.setDrivers(result);
+		this.setDrivers(resultDriver);
 		this.setJourneys(resultJourneys);
 	}
 
@@ -36,11 +36,11 @@ public class GetValidateDriversEvent extends
 		handler.onGetValidateDrivers(this);
 	}
 
-	private void setDrivers(List<String> drivers) {
+	private void setDrivers(List<Long> drivers) {
 		this.drivers = drivers;
 	}
 
-	public List<String> getDrivers() {
+	public List<Long> getDrivers() {
 		return drivers;
 	}
 

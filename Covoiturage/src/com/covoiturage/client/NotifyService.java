@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("notifyService")
 public interface NotifyService extends RemoteService {
 
-	String sendMessage(String userDetails, String subject, String text,
-			String from, Date date);
+	long sendMessage(Long passenger, String subject, String text, String from,
+			Date date);
 
 }

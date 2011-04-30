@@ -2,28 +2,30 @@ package com.covoiturage.shared;
 
 import java.util.List;
 
-import com.google.gwt.requestfactory.shared.InstanceRequest;
+
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-import com.covoiturage.server.domain.UserInfo;
 
-@Service(UserInfo.class)
+import com.covoiturage.server.locator.DaoServiceLocator;
+import com.covoiturage.server.service.UserInfoDao;
+
+@Service(value=UserInfoDao.class,locator = DaoServiceLocator.class)
 public interface UserInfoRequest extends RequestContext {
-	Request<Long> countUsers();
+	Request<Long> countUserInfos();
 
-	Request<List<UserInfoProxy>> findAllUsers();
+	Request<List<UserInfoProxy>> findAllUserInfos();
 
-	Request<UserInfoProxy> findUserInfo(String id);
+	Request<UserInfoProxy> findUserInfo(Long id);
 
-	Request<Boolean> logout(String id);
+	Request<Boolean> logout(Long id);
 
-	InstanceRequest<UserInfoProxy, String> persist();
+	Request<String> persist(UserInfoProxy userInfo);
 
-	InstanceRequest<UserInfoProxy, Void> remove();
+	Request<Void> remove(UserInfoProxy userInfo);
 
-	Request<UserInfoProxy> modifyUserInfo(String id, String password,
+	Request<UserInfoProxy> modifyUserInfo(Long id, String password,
 			String emailAddress);
 
 }

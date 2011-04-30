@@ -1,16 +1,15 @@
 package com.covoiturage.shared;
 
 import com.covoiturage.server.domain.Vehicles;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
+
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(Vehicles.class)
+@ProxyFor(value=Vehicles.class,locator=ObjectifyLocator.class)
 public interface VehiclesProxy extends EntityProxy {
-	@Override
-	EntityProxyId<VehiclesProxy> stableId();
 
-	public String getId();
+	public Long getId();
 
 	public String getMake();
 

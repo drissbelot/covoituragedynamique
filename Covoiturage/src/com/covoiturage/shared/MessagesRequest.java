@@ -2,23 +2,25 @@ package com.covoiturage.shared;
 
 import java.util.List;
 
-import com.google.gwt.requestfactory.shared.InstanceRequest;
+
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-import com.covoiturage.server.domain.Messages;
+import com.covoiturage.server.locator.DaoServiceLocator;
 
-@Service(Messages.class)
+import com.covoiturage.server.service.MessagesDao;
+
+@Service(value=MessagesDao.class,locator = DaoServiceLocator.class)
 public interface MessagesRequest extends RequestContext {
 	Request<Long> countMessages();
 
 	Request<List<MessagesProxy>> findAllMessages();
 
-	Request<MessagesProxy> findMessages(String id);
+	Request<MessagesProxy> findMessages(Long id);
 
-	InstanceRequest<MessagesProxy, String> persist();
+	Request<String> persist(MessagesProxy message);
 
-	InstanceRequest<MessagesProxy, Void> remove();
+	Request<Void> remove(MessagesProxy message);
 
 }

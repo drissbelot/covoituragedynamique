@@ -3,14 +3,14 @@ package com.covoiturage.shared;
 import java.util.List;
 
 import com.covoiturage.server.domain.UserInfoDetails;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
+
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(UserInfoDetails.class)
+@ProxyFor(value=UserInfoDetails.class,locator=ObjectifyLocator.class)
 public interface UserInfoDetailsProxy extends EntityProxy {
-	@Override
-	EntityProxyId<UserInfoDetailsProxy> stableId();
+
 
 	public void setVehicle(String vehicle);
 
@@ -40,7 +40,7 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public void setUser(String user);
 
-	public String getId();
+	public Long getId();
 
 	public String getLanguage();
 

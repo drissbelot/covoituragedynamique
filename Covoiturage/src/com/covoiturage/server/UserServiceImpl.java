@@ -1,14 +1,20 @@
 package com.covoiturage.server;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import com.covoiturage.client.UserService;
+
+import com.covoiturage.server.domain.Journey;
+import com.covoiturage.server.domain.Messages;
+import com.covoiturage.server.domain.SimpleTravel;
 import com.covoiturage.server.domain.UserInfo;
+import com.covoiturage.server.domain.UserInfoDetails;
+import com.covoiturage.server.domain.Vehicles;
+
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 public class UserServiceImpl extends RemoteServiceServlet implements
 		UserService {
@@ -19,41 +25,38 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public String login(String login, String password) {
-		EntityManager em = EMF.get().createEntityManager();
+
+		
+   
+
+		Objectify ofy=  ObjectifyService.begin();
 		UserInfo user = new UserInfo();
-		Query query = em
-				.createQuery("select o from UserInfo o where o.login = :loginParam ");
-		query.setParameter("loginParam", login);
+		user = ofy.query(UserInfo.class).filter("login",login).get();
+	
+				if (BCrypt.checkpw(password, user.getPassword())) {
 
-		try {
-			@SuppressWarnings("unchecked")
-			List<UserInfo> results = query.getResultList();
 
-			if (results.size() == 0) {
-				return null;
-			} else {
-				if (BCrypt.checkpw(password, results.get(0).getPassword())) {
-					user = results.get(0);
-
-					em.getTransaction().begin();
 
 					user.setLoggedIn(true);
-
-					em.getTransaction().commit();
+					ofy.put(user);
 					HttpSession httpSession = getThreadLocalRequest()
 							.getSession();
 					httpSession.setMaxInactiveInterval(1000 * 60 * 5);
-					httpSession.setAttribute("LOGGED_IN_USER", results.get(0)
-							.getId());
+					httpSession.setAttribute("LOGGED_IN_USER", user
+							.getId().toString());
 					return httpSession.getId();
 				} else
 					return null;
-			}
-		} finally {
-			em.close();
-		}
-	}
 
+	}
+	public void registerClasses(){
+		ObjectifyService.register(Journey.class);
+        ObjectifyService.register(Messages.class);
+        ObjectifyService.register(SimpleTravel.class);
+        ObjectifyService.register(UserInfo.class);
+        ObjectifyService.register(UserInfoDetails.class);
+        ObjectifyService.register(Vehicles.class);
+	}
 	public String getUser() {
 		HttpSession httpSession = getThreadLocalRequest().getSession();
 		return (String) httpSession.getAttribute("LOGGED_IN_USER");

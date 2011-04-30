@@ -1,6 +1,6 @@
 package com.covoiturage.client.activity;
 
-import java.util.ArrayList;
+
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
@@ -21,13 +21,14 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
+
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class AddUserActivity extends AbstractActivity implements
 		AddUserView.Presenter {
 
 	private final EventBus eventBus;
-	AddUserView addUserView;
+	private AddUserView addUserView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
 	LanguageFlagsRessources languageFlags = GWT
@@ -59,7 +60,7 @@ public class AddUserActivity extends AbstractActivity implements
 		newUser.setPassword(addUserView.getPassword().getValue());
 		newUser.setEmailAddress(addUserView.getEmailAddress().getValue());
 
-		Request<String> createReq = request.persist().using(newUser);
+		Request<String> createReq = request.persist(newUser);
 		createReq.fire(new Receiver<String>() {
 			@Override
 			public void onSuccess(String response) {
@@ -81,17 +82,17 @@ public class AddUserActivity extends AbstractActivity implements
 		newDriver.setFirstName(addUserView.getFirstName().getValue());
 		newDriver.setLastName(addUserView.getLastName().getValue());
 
-		newDriver.setMessages(new ArrayList<String>());
+	//	newDriver.setMessages(new ArrayList<String>());
 
-		Request<Void> createReqDriver = requestDriver.persist()
-				.using(newDriver);
+		Request<String> createReqDriver = requestDriver.persist(newDriver);
 
-		createReqDriver.fire(new Receiver<Void>() {
+		createReqDriver.fire(new Receiver<String>() {
 			@Override
-			public void onSuccess(Void response) {
+			public void onSuccess(String response) {
 				eventBus.fireEvent(new AddUserEvent());
 				goTo(new LoginPlace(null));
 			}
+
 		});
 
 	}

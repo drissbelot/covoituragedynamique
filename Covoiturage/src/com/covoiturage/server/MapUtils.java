@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
+
 
 import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
+
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -42,14 +45,12 @@ public class MapUtils {
 	public static List<Journey> journeyNearBuffer(Geometry buffer,
 			float distanceJourney, Date departureStart, Date departureEnd,
 			Date arrival) {
-		EntityManager em = EMF.get().createEntityManager();
-		em.getTransaction().begin();
-		List<Journey> journeys = new ArrayList<Journey>();
-		try {
 
-			@SuppressWarnings("unchecked")
-			List<Journey> results = em.createQuery("select o from Journey o")
-					.getResultList();
+		Objectify ofy=  ObjectifyService.begin();
+		List<Journey> journeys = new ArrayList<Journey>();
+
+			List<Journey> results = ofy.query(Journey.class).list();
+					
 			for (Journey journey : results) {
 				List<String> stepsDetails = journey.getStepsDetails();
 				Coordinate[] arrayWaypoints = null;
@@ -148,12 +149,9 @@ public class MapUtils {
 					}
 				}
 			}
-			em.getTransaction().commit();
 
 			return journeys;
-		} finally {
-			em.close();
-		}
+
 	}
 
 	public static List<SimpleTravel> bufferRoute(List<String> coordinates,
@@ -182,13 +180,12 @@ public class MapUtils {
 			Geometry buffer, Date departureStart, Date departureEnd,
 			Date arrival, float distanceJourney) {
 
-		EntityManager em = EMF.get().createEntityManager();
+		Objectify ofy=  ObjectifyService.begin();
 		List<SimpleTravel> simpleTravels = new ArrayList<SimpleTravel>();
-		try {
+	
 
-			@SuppressWarnings("unchecked")
-			List<SimpleTravel> results = em.createQuery(
-					"select o from SimpleTravel o").getResultList();
+
+			List<SimpleTravel> results = ofy.query(SimpleTravel.class).list();
 			for (SimpleTravel travel : results) {
 				List<String> steps = travel.getSteps();
 				int i = 0;
@@ -250,10 +247,7 @@ public class MapUtils {
 				}
 
 			}
-		} finally {
-			em.close();
-
-		}
+	
 		return simpleTravels;
 	}
 

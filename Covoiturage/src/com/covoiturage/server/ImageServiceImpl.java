@@ -2,8 +2,6 @@ package com.covoiturage.server;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.covoiturage.server.domain.SimpleTravel;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 public class ImageServiceImpl extends HttpServlet {
 
@@ -21,18 +21,13 @@ public class ImageServiceImpl extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		EntityManager em = EMF.get().createEntityManager();
-		Query query = em
-				.createQuery("select o from SimpleTravel o where o.passenger = :idParam");
-		query.setParameter("idParam", request.getParameter("id"));
+		Objectify ofy=  ObjectifyService.begin();
 		SimpleTravel travel;
+		travel= ofy.query(SimpleTravel.class).filter("passenger", request.getParameter("id")).get();
 
-		try {
+		
 
-			travel = (SimpleTravel) query.getResultList().get(0);
-		} finally {
-			em.close();
-		}
+
 		response.reset();
 		response.setContentType(travel.getMapImageType());
 

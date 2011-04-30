@@ -50,7 +50,7 @@ public class HeaderActivity extends AbstractActivity implements
 			@Override
 			public void onSuccess(String result) {
 				UserInfoRequest userReq = requestFactory.userInfoRequest();
-				Request<UserInfoProxy> createReq = userReq.findUserInfo(result);
+				Request<UserInfoProxy> createReq = userReq.findUserInfo(Long.parseLong(result));
 				createReq.fire(new Receiver<UserInfoProxy>() {
 
 					@Override

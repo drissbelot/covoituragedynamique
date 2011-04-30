@@ -3,38 +3,40 @@ package com.covoiturage.shared;
 import java.util.Date;
 import java.util.List;
 
-import com.covoiturage.server.domain.Journey;
-import com.google.gwt.requestfactory.shared.InstanceRequest;
+
+import com.covoiturage.server.locator.DaoServiceLocator;
+import com.covoiturage.server.service.JourneyDao;
+
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-@Service(Journey.class)
+@Service(value=JourneyDao.class,locator = DaoServiceLocator.class)
 public interface JourneyRequest extends RequestContext {
 
 	Request<Long> countJourneys();
 
 	Request<List<JourneyProxy>> findAllJourneys();
 
-	Request<JourneyProxy> findJourney(String id);
+	Request<JourneyProxy> findJourney(Long id);
 
 	Request<JourneyProxy> saveJourneyDriver(List<String> steps, Date date,
-			Date departureStart, Date departureEnd, Date arrival, String id,
+			Date departureStart, Date departureEnd, Date arrival, Long id,
 			String originAddress, String destinationAddress,
 			List<String> waypoints, List<String> stepsDetails,
-			List<String> passengers);
+			List<Long> passengers);
 
-	InstanceRequest<JourneyProxy, Void> persist();
+Request<Void> persist(JourneyProxy journey);
 
-	InstanceRequest<JourneyProxy, Void> remove();
+	Request<Void> remove(JourneyProxy journey);
 
 	Request<List<JourneyProxy>> getJourneys(List<String> steps,
 			Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax);
 
-	Request<List<JourneyProxy>> getJourneysFromUser(String id);
+	Request<List<JourneyProxy>> getJourneysFromUser(Long id);
 
-	Request<JourneyProxy> updateJourney(String journeyId,
-			String simpleTravelId, List<String> steps);
+	Request<JourneyProxy> updateJourney(Long journeyId,
+			Long simpleTravelId, List<String> steps);
 
 }

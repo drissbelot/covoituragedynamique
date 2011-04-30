@@ -54,7 +54,7 @@ public class MenuActivity extends AbstractActivity implements
 				UserInfoDetailsRequest userReq = requestFactory
 						.userInfoDetailsRequest();
 				Request<UserInfoDetailsProxy> createReq = userReq
-						.findDetailsFromUser(result);
+						.findDetailsFromUser(Long.valueOf(result));
 				createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 
 					@Override
@@ -66,7 +66,7 @@ public class MenuActivity extends AbstractActivity implements
 							MessagesRequest messageReq = requestFactory
 									.messagesRequest();
 							Request<MessagesProxy> createMessageReq = messageReq
-									.findMessages(message);
+									.findMessages(Long.valueOf(message));
 							createMessageReq
 									.fire(new Receiver<MessagesProxy>() {
 

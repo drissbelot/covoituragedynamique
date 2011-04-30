@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.server.domain.Journey;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(Journey.class)
+@ProxyFor(value=Journey.class, locator=ObjectifyLocator.class)
 public interface JourneyProxy extends EntityProxy {
 
 	public Date getDate();
@@ -19,19 +19,19 @@ public interface JourneyProxy extends EntityProxy {
 
 	public String getDestinationAddress();
 
-	public String getDriver();
+	public Long getDriver();
 
-	public void setDriver(String driver);
+	public void setDriver(Long driver);
 
-	public List<String> getPassengersTravels();
+	public List<Long> getPassengersTravels();
 
-	public void setPassengersTravels(List<String> passengersTravels);
+	public void setPassengersTravels(List<Long> passengersTravels);
 
 	public List<String> getSteps();
 
 	public void setSteps(List<String> steps);
 
-	EntityProxyId<JourneyProxy> stableId();
+
 
 	public List<String> getWaypoints();
 
@@ -53,6 +53,6 @@ public interface JourneyProxy extends EntityProxy {
 
 	public void setArrival(Date arrival);
 
-	public String getId();
+	public Long getId();
 
 }

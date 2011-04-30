@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.covoiturage.server.domain.SimpleTravel;
+import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.EntityProxyId;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(SimpleTravel.class)
+@ProxyFor(value=SimpleTravel.class,locator=ObjectifyLocator.class)
 public interface SimpleTravelProxy extends EntityProxy {
 
 	public Date getDate();
@@ -21,14 +21,12 @@ public interface SimpleTravelProxy extends EntityProxy {
 
 	public String getDestinationAddress();
 
-	public String getPassenger();
+	public Long getPassenger();
 
 	public void setPassenger(String passenger);
 
 	public void setSteps(List<String> steps);
 
-	@Override
-	EntityProxyId<SimpleTravelProxy> stableId();
 
 	public Date getDepartureStart();
 
@@ -42,7 +40,7 @@ public interface SimpleTravelProxy extends EntityProxy {
 
 	public void setArrival(Date arrival);
 
-	public String getId();
+	public Long getId();
 
 	public String getStatusPassenger();
 

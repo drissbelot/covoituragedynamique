@@ -12,7 +12,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.covoiturage.server.domain.Messages;
 import com.covoiturage.server.domain.UserInfo;
 import com.covoiturage.server.domain.UserInfoDetails;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 public class ReminderServiceImpl extends HttpServlet {
 
@@ -30,26 +31,21 @@ public class ReminderServiceImpl extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userDetailsId = request.getParameter("passenger");
-		UserInfoDetails userDetails = UserInfoDetails
-				.findUserInfoDetails(userDetailsId);
-		UserInfo user = UserInfo.findUserInfo(userDetails.getUser());
+		Objectify ofy=  ObjectifyService.begin();
+		UserInfoDetails userDetails = ofy.find(UserInfoDetails.class,userDetailsId);
+		UserInfo user = ofy.find(UserInfo.class,userDetails.getUser());
 		String text = "Someone not replying";
-		EntityManager em = EMF.get().createEntityManager();
+
 		Messages message = new Messages();
-		try {
-			em.getTransaction().begin();
+		
+			
 			message.setMessage(text);
 			message.setRead(false);
 			message.setDate(new Date(System.currentTimeMillis()));
 			message.setFrom("Covdyn Admin");
 			// TODO affiner (peut-être en passant plus de paramètres)
 			message.setSubject(text);
-			em.persist(message);
-			em.getTransaction().commit();
-
-		} finally {
-			em.close();
-		}
+ofy.put(message);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 

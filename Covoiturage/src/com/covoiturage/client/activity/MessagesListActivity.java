@@ -90,8 +90,8 @@ public class MessagesListActivity extends AbstractActivity implements
 										.userInfoDetailsRequest();
 								Request<UserInfoDetailsProxy> createReqMessagesDelete = requestMessagesDelete
 										.deleteMessage(userDetails.getId(),
-												message.get("messageId")
-														.toString());
+												Long.valueOf(message.get("messageId")
+														.toString()));
 								createReqMessagesDelete
 										.fire(new Receiver<UserInfoDetailsProxy>() {
 
@@ -142,9 +142,9 @@ public class MessagesListActivity extends AbstractActivity implements
 												.simpleTravelRequest();
 										Request<Void> createRequestTravel = requestTravel
 												.updateSimpleTravel(
-														model.get("message")
+														Long.valueOf(model.get("message")
 																.toString()
-																.split("/")[1],
+																.split("/")[1]),
 														"accepted", "accepted");
 										createRequestTravel
 												.fire(new Receiver<Void>() {
@@ -153,11 +153,11 @@ public class MessagesListActivity extends AbstractActivity implements
 															Void response) {
 
 														notifyService
-																.sendMessage(
+																.sendMessage(Long.valueOf(
 																		model.get(
 																				"message")
 																				.toString()
-																				.split("/")[0],
+																				.split("/")[0]),
 																		"Travel confirmed",
 																		model.get(
 																				"message")
@@ -170,19 +170,19 @@ public class MessagesListActivity extends AbstractActivity implements
 																						.getLastName(),
 																		new Date(
 																				System.currentTimeMillis()),
-																		new AsyncCallback<String>() {
+																		new AsyncCallback<Long>() {
 
 																			@Override
 																			public void onSuccess(
-																					String result) {
+																					Long result) {
 																				UserInfoDetailsRequest requestMessageUser = requestFactory
 																						.userInfoDetailsRequest();
 																				Request<UserInfoDetailsProxy> createReqMessageUser = requestMessageUser
-																						.addMessageToUser(
+																						.addMessageToUser(Long.valueOf(
 																								model.get(
 																										"message")
 																										.toString()
-																										.split("/")[0],
+																										.split("/")[0]),
 																								result);
 																				createReqMessageUser
 																						.fire(new Receiver<UserInfoDetailsProxy>() {
@@ -236,7 +236,7 @@ public class MessagesListActivity extends AbstractActivity implements
 		UserInfoDetailsRequest requestDetails = requestFactory
 				.userInfoDetailsRequest();
 		Request<UserInfoDetailsProxy> createReqDatails = requestDetails
-				.findDetailsFromUser(currentUser);
+				.findDetailsFromUser(Long.valueOf(currentUser));
 		createReqDatails.fire(new Receiver<UserInfoDetailsProxy>() {
 			@Override
 			public void onSuccess(UserInfoDetailsProxy response) {
@@ -247,7 +247,7 @@ public class MessagesListActivity extends AbstractActivity implements
 					MessagesRequest requestMessages = requestFactory
 							.messagesRequest();
 					Request<MessagesProxy> createReqMessages = requestMessages
-							.findMessages(message);
+							.findMessages(Long.valueOf(message));
 					createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 						@Override

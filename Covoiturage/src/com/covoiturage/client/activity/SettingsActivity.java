@@ -9,6 +9,7 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.images.LanguageFlagsRessources;
+import com.covoiturage.client.images.RatingRessources;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -50,6 +51,7 @@ public class SettingsActivity extends AbstractActivity implements
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 	LanguageFlagsRessources languageFlags = GWT
 			.create(LanguageFlagsRessources.class);
+	RatingRessources ratingRessources = GWT.create(RatingRessources.class);
 
 	public SettingsActivity(ClientFactory clientFactory) {
 
@@ -61,14 +63,15 @@ public class SettingsActivity extends AbstractActivity implements
 
 	private void bind() {
 		languageComboBox();
-
+		comfortComboBox();
 		userService.getUser(new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
 
 				UserInfoRequest userReq = requestFactory.userInfoRequest();
-				Request<UserInfoProxy> createReq = userReq.findUserInfo(Long.valueOf(result));
+				Request<UserInfoProxy> createReq = userReq.findUserInfo(Long
+						.valueOf(result));
 				createReq.fire(new Receiver<UserInfoProxy>() {
 
 					@Override
@@ -188,6 +191,36 @@ public class SettingsActivity extends AbstractActivity implements
 
 			}
 		});
+
+	}
+
+	private void comfortComboBox() {
+		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
+		BaseModelData rec1 = new BaseModelData();
+		rec1.set("name", settingsView.getConstants().basic());
+		rec1.set("img", AbstractImagePrototype.create(ratingRessources.star())
+				.getHTML());
+		BaseModelData rec2 = new BaseModelData();
+		rec2.set("name", settingsView.getConstants().normal());
+		rec1.set("img",
+				AbstractImagePrototype.create(ratingRessources.twoStar())
+						.getHTML());
+		BaseModelData rec3 = new BaseModelData();
+		rec3.set("name", settingsView.getConstants().comfortable());
+		rec1.set("img",
+				AbstractImagePrototype.create(ratingRessources.threeStar())
+						.getHTML());
+		BaseModelData rec4 = new BaseModelData();
+		rec4.set("name", settingsView.getConstants().luxury());
+		rec1.set("img",
+				AbstractImagePrototype.create(ratingRessources.fourStar())
+						.getHTML());
+
+		listRecords.add(rec1);
+		listRecords.add(rec2);
+		listRecords.add(rec3);
+		listRecords.add(rec4);
+		settingsView.getComfortField().getStore().add(listRecords);
 
 	}
 

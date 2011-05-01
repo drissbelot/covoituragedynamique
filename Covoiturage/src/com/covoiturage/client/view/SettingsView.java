@@ -46,4 +46,6 @@ public interface SettingsView extends IsWidget {
 
 	public TextField<Float> getFuelMixedDriveField();
 
+	public ComboBox<BaseModelData> getComfortField();
+
 }

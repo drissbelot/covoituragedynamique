@@ -51,4 +51,12 @@ public interface SettingsViewConstants extends Constants {
 	String homePhoneNumber();
 
 	String workPhoneNumber();
+
+	String basic();
+
+	String normal();
+
+	String comfortable();
+
+	String luxury();
 }

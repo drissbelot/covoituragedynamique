@@ -8,5 +8,5 @@ public interface UserService extends RemoteService {
 	String login(String login, String password);
 
 	String getUser();
-	void registerClasses();
+
 }

@@ -8,6 +8,4 @@ public interface UserServiceAsync {
 
 	void getUser(AsyncCallback<String> callback);
 
-	void registerClasses(AsyncCallback<Void> callback);
-
 }

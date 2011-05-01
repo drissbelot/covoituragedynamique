@@ -17,7 +17,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -172,18 +171,6 @@ public class Covoiturage implements EntryPoint {
 		RootLayoutPanel.get().add(v);
 
 		historyHandler.handleCurrentHistory();
-		UserServiceAsync userService = GWT.create(UserService.class);
-		userService.registerClasses(new AsyncCallback<Void>() {
 
-			@Override
-			public void onSuccess(Void result) {
-
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-
-			}
-		});
 	}
 }

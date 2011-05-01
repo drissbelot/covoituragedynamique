@@ -2,15 +2,13 @@ package com.covoiturage.shared;
 
 import java.util.List;
 
-
 import com.covoiturage.server.locator.DaoServiceLocator;
 import com.covoiturage.server.service.UserInfoDetailsDao;
-
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-@Service(value=UserInfoDetailsDao.class,locator = DaoServiceLocator.class)
+@Service(value = UserInfoDetailsDao.class, locator = DaoServiceLocator.class)
 public interface UserInfoDetailsRequest extends RequestContext {
 	Request<Long> countUserInfoDetails();
 
@@ -18,7 +16,7 @@ public interface UserInfoDetailsRequest extends RequestContext {
 
 	Request<UserInfoDetailsProxy> findUserInfoDetails(Long id);
 
-	Request<String> persist(UserInfoDetailsProxy userDetails);
+	Request<Long> persist(UserInfoDetailsProxy userDetails);
 
 	Request<Void> remove(UserInfoDetailsProxy userDetails);
 

@@ -51,47 +51,53 @@ public class MenuActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(String result) {
-				UserInfoDetailsRequest userReq = requestFactory
-						.userInfoDetailsRequest();
-				Request<UserInfoDetailsProxy> createReq = userReq
-						.findDetailsFromUser(Long.valueOf(result));
-				createReq.fire(new Receiver<UserInfoDetailsProxy>() {
+				if (result != null) {
+					UserInfoDetailsRequest userReq = requestFactory
+							.userInfoDetailsRequest();
+					Request<UserInfoDetailsProxy> createReq = userReq
+							.findDetailsFromUser(Long.valueOf(result));
 
-					@Override
-					public void onSuccess(UserInfoDetailsProxy response) {
+					createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 
-						userDetails = response;
-						if (userDetails.getMessages() != null) {
-							for (String message : userDetails.getMessages()) {
-								MessagesRequest messageReq = requestFactory
-										.messagesRequest();
-								Request<MessagesProxy> createMessageReq = messageReq
-										.findMessages(Long.valueOf(message));
-								createMessageReq
-										.fire(new Receiver<MessagesProxy>() {
+						@Override
+						public void onSuccess(UserInfoDetailsProxy response) {
 
-											@Override
-											public void onSuccess(
-													MessagesProxy response) {
-												if (!response.getRead())
-													messagesUnread++;
+							userDetails = response;
 
-											}
-										});
+							if (userDetails.getMessages() != null) {
+								for (Long message : userDetails.getMessages()) {
+									MessagesRequest messageReq = requestFactory
+											.messagesRequest();
+									Request<MessagesProxy> createMessageReq = messageReq
+											.findMessages(message);
+									createMessageReq
+											.fire(new Receiver<MessagesProxy>() {
+
+												@Override
+												public void onSuccess(
+														MessagesProxy response) {
+													if (!response.getRead())
+														messagesUnread++;
+
+												}
+											});
+								}
+								menuView.getMessagesLabel().setText(
+										menuView.getConstants().message()
+												+ " (" + messagesUnread + ")");
 							}
-							menuView.getMessagesLabel().setText(
-									menuView.getConstants().message() + " ("
-											+ messagesUnread + ")");
 						}
-					}
 
-					@Override
-					public void onFailure(ServerFailure error) {
-						if (error.getMessage().contains("not logged in"))
-							goTo(new LoginPlace(null));
+						@Override
+						public void onFailure(ServerFailure error) {
+							if (error.getMessage().contains("not logged in"))
+								goTo(new LoginPlace(null));
 
-					}
-				});
+						}
+					});
+				} else {
+					goTo(new LoginPlace(null));
+				}
 
 			}
 

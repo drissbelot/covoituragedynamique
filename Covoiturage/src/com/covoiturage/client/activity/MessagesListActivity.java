@@ -88,10 +88,10 @@ public class MessagesListActivity extends AbstractActivity implements
 									.getSelectedItems()) {
 								UserInfoDetailsRequest requestMessagesDelete = requestFactory
 										.userInfoDetailsRequest();
-								Request<UserInfoDetailsProxy> createReqMessagesDelete = requestMessagesDelete
-										.deleteMessage(userDetails.getId(),
-												Long.valueOf(message.get("messageId")
-														.toString()));
+								Request<UserInfoDetailsProxy> createReqMessagesDelete = requestMessagesDelete.deleteMessage(
+										userDetails.getId(),
+										Long.valueOf(message.get("messageId")
+												.toString()));
 								createReqMessagesDelete
 										.fire(new Receiver<UserInfoDetailsProxy>() {
 
@@ -140,69 +140,67 @@ public class MessagesListActivity extends AbstractActivity implements
 									public void componentSelected(ButtonEvent ce) {
 										SimpleTravelRequest requestTravel = requestFactory
 												.simpleTravelRequest();
-										Request<Void> createRequestTravel = requestTravel
-												.updateSimpleTravel(
-														Long.valueOf(model.get("message")
-																.toString()
-																.split("/")[1]),
-														"accepted", "accepted");
+										Request<Void> createRequestTravel = requestTravel.updateSimpleTravel(
+												Long.valueOf(model
+														.get("message")
+														.toString().split("/")[1]),
+												"accepted", "accepted");
 										createRequestTravel
 												.fire(new Receiver<Void>() {
 													@Override
 													public void onSuccess(
 															Void response) {
 
-														notifyService
-																.sendMessage(Long.valueOf(
-																		model.get(
-																				"message")
-																				.toString()
-																				.split("/")[0]),
-																		"Travel confirmed",
-																		model.get(
-																				"message")
-																				.toString()
-																				.split("/")[1],
-																		userDetails
-																				.getFirstName()
-																				+ " "
-																				+ userDetails
-																						.getLastName(),
-																		new Date(
-																				System.currentTimeMillis()),
-																		new AsyncCallback<Long>() {
+														notifyService.sendMessage(
+																Long.valueOf(model
+																		.get("message")
+																		.toString()
+																		.split("/")[0]),
+																"Travel confirmed",
+																model.get(
+																		"message")
+																		.toString()
+																		.split("/")[1],
+																userDetails
+																		.getFirstName()
+																		+ " "
+																		+ userDetails
+																				.getLastName(),
+																new Date(
+																		System.currentTimeMillis()),
+																new AsyncCallback<Long>() {
 
-																			@Override
-																			public void onSuccess(
-																					Long result) {
-																				UserInfoDetailsRequest requestMessageUser = requestFactory
-																						.userInfoDetailsRequest();
-																				Request<UserInfoDetailsProxy> createReqMessageUser = requestMessageUser
-																						.addMessageToUser(Long.valueOf(
-																								model.get(
-																										"message")
-																										.toString()
-																										.split("/")[0]),
-																								result);
-																				createReqMessageUser
-																						.fire(new Receiver<UserInfoDetailsProxy>() {
+																	@Override
+																	public void onSuccess(
+																			Long result) {
+																		UserInfoDetailsRequest requestMessageUser = requestFactory
+																				.userInfoDetailsRequest();
+																		Request<UserInfoDetailsProxy> createReqMessageUser = requestMessageUser
+																				.addMessageToUser(
+																						Long.valueOf(model
+																								.get("message")
+																								.toString()
+																								.split("/")[0]),
+																						result);
+																		createReqMessageUser
+																				.fire(new Receiver<UserInfoDetailsProxy>() {
 
-																							@Override
-																							public void onSuccess(
-																									UserInfoDetailsProxy response) {
+																					@Override
+																					public void onSuccess(
+																							UserInfoDetailsProxy response) {
 
-																							}
+																					}
 
-																						});
+																				});
 
-																			}
+																	}
 
-																			@Override
-																			public void onFailure(
-																					Throwable caught) {
+																	@Override
+																	public void onFailure(
+																			Throwable caught) {
 
-																			}
-																		});
+																	}
+																});
 
 													}
 
@@ -242,12 +240,12 @@ public class MessagesListActivity extends AbstractActivity implements
 			public void onSuccess(UserInfoDetailsProxy response) {
 				userDetails = response;
 				messagesListView.getListGrid().getStore().removeAll();
-				for (String message : userDetails.getMessages()) {
+				for (Long message : userDetails.getMessages()) {
 
 					MessagesRequest requestMessages = requestFactory
 							.messagesRequest();
 					Request<MessagesProxy> createReqMessages = requestMessages
-							.findMessages(Long.valueOf(message));
+							.findMessages(message);
 					createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 						@Override

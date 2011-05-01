@@ -28,7 +28,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	private Integer rating;
 
-	private String user;
+	private Long user;
 
 	private String colorOfVehicle;
 
@@ -95,7 +95,7 @@ public class UserInfoDetails extends DatastoreObject {
 		return rating;
 	}
 
-	public String getUser() {
+	public Long getUser() {
 		return user;
 	}
 
@@ -135,7 +135,7 @@ public class UserInfoDetails extends DatastoreObject {
 		this.rating = rating;
 	}
 
-	public void setUser(String user) {
+	public void setUser(Long user) {
 		this.user = user;
 	}
 

@@ -3,10 +3,7 @@ package com.covoiturage.server.service;
 import java.util.Date;
 import java.util.List;
 
-
-
 import com.covoiturage.server.MapUtils;
-
 import com.covoiturage.server.domain.Journey;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Objectify;
@@ -22,21 +19,23 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 				departureEnd, arrival);
 
 	}
-	public static List<Journey> getJourneysFromUser(Long id) {
-		Objectify ofy=  ObjectifyService.begin();
 
-		List<Journey> list = ofy.query(Journey.class).filter("driver" ,id).list();
+	public static List<Journey> getJourneysFromUser(Long id) {
+		Objectify ofy = ObjectifyService.begin();
+
+		List<Journey> list = ofy.query(Journey.class).filter("driver", id)
+				.list();
 
 		return list;
 	}
 
 	public static Journey saveJourneyDriver(List<String> steps, Date date,
-			Date departureStart, Date departureEnd, Date arrival,
-			Long driver, String originAddress, String destinationAddress,
+			Date departureStart, Date departureEnd, Date arrival, Long driver,
+			String originAddress, String destinationAddress,
 			List<String> waypoints, List<String> stepsDetails,
 			List<Long> passengersTravels) {
 		Journey journey = new Journey();
-		Objectify ofy=  ObjectifyService.begin();
+		Objectify ofy = ObjectifyService.begin();
 		journey.setSteps(steps);
 		journey.setDate(date);
 		journey.setDriver(driver);
@@ -53,10 +52,10 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return journey;
 	}
 
-	public static Journey updateJourney(String journeyId,
-			Long simpleTravelId, List<String> steps) {
+	public static Journey updateJourney(Long journeyId, Long simpleTravelId,
+			List<String> steps) {
 		Journey journey = new Journey();
-		Objectify ofy=  ObjectifyService.begin();
+		Objectify ofy = ObjectifyService.begin();
 
 		Query<Journey> query = ofy.query(Journey.class).filter("id", journeyId);
 		List<Journey> results = query.list();
@@ -64,8 +63,6 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		if (results.size() != 0) {
 
 			journey = results.get(0);
-
-
 
 			journey.getPassengersTravels().add(simpleTravelId);
 			journey.getWaypoints().addAll(steps);
@@ -75,15 +72,16 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return journey;
 
 	}
-	public Long countJourneys(){
+
+	public Long countJourneys() {
 		return (long) this.listAll().size();
 	}
 
-	public  List<Journey> findAllJourneys(){
+	public List<Journey> findAllJourneys() {
 		return this.listAll();
 	}
 
-	public Journey findJourney(Long id){
+	public Journey findJourney(Long id) {
 		try {
 			return this.get(id);
 		} catch (EntityNotFoundException e) {
@@ -92,12 +90,12 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return null;
 	}
 
-	public String persist(Journey journey){
+	public Long persist(Journey journey) {
 		this.put(journey);
-		return journey.getId().toString();
+		return journey.getId();
 	}
 
-	public void remove(Journey journey){
+	public void remove(Journey journey) {
 		this.delete(journey);
 	}
 }

@@ -3,15 +3,13 @@ package com.covoiturage.shared;
 import java.util.Date;
 import java.util.List;
 
-
 import com.covoiturage.server.locator.DaoServiceLocator;
 import com.covoiturage.server.service.JourneyDao;
-
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-@Service(value=JourneyDao.class,locator = DaoServiceLocator.class)
+@Service(value = JourneyDao.class, locator = DaoServiceLocator.class)
 public interface JourneyRequest extends RequestContext {
 
 	Request<Long> countJourneys();
@@ -26,7 +24,7 @@ public interface JourneyRequest extends RequestContext {
 			List<String> waypoints, List<String> stepsDetails,
 			List<Long> passengers);
 
-Request<Void> persist(JourneyProxy journey);
+	Request<Long> persist(JourneyProxy journey);
 
 	Request<Void> remove(JourneyProxy journey);
 
@@ -36,7 +34,7 @@ Request<Void> persist(JourneyProxy journey);
 
 	Request<List<JourneyProxy>> getJourneysFromUser(Long id);
 
-	Request<JourneyProxy> updateJourney(Long journeyId,
-			Long simpleTravelId, List<String> steps);
+	Request<JourneyProxy> updateJourney(Long journeyId, Long simpleTravelId,
+			List<String> steps);
 
 }

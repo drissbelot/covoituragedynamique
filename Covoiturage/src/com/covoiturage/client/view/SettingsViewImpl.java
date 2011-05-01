@@ -52,6 +52,12 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		language.setTemplate(getFlagTemplate());
 		vehicleMakeField.setTypeAhead(true);
 		vehicleModelField.setTypeAhead(true);
+		emailAdressField
+				.setRegex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$");
+		passwordField.setMinLength(4);
+		homePhoneNumberField.setRegex("\\d+");
+		mobilePhoneNumberField.setRegex("\\d+");
+		workPhoneNumberField.setRegex("\\d+");
 
 	}
 
@@ -131,5 +137,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@Override
 	public TextField<Float> getFuelMixedDriveField() {
 		return fuelMixedDriveField;
+	}
+
+	public ComboBox<BaseModelData> getComfortField() {
+		return comfortField;
 	}
 }

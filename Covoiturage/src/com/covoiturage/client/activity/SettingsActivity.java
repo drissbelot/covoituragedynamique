@@ -202,69 +202,85 @@ public class SettingsActivity extends AbstractActivity implements
 		settingsView.getCarColorField().getStore().removeAll();
 		List<BaseModelData> listRecordsColor = new ArrayList<BaseModelData>();
 		BaseModelData rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_blue());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_blue())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_darkred());
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_darkred())
 						.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_gold());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_gold())
 				.getHTML());
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_green());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_green())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_grey());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_grey())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_indigo());
 		rec.set("img", AbstractImagePrototype
 				.create(carRessources.car_indigo()).getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_orange());
 		rec.set("img", AbstractImagePrototype
 				.create(carRessources.car_orange()).getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_orangered());
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_orangered())
 						.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_pink());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_pink())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_red());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_red())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_slategray());
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_slategray())
 						.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_springgreen());
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_springgreen())
 						.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_violetred());
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_violetred())
 						.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_white());
 		rec.set("img", AbstractImagePrototype.create(carRessources.car_white())
 				.getHTML());
 		listRecordsColor.add(rec);
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_yellow());
 		rec.set("img", AbstractImagePrototype
 				.create(carRessources.car_yellow()).getHTML());
 		listRecordsColor.add(rec);
+		rec.set("name", settingsView.getConstants().car_yellowgreen());
 		rec = new BaseModelData();
 		rec.set("img",
 				AbstractImagePrototype.create(carRessources.car_yellowgreen())

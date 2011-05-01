@@ -53,7 +53,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		vehicleMakeField.setTypeAhead(true);
 		vehicleModelField.setTypeAhead(true);
 
-		// TODO mettre des validators
 	}
 
 	@Override

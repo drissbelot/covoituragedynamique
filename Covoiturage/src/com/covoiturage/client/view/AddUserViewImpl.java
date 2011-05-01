@@ -30,7 +30,16 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	public AddUserViewImpl() {
 
 		initWidget(binder.createAndBindUi(this));
+		loginField.setAllowBlank(false);
+		loginField.setMinLength(4);
 		passwordField.setPassword(true);
+		passwordField.setMinLength(4);
+		firstNameField.setAllowBlank(false);
+		lastNameField.setAllowBlank(false);
+		emailAdressField.setAllowBlank(false);
+		emailAdressField
+				.setRegex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$");
+
 	}
 
 	@Override

@@ -48,4 +48,6 @@ public interface SettingsView extends IsWidget {
 
 	public ComboBox<BaseModelData> getComfortField();
 
+	public ComboBox<BaseModelData> getCarColorField();
+
 }

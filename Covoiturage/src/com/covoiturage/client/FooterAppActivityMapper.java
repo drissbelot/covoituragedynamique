@@ -1,7 +1,7 @@
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.FooterActivity;
-
+import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
@@ -14,7 +14,7 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 public class FooterAppActivityMapper implements ActivityMapper {
-	private ClientFactory clientFactory;
+	private final ClientFactory clientFactory;
 
 	public FooterAppActivityMapper(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
@@ -35,6 +35,8 @@ public class FooterAppActivityMapper implements ActivityMapper {
 		else if (place instanceof MessagesListPlace)
 			return new FooterActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
+			return new FooterActivity(clientFactory);
+		else if (place instanceof AddUserPlace)
 			return new FooterActivity(clientFactory);
 		return null;
 	}

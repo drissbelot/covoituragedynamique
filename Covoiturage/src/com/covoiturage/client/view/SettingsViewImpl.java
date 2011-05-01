@@ -49,7 +49,8 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	public SettingsViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 
-		language.setTemplate(getFlagTemplate());
+		language.setTemplate(getTemplate());
+		comfortField.setTemplate(getTemplate());
 		vehicleMakeField.setTypeAhead(true);
 		vehicleModelField.setTypeAhead(true);
 		emailAdressField
@@ -106,7 +107,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		return constants;
 	}
 
-	private native String getFlagTemplate() /*-{
+	private native String getTemplate() /*-{
 		return [
 				'<tpl for=".">',
 				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
@@ -139,6 +140,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		return fuelMixedDriveField;
 	}
 
+	@Override
 	public ComboBox<BaseModelData> getComfortField() {
 		return comfortField;
 	}

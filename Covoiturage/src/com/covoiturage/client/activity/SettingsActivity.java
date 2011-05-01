@@ -195,36 +195,38 @@ public class SettingsActivity extends AbstractActivity implements
 	}
 
 	private void comfortComboBox() {
-		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
+		settingsView.getComfortField().getStore().removeAll();
+		List<BaseModelData> listRecordsComfort = new ArrayList<BaseModelData>();
 		BaseModelData rec1 = new BaseModelData();
 		rec1.set("name", settingsView.getConstants().basic());
 		rec1.set("img", AbstractImagePrototype.create(ratingRessources.star())
 				.getHTML());
 		BaseModelData rec2 = new BaseModelData();
 		rec2.set("name", settingsView.getConstants().normal());
-		rec1.set("img",
+		rec2.set("img",
 				AbstractImagePrototype.create(ratingRessources.twoStar())
 						.getHTML());
 		BaseModelData rec3 = new BaseModelData();
 		rec3.set("name", settingsView.getConstants().comfortable());
-		rec1.set("img",
+		rec3.set("img",
 				AbstractImagePrototype.create(ratingRessources.threeStar())
 						.getHTML());
 		BaseModelData rec4 = new BaseModelData();
 		rec4.set("name", settingsView.getConstants().luxury());
-		rec1.set("img",
+		rec4.set("img",
 				AbstractImagePrototype.create(ratingRessources.fourStar())
 						.getHTML());
 
-		listRecords.add(rec1);
-		listRecords.add(rec2);
-		listRecords.add(rec3);
-		listRecords.add(rec4);
-		settingsView.getComfortField().getStore().add(listRecords);
+		listRecordsComfort.add(rec1);
+		listRecordsComfort.add(rec2);
+		listRecordsComfort.add(rec3);
+		listRecordsComfort.add(rec4);
+		settingsView.getComfortField().getStore().add(listRecordsComfort);
 
 	}
 
 	private void languageComboBox() {
+		settingsView.getLanguage().getStore().removeAll();
 		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 		BaseModelData recEn = new BaseModelData();
 		recEn.set("name", settingsView.getConstants().en());

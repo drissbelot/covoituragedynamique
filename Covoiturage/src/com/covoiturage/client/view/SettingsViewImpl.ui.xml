@@ -2,7 +2,10 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client' xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
 	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form" xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
-	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeLanguage" />
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeComfort" />
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeModel" />
+	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeMake" />
 	<ui:with type="com.covoiturage.client.i18n.SettingsViewConstants" field="constants"/>
 	<ui:style src="stylesheet.css" />
 		
@@ -20,16 +23,16 @@
 						<form:TextField ui:field="mobilePhoneNumberField" fieldLabel="{constants.mobilePhoneNumber}"/>
 						<form:TextField ui:field="homePhoneNumberField" fieldLabel="{constants.homePhoneNumber}"/>
 						<form:TextField ui:field="workPhoneNumberField" fieldLabel="{constants.workPhoneNumber}"/>
-						<form:ComboBox store="{store}" ui:field="language" fieldLabel="{constants.languelab}"/>
+						<form:ComboBox store="{storeLanguage}" ui:field="language" fieldLabel="{constants.languelab}"/>
 					</form:FormPanel>
 				</gxt:TabItem>
 				<gxt:TabItem text="Vehicle Informations">
 					<form:FormPanel ui:field="vehicleForm">
-						<form:ComboBox ui:field="vehicleMakeField" store="{store}" fieldLabel="{constants.make}"/>
-						<form:ComboBox ui:field="vehicleModelField" store="{store}" fieldLabel="{constants.model}"/>
+						<form:ComboBox ui:field="vehicleMakeField" store="{storeMake}" fieldLabel="{constants.make}"/>
+						<form:ComboBox ui:field="vehicleModelField" store="{storeModel}" fieldLabel="{constants.model}"/>
 						<form:TextField ui:field="vehicleDateField" fieldLabel="{constants.vehicleDate}"/>
 						<form:TextField ui:field="seatsNumberField" fieldLabel="{constants.seatsNumber}"/>
-						<form:ComboBox ui:field="comfortField" store="{store}"/>
+						<form:ComboBox ui:field="comfortField" store="{storeComfort}"/>
 						<form:TextField ui:field="fuelMixedDriveField" fieldLabel="{constants.fuelMixedDrive}"/>
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 						

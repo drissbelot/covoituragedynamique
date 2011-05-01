@@ -20,4 +20,14 @@ public interface LanguageFlagsRessources extends ClientBundle {
 	@Source("com/covoiturage/client/images/flag_nl.png")
 	ImageResource flag_nl();
 
+	ImageResource flag_ch_list();
+
+	ImageResource flag_en_list();
+
+	ImageResource flag_fr_list();
+
+	ImageResource flag_it_list();
+
+	ImageResource flag_nl_list();
+
 }

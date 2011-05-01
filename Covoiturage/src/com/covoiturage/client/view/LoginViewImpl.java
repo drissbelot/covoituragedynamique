@@ -1,5 +1,6 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.images.CovoiturageResources;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
@@ -20,7 +21,8 @@ public class LoginViewImpl extends Composite implements LoginView {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-
+	private final CovoiturageResources covoiturageResources = GWT
+			.create(CovoiturageResources.class);
 	@UiField
 	TextField<String> loginField, passwordField;
 	@UiField
@@ -41,6 +43,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 
 		initWidget(binder.createAndBindUi(this));
 		passwordField.setPassword(true);
+		image.setResource(covoiturageResources.taxi());
 	}
 
 	@Override

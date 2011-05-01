@@ -3,7 +3,7 @@ package com.covoiturage.client.images;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface LanguageFlagsRessources extends ClientBundle {
+public interface LanguageFlagsResources extends ClientBundle {
 
 	@Source("com/covoiturage/client/images/flag_ch.png")
 	ImageResource flag_ch();

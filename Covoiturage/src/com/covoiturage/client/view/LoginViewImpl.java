@@ -28,7 +28,7 @@ public class LoginViewImpl extends Composite implements LoginView {
 	@UiField
 	Button addUserButton, sendButton;
 	@UiField
-	Image image, image2;
+	Image image;
 	@UiField
 	AbsolutePanel flowpanel;
 	@UiField
@@ -41,11 +41,6 @@ public class LoginViewImpl extends Composite implements LoginView {
 
 		initWidget(binder.createAndBindUi(this));
 		passwordField.setPassword(true);
-		// TODO ça non plus ça marchera pas mais ça va disparaitre donc ce n'est
-		// rien
-		image.setUrl("LocalPictures/car.png");
-		image2.setUrl("LocalPictures/car.png");
-
 	}
 
 	@Override

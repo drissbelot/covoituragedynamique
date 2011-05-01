@@ -23,7 +23,6 @@
 					</g:HorizontalPanel>
 				</form:FormPanel>	
 			</g:VerticalPanel>
-		<g:Image ui:field="image2" styleName='{style.photo}'  />	
 	</g:HorizontalPanel>
 </g:AbsolutePanel>
 </ui:UiBinder>

@@ -29,29 +29,6 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return list;
 	}
 
-	public static Journey saveJourneyDriver(List<String> steps, Date date,
-			Date departureStart, Date departureEnd, Date arrival, Long driver,
-			String originAddress, String destinationAddress,
-			List<String> waypoints, List<String> stepsDetails,
-			List<Long> passengersTravels) {
-		Journey journey = new Journey();
-		Objectify ofy = ObjectifyService.begin();
-		journey.setSteps(steps);
-		journey.setDate(date);
-		journey.setDriver(driver);
-		journey.setOriginAddress(originAddress);
-		journey.setDestinationAddress(destinationAddress);
-		journey.setWaypoints(waypoints);
-		journey.setStepsDetails(stepsDetails);
-		journey.setDepartureStart(departureStart);
-		journey.setDepartureEnd(departureEnd);
-		journey.setArrival(arrival);
-		journey.setPassengersTravels(passengersTravels);
-		ofy.put(journey);
-
-		return journey;
-	}
-
 	public static Journey updateJourney(Long journeyId, Long simpleTravelId,
 			List<String> steps) {
 		Journey journey = new Journey();

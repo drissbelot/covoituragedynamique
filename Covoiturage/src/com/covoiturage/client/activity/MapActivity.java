@@ -502,23 +502,29 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								.getLocation().toUrlValue());
 
 						if (isDriver) {
+
 							JourneyRequest request = requestFactory
 									.journeyRequest();
-							Request<JourneyProxy> createReq = request
-									.saveJourneyDriver(listAddress, date,
-											departureStart, departureEnd,
-											arrival, userDetails.getId(),
-											mapView.getOriginAddress()
-													.getText(), mapView
-													.getDestinationAddress()
-													.getText(),
-											waypointsCoords, steps,
-											passengersTravels);
-							createReq.fire(new Receiver<JourneyProxy>() {
+							JourneyProxy journey = request
+									.create(JourneyProxy.class);
+							journey.setSteps(listAddress);
+							journey.setDate(date);
+							journey.setDriver(userDetails.getId());
+							journey.setOriginAddress(mapView.getOriginAddress()
+									.getText());
+							journey.setDestinationAddress(mapView
+									.getDestinationAddress().getText());
+							journey.setWaypoints(waypointsCoords);
+							journey.setStepsDetails(steps);
+							journey.setDepartureStart(departureStart);
+							journey.setDepartureEnd(departureEnd);
+							journey.setArrival(arrival);
+							journey.setPassengersTravels(passengersTravels);
+							Request<Long> createReq = request.persist(journey);
+							createReq.fire(new Receiver<Long>() {
 
 								@Override
-								public void onSuccess(
-										JourneyProxy responseJourney) {
+								public void onSuccess(Long responseJourney) {
 									if (passengers != null) {
 										int i = 0;
 										for (final Long passenger : passengers) {
@@ -528,7 +534,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 															passenger,
 															"Passenger found",
 															responseJourney
-																	.getId()
+
 																	+ "/"
 																	+ passengersTravels
 																			.get(i),

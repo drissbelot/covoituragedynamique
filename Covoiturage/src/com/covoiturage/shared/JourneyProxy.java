@@ -8,7 +8,7 @@ import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(value=Journey.class, locator=ObjectifyLocator.class)
+@ProxyFor(value = Journey.class, locator = ObjectifyLocator.class)
 public interface JourneyProxy extends EntityProxy {
 
 	public Date getDate();
@@ -31,8 +31,6 @@ public interface JourneyProxy extends EntityProxy {
 
 	public void setSteps(List<String> steps);
 
-
-
 	public List<String> getWaypoints();
 
 	public void setWaypoints(List<String> waypoints);
@@ -54,5 +52,17 @@ public interface JourneyProxy extends EntityProxy {
 	public void setArrival(Date arrival);
 
 	public Long getId();
+
+	public void setDistance(Float distance);
+
+	public Float getDistance();
+
+	public void setDuration(Float duration);
+
+	public Float getDuration();
+
+	public void setOriginAddress(String originAddress);
+
+	public void setDestinationAddress(String destinationAddress);
 
 }

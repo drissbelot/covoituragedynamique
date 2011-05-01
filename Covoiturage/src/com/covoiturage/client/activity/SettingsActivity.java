@@ -228,24 +228,29 @@ public class SettingsActivity extends AbstractActivity implements
 		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
 		BaseModelData recEn = new BaseModelData();
 		recEn.set("name", settingsView.getConstants().en());
-		recEn.set("img", AbstractImagePrototype.create(languageFlags.flag_en())
-				.getHTML());
+		recEn.set("img",
+				AbstractImagePrototype.create(languageFlags.flag_en_list())
+						.getHTML());
 		BaseModelData recFr = new BaseModelData();
 		recFr.set("name", settingsView.getConstants().fr());
-		recFr.set("img", AbstractImagePrototype.create(languageFlags.flag_fr())
-				.getHTML());
+		recFr.set("img",
+				AbstractImagePrototype.create(languageFlags.flag_fr_list())
+						.getHTML());
 		BaseModelData recNl = new BaseModelData();
 		recNl.set("name", settingsView.getConstants().nl());
-		recNl.set("img", AbstractImagePrototype.create(languageFlags.flag_nl())
-				.getHTML());
+		recNl.set("img",
+				AbstractImagePrototype.create(languageFlags.flag_nl_list())
+						.getHTML());
 		BaseModelData recIt = new BaseModelData();
 		recIt.set("name", settingsView.getConstants().it());
-		recIt.set("img", AbstractImagePrototype.create(languageFlags.flag_it())
-				.getHTML());
+		recIt.set("img",
+				AbstractImagePrototype.create(languageFlags.flag_it_list())
+						.getHTML());
 		BaseModelData recCh = new BaseModelData();
 		recCh.set("name", settingsView.getConstants().ch());
-		recCh.set("img", AbstractImagePrototype.create(languageFlags.flag_ch())
-				.getHTML());
+		recCh.set("img",
+				AbstractImagePrototype.create(languageFlags.flag_ch_list())
+						.getHTML());
 		listRecords.add(recEn);
 		listRecords.add(recFr);
 		listRecords.add(recIt);

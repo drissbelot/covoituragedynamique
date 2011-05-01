@@ -2,7 +2,6 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
-import com.covoiturage.client.images.LanguageFlagsRessources;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -11,7 +10,6 @@ import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.covoiturage.shared.UserInfoProxy;
 import com.covoiturage.shared.UserInfoRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -28,8 +26,6 @@ public class AddUserActivity extends AbstractActivity implements
 	private final AddUserView addUserView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
-	LanguageFlagsRessources languageFlags = GWT
-			.create(LanguageFlagsRessources.class);
 
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();

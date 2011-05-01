@@ -45,10 +45,12 @@ import com.google.gwt.maps.client.directions.DirectionsResult;
 import com.google.gwt.maps.client.directions.DirectionsService;
 import com.google.gwt.maps.client.directions.DirectionsTravelMode;
 import com.google.gwt.maps.client.directions.DirectionsWaypoint;
+import com.google.gwt.maps.client.directions.HasDirectionsLeg;
 import com.google.gwt.maps.client.directions.HasDirectionsRenderer;
 import com.google.gwt.maps.client.directions.HasDirectionsRequest;
 import com.google.gwt.maps.client.directions.HasDirectionsResult;
 import com.google.gwt.maps.client.directions.HasDirectionsService;
+import com.google.gwt.maps.client.directions.HasDirectionsStep;
 import com.google.gwt.maps.client.directions.HasDirectionsTravelMode;
 import com.google.gwt.maps.client.directions.HasDirectionsWaypoint;
 import com.google.gwt.maps.client.directions.impl.DirectionsRendererImpl;
@@ -764,13 +766,23 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							directionsRenderer.setDirections(response);
 							directionsDriver = response;
 							steps = new ArrayList<String>();
-							for (int i = 0; i < response.getRoutes().get(0)
-									.getLegs().get(0).getSteps().size(); i++) {
-								steps.add(response.getRoutes().get(0).getLegs()
-										.get(0).getSteps().get(i)
-										.getStartPoint().toString());
+							for (HasDirectionsLeg leg : response.getRoutes()
+									.get(0).getLegs()) {
+								for (HasDirectionsStep step : leg.getSteps()) {
+									for (int j = 0; j < step.getPath().size(); j = j + 4) {
 
+										steps.add(step.getPath().get(j)
+												.toUrlValue());
+									}
+
+								}
 							}
+
+							mapUrl = "http://maps.google.com/maps/api/staticmap?size=400x400&path=color:0x0000ff";
+							for (String step : steps) {
+								mapUrl += "|" + step;
+							}
+							mapUrl += "&sensor=false";
 
 							if (isDriver) {
 								SimpleTravelRequest request = requestFactory
@@ -870,11 +882,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						}
 
 					});
-			// TODO ajouter le path
-			mapUrl = "http://maps.google.com/maps/api/staticmap?center="
-					+ mapView.getMap().getMap().getCenter().toUrlValue()
-					+ "&zoom=" + mapView.getMap().getMap().getZoom()
-					+ "&size=400x400&sensor=false";
+
 		}
 	}
 

@@ -1,7 +1,5 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.gwtanimation.AnimationVoiture;
-import com.covoiturage.client.gwtanimation.Resources;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
@@ -47,15 +45,6 @@ public class LoginViewImpl extends Composite implements LoginView {
 		// rien
 		image.setUrl("LocalPictures/car.png");
 		image2.setUrl("LocalPictures/car.png");
-
-		// TODO l'idée est bonne mais la voiture qui bouge m'énerve quand je
-		// fais des tests... on doit pouvoir faire plus subtil (genre une
-		// voiture qui change de couleur)
-		final Image img = new Image(Resources.INSTANCE.gwtLogo());
-		flowpanel.add(img, 000, 000);
-		AnimationVoiture animation = new AnimationVoiture(img.getElement(),
-				40000);
-		animation.scrollTo();
 
 	}
 

@@ -58,7 +58,9 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 				.getURLFetchService();
 
 		try {
+			// Logger.getLogger("").warning(mapImage);
 			HTTPResponse fetchResponse = fetchService.fetch(new URL(mapImage));
+
 			String fetchResponseContentType = null;
 			for (HTTPHeader header : fetchResponse.getHeaders()) {
 

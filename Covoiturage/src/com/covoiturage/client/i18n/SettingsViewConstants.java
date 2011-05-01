@@ -59,4 +59,36 @@ public interface SettingsViewConstants extends Constants {
 	String comfortable();
 
 	String luxury();
+
+	String car_blue();
+
+	String car_darkred();
+
+	String car_gold();
+
+	String car_green();
+
+	String car_grey();
+
+	String car_indigo();
+
+	String car_orange();
+
+	String car_orangered();
+
+	String car_pink();
+
+	String car_red();
+
+	String car_slategray();
+
+	String car_springgreen();
+
+	String car_violetred();
+
+	String car_white();
+
+	String car_yellow();
+
+	String car_yellowgreen();
 }

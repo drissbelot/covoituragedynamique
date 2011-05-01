@@ -53,7 +53,7 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 
 		language.setTemplate(getTemplate());
 		comfortField.setTemplate(getTemplate());
-		carColorField.setTemplate(getCarTemplate());
+		carColorField.setTemplate(getTemplate());
 		vehicleMakeField.setTypeAhead(true);
 		vehicleModelField.setTypeAhead(true);
 
@@ -116,12 +116,6 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 				'<tpl for=".">',
 				'<div class="x-combo-list-item">{[values.img]} {[values.name]}</div>',
 				'</tpl>' ].join("");
-	}-*/;
-
-	private native String getCarTemplate() /*-{
-		return [ '<tpl for=".">',
-				'<div class="x-combo-list-item">{[values.img]}</div>', '</tpl>' ]
-				.join("");
 	}-*/;
 
 	@Override

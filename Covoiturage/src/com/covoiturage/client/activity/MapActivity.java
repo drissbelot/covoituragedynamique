@@ -274,32 +274,35 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 				isDriver = mapView.getDriverRadioButton().getValue();
 				isPassenger = mapView.getPassengerRadioButton().getValue();
-				GWT.log("test" + isPassenger);
 			}
 		});
 		userService.getUser(new AsyncCallback<String>() {
 
 			@Override
 			public void onSuccess(String result) {
-				UserInfoDetailsRequest userReq = requestFactory
-						.userInfoDetailsRequest();
-				Request<UserInfoDetailsProxy> createReq = userReq
-						.findDetailsFromUser(Long.parseLong(result));
-				createReq.fire(new Receiver<UserInfoDetailsProxy>() {
+				if (result != null) {
+					UserInfoDetailsRequest userReq = requestFactory
+							.userInfoDetailsRequest();
+					Request<UserInfoDetailsProxy> createReq = userReq
+							.findDetailsFromUser(Long.parseLong(result));
+					createReq.fire(new Receiver<UserInfoDetailsProxy>() {
 
-					@Override
-					public void onSuccess(UserInfoDetailsProxy response) {
-						userDetails = response;
+						@Override
+						public void onSuccess(UserInfoDetailsProxy response) {
+							userDetails = response;
 
-					}
+						}
 
-					@Override
-					public void onFailure(ServerFailure error) {
-						if (error.getMessage().contains("not logged in"))
-							goTo(new LoginPlace(null));
+						@Override
+						public void onFailure(ServerFailure error) {
+							if (error.getMessage().contains("not logged in"))
+								goTo(new LoginPlace(null));
 
-					}
-				});
+						}
+					});
+				} else {
+					goTo(new LoginPlace(null));
+				}
 
 			}
 
@@ -603,6 +606,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 							SimpleTravelRequest request = requestFactory
 									.simpleTravelRequest();
+
 							Request<SimpleTravelProxy> createReq = request
 									.saveJourneyPassenger(listAddress, mapView
 											.getOriginAddress().getText(),
@@ -611,6 +615,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 											departureStart, departureEnd,
 											arrival, userDetails.getId(),
 											mapUrl);
+
 							createReq.fire(new Receiver<SimpleTravelProxy>() {
 
 								@Override

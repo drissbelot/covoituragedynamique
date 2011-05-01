@@ -34,9 +34,9 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public String getLastName();
 
-	public String getUser();
+	public Long getUser();
 
-	public void setUser(String user);
+	public void setUser(Long user);
 
 	public Long getId();
 
@@ -48,9 +48,9 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public void setChannelId(String Id);
 
-	public void setMessages(List<String> messages);
+	public void setMessages(List<Long> messages);
 
-	public List<String> getMessages();
+	public List<Long> getMessages();
 
 	public void setColorOfVehicle(String colorOfVehicle);
 

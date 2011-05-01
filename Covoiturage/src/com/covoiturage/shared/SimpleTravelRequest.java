@@ -5,13 +5,11 @@ import java.util.List;
 
 import com.covoiturage.server.locator.DaoServiceLocator;
 import com.covoiturage.server.service.SimpleTravelDao;
-
-
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.RequestContext;
 import com.google.gwt.requestfactory.shared.Service;
 
-@Service(value=SimpleTravelDao.class,locator = DaoServiceLocator.class)
+@Service(value = SimpleTravelDao.class, locator = DaoServiceLocator.class)
 public interface SimpleTravelRequest extends RequestContext {
 
 	Request<Long> countSimpleTravels();
@@ -25,7 +23,7 @@ public interface SimpleTravelRequest extends RequestContext {
 			Date departureStart, Date departureEnd, Date arrival, Long id,
 			String mapUrl);
 
-	Request<String> persist(SimpleTravelProxy simpleTravel);
+	Request<Long> persist(SimpleTravelProxy simpleTravel);
 
 	Request<Void> remove(SimpleTravelProxy simpleTravel);
 

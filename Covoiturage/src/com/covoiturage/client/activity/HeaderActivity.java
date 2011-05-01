@@ -49,26 +49,30 @@ public class HeaderActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(String result) {
-				UserInfoRequest userReq = requestFactory.userInfoRequest();
-				Request<UserInfoProxy> createReq = userReq.findUserInfo(Long.parseLong(result));
-				createReq.fire(new Receiver<UserInfoProxy>() {
+				if (result != null) {
+					UserInfoRequest userReq = requestFactory.userInfoRequest();
+					Request<UserInfoProxy> createReq = userReq
+							.findUserInfo(Long.parseLong(result));
+					createReq.fire(new Receiver<UserInfoProxy>() {
 
-					@Override
-					public void onSuccess(UserInfoProxy response) {
+						@Override
+						public void onSuccess(UserInfoProxy response) {
 
-						currentUser = response;
-						headerView.getCurrentUser().setText(
-								currentUser.getLogin());
-					}
+							currentUser = response;
+							headerView.getCurrentUser().setText(
+									currentUser.getLogin());
+						}
 
-					@Override
-					public void onFailure(ServerFailure error) {
-						if (error.getMessage().contains("not logged in"))
-							goTo(new LoginPlace(null));
+						@Override
+						public void onFailure(ServerFailure error) {
+							if (error.getMessage().contains("not logged in"))
+								goTo(new LoginPlace(null));
 
-					}
-				});
-
+						}
+					});
+				} else {
+					goTo(new LoginPlace(null));
+				}
 			}
 
 			@Override

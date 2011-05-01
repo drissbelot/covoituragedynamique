@@ -8,7 +8,7 @@ import com.covoiturage.server.locator.ObjectifyLocator;
 import com.google.gwt.requestfactory.shared.EntityProxy;
 import com.google.gwt.requestfactory.shared.ProxyFor;
 
-@ProxyFor(value=SimpleTravel.class,locator=ObjectifyLocator.class)
+@ProxyFor(value = SimpleTravel.class, locator = ObjectifyLocator.class)
 public interface SimpleTravelProxy extends EntityProxy {
 
 	public Date getDate();
@@ -23,10 +23,9 @@ public interface SimpleTravelProxy extends EntityProxy {
 
 	public Long getPassenger();
 
-	public void setPassenger(String passenger);
+	public void setPassenger(Long passenger);
 
 	public void setSteps(List<String> steps);
-
 
 	public Date getDepartureStart();
 

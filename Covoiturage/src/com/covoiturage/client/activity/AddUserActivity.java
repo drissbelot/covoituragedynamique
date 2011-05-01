@@ -1,7 +1,5 @@
 package com.covoiturage.client.activity;
 
-
-
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.images.LanguageFlagsRessources;
@@ -21,14 +19,13 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
-
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class AddUserActivity extends AbstractActivity implements
 		AddUserView.Presenter {
 
 	private final EventBus eventBus;
-	private AddUserView addUserView;
+	private final AddUserView addUserView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
 	LanguageFlagsRessources languageFlags = GWT
@@ -60,10 +57,10 @@ public class AddUserActivity extends AbstractActivity implements
 		newUser.setPassword(addUserView.getPassword().getValue());
 		newUser.setEmailAddress(addUserView.getEmailAddress().getValue());
 
-		Request<String> createReq = request.persist(newUser);
-		createReq.fire(new Receiver<String>() {
+		Request<Long> createReq = request.persist(newUser);
+		createReq.fire(new Receiver<Long>() {
 			@Override
-			public void onSuccess(String response) {
+			public void onSuccess(Long response) {
 
 				savePassengerDriver(response);
 			}
@@ -72,7 +69,7 @@ public class AddUserActivity extends AbstractActivity implements
 
 	}
 
-	protected void savePassengerDriver(String newUser) {
+	protected void savePassengerDriver(Long newUser) {
 
 		UserInfoDetailsRequest requestDriver = requestFactory
 				.userInfoDetailsRequest();
@@ -81,14 +78,11 @@ public class AddUserActivity extends AbstractActivity implements
 		newDriver.setUser(newUser);
 		newDriver.setFirstName(addUserView.getFirstName().getValue());
 		newDriver.setLastName(addUserView.getLastName().getValue());
+		Request<Long> createReqDriver = requestDriver.persist(newDriver);
 
-	//	newDriver.setMessages(new ArrayList<String>());
-
-		Request<String> createReqDriver = requestDriver.persist(newDriver);
-
-		createReqDriver.fire(new Receiver<String>() {
+		createReqDriver.fire(new Receiver<Long>() {
 			@Override
-			public void onSuccess(String response) {
+			public void onSuccess(Long response) {
 				eventBus.fireEvent(new AddUserEvent());
 				goTo(new LoginPlace(null));
 			}

@@ -29,7 +29,7 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	}
 
-	public static List<SimpleTravel> getSimpleTravelsFromUser(String userId) {
+	public static List<SimpleTravel> getSimpleTravelsFromUser(Long userId) {
 		Objectify ofy = ObjectifyService.begin();
 
 		List<SimpleTravel> list = ofy.query(SimpleTravel.class)
@@ -39,13 +39,13 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	}
 
-	public static SimpleTravel saveJourneyPassenger(List<String> steps,
+	public SimpleTravel saveJourneyPassenger(List<String> steps,
 			String originAddress, String destinationAddress, Date date,
 			Date departureStart, Date departureEnd, Date arrival,
 			Long passenger, String mapImage) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		Objectify ofy = ObjectifyService.begin();
-		java.util.logging.Logger.getLogger("").warning("blabla");
+
 		simpleTravel.setSteps(steps);
 		simpleTravel.setDate(date);
 		simpleTravel.setPassenger(passenger);
@@ -73,7 +73,6 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 				simpleTravel.setMapImageType(fetchResponseContentType);
 
 				simpleTravel.setMapImage(fetchResponse.getContent());
-				;
 
 			}
 
@@ -90,7 +89,7 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 		return simpleTravel;
 	}
 
-	public static void updateSimpleTravel(String id, String statusDriver,
+	public static void updateSimpleTravel(Long id, String statusDriver,
 			String statusPassenger) {
 
 		SimpleTravel travel = new SimpleTravel();
@@ -132,9 +131,9 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 		return null;
 	}
 
-	public String persist(SimpleTravel simpleTravel) {
+	public Long persist(SimpleTravel simpleTravel) {
 		this.put(simpleTravel);
-		return simpleTravel.getId().toString();
+		return simpleTravel.getId();
 	}
 
 	public void remove(SimpleTravel simpleTravel) {

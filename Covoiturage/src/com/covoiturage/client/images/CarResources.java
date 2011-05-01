@@ -3,7 +3,7 @@ package com.covoiturage.client.images;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface CarRessources extends ClientBundle {
+public interface CarResources extends ClientBundle {
 
 	ImageResource car_blue();
 

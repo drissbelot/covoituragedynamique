@@ -3,7 +3,7 @@ package com.covoiturage.client.images;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
-public interface RatingRessources extends ClientBundle {
+public interface RatingResources extends ClientBundle {
 	@Source("star.png")
 	ImageResource star();
 

@@ -1,6 +1,6 @@
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.images.LanguageFlagsRessources;
+import com.covoiturage.client.images.LanguageFlagsResources;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,8 +23,8 @@ public class FooterViewImpl extends Composite implements FooterView {
 
 	public FooterViewImpl() {
 		initWidget(binder.createAndBindUi(this));
-		LanguageFlagsRessources languageFlags = GWT
-				.create(LanguageFlagsRessources.class);
+		LanguageFlagsResources languageFlags = GWT
+				.create(LanguageFlagsResources.class);
 
 		imagefr = new Image(languageFlags.flag_fr());
 		imagenl = new Image(languageFlags.flag_nl());

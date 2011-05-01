@@ -79,7 +79,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 		driverRadioButton.setValue(true);
 		directionsPanel.setHeaderVisible(false);
-		// TODO unifier le style pour les deux suggestbox
+
 	}
 
 	@Override

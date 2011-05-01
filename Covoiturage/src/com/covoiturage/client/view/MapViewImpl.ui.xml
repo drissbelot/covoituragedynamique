@@ -14,15 +14,15 @@
 				<m:MapWidget ui:field='mapWidget' width="450px" height="450px" />
 				<g:VerticalPanel styleName='{style.horairecontainer}'>
 					<form:FormPanel ui:field="data" heading="{constants.header}">
-						<g:HorizontalPanel>
-							<g:Label styleName='{style.label}' ui:field="from" width="3em" text="{constants.from} :"/>
+						<g:HorizontalPanel width="100%">
+							<g:Label styleName='x-form-item-label' ui:field="from" text="{constants.from} : " width="100%"/>
 							<g:SuggestBox ui:field="originAdress"
-								text="1,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}' />
+								text="1,Grand place, Louvain-La-Neuve"  styleName="x-form-field x-form-text" width="100%"/>
 						</g:HorizontalPanel>
-						<g:HorizontalPanel>
-							<g:Label styleName='{style.label}' ui:field="to" width="3em" text="{constants.to} :"/>
+						<g:HorizontalPanel width="100%">
+							<g:Label styleName='x-form-item-label' ui:field="to" text="{constants.to} : " width="100%"/>
 							<g:SuggestBox ui:field="destinationAdress"
-								text="2,Grand place, Louvain-La-Neuve" width="200px" styleName='{style.textbox}' />
+								text="2,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"  width="100%"/>
 						</g:HorizontalPanel>
 						<form:DateField ui:field="dateOfJourney" fieldLabel="{constants.Dateofjourney}"/>
 						<form:TextField ui:field="departureStartTimeItem" fieldLabel="{constants.departuretime}"/>

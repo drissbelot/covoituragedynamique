@@ -3,11 +3,10 @@ package com.covoiturage.server.domain;
 import java.util.Date;
 import java.util.List;
 
-
 import com.googlecode.objectify.annotation.Entity;
 
-@Entity 
-public class Journey  extends DatastoreObject{
+@Entity
+public class Journey extends DatastoreObject {
 	private Long driver;
 
 	private List<Long> passengersTravels;
@@ -82,12 +81,10 @@ public class Journey  extends DatastoreObject{
 		this.waypoints = waypoints;
 	}
 
-
-
 	public Journey() {
 	}
 
-	public Journey( Long driver, List<Long> passengersTravels,
+	public Journey(Long driver, List<Long> passengersTravels,
 			List<String> steps, String originAddress,
 			String destinationAddress, List<String> stepsDetails) {
 		super();

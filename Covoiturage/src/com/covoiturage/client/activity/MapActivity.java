@@ -489,7 +489,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			public void callback(List<HasGeocoderResult> responses,
 					String status) {
 				listAddress.add(responses.get(0).getGeometry().getLocation()
-						.toString());
+						.toUrlValue());
 				geocoder = new Geocoder();
 				HasGeocoderRequest request = new GeocoderRequest();
 				request.setAddress(mapView.getDestinationAddress().getTextBox()
@@ -499,7 +499,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					public void callback(List<HasGeocoderResult> responses,
 							String status) {
 						listAddress.add(responses.get(0).getGeometry()
-								.getLocation().toString());
+								.getLocation().toUrlValue());
 
 						if (isDriver) {
 							JourneyRequest request = requestFactory
@@ -780,7 +780,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 							mapUrl = "http://maps.google.com/maps/api/staticmap?size=400x400&path=color:0x0000ff";
 							for (String step : steps) {
-								mapUrl += "|" + step;
+								mapUrl += "%7C" + step;
 							}
 							mapUrl += "&sensor=false";
 

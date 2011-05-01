@@ -35,6 +35,8 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	ComboBox<BaseModelData> comfortField;
 	@UiField
+	ComboBox<BaseModelData> carColorField;
+	@UiField
 	TextField<Integer> seatsNumberField;
 	@UiField
 	TextField<Float> emissionsCO2Field;
@@ -51,8 +53,10 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 
 		language.setTemplate(getTemplate());
 		comfortField.setTemplate(getTemplate());
+		carColorField.setTemplate(getCarTemplate());
 		vehicleMakeField.setTypeAhead(true);
 		vehicleModelField.setTypeAhead(true);
+
 		emailAdressField
 				.setRegex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$");
 		passwordField.setMinLength(4);
@@ -114,6 +118,12 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 				'</tpl>' ].join("");
 	}-*/;
 
+	private native String getCarTemplate() /*-{
+		return [ '<tpl for=".">',
+				'<div class="x-combo-list-item">{[values.img]}</div>', '</tpl>' ]
+				.join("");
+	}-*/;
+
 	@Override
 	public ComboBox<BaseModelData> getVehicleMake() {
 		return vehicleMakeField;
@@ -143,5 +153,10 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@Override
 	public ComboBox<BaseModelData> getComfortField() {
 		return comfortField;
+	}
+
+	@Override
+	public ComboBox<BaseModelData> getCarColorField() {
+		return carColorField;
 	}
 }

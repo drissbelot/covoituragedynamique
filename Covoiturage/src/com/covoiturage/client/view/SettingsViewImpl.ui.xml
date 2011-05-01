@@ -4,6 +4,7 @@
 	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form" xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeLanguage" />
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeComfort" />
+		<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeCarColor" />
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeModel" />
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeMake" />
 	<ui:with type="com.covoiturage.client.i18n.SettingsViewConstants" field="constants"/>
@@ -33,6 +34,7 @@
 						<form:TextField ui:field="vehicleDateField" fieldLabel="{constants.vehicleDate}"/>
 						<form:TextField ui:field="seatsNumberField" fieldLabel="{constants.seatsNumber}"/>
 						<form:ComboBox ui:field="comfortField" store="{storeComfort}"/>
+						<form:ComboBox ui:field="carColorField" store="{storeCarColor}"/>
 						<form:TextField ui:field="fuelMixedDriveField" fieldLabel="{constants.fuelMixedDrive}"/>
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 						

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
+import com.covoiturage.client.images.CarRessources;
 import com.covoiturage.client.images.LanguageFlagsRessources;
 import com.covoiturage.client.images.RatingRessources;
 import com.covoiturage.client.place.LoginPlace;
@@ -52,6 +53,7 @@ public class SettingsActivity extends AbstractActivity implements
 	LanguageFlagsRessources languageFlags = GWT
 			.create(LanguageFlagsRessources.class);
 	RatingRessources ratingRessources = GWT.create(RatingRessources.class);
+	CarRessources carRessources = GWT.create(CarRessources.class);
 
 	public SettingsActivity(ClientFactory clientFactory) {
 
@@ -64,6 +66,7 @@ public class SettingsActivity extends AbstractActivity implements
 	private void bind() {
 		languageComboBox();
 		comfortComboBox();
+		carColorComboBox();
 		userService.getUser(new AsyncCallback<String>() {
 
 			@Override
@@ -191,6 +194,84 @@ public class SettingsActivity extends AbstractActivity implements
 
 			}
 		});
+
+	}
+
+	private void carColorComboBox() {
+
+		settingsView.getCarColorField().getStore().removeAll();
+		List<BaseModelData> listRecordsColor = new ArrayList<BaseModelData>();
+		BaseModelData rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_blue())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_darkred())
+						.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_gold())
+				.getHTML());
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_green())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_grey())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype
+				.create(carRessources.car_indigo()).getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype
+				.create(carRessources.car_orange()).getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_orangered())
+						.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_pink())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_red())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_slategray())
+						.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_springgreen())
+						.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_violetred())
+						.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype.create(carRessources.car_white())
+				.getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img", AbstractImagePrototype
+				.create(carRessources.car_yellow()).getHTML());
+		listRecordsColor.add(rec);
+		rec = new BaseModelData();
+		rec.set("img",
+				AbstractImagePrototype.create(carRessources.car_yellowgreen())
+						.getHTML());
+		listRecordsColor.add(rec);
+
+		settingsView.getCarColorField().getStore().add(listRecordsColor);
 
 	}
 

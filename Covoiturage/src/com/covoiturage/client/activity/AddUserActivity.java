@@ -2,7 +2,7 @@ package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
-import com.covoiturage.client.place.LoginPlace;
+import com.covoiturage.client.place.LicencePlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoDetailsProxy;
@@ -57,10 +57,8 @@ public class AddUserActivity extends AbstractActivity implements
 		createReq.fire(new Receiver<Long>() {
 			@Override
 			public void onSuccess(Long response) {
-
 				savePassengerDriver(response);
 			}
-
 		});
 
 	}
@@ -80,7 +78,7 @@ public class AddUserActivity extends AbstractActivity implements
 			@Override
 			public void onSuccess(Long response) {
 				eventBus.fireEvent(new AddUserEvent());
-				goTo(new LoginPlace(null));
+				goTo(new LicencePlace(null));
 			}
 
 		});

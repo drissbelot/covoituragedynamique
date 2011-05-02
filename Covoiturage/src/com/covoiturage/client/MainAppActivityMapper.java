@@ -2,6 +2,7 @@ package com.covoiturage.client;
 
 import com.covoiturage.client.activity.AddUserActivity;
 import com.covoiturage.client.activity.HistoryActivity;
+import com.covoiturage.client.activity.LicenceActivity;
 import com.covoiturage.client.activity.LoginActivity;
 import com.covoiturage.client.activity.MapActivity;
 import com.covoiturage.client.activity.MessageDetailsActivity;
@@ -9,6 +10,7 @@ import com.covoiturage.client.activity.MessagesListActivity;
 import com.covoiturage.client.activity.SettingsActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
+import com.covoiturage.client.place.LicencePlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
@@ -44,6 +46,8 @@ public class MainAppActivityMapper implements ActivityMapper {
 			return new MessagesListActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
 			return new MessageDetailsActivity(clientFactory);
+		else if (place instanceof LicencePlace)
+			return new LicenceActivity(clientFactory);
 		return null;
 	}
 

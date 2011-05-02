@@ -31,6 +31,8 @@ public class Covoiturage implements EntryPoint {
 	private final ContentPanel horizMasterPanel = new ContentPanel();
 	private final ContentPanel vertMasterPanel = new ContentPanel();
 	private final ContentPanel asidePanel = new ContentPanel();
+	
+	
 
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
 		@Override
@@ -108,12 +110,12 @@ public class Covoiturage implements EntryPoint {
 		final Viewport v = new Viewport();
 		v.setLayout(new FitLayout());
 		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH,
-				100);
+				60);
 		layoutContainer.add(horizMasterPanel, northData);
 		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
 		eastData.setCollapsible(true);
 		layoutContainer.add(asidePanel, eastData);
-		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 120);
+		BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 110);
 		layoutContainer.add(vertMasterPanel, westData);
 		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
 				50);
@@ -125,9 +127,12 @@ public class Covoiturage implements EntryPoint {
 		FooterPanel.setHeaderVisible(false);
 		mainPanel.setHeaderVisible(false);
 		mainPanel.setScrollMode(Scroll.AUTO);
-
 		horizMasterPanel.setHeaderVisible(false);
 		vertMasterPanel.setHeaderVisible(false);
+		
+		//vertMasterPanel.setBodyStyleName("menuPanel");
+		//vertMasterPanel.addStyleName("menuPanel");
+		vertMasterPanel.setStyleName("menuPanel",true);
 
 		ClientFactory clientFactory = new ClientFactoryImpl();
 		EventBus eventBus = clientFactory.getEventBus();

@@ -4,6 +4,7 @@ import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.client.view.FooterView;
 import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.HistoryView;
+import com.covoiturage.client.view.LicenceView;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.MapView;
 import com.covoiturage.client.view.MenuView;
@@ -46,4 +47,6 @@ public interface ClientFactory {
 	MessageDetailsView getMessageDetailsView();
 
 	ReplyMessageView getReplyMessageView();
+
+	LicenceView getLicenceView();
 }

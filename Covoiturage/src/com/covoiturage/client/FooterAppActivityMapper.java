@@ -3,6 +3,7 @@ package com.covoiturage.client;
 import com.covoiturage.client.activity.FooterActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
+import com.covoiturage.client.place.LicencePlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
@@ -36,8 +37,11 @@ public class FooterAppActivityMapper implements ActivityMapper {
 			return new FooterActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
 			return new FooterActivity(clientFactory);
+		else if (place instanceof LicencePlace)
+			return new FooterActivity(clientFactory);
 		else if (place instanceof AddUserPlace)
 			return new FooterActivity(clientFactory);
+
 		return null;
 	}
 

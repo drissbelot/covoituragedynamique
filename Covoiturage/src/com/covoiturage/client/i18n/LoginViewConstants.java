@@ -15,5 +15,10 @@ public interface LoginViewConstants extends Constants {
 	String newuser();
 
 	String title();
-
+	
+	String AlreadyGotAccount();
+	
+	String NoAccountYet();
+	
+	String Register();
 }

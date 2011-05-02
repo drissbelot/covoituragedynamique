@@ -10,7 +10,7 @@
 		}
 		.button {
 			margin: 1em;
-			background-color: RGB(59,89,152); 
+			background-color: RGB(59,89,152);
 			display:block;
 			color: white;
 			text-decoration : none;
@@ -30,9 +30,9 @@
 			color: white;
 		}
 		.cartecontainer{
-			padding: 2em 4em 2em 2em;
-			border-bottom : solid RGB(109,134,183) 3px;
-			border-right : solid RGB(109,134,183) 3px;
+			padding: 1em 4em 1em 2em;
+			/*border-bottom : solid RGB(109,134,183) 3px;
+			border-right : solid RGB(153,13,183) 3px;*/
 			/*border-left : solid RGB(109,134,183) 3px;*/
 		
 		}
@@ -42,10 +42,32 @@
     	.label { 
     		background-color: white; 
     		color: black;
-    		font: 112% Arial;
-    		width: 5.5em;
+    		font: 115% Arial;
     		margin: 0em 1em 1em 1em;
+    		width: 5.5em;
     		
+    		
+    	}
+    	.text{
+    		background-color: white; 
+    		color: black;
+    		font: 115% Arial;
+    		margin: 0em 0.5em 0em 0.5em;
+    	
+    	}
+    	.h4{
+    		background-color: white; 
+    		color: black;
+    		font: 122% Arial;
+    		text-decoration: underline;
+    		margin: 0em 1em 1em 1em;
+    	}
+    	.paddingright{
+    		padding: 0em 1em 1em 0em;
+    		border-right: inset RGB(109,134,183) 2px;
+    	}
+    	.paddingleft{
+    		padding: 0em 0em 1em 2em;
     	}
     	.paddingdown{
     		padding: 0em 0em 1em 0em;
@@ -68,7 +90,7 @@
     	}
     	.centerpanel2 { 
     		border: solid RGB(109,134,183) 3px;
-    		margin: 10% 30%;
+    		
     	}
     	.grandpanel { 
     		border: 2px solid orange;	
@@ -81,6 +103,7 @@
 			text-align: center;
 			margin: 0px 0% 0%;
 			background-color: RGB(59,89,152);
+			border-bottom : solid RGB(153,187,232) 3px;
     	}
     	.h2{
     		font: 150% Arial;
@@ -99,7 +122,8 @@
 			border-bottom: solid RGB(109,134,183) 3px;
     	}
     	.textbox{
-    		margin : 0em 1em 0em 0em;
+    		margin : 0em 1em 0.3em 0em;
+    		outline:medium grey;/*!important;*/
     	}
     	.datepicker{
     		margin : 0em 0em 1em 2em;
@@ -108,8 +132,8 @@
     		margin : 0em 0em 1em 1.5em;
     	}
     	.containerphtoto{
-    		/*border: solid RGB(109,134,183) 3px;*/
-    		margin: 10% 22%;
+    		
+    		margin: 10% 20%;
     		padding : 0em 1em
     	}
     	.photo{
@@ -117,12 +141,7 @@
     		height:175px;
     		margin :0em 1em 0em 1em
     	}
-    	.menutitre{
-    		background-color: RGB(59,89,152);
-    		color: white;
-    		border-bottom: solid RGB(109,134,183) 3px;
-    		
-    	}
+    	
     	.buttontitre {
     		font: 120% normal;
 			background-color: RGB(59,89,152);
@@ -145,24 +164,46 @@
     		font: 200% Arial;
 			color: white;
 			text-align: center;
-			background-color: RGB(59,89,152);
+			/*background-color: RGB(59,89,152);*/
     	}
-    	.menucote{
+    	
+    	
+    	.menutitre{
+    		background-color: RGB(59,89,152);
+    		color: white;
+    		/*border-bottom: solid RGB(109,134,183) 3px;*/
+    		font: 125% normal;
+    		
+    	}
+    	/* menu css*/
+    	.menuhead{
+    		color: RGB(54,66,139);
+			font: 120% normal bold;
+    		background-image:url(images/covoiturage/corners-sprite.jpg) ;
+			background-repeat:repeat-x ;
+			background-position:top-left ;
+			background-color:RGB(59,95,165);
+			padding: 0.20em 1em 0.20em 0.1em;
+			border-bottom: inset RGB(109,134,183) 2px;
+    	}
+    	/*.menucote{
     		background-color: RGB(59,95,165);
     		color: white;
-    		/*border-right: solid RGB(109,134,183) 3px;*/
-    		/*border-bottom: solid RGB(109,134,183) 3px;*/
-    	}
+    	}*/
     	.buttonmenu {
-    		font: 110% normal;
+    		font: 120% normal ;
 			background-color: RGB(59,95,165);
+			background-image:url(images/covoiturage/degrade_bleu.jpg) ;
+			background-color:RGB(59,95,180); 
+			background-repeat:repeat-y;
 			display:block;
 			color: white;
 			margin : 0em 0em 0em 0em;
-			padding: 0em 1em 0em 0em;
+			padding: 0.25em 1em 0.25em 1em;
 		}
 		.buttonmenu:hover {
-			background-color: RGB(109,134,183);
+			background-image:none ;
+			background-color: RGB(34,123,189);
 			color: white;
 			cursor : pointer;
 		}
@@ -171,3 +212,20 @@
 			color: white;
 		}
 		
+		.menuPanel{
+			background-image:url(images/covoiturage/degrade_bleu.jpg) ;
+			background-color:RGB(59,95,180); 
+			background-repeat:repeat-y;
+		}
+		
+		
+		/*licence*/
+		.licencepanel{
+			background-color:RGB(240,240,240); 
+			padding: 1em 1em 1em 1em;
+			margin: 1% 5%;
+		}
+
+		.labelform{
+			padding: 0.1em 0em 0.1em 0.0em;
+		}

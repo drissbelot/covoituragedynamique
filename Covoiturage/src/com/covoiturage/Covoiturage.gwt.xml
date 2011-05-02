@@ -21,6 +21,7 @@
 <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 <inherits name="com.google.gwt.appengine.channel.Channel" />
 <inherits name="com.googlecode.objectify.Objectify" />
+
   <entry-point class='com.covoiturage.client.Covoiturage'/>
 
   <!-- Specify the paths for translatable code                    -->
@@ -34,5 +35,6 @@
 <extend-property name="locale" values="fr"/>
 <extend-property name="locale" values="it"/>
 <extend-property name="locale" values="ch"/>
+
           
 </module>

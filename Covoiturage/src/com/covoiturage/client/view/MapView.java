@@ -1,7 +1,9 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.images.CovoiturageResources;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -53,5 +55,13 @@ public interface MapView extends IsWidget {
 	public TextField<String> getArrivalTime();
 
 	public TextArea getCommentField();
+
+	public com.extjs.gxt.ui.client.widget.Label getDistance();
+
+	public com.extjs.gxt.ui.client.widget.Label getDuration();
+
+	public CovoiturageResources getCovoiturageResources();
+
+	public FormPanel getData();
 
 }

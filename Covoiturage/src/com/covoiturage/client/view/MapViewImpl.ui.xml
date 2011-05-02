@@ -6,14 +6,14 @@
 		field="constants" />
 	<ui:style src="stylesheet.css" />
 
-	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
+	<g:FlowPanel ui:field="flowpanel" >
 
 
 		<g:HorizontalPanel horizontalAlignment="ALIGN_LEFT">
 			<g:HorizontalPanel styleName='{style.cartecontainer}'>
 				<m:MapWidget ui:field='mapWidget' width="450px" height="450px" />
-				<g:VerticalPanel styleName='{style.horairecontainer}'>
-					<form:FormPanel ui:field="data" heading="{constants.header}">
+				<g:VerticalPanel styleName='{style.horairecontainer}' width="100%">
+					<form:FormPanel ui:field="data" heading="{constants.header}" width="500px">
 						<g:HorizontalPanel  styleName="x-form-item">
 							<g:Label styleName='x-form-item-label' ui:field="from"
 								text="{constants.from} : " width="100px"/>

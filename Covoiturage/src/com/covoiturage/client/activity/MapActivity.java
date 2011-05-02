@@ -28,6 +28,7 @@ import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -71,8 +72,10 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.ServerFailure;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
@@ -105,6 +108,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private double distance;
 	private double duration;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	private Element imageEl = null;
 
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -174,12 +178,27 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void handleEvent(BaseEvent be) {
 						date = mapView.getDateOfJourney().getValue();
-						if (date != null) {
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
 
-							mapView.getDateOfJourney().setData(
-									"img",
-									mapView.getCovoiturageResources().valid()
-											.getURL());
+						if (mapView.getDateOfJourney().getValue() != null) {
+
+							image.render(mapView.getDateOfJourney().el()
+									.getParent().dom);
+							imageEl = mapView.getDateOfJourney().el()
+									.getParent().dom.appendChild(image
+									.getElement());
+
+							image.el().alignTo(
+									mapView.getDateOfJourney().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+							mapView.getDateOfJourney().el().getParent()
+									.setHeight(37);
+
+						} else {
+							if (imageEl != null)
+								mapView.getDateOfJourney().el().getParent().dom
+										.removeChild(imageEl);
 
 						}
 

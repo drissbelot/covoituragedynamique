@@ -174,6 +174,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void handleEvent(BaseEvent be) {
 						date = mapView.getDateOfJourney().getValue();
+						if (date != null) {
+
+							mapView.getDateOfJourney().setData(
+									"img",
+									mapView.getCovoiturageResources().valid()
+											.getURL());
+
+						}
 
 					}
 				});
@@ -219,6 +227,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@SuppressWarnings("deprecation")
 					@Override
 					public void handleEvent(BaseEvent be) {
+						// TODO gaffe exception
 						if (mapView.getDepartureStartTime().getValue().length() == 5) {
 							departureStart.setHours(Integer.valueOf(mapView
 									.getDepartureStartTime().getValue()
@@ -795,7 +804,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 								}
 							}
-
+							// TODO faire joli
+							mapView.getDistance().setText(
+									"Distance : " + distance);
+							mapView.getDuration().setText(
+									"Duration : " + duration);
 							mapUrl = "http://maps.google.com/maps/api/staticmap?size=400x400&path=color:0x0000ff";
 							for (String step : steps) {
 								mapUrl += "%7C" + step;

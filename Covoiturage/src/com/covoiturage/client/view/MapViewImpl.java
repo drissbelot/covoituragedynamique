@@ -61,6 +61,8 @@ public class MapViewImpl extends Composite implements MapView {
 	RadioButton driverRadioButton, passengerRadioButton;
 	@UiField
 	TextArea commentField;
+	@UiField
+	com.extjs.gxt.ui.client.widget.Label distance, duration;
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -103,21 +105,22 @@ public class MapViewImpl extends Composite implements MapView {
 	ComponentPlugin plugin = new ComponentPlugin() {
 		@Override
 		public void init(Component component) {
-			component.addListener(Events.Render,
-					new Listener<ComponentEvent>() {
-						@Override
-						public void handleEvent(ComponentEvent be) {
-							El elem = be.getComponent().el()
-									.findParent(".x-form-element", 3);
-
-							elem.appendChild(XDOM
-									.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
-											+ be.getComponent().getData("text")
-											+ "<img src="
-											+ be.getComponent().getData("img")
-											+ ">" + "</div>"));
-						}
-					});
+			component.addListener(Events.Blur, new Listener<ComponentEvent>() {
+				@Override
+				public void handleEvent(ComponentEvent be) {
+					El elem = be.getComponent().el()
+							.findParent(".x-form-element", 3);
+					if (elem.childElement("validate-element") != null)
+						elem.removeChild(elem.childElement("validate-element"));
+					elem.appendChild(XDOM
+							.create("<div class='validate-element' style='color: #615f5f;padding: 1 0 2 0px;'>"
+									+ be.getComponent().getData("text")
+									+ "<img src="
+									+ be.getComponent().getData("img")
+									+ ">"
+									+ "</div>"));
+				}
+			});
 		}
 	};
 
@@ -210,6 +213,26 @@ public class MapViewImpl extends Composite implements MapView {
 	@Override
 	public TextArea getCommentField() {
 		return commentField;
+	}
+
+	@Override
+	public com.extjs.gxt.ui.client.widget.Label getDistance() {
+		return distance;
+	}
+
+	@Override
+	public com.extjs.gxt.ui.client.widget.Label getDuration() {
+		return duration;
+	}
+
+	@Override
+	public CovoiturageResources getCovoiturageResources() {
+		return covoiturageResources;
+	}
+
+	@Override
+	public FormPanel getData() {
+		return data;
 	}
 
 }

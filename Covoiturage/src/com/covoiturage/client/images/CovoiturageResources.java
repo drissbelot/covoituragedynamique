@@ -7,4 +7,8 @@ public interface CovoiturageResources extends ClientBundle {
 
 	ImageResource taxi();
 
+	ImageResource invalid();
+
+	ImageResource valid();
+
 }

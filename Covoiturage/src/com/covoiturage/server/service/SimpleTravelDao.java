@@ -23,9 +23,9 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	public static List<SimpleTravel> getSimpleTravels(List<String> steps,
 			Date departureStart, Date departureEnd, Date arrival,
-			float distanceMax) {
+			float distanceMax, double totalDistance) {
 		return MapUtils.bufferRoute(steps, departureStart, departureEnd,
-				arrival, distanceMax);
+				arrival, distanceMax, totalDistance);
 
 	}
 
@@ -42,7 +42,8 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 	public SimpleTravel saveJourneyPassenger(List<String> steps,
 			String originAddress, String destinationAddress, Date date,
 			Date departureStart, Date departureEnd, Date arrival,
-			Long passenger, String mapImage) {
+			Long passenger, String comment, double distance, double duration,
+			String mapImage) {
 		SimpleTravel simpleTravel = new SimpleTravel();
 		Objectify ofy = ObjectifyService.begin();
 
@@ -54,6 +55,10 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 		simpleTravel.setDepartureStart(departureStart);
 		simpleTravel.setDepartureEnd(departureEnd);
 		simpleTravel.setArrival(arrival);
+		simpleTravel.setComment(comment);
+		simpleTravel.setDistance(distance);
+		simpleTravel.setDuration(duration);
+
 		URLFetchService fetchService = URLFetchServiceFactory
 				.getURLFetchService();
 

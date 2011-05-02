@@ -57,4 +57,15 @@ public interface SimpleTravelProxy extends EntityProxy {
 
 	public byte[] getMapImage();
 
+	public void setDuration(double duration);
+
+	public double getDuration();
+
+	public void setDistance(double distance);
+
+	public double getDistance();
+
+	public void setComment(String comment);
+
+	public String getComment();
 }

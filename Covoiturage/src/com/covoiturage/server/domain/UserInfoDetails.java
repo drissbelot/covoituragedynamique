@@ -14,7 +14,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	private Integer countOfJourneys;
 
-	private String countOfPlaces;
+	private Integer countOfPlaces = 4;
 
 	private String firstName;
 
@@ -67,7 +67,7 @@ public class UserInfoDetails extends DatastoreObject {
 		return countOfJourneys;
 	}
 
-	public String getCountOfPlaces() {
+	public Integer getCountOfPlaces() {
 		return countOfPlaces;
 	}
 
@@ -111,7 +111,7 @@ public class UserInfoDetails extends DatastoreObject {
 		this.countOfJourneys = countOfJourneys;
 	}
 
-	public void setCountOfPlaces(String countOfPlaces) {
+	public void setCountOfPlaces(Integer countOfPlaces) {
 		this.countOfPlaces = countOfPlaces;
 	}
 

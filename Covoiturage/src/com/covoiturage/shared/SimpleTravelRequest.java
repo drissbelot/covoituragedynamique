@@ -21,7 +21,7 @@ public interface SimpleTravelRequest extends RequestContext {
 	Request<SimpleTravelProxy> saveJourneyPassenger(List<String> steps,
 			String originAddress, String destinationAddress, Date date,
 			Date departureStart, Date departureEnd, Date arrival, Long id,
-			String mapUrl);
+			String comment, double distance, double duration, String mapUrl);
 
 	Request<Long> persist(SimpleTravelProxy simpleTravel);
 
@@ -29,7 +29,7 @@ public interface SimpleTravelRequest extends RequestContext {
 
 	Request<List<SimpleTravelProxy>> getSimpleTravels(List<String> steps,
 			Date departureStart, Date departureEnd, Date arrival,
-			float distanceMax);
+			float distanceMax, double totalDistance);
 
 	Request<List<SimpleTravelProxy>> getSimpleTravelsFromUser(Long userId);
 

@@ -16,6 +16,9 @@ public class SimpleTravel extends DatastoreObject {
 	private String destinationAddress;
 	private Blob mapImage;
 	private String mapImageType;
+	private double duration;
+	private double distance;
+	private String comment;
 
 	public String getMapImageType() {
 		return mapImageType;
@@ -93,12 +96,6 @@ public class SimpleTravel extends DatastoreObject {
 	public SimpleTravel() {
 	}
 
-	public SimpleTravel(Long passenger, List<String> steps) {
-
-		this.passenger = passenger;
-		this.steps = steps;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -130,5 +127,29 @@ public class SimpleTravel extends DatastoreObject {
 
 	public byte[] getMapImage() {
 		return mapImage.getBytes();
+	}
+
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
+
+	public double getDuration() {
+		return duration;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getComment() {
+		return comment;
 	}
 }

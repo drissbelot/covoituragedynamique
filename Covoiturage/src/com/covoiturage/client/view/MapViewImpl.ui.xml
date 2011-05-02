@@ -5,7 +5,7 @@
 	<ui:with type="com.covoiturage.client.i18n.MapViewConstants"
 		field="constants" />
 	<ui:style src="stylesheet.css" />
-		
+
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 
 
@@ -14,36 +14,51 @@
 				<m:MapWidget ui:field='mapWidget' width="450px" height="450px" />
 				<g:VerticalPanel styleName='{style.horairecontainer}'>
 					<form:FormPanel ui:field="data" heading="{constants.header}">
-						<g:HorizontalPanel width="100%">
-							<g:Label styleName='x-form-item-label' ui:field="from" text="{constants.from} : " width="100%"/>
+						<g:HorizontalPanel  styleName="x-form-item">
+							<g:Label styleName='x-form-item-label' ui:field="from"
+								text="{constants.from} : " width="100px"/>
 							<g:SuggestBox ui:field="originAdress"
-								text="1,Grand place, Louvain-La-Neuve"  styleName="x-form-field x-form-text" width="100%"/>
+								text="1,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"
+								width="192px" />
 						</g:HorizontalPanel>
-						<g:HorizontalPanel width="100%">
-							<g:Label styleName='x-form-item-label' ui:field="to" text="{constants.to} : " width="100%"/>
+						<g:HorizontalPanel styleName="x-form-item" width="100%">
+							<g:Label styleName='x-form-item-label' ui:field="to"
+								text="{constants.to} : " width="100px" />
 							<g:SuggestBox ui:field="destinationAdress"
-								text="2,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"  width="100%"/>
+								text="2,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"
+								width="192px" />
 						</g:HorizontalPanel>
-						<form:DateField ui:field="dateOfJourney" fieldLabel="{constants.Dateofjourney}"/>
-						<form:TextField ui:field="departureStartTimeItem" fieldLabel="{constants.departuretime}"/>
-						<form:TextField ui:field="departureEndTimeItem" fieldLabel="{constants.and}"/>
-						<form:TextField ui:field="arrivalTimeItem" fieldLabel="{constants.arrivaltime}"/>
+						<form:DateField ui:field="dateOfJourney"
+							fieldLabel="{constants.Dateofjourney}" />
+						<form:TextField ui:field="departureStartTimeItem"
+							fieldLabel="{constants.departuretime}" />
+						<form:TextField ui:field="departureEndTimeItem"
+							fieldLabel="{constants.and}" />
+						<form:TextField ui:field="arrivalTimeItem"
+							fieldLabel="{constants.arrivaltime}" />
 						<g:HorizontalPanel styleName='{style.paddingdown}'>
 							<g:RadioButton ui:field="driverRadioButton"
-								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}"/>
+								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}" />
 							<g:RadioButton ui:field="passengerRadioButton"
-								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.passenger}"/>
+								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.passenger}" />
 						</g:HorizontalPanel>
 
-						<form:TextField ui:field="distanceMaxField" fieldLabel="{constants.distmax}"/>
+						<form:TextField ui:field="distanceMaxField"
+							fieldLabel="{constants.distmax}" />
+						<form:TextArea ui:field="commentField" fieldLabel="Comment" />
 
 						<g:HorizontalPanel>
-							<g:Button ui:field="sendAddress" styleName='{style.button}' text="{constants.gettravelway}"/>
-							<g:Button ui:field="saveJourney" styleName='{style.button}' text="{constants.savejourney}" />
+							<g:Button ui:field="sendAddress" styleName='{style.button}'
+								text="{constants.gettravelway}" />
+							<g:Button ui:field="saveJourney" styleName='{style.button}'
+								text="{constants.savejourney}" />
 						</g:HorizontalPanel>
 
 					</form:FormPanel>
-
+					<gxt:ContentPanel heading="">
+						<gxt:Label ui:field="distance" />
+						<gxt:Label ui:field="duration" />
+					</gxt:ContentPanel>
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:HorizontalPanel>

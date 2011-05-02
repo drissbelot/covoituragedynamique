@@ -10,7 +10,7 @@ public interface LicenceViewConstants extends Constants {
 
 	String Accept();
 	
-	String Denie();
+	String Deny();
 
 	String message();
 

@@ -14,7 +14,7 @@
 					<g:HTML ui:field="html" HTML="{constants.message}" styleName='{style.text}'/>
 				</g:ScrollPanel>
 				<g:RadioButton text="{constants.Accept}" ui:name="LicenceAccepted" ui:field="RadioAccpeted"/>
-				<g:RadioButton text="{constants.Denie}" ui:name="LicenceDinied" ui:field="RadioDenied"/>
+				<g:RadioButton text="{constants.Deny}" ui:name="LicenceDinied" ui:field="RadioDenied"/>
 				<g:Button ui:field="nextButton" styleName='{style.button}' text="{constants.next}"/>
 			</g:VerticalPanel>	
 		</g:FlowPanel>

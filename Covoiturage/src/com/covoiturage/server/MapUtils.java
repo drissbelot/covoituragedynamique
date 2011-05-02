@@ -117,7 +117,7 @@ public class MapUtils {
 				if (journey.getArrival().getTime() <= arrival.getTime()
 						&& journey.getDepartureEnd().getTime() >= departureStart
 								.getTime()
-						&& distance <= distanceJourney
+						&& (journey.getDistance() - distance) <= distanceJourney
 						&& (new Date(journey.getDepartureStart().getTime()
 								+ (long) (duration * 1000))).getTime() <= journey
 								.getArrival().getTime()) {
@@ -134,7 +134,8 @@ public class MapUtils {
 	}
 
 	public static List<SimpleTravel> bufferRoute(List<String> coordinates,
-			Date departureStart, Date departureEnd, Date arrival, float distance) {
+			Date departureStart, Date departureEnd, Date arrival,
+			float distance, double totalDistance) {
 		Coordinate[] coordArray = new Coordinate[coordinates.size()];
 		int i = 0;
 		for (String singleCoord : coordinates) {
@@ -149,12 +150,12 @@ public class MapUtils {
 		Geometry polyline = new GeometryFactory().createLineString(coordArray);
 		return simpleTravelsInBuffer(coordArray,
 				polyline.buffer(distance / 111), departureStart, departureEnd,
-				arrival, distance);
+				arrival, distance, totalDistance);
 	}
 
 	public static List<SimpleTravel> simpleTravelsInBuffer(Coordinate[] array,
 			Geometry buffer, Date departureStart, Date departureEnd,
-			Date arrival, float distanceJourney) {
+			Date arrival, float distanceJourney, double totalDistance) {
 
 		Objectify ofy = ObjectifyService.begin();
 		List<SimpleTravel> simpleTravels = new ArrayList<SimpleTravel>();
@@ -215,7 +216,7 @@ public class MapUtils {
 				if (travel.getArrival().getTime() <= arrival.getTime()
 						&& travel.getDepartureStart().getTime() <= departureEnd
 								.getTime()
-						&& distance <= distanceJourney
+						&& distance <= (distanceJourney + totalDistance)
 						&& (departureStart.getTime() + (long) (duration * 1000)) <= arrival
 								.getTime())
 					simpleTravels.add(travel);

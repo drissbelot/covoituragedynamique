@@ -102,6 +102,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			.create(NotifyService.class);
 	private List<Long> passengersTravels;
 	private String mapUrl;
+	private double distance;
+	private double duration;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
 	public MapActivity(ClientFactory clientFactory) {
@@ -402,6 +404,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						request.setRegion("be");
 						request.setAddress(mapView.getOriginAddress()
 								.getTextBox().getText());
+
 						geocoder.geocode(request, new GeocoderCallback() {
 							@SuppressWarnings("deprecation")
 							@Override
@@ -494,6 +497,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				HasGeocoderRequest request = new GeocoderRequest();
 				request.setAddress(mapView.getDestinationAddress().getTextBox()
 						.getText());
+
 				geocoder.geocode(request, new GeocoderCallback() {
 					@Override
 					public void callback(List<HasGeocoderResult> responses,
@@ -505,26 +509,28 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 							JourneyRequest request = requestFactory
 									.journeyRequest();
-							JourneyProxy journey = request
-									.create(JourneyProxy.class);
-							journey.setSteps(listAddress);
-							journey.setDate(date);
-							journey.setDriver(userDetails.getId());
-							journey.setOriginAddress(mapView.getOriginAddress()
-									.getText());
-							journey.setDestinationAddress(mapView
-									.getDestinationAddress().getText());
-							journey.setWaypoints(waypointsCoords);
-							journey.setStepsDetails(steps);
-							journey.setDepartureStart(departureStart);
-							journey.setDepartureEnd(departureEnd);
-							journey.setArrival(arrival);
-							journey.setPassengersTravels(passengersTravels);
-							Request<Long> createReq = request.persist(journey);
-							createReq.fire(new Receiver<Long>() {
+							Request<JourneyProxy> createReq = request.saveJourneyDriver(
+									listAddress,
+									date,
+									departureStart,
+									departureEnd,
+									arrival,
+									userDetails.getId(),
+									mapView.getOriginAddress().getText(),
+									mapView.getDestinationAddress().getText(),
+									waypointsCoords,
+									steps,
+									passengersTravels,
+									mapView.getCommentField().getValue(),
+									duration,
+									distance,
+									userDetails.getCountOfPlaces()
+											- passengers.size(), mapUrl);
+							createReq.fire(new Receiver<JourneyProxy>() {
 
 								@Override
-								public void onSuccess(Long responseJourney) {
+								public void onSuccess(
+										JourneyProxy responseJourney) {
 									if (passengers != null) {
 										int i = 0;
 										for (final Long passenger : passengers) {
@@ -622,7 +628,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 													.getText(), date,
 											departureStart, departureEnd,
 											arrival, userDetails.getId(),
-											mapUrl);
+											mapView.getCommentField()
+													.getValue(), distance,
+											duration, mapUrl);
 
 							createReq.fire(new Receiver<SimpleTravelProxy>() {
 
@@ -750,6 +758,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		&& mapView.getDepartureEndTime().validate()
 				&& mapView.getArrivalTime().validate()) {
 			mapUrl = "";
+			duration = 0f;
+			distance = 0f;
 			HasDirectionsService directionsService = new DirectionsService();
 			DirectionsRendererImpl.impl.setMap(directionsRenderer.getJso(),
 					null);
@@ -774,6 +784,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							steps = new ArrayList<String>();
 							for (HasDirectionsLeg leg : response.getRoutes()
 									.get(0).getLegs()) {
+								duration += leg.getDuration().getValue();
+								distance += leg.getDistance().getValue();
 								for (HasDirectionsStep step : leg.getSteps()) {
 									for (int j = 0; j < step.getPath().size(); j = j + 4) {
 
@@ -797,7 +809,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										.getSimpleTravels(steps,
 												departureStart, departureEnd,
 												arrival,
-												mapView.getDistanceMax());
+												mapView.getDistanceMax(),
+												distance);
 
 								createReq
 										.fire(new Receiver<List<SimpleTravelProxy>>() {

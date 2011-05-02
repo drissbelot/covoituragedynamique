@@ -53,16 +53,32 @@ public interface JourneyProxy extends EntityProxy {
 
 	public Long getId();
 
-	public void setDistance(Float distance);
+	public void setDistance(double distance);
 
-	public Float getDistance();
+	public double getDistance();
 
-	public void setDuration(Float duration);
+	public void setDuration(double duration);
 
-	public Float getDuration();
+	public double getDuration();
 
 	public void setOriginAddress(String originAddress);
 
 	public void setDestinationAddress(String destinationAddress);
+
+	public void setPlaces(int places);
+
+	public int getPlaces();
+
+	public void setComment(String comment);
+
+	public String getComment();
+
+	public void setMapImage(byte[] mapImage);
+
+	public byte[] getMapImage();
+
+	public String getMapImageType();
+
+	public void setMapImageType(String mapImageType);
 
 }

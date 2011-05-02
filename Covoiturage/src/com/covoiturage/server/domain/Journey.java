@@ -3,6 +3,7 @@ package com.covoiturage.server.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.google.appengine.api.datastore.Blob;
 import com.googlecode.objectify.annotation.Entity;
 
 @Entity
@@ -29,9 +30,15 @@ public class Journey extends DatastoreObject {
 
 	private List<String> waypoints;
 
-	private Float distance;
+	private double distance;
 
-	private Float duration;
+	private double duration;
+
+	private int places;
+
+	private String comment;
+	private Blob mapImage;
+	private String mapImageType;
 
 	public Journey() {
 	}
@@ -124,20 +131,52 @@ public class Journey extends DatastoreObject {
 		this.waypoints = waypoints;
 	}
 
-	public void setDistance(Float distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 
-	public Float getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
-	public void setDuration(Float duration) {
+	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 
-	public Float getDuration() {
+	public double getDuration() {
 		return duration;
+	}
+
+	public void setPlaces(int places) {
+		this.places = places;
+	}
+
+	public int getPlaces() {
+		return places;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setMapImage(byte[] mapImage) {
+		this.mapImage = new Blob(mapImage);
+	}
+
+	public byte[] getMapImage() {
+		return mapImage.getBytes();
+	}
+
+	public String getMapImageType() {
+		return mapImageType;
+	}
+
+	public void setMapImageType(String mapImageType) {
+		this.mapImageType = mapImageType;
 	}
 
 }

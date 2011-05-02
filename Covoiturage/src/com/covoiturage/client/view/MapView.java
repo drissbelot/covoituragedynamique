@@ -2,6 +2,7 @@ package com.covoiturage.client.view;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
@@ -50,5 +51,7 @@ public interface MapView extends IsWidget {
 	public TextField<String> getDepartureEndTime();
 
 	public TextField<String> getArrivalTime();
+
+	public TextArea getCommentField();
 
 }

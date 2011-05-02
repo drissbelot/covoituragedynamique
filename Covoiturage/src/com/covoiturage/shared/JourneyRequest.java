@@ -22,7 +22,8 @@ public interface JourneyRequest extends RequestContext {
 			Date departureStart, Date departureEnd, Date arrival, Long id,
 			String originAddress, String destinationAddress,
 			List<String> waypoints, List<String> stepsDetails,
-			List<Long> passengers);
+			List<Long> passengers, String comment, double duration,
+			double distance, int places, String mapImage);
 
 	Request<Long> persist(JourneyProxy journey);
 

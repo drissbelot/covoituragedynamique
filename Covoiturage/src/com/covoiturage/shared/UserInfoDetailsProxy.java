@@ -14,9 +14,9 @@ public interface UserInfoDetailsProxy extends EntityProxy {
 
 	public String getVehicle();
 
-	public void setCountOfPlaces(String countOfPlaces);
+	public void setCountOfPlaces(Integer countOfPlaces);
 
-	public String getCountOfPlaces();
+	public Integer getCountOfPlaces();
 
 	public void setRating(Integer rating);
 

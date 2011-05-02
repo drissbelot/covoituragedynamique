@@ -1,8 +1,17 @@
 package com.covoiturage.client.view;
 
+import com.covoiturage.client.images.CovoiturageResources;
+import com.extjs.gxt.ui.client.core.El;
+import com.extjs.gxt.ui.client.core.XDOM;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -24,6 +33,8 @@ public class MapViewImpl extends Composite implements MapView {
 	interface MyUiBinder extends UiBinder<FlowPanel, MapViewImpl> {
 	}
 
+	private final CovoiturageResources covoiturageResources = GWT
+			.create(CovoiturageResources.class);
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
 	@UiField
@@ -48,6 +59,8 @@ public class MapViewImpl extends Composite implements MapView {
 			arrivalTimeItem, distanceMaxField;
 	@UiField
 	RadioButton driverRadioButton, passengerRadioButton;
+	@UiField
+	TextArea commentField;
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -66,6 +79,11 @@ public class MapViewImpl extends Composite implements MapView {
 		initWidget(binder.createAndBindUi(this));
 
 		dateOfJourney.setAllowBlank(false);
+		dateOfJourney.addPlugin(plugin);
+
+		// todo on doit pouvoir mettre ça dans l'uibinder aussi
+		dateOfJourney.setData("text", "Field required");
+		dateOfJourney.setData("img", covoiturageResources.invalid().getURL());
 		departureStartTimeItem.setAllowBlank(false);
 		departureEndTimeItem.setAllowBlank(false);
 		arrivalTimeItem.setAllowBlank(false);
@@ -81,6 +99,27 @@ public class MapViewImpl extends Composite implements MapView {
 		directionsPanel.setHeaderVisible(false);
 
 	}
+
+	ComponentPlugin plugin = new ComponentPlugin() {
+		@Override
+		public void init(Component component) {
+			component.addListener(Events.Render,
+					new Listener<ComponentEvent>() {
+						@Override
+						public void handleEvent(ComponentEvent be) {
+							El elem = be.getComponent().el()
+									.findParent(".x-form-element", 3);
+
+							elem.appendChild(XDOM
+									.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
+											+ be.getComponent().getData("text")
+											+ "<img src="
+											+ be.getComponent().getData("img")
+											+ ">" + "</div>"));
+						}
+					});
+		}
+	};
 
 	@Override
 	public RadioButton getPassengerRadioButton() {
@@ -166,6 +205,11 @@ public class MapViewImpl extends Composite implements MapView {
 	@Override
 	public TextField<String> getDepartureEndTime() {
 		return departureEndTimeItem;
+	}
+
+	@Override
+	public TextArea getCommentField() {
+		return commentField;
 	}
 
 }

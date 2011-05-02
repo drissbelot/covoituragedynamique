@@ -8,6 +8,8 @@ import com.covoiturage.client.view.HeaderView;
 import com.covoiturage.client.view.HeaderViewImpl;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.client.view.HistoryViewImpl;
+import com.covoiturage.client.view.LicenceView;
+import com.covoiturage.client.view.LicenceViewImpl;
 import com.covoiturage.client.view.LoginView;
 import com.covoiturage.client.view.LoginViewImpl;
 import com.covoiturage.client.view.MapView;
@@ -32,12 +34,12 @@ import com.google.gwt.place.shared.PlaceController;
 
 public class ClientFactoryImpl implements ClientFactory {
 	private final EventBus eventBus = new SimpleEventBus();
-	private final PlaceController placeController = new PlaceController(
-			eventBus);
+	private final PlaceController placeController = new PlaceController(eventBus);
 	private final LoginView loginView = new LoginViewImpl();
 	private final MapView mapView = new MapViewImpl();
 	private final AddUserView addUserView = new AddUserViewImpl();
 	private final SettingsView EditProfilView = new SettingsViewImpl();
+	private final LicenceView LicenceView = new LicenceViewImpl();
 	private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
 	private final MenuView menuView = new MenuViewImpl();
 	private final HeaderView headerView = new HeaderViewImpl();
@@ -91,13 +93,11 @@ public class ClientFactoryImpl implements ClientFactory {
 
 	@Override
 	public SettingsView getSettingsView() {
-
 		return EditProfilView;
 	}
 
 	@Override
 	public MenuView getMenuView() {
-
 		return menuView;
 	}
 
@@ -113,13 +113,11 @@ public class ClientFactoryImpl implements ClientFactory {
 
 	@Override
 	public HistoryView getHistoryView() {
-
 		return historyView;
 	}
 
 	@Override
 	public MessagesListView getMessagesListView() {
-
 		return messagesListView;
 	}
 
@@ -130,8 +128,12 @@ public class ClientFactoryImpl implements ClientFactory {
 
 	@Override
 	public ReplyMessageView getReplyMessageView() {
-
 		return replyMessageView;
+	}
+
+	@Override
+	public LicenceView getLicenceView() {
+		return LicenceView;
 	}
 
 }

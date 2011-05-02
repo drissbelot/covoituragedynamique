@@ -85,7 +85,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 		// todo on doit pouvoir mettre ça dans l'uibinder aussi
 		dateOfJourney.setData("text", "Field required");
-		dateOfJourney.setData("img", covoiturageResources.invalid().getURL());
+
 		departureStartTimeItem.setAllowBlank(false);
 		departureEndTimeItem.setAllowBlank(false);
 		arrivalTimeItem.setAllowBlank(false);
@@ -105,22 +105,19 @@ public class MapViewImpl extends Composite implements MapView {
 	ComponentPlugin plugin = new ComponentPlugin() {
 		@Override
 		public void init(Component component) {
-			component.addListener(Events.Blur, new Listener<ComponentEvent>() {
-				@Override
-				public void handleEvent(ComponentEvent be) {
-					El elem = be.getComponent().el()
-							.findParent(".x-form-element", 3);
-					if (elem.childElement("validate-element") != null)
-						elem.removeChild(elem.childElement("validate-element"));
-					elem.appendChild(XDOM
-							.create("<div class='validate-element' style='color: #615f5f;padding: 1 0 2 0px;'>"
-									+ be.getComponent().getData("text")
-									+ "<img src="
-									+ be.getComponent().getData("img")
-									+ ">"
-									+ "</div>"));
-				}
-			});
+			component.addListener(Events.Render,
+					new Listener<ComponentEvent>() {
+						@Override
+						public void handleEvent(ComponentEvent be) {
+							El elem = be.getComponent().el()
+									.findParent(".x-form-element", 3);
+
+							elem.appendChild(XDOM
+									.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
+											+ be.getComponent().getData("text")
+											+ "</div>"));
+						}
+					});
 		}
 	};
 

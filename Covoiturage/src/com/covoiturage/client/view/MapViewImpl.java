@@ -83,7 +83,7 @@ public class MapViewImpl extends Composite implements MapView {
 		dateOfJourney.setAllowBlank(false);
 		dateOfJourney.addPlugin(plugin);
 
-		// todo on doit pouvoir mettre ça dans l'uibinder aussi
+		// todo on doit pouvoir mettre ��a dans l'uibinder aussi
 		dateOfJourney.setData("text", "Field required");
 
 		departureStartTimeItem.setAllowBlank(false);
@@ -99,6 +99,7 @@ public class MapViewImpl extends Composite implements MapView {
 
 		driverRadioButton.setValue(true);
 		directionsPanel.setHeaderVisible(false);
+		saveJourney.setEnabled(false);
 
 	}
 
@@ -162,7 +163,7 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	@Override
-	public HasClickHandlers getSaveJourneyButton() {
+	public Button getSaveJourneyButton() {
 		return saveJourney;
 	}
 

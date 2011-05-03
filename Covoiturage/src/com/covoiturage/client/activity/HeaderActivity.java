@@ -5,6 +5,7 @@ import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.event.MessageEvent;
 import com.covoiturage.client.event.MessageEventHandler;
+import com.covoiturage.client.i18n.HeaderViewConstants;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.view.HeaderView;
@@ -36,6 +37,7 @@ public class HeaderActivity extends AbstractActivity implements
 	private UserInfoProxy currentUser;
 
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	private final HeaderViewConstants headerview = GWT.create(HeaderViewConstants.class);
 
 	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -59,7 +61,7 @@ public class HeaderActivity extends AbstractActivity implements
 						public void onSuccess(UserInfoProxy response) {
 
 							currentUser = response;
-							headerView.getCurrentUser().setText(
+							headerView.getCurrentUser().setText(headerview.username()+" : "+
 									currentUser.getLogin());
 						}
 

@@ -24,7 +24,7 @@ public class HeaderViewImpl extends Composite implements HeaderView {
 	@UiField
 	Label currentUser, messages;
 	@UiField
-	Label titre;
+	Label title;
 	@UiField
 	HorizontalPanel menu;
 	@SuppressWarnings("unused")

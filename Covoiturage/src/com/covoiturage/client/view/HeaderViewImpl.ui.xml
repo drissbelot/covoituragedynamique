@@ -8,8 +8,8 @@
 
   	<g:HorizontalPanel ui:field='menu' styleName='{style.menutitre}' width="100%" height="100%">
   	
-  		<gxt:Label styleName='{style.h1titre}'  ui:field="titre" width="16em" title="{constants.title}"/>
-  		<gxt:Label ui:field='currentUser' title="{constants.username}"/>
+  		<gxt:Label styleName='{style.h1titre}'  ui:field="title" width="16em" text="{constants.title}"/>
+  		<gxt:Label ui:field='currentUser' text="{constants.username}"/>
   		<gxt:Label ui:field='messages' title="{constants.message}"/>
   		<g:Anchor ui:field='logout' styleName='{style.buttontitre}' width="42px" height="30px" text="{constants.logout}"/>
   	</g:HorizontalPanel>

@@ -70,7 +70,7 @@ public class MenuActivity extends AbstractActivity implements
 											.messagesRequest();
 									Request<MessagesProxy> createMessageReq = messageReq
 											.findMessages(message);
-									createMessageReq
+									createMessageReq	
 											.fire(new Receiver<MessagesProxy>() {
 
 												@Override

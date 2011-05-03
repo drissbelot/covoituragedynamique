@@ -15,14 +15,14 @@
 				<g:VerticalPanel styleName='{style.horairecontainer}' width="100%">
 					<form:FormPanel ui:field="data" heading="{constants.header}" width="500px">
 						<g:HorizontalPanel  styleName="x-form-item">
-							<g:Label styleName='x-form-item-label' ui:field="from"
+							<gxt:Label styleName='x-form-item-label' ui:field="from"
 								text="{constants.from} : " width="100px"/>
 							<g:SuggestBox ui:field="originAdress"
 								text="1,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"
 								width="192px" />
 						</g:HorizontalPanel>
 						<g:HorizontalPanel styleName="x-form-item" width="100%">
-							<g:Label styleName='x-form-item-label' ui:field="to"
+							<gxt:Label styleName='x-form-item-label' ui:field="to"
 								text="{constants.to} : " width="100px" />
 							<g:SuggestBox ui:field="destinationAdress"
 								text="2,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"
@@ -63,7 +63,9 @@
 										</form:FormPanel>
 					<gxt:ContentPanel heading="">
 						<gxt:Label ui:field="distance" />
+						<gxt:Label ui:field="distanceDelta" />
 						<gxt:Label ui:field="duration" />
+						<gxt:Label ui:field="durationDelta" />
 						</gxt:ContentPanel>
 	
 				</g:VerticalPanel>

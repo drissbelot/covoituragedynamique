@@ -2,6 +2,7 @@ package com.covoiturage.client.view;
 
 import com.covoiturage.client.images.CovoiturageResources;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
@@ -57,12 +58,16 @@ public interface MapView extends IsWidget {
 
 	public TextArea getCommentField();
 
-	public com.extjs.gxt.ui.client.widget.Label getDistance();
+	public Label getDistance();
 
-	public com.extjs.gxt.ui.client.widget.Label getDuration();
+	public Label getDuration();
 
 	public CovoiturageResources getCovoiturageResources();
 
 	public FormPanel getData();
+
+	public Label getDistanceDelta();
+
+	public Label getDurationDelta();
 
 }

@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
@@ -207,16 +207,11 @@ public class MapUtils {
 				} catch (IOException e) {
 
 				}
-				Logger.getLogger("").warning(Float.toString((duration * 1000)));
-				Logger.getLogger("").warning(
-						Long.toString(departureStart.getTime()
-								+ (long) (duration * 1000)));
-				Logger.getLogger("").warning(Long.toString(arrival.getTime()));
-				Logger.getLogger("").warning(Float.toString(distance));
+
 				if (travel.getArrival().getTime() <= arrival.getTime()
 						&& travel.getDepartureStart().getTime() <= departureEnd
 								.getTime()
-						&& distance <= (distanceJourney + totalDistance)
+						&& distance <= (distanceJourney*1000 + totalDistance)
 						&& (departureStart.getTime() + (long) (duration * 1000)) <= arrival
 								.getTime())
 					simpleTravels.add(travel);

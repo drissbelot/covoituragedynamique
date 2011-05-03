@@ -23,7 +23,7 @@ public class ImageServiceImpl extends HttpServlet {
 			throws ServletException, IOException {
 		Objectify ofy=  ObjectifyService.begin();
 		SimpleTravel travel;
-		travel= ofy.query(SimpleTravel.class).filter("passenger", request.getParameter("id")).get();
+		travel= ofy.query(SimpleTravel.class).filter("passenger", Long.valueOf(request.getParameter("id"))).get();
 
 		
 

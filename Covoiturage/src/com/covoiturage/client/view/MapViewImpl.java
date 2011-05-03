@@ -214,10 +214,12 @@ public class MapViewImpl extends Composite implements MapView {
 		return data;
 	}
 
+	@Override
 	public Label getDistanceDelta() {
 		return distanceDelta;
 	}
 
+	@Override
 	public Label getDurationDelta() {
 		return durationDelta;
 	}

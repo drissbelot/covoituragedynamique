@@ -60,10 +60,12 @@
 							<g:Button ui:field="saveJourney" styleName='{style.button}'
 								text="{constants.savejourney}" ui:enabled="false"/>
 						</g:HorizontalPanel>
-					
+										</form:FormPanel>
+					<gxt:ContentPanel heading="">
 						<gxt:Label ui:field="distance" />
 						<gxt:Label ui:field="duration" />
-					</form:FormPanel>
+						</gxt:ContentPanel>
+	
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:HorizontalPanel>

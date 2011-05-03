@@ -80,7 +80,6 @@ public class MapViewImpl extends Composite implements MapView {
 
 		initWidget(binder.createAndBindUi(this));
 
-		// TODO on doit pouvoir mettre  ca dans l'uibinder aussi ---> je ne sais pas comment on fait pr le dernier
 		dateOfJourney.setData("text", "Field required");
 		dateOfJourney.addPlugin(plugin);
 	}

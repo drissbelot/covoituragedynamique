@@ -92,6 +92,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 											BaseModelData rec = new BaseModelData();
 											rec.set("login", passengersTravels
 													.get(i).getPassenger());
+											rec.set("date", passengersTravels
+													.get(i).getDate());
 											rec.set("origin", passengersTravels
 													.get(i).getOriginAddress());
 											rec.set("destination",
@@ -163,6 +165,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 											BaseModelData rec = new BaseModelData();
 											rec.set("login", journeys.get(i)
 													.getDriver());
+											rec.set("date", journeys.get(i)
+													.getDate());
 											rec.set("origin", journeys.get(i)
 													.getOriginAddress());
 											rec.set("destination", journeys

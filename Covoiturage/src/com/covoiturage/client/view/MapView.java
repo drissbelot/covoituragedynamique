@@ -9,6 +9,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -32,7 +33,7 @@ public interface MapView extends IsWidget {
 
 	public ContentPanel getDirectionsPanel();
 
-	public HasClickHandlers getSaveJourneyButton();
+	public Button getSaveJourneyButton();
 
 	public float getDistanceMax();
 

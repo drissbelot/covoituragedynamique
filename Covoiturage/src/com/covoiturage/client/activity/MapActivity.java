@@ -246,8 +246,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void handleEvent(BaseEvent be) {
-				// TODO gaffe exception
-				if (mapView.getDepartureStartTime().getValue().length() == 5) {
+				
+				if (mapView.getDepartureStartTime().validate() && mapView.getDepartureStartTime().getValue().length() == 5) {
 					departureStart.setHours(Integer.valueOf(mapView
 							.getDepartureStartTime().getValue()
 							.substring(0, 2)));
@@ -264,7 +264,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void handleEvent(BaseEvent be) {
-				if (mapView.getDepartureEndTime().getValue().length() == 5) {
+				if (mapView.getDepartureEndTime().validate() &&mapView.getDepartureEndTime().getValue().length() == 5) {
 					departureEnd.setHours(Integer.valueOf(mapView
 							.getDepartureEndTime().getValue()
 							.substring(0, 2)));
@@ -280,7 +280,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void handleEvent(BaseEvent be) {
-				if (mapView.getArrivalTime().getValue().length() == 5) {
+				if (mapView.getArrivalTime().validate() && mapView.getArrivalTime().getValue().length() == 5) {
 					arrival.setHours(Integer.valueOf(mapView
 							.getArrivalTime().getValue()
 							.substring(0, 2)));
@@ -518,6 +518,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	}
 
 	protected void saveJourney() {
+		mapView.getSaveJourneyButton().setEnabled(false);
 		geocoder = new Geocoder();
 		HasGeocoderRequest request = new GeocoderRequest();
 		request.setAddress(mapView.getOriginAddress().getTextBox().getText());
@@ -938,6 +939,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						});
 
 					}
+				mapView.getSaveJourneyButton().setEnabled(true);
 				}
 
 			});

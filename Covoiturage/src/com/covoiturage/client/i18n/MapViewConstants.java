@@ -16,5 +16,7 @@ public interface MapViewConstants extends Constants {
 	String and();
 	String arrivaltime();
 	String Dateofjourney();
+	String Duration();
+	String Distance();
 
 }

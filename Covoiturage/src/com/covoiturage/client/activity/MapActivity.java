@@ -14,6 +14,7 @@ import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.PossiblePassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.event.SelectPassengersEventHandler;
+import com.covoiturage.client.i18n.MapViewConstants;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.covoiturage.client.view.MapView;
@@ -109,6 +110,8 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private double duration;
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 	private Element imageEl = null;
+	
+	private final MapViewConstants mapviewconstants = GWT.create(MapViewConstants.class);
 
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -832,11 +835,15 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						}
 					}
-					// TODO faire joli
-					mapView.getDistance().setText(
-							"Distance : " + distance);
-					mapView.getDuration().setText(
-							"Duration : " + duration);
+					int h=(int) (duration/3600);
+					int min=(int) ((duration-h*3600)/60);
+					int s= (int) (duration-h*3600-min*60);
+					String sh=""+h,sm=""+min,ss=""+s;
+					if(h<10){sh="0"+sh;}
+					if(min<10){sm="0"+sm;}
+					if(s<10){ss="0"+ss;}
+					mapView.getDistance().setText(mapviewconstants.Distance()+": "+ distance+" m. ");
+					mapView.getDuration().setText(mapviewconstants.Duration()+": "+sh+":"+sm+":"+ss+".");
 					mapUrl = "http://maps.google.com/maps/api/staticmap?size=400x400&path=color:0x0000ff";
 					for (String step : steps) {
 						mapUrl += "%7C" + step;

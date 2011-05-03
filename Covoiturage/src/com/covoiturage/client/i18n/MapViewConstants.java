@@ -5,18 +5,31 @@ import com.google.gwt.i18n.client.Constants;
 public interface MapViewConstants extends Constants {
 
 	String header();
+
 	String from();
+
 	String to();
-	String distmax();
-	String savejourney();
-	String gettravelway();
+
+	String distMax();
+
+	String saveJourney();
+
+	String getDirections();
+
 	String driver();
+
 	String passenger();
-	String departuretime();
+
+	String departureTime();
+
 	String and();
-	String arrivaltime();
-	String Dateofjourney();
-	String Duration();
-	String Distance();
+
+	String arrivalTime();
+
+	String dateOfJourney();
+
+	String duration();
+
+	String distance();
 
 }

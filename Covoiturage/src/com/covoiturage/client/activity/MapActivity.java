@@ -875,12 +875,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								}
 							}
 							mapView.getDistance().setText(
-									mapviewconstants.Distance() + ": "
+									mapviewconstants.distance() + ": "
 											+ distance + " m. ");
 							GWT.log(new Date((long) duration * 1000).toString());
 							mapView.getDuration()
 									.setText(
-											mapviewconstants.Duration()
+											mapviewconstants.duration()
 													+ ": "
 													+ DateTimeFormat
 															.getFormat(

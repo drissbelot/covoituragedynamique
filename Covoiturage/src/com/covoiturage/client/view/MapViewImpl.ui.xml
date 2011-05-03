@@ -30,11 +30,11 @@
 						</g:HorizontalPanel>
 						<form:DateField ui:field="dateOfJourney" 
 							ui:allowBlank="false"
-							fieldLabel="{constants.Dateofjourney}" />
+							fieldLabel="{constants.dateOfJourney}" />
 						<form:TextField ui:field="departureStartTimeItem"
 							ui:allowBlank="false"
 							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
-							fieldLabel="{constants.departuretime}" />
+							fieldLabel="{constants.departureTime}" />
 						<form:TextField ui:field="departureEndTimeItem"
 							ui:allowBlank="false"
 							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
@@ -42,7 +42,7 @@
 						<form:TextField ui:field="arrivalTimeItem"
 							ui:allowBlank="false"
 							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
-							fieldLabel="{constants.arrivaltime}" />
+							fieldLabel="{constants.arrivalTime}" />
 						<g:HorizontalPanel styleName='{style.paddingdown}'>
 							<g:RadioButton ui:field="driverRadioButton"
 								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}" ui:value="true"/>
@@ -51,14 +51,14 @@
 						</g:HorizontalPanel>
 
 						<form:TextField ui:field="distanceMaxField"
-							fieldLabel="{constants.distmax}" />
+							fieldLabel="{constants.distMax}" />
 						<form:TextArea ui:field="commentField" fieldLabel="Comment" />
 
 						<g:HorizontalPanel>
 							<g:Button ui:field="sendAddress" styleName='{style.button}'
-								text="{constants.gettravelway}" />
+								text="{constants.getDirections}" />
 							<g:Button ui:field="saveJourney" styleName='{style.button}'
-								text="{constants.savejourney}" ui:enabled="false"/>
+								text="{constants.saveJourney}" ui:enabled="false"/>
 						</g:HorizontalPanel>
 										</form:FormPanel>
 					<gxt:ContentPanel heading="">

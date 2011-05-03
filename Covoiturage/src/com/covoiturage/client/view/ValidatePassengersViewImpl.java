@@ -7,17 +7,13 @@ import com.covoiturage.client.activity.ValidatePassengersActivity;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -31,8 +27,9 @@ public class ValidatePassengersViewImpl extends Composite implements
 
 	private ColumnModel cm;
 	private ListStore<BaseModelData> store;
-	private ContentPanel panel;
+
 	private WidgetExpander<BaseModelData> expander;
+	private ValidatePassengersExpander expanderWidget;
 
 	public ValidatePassengersViewImpl() {
 
@@ -47,23 +44,8 @@ public class ValidatePassengersViewImpl extends Composite implements
 
 					@Override
 					public Widget render(BaseModelData model, int rowIdx) {
-						panel = new ContentPanel();
-						Label firstName = new Label();
-						Label lastName = new Label();
-
-						Image mapImage = new Image(GWT.getHostPageBaseURL()
-								+ "imageService?id="
-								+ model.get("login").toString());
-						mapImage.setSize("200px", "200px");
-
-						firstName.setText(model.get("firstName").toString());
-						lastName.setText(model.get("lastName").toString());
-
-						panel.add(firstName);
-						panel.add(lastName);
-						panel.add(mapImage);
-
-						return panel;
+						expanderWidget = new ValidatePassengersExpander(model);
+						return expanderWidget;
 					}
 
 				});
@@ -113,6 +95,11 @@ public class ValidatePassengersViewImpl extends Composite implements
 	@Override
 	public WidgetExpander<BaseModelData> getExpander() {
 		return expander;
+	}
+
+	@Override
+	public ValidatePassengersExpander getExpanderWidget() {
+		return expanderWidget;
 	}
 
 }

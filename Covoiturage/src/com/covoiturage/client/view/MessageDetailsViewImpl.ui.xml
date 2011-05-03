@@ -3,7 +3,7 @@
 		<ui:with type="com.covoiturage.client.i18n.MessageDetailsViewConstants" field="constants"/>
 	<ui:style src="stylesheet.css" />
 		
-	<g:VerticalPanel>
+	<g:VerticalPanel width="100%" height="100%">
 		<g:HorizontalPanel>
 			<g:Label ui:field="subjectLabel"/>
 		</g:HorizontalPanel>

@@ -1,12 +1,13 @@
 package com.covoiturage.client.view;
 
+import com.extjs.gxt.ui.client.widget.form.HtmlEditor;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
+
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ReplyMessageViewImpl extends Composite implements ReplyMessageView {
@@ -24,7 +25,7 @@ public class ReplyMessageViewImpl extends Composite implements ReplyMessageView 
 	@UiField
 	Label dateLabel;
 	@UiField
-	TextArea messageText;
+	HtmlEditor messageText;
 
 	@UiField
 	Button answerButton;
@@ -58,7 +59,7 @@ public class ReplyMessageViewImpl extends Composite implements ReplyMessageView 
 	}
 
 	@Override
-	public TextArea getMessageText() {
+	public HtmlEditor getMessageText() {
 		return messageText;
 	}
 

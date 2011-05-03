@@ -7,6 +7,7 @@ import com.covoiturage.client.activity.LoginActivity;
 import com.covoiturage.client.activity.MapActivity;
 import com.covoiturage.client.activity.MessageDetailsActivity;
 import com.covoiturage.client.activity.MessagesListActivity;
+import com.covoiturage.client.activity.ReplyMessageActivity;
 import com.covoiturage.client.activity.SettingsActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
@@ -15,6 +16,7 @@ import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.place.MessagesListPlace;
+import com.covoiturage.client.place.ReplyMessagePlace;
 import com.covoiturage.client.place.SettingsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
@@ -46,6 +48,8 @@ public class MainAppActivityMapper implements ActivityMapper {
 			return new MessagesListActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
 			return new MessageDetailsActivity(clientFactory);
+		else if(place instanceof ReplyMessagePlace)
+			return new ReplyMessageActivity(clientFactory);
 		else if (place instanceof LicencePlace)
 			return new LicenceActivity(clientFactory);
 		return null;

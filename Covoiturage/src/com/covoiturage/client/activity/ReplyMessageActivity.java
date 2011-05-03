@@ -9,6 +9,7 @@ import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.MessagesProxy;
 import com.covoiturage.shared.MessagesRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -52,20 +53,22 @@ public class ReplyMessageActivity extends AbstractActivity implements
 	protected void showMessage() {
 
 		MessagesRequest requestMessages = requestFactory.messagesRequest();
+
 		Request<MessagesProxy> createReqMessages = requestMessages
-				.findMessages(Long.valueOf(((MessageDetailsPlace) placeController.getWhere())
-						.getMessageDetailsName()));
+				.findMessages(Long.valueOf(((ReplyMessagePlace) placeController.getWhere())
+						.getReplyMessagesName()));
 		createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 			@Override
 			public void onSuccess(MessagesProxy response) {
 				message = response;
+				//TODO on doit pouvoir inverser les champs
 				replyMessageView.getFromLabel().setText(message.getFrom());
 				replyMessageView.getSubjectLabel()
 						.setText(message.getSubject());
 				replyMessageView.getDateLabel().setText(
 						message.getDate().toString());
-				replyMessageView.getMessageText().setText(message.getMessage());
+				
 
 			}
 

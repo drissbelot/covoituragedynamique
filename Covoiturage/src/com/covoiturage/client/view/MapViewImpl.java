@@ -80,27 +80,9 @@ public class MapViewImpl extends Composite implements MapView {
 
 		initWidget(binder.createAndBindUi(this));
 
-		dateOfJourney.setAllowBlank(false);
-		dateOfJourney.addPlugin(plugin);
-
-		// todo on doit pouvoir mettre ��a dans l'uibinder aussi
+		// TODO on doit pouvoir mettre  ca dans l'uibinder aussi ---> je ne sais pas comment on fait pr le dernier
 		dateOfJourney.setData("text", "Field required");
-
-		departureStartTimeItem.setAllowBlank(false);
-		departureEndTimeItem.setAllowBlank(false);
-		arrivalTimeItem.setAllowBlank(false);
-
-		departureStartTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-		departureEndTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-		arrivalTimeItem
-				.setRegex("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$");
-
-		driverRadioButton.setValue(true);
-		directionsPanel.setHeaderVisible(false);
-		saveJourney.setEnabled(false);
-
+		dateOfJourney.addPlugin(plugin);
 	}
 
 	ComponentPlugin plugin = new ComponentPlugin() {

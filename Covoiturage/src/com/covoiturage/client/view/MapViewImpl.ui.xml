@@ -2,8 +2,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m='urn:import:com.google.gwt.maps.client'
 	xmlns:d='urn:import:com.google.gwt.user.datepicker.client' xmlns:dir='urn:import:com.google.gwt.maps.client.geocoder'
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget" xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
-	<ui:with type="com.covoiturage.client.i18n.MapViewConstants"
-		field="constants" />
+	<ui:with type="com.covoiturage.client.i18n.MapViewConstants" field="constants" />
 	<ui:style src="stylesheet.css" />
 
 	<g:FlowPanel ui:field="flowpanel" >
@@ -12,6 +11,7 @@
 		<g:HorizontalPanel horizontalAlignment="ALIGN_LEFT">
 			<g:HorizontalPanel styleName='{style.cartecontainer}'>
 				<m:MapWidget ui:field='mapWidget' width="450px" height="450px" />
+
 				<g:VerticalPanel styleName='{style.horairecontainer}' width="100%">
 					<form:FormPanel ui:field="data" heading="{constants.header}" width="500px">
 						<g:HorizontalPanel  styleName="x-form-item">
@@ -28,17 +28,24 @@
 								text="2,Grand place, Louvain-La-Neuve" styleName="x-form-field x-form-text"
 								width="192px" />
 						</g:HorizontalPanel>
-						<form:DateField ui:field="dateOfJourney"
+						<form:DateField ui:field="dateOfJourney" 
+							ui:allowBlank="false"
 							fieldLabel="{constants.Dateofjourney}" />
 						<form:TextField ui:field="departureStartTimeItem"
+							ui:allowBlank="false"
+							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
 							fieldLabel="{constants.departuretime}" />
 						<form:TextField ui:field="departureEndTimeItem"
+							ui:allowBlank="false"
+							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
 							fieldLabel="{constants.and}" />
 						<form:TextField ui:field="arrivalTimeItem"
+							ui:allowBlank="false"
+							ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
 							fieldLabel="{constants.arrivaltime}" />
 						<g:HorizontalPanel styleName='{style.paddingdown}'>
 							<g:RadioButton ui:field="driverRadioButton"
-								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}" />
+								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}" ui:value="true"/>
 							<g:RadioButton ui:field="passengerRadioButton"
 								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.passenger}" />
 						</g:HorizontalPanel>
@@ -51,7 +58,7 @@
 							<g:Button ui:field="sendAddress" styleName='{style.button}'
 								text="{constants.gettravelway}" />
 							<g:Button ui:field="saveJourney" styleName='{style.button}'
-								text="{constants.savejourney}" />
+								text="{constants.savejourney}" ui:enabled="false"/>
 						</g:HorizontalPanel>
 
 					</form:FormPanel>
@@ -62,7 +69,7 @@
 				</g:VerticalPanel>
 			</g:HorizontalPanel>
 		</g:HorizontalPanel>
-		<gxt:ContentPanel ui:field="directionsPanel" />
+		<gxt:ContentPanel ui:field="directionsPanel" ui:headerVisible="false" />
 
 
 

@@ -8,8 +8,6 @@ import com.covoiturage.client.event.GetValidateDriversEvent;
 import com.covoiturage.client.event.GetValidateDriversEventHandler;
 import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.GetValidatePassengersEventHandler;
-import com.covoiturage.client.event.PossiblePassengersEvent;
-import com.covoiturage.client.event.PossiblePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.ValidatePassengersView;
@@ -211,20 +209,6 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 						eventBus.fireEvent(new SelectPassengersEvent(
 								validatePassengersView.getListGrid()
 										.getSelectionModel().getSelectedItems()));
-
-					}
-				});
-
-		eventBus.addHandler(PossiblePassengersEvent.TYPE,
-				new PossiblePassengersEventHandler() {
-
-					@Override
-					public void onPossiblePassengers(
-							PossiblePassengersEvent event) {
-						validatePassengersView.getDistanceLabel().setText(
-								(Double.toString(event.getDistance())) + " m");
-						validatePassengersView.getDurationLabel().setText(
-								(Double.toString(event.getDuration())) + " s");
 
 					}
 				});

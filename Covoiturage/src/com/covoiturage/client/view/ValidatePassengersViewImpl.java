@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.covoiturage.client.activity.ValidatePassengersActivity;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -16,7 +15,6 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
 import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
@@ -30,10 +28,6 @@ public class ValidatePassengersViewImpl extends Composite implements
 	private Presenter presenter;
 
 	private final Grid<BaseModelData> listGrid;
-
-	private Label distanceLabel;
-
-	private Label durationLabel;
 
 	private ColumnModel cm;
 	private ListStore<BaseModelData> store;
@@ -93,15 +87,12 @@ public class ValidatePassengersViewImpl extends Composite implements
 		listGrid.setSelectionModel(check);
 		listGrid.getView().setAutoFill(true);
 
-		distanceLabel = new Label();
-		durationLabel = new Label();
 		pan.add(listGrid);
-		pan.add(distanceLabel);
-		pan.add(durationLabel);
 
 		initWidget(pan);
 	}
 
+	@Override
 	public Widget asWidget() {
 		return this;
 	}
@@ -120,17 +111,6 @@ public class ValidatePassengersViewImpl extends Composite implements
 	}
 
 	@Override
-	public Label getDistanceLabel() {
-
-		return distanceLabel;
-	}
-
-	@Override
-	public Label getDurationLabel() {
-
-		return durationLabel;
-	}
-
 	public WidgetExpander<BaseModelData> getExpander() {
 		return expander;
 	}

@@ -9,6 +9,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
@@ -24,7 +25,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 
@@ -62,7 +62,7 @@ public class MapViewImpl extends Composite implements MapView {
 	@UiField
 	TextArea commentField;
 	@UiField
-	com.extjs.gxt.ui.client.widget.Label distance, duration;
+	Label distance, duration, distanceDelta, durationDelta;
 
 	@SuppressWarnings("unused")
 	private Presenter presenter;
@@ -195,12 +195,12 @@ public class MapViewImpl extends Composite implements MapView {
 	}
 
 	@Override
-	public com.extjs.gxt.ui.client.widget.Label getDistance() {
+	public Label getDistance() {
 		return distance;
 	}
 
 	@Override
-	public com.extjs.gxt.ui.client.widget.Label getDuration() {
+	public Label getDuration() {
 		return duration;
 	}
 
@@ -212,6 +212,14 @@ public class MapViewImpl extends Composite implements MapView {
 	@Override
 	public FormPanel getData() {
 		return data;
+	}
+
+	public Label getDistanceDelta() {
+		return distanceDelta;
+	}
+
+	public Label getDurationDelta() {
+		return durationDelta;
 	}
 
 }

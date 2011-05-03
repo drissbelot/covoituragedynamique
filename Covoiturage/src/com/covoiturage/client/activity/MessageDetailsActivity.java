@@ -42,9 +42,7 @@ public class MessageDetailsActivity extends AbstractActivity implements
 
 					@Override
 					public void onClick(ClickEvent event) {
-						goTo(new ReplyMessagePlace(
-								((MessageDetailsPlace) placeController
-										.getWhere()).getMessageDetailsName()));
+						goTo(new ReplyMessagePlace(message.getId().toString()));
 
 					}
 				});

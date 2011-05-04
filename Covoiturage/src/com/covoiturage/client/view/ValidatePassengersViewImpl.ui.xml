@@ -1,7 +1,9 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid" 
-	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
+	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget"
+	xmlns:myExpander="urn:import:com.covoiturage.client.view">
 <ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
+
 
 <ui:style src="stylesheet.css" />
 	
@@ -10,7 +12,9 @@
 
 		<grid:column id="origin" header="Origin" />
 		<grid:column id="destination" header="Destination" />
+
 		
+
 	</grid:Grid>
 
 </gxt:ContentPanel>

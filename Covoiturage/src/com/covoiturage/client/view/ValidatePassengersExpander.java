@@ -26,6 +26,8 @@ public class ValidatePassengersExpander extends ContentPanel {
 		Label date = new Label();
 		mapImage = new Image(GWT.getHostPageBaseURL() + "imageService?id="
 				+ model.get("login").toString());
+		mapImage.setTitle("Click to zoom");
+
 		mapImage.setSize("200px", "200px");
 
 		nameLabel.setText(model.get("firstName").toString() + " "
@@ -38,13 +40,14 @@ public class ValidatePassengersExpander extends ContentPanel {
 
 		this.add(vertPanel);
 		window = new Window();
-		window.setSize(500, 300);
+		window.setSize(500, 500);
 		window.setPlain(true);
 		window.setModal(true);
 		window.setBlinkModal(true);
 		window.setHeading("Image");
 		window.setLayout(new FitLayout());
-
+		window.add(new Image(GWT.getHostPageBaseURL() + "imageService?id="
+				+ model.get("login").toString()));
 		window.addButton(new Button("Close",
 				new SelectionListener<ButtonEvent>() {
 					@Override

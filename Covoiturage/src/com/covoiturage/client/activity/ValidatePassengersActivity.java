@@ -10,6 +10,8 @@ import com.covoiturage.client.event.GetValidatePassengersEvent;
 import com.covoiturage.client.event.GetValidatePassengersEventHandler;
 import com.covoiturage.client.event.SelectPassengersEvent;
 import com.covoiturage.client.place.LoginPlace;
+import com.covoiturage.client.place.TravelDetailsPlace;
+import com.covoiturage.client.view.ValidatePassengersExpanderViewImpl;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -18,9 +20,14 @@ import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -50,6 +57,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 	private final PlaceController placeController;
 	private List<Long> passengers;
 	private List<Long> drivers;
+	private ValidatePassengersExpanderViewImpl expanderWidget;
 
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -215,6 +223,46 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 										.getSelectionModel().getSelectedItems()));
 
 					}
+				});
+		validatePassengersView.getExpander().setWidgetRowRenderer(
+				new WidgetRowRenderer<BaseModelData>() {
+
+					@Override
+					public Widget render(final BaseModelData model, int rowIdx) {
+
+						expanderWidget = new ValidatePassengersExpanderViewImpl(
+								model);
+						expanderWidget.getDetailsAnchor().addClickHandler(
+								new ClickHandler() {
+
+									@Override
+									public void onClick(ClickEvent event) {
+										goTo(new TravelDetailsPlace(model.get(
+												"id").toString()));
+
+									}
+								});
+						expanderWidget.getMapImage().addClickHandler(
+								new ClickHandler() {
+
+									@Override
+									public void onClick(ClickEvent event) {
+
+										expanderWidget.getImageZoom().show();
+
+									}
+								});
+						expanderWidget.getCloseButton().addSelectionListener(
+								new SelectionListener<ButtonEvent>() {
+									@Override
+									public void componentSelected(ButtonEvent ce) {
+										expanderWidget.getImageZoom().hide();
+									}
+								});
+
+						return expanderWidget;
+					}
+
 				});
 
 	}

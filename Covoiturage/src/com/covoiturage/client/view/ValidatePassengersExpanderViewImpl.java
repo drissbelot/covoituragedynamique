@@ -1,8 +1,6 @@
 package com.covoiturage.client.view;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -10,16 +8,19 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Image;
 
-public class ValidatePassengersExpander extends ContentPanel {
+public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
+		ValidatePassengersExpanderView {
 
 	private final Image mapImage;
 	private final Window window;
 
-	public ValidatePassengersExpander(BaseModelData model) {
+	private final Anchor detailsAnchor;
+	private final Button closeButton;
+
+	public ValidatePassengersExpanderViewImpl(BaseModelData model) {
 		VerticalPanel vertPanel = new VerticalPanel();
 		Label nameLabel = new Label();
 
@@ -37,7 +38,8 @@ public class ValidatePassengersExpander extends ContentPanel {
 		vertPanel.add(date);
 		vertPanel.add(mapImage);
 		vertPanel.add(nameLabel);
-
+		detailsAnchor = new Anchor("More details");
+		vertPanel.add(detailsAnchor);
 		this.add(vertPanel);
 		window = new Window();
 		window.setSize(500, 500);
@@ -48,30 +50,27 @@ public class ValidatePassengersExpander extends ContentPanel {
 		window.setLayout(new FitLayout());
 		window.add(new Image(GWT.getHostPageBaseURL() + "imageService?id="
 				+ model.get("login").toString()));
-		window.addButton(new Button("Close",
-				new SelectionListener<ButtonEvent>() {
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						window.hide();
-					}
-				}));
-		getMapImage().addClickHandler(new ClickHandler() {
+		closeButton = new Button("Close");
+		window.addButton(closeButton);
 
-			@Override
-			public void onClick(ClickEvent event) {
-
-				getImageZoom().show();
-
-			}
-		});
 	}
 
+	@Override
 	public Image getMapImage() {
 		return mapImage;
 	}
 
+	@Override
 	public Window getImageZoom() {
 		return window;
+	}
+
+	public Anchor getDetailsAnchor() {
+		return detailsAnchor;
+	}
+
+	public Button getCloseButton() {
+		return closeButton;
 	}
 
 }

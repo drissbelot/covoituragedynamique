@@ -9,6 +9,7 @@ import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.ReplyMessagePlace;
 import com.covoiturage.client.place.SettingsPlace;
+import com.covoiturage.client.place.TravelDetailsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
@@ -17,6 +18,7 @@ import com.google.gwt.place.shared.WithTokenizers;
 		AddUserPlace.Tokenizer.class, ValidatePassengersPlace.Tokenizer.class,
 		SettingsPlace.Tokenizer.class, HistoryPlace.Tokenizer.class,
 		MessagesListPlace.Tokenizer.class, MessageDetailsPlace.Tokenizer.class,
-		ReplyMessagePlace.Tokenizer.class,LicencePlace.Tokenizer.class})
+		ReplyMessagePlace.Tokenizer.class, LicencePlace.Tokenizer.class,
+		TravelDetailsPlace.Tokenizer.class })
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

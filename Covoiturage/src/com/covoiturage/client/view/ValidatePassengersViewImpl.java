@@ -7,7 +7,6 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.WidgetExpander;
-import com.extjs.gxt.ui.client.widget.grid.WidgetRowRenderer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -30,23 +29,13 @@ public class ValidatePassengersViewImpl extends Composite implements
 
 	WidgetExpander<BaseModelData> expander;
 
-	ValidatePassengersExpander expanderWidget;
-
 	public ValidatePassengersViewImpl() {
 
 		CheckBoxSelectionModel<BaseModelData> check = new CheckBoxSelectionModel<BaseModelData>();
 		check.setSelectionMode(SelectionMode.MULTI);
-		expander = new WidgetExpander<BaseModelData>(
-				new WidgetRowRenderer<BaseModelData>() {
 
-					@Override
-					public Widget render(BaseModelData model, int rowIdx) {
+		expander = new WidgetExpander<BaseModelData>();
 
-						expanderWidget = new ValidatePassengersExpander(model);
-						return expanderWidget;
-					}
-
-				});
 		initWidget(binder.createAndBindUi(this));
 
 		listGrid.addPlugin(expander);
@@ -78,11 +67,6 @@ public class ValidatePassengersViewImpl extends Composite implements
 	@Override
 	public WidgetExpander<BaseModelData> getExpander() {
 		return expander;
-	}
-
-	@Override
-	public ValidatePassengersExpander getExpanderWidget() {
-		return expanderWidget;
 	}
 
 }

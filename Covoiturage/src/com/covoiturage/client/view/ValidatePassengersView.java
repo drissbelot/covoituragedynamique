@@ -24,5 +24,4 @@ public interface ValidatePassengersView extends IsWidget {
 
 	public WidgetExpander<BaseModelData> getExpander();
 
-	public ValidatePassengersExpander getExpanderWidget();
 }

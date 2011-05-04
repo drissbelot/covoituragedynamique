@@ -1,0 +1,16 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
+	<ui:with type="com.extjs.gxt.ui.client.data.BaseModelData" field="model" />
+		
+	<ui:style src="stylesheet.css" />
+		
+	<g:VerticalPanel>
+		<gxt:Label ui:field="dateLabel" />
+		<g:Image ui:field="mapImage" />
+		<gxt:Label ui:field="nameLabel" />
+
+<gxt:Window ui:field="window" />
+	</g:VerticalPanel>
+	
+</ui:UiBinder>

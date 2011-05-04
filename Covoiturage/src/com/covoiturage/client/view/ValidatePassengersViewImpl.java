@@ -28,8 +28,9 @@ public class ValidatePassengersViewImpl extends Composite implements
 	@UiField
 	Grid<BaseModelData> listGrid;
 
-	private WidgetExpander<BaseModelData> expander;
-	private ValidatePassengersExpander expanderWidget;
+	WidgetExpander<BaseModelData> expander;
+
+	ValidatePassengersExpander expanderWidget;
 
 	public ValidatePassengersViewImpl() {
 
@@ -40,12 +41,14 @@ public class ValidatePassengersViewImpl extends Composite implements
 
 					@Override
 					public Widget render(BaseModelData model, int rowIdx) {
+
 						expanderWidget = new ValidatePassengersExpander(model);
 						return expanderWidget;
 					}
 
 				});
 		initWidget(binder.createAndBindUi(this));
+
 		listGrid.addPlugin(expander);
 		listGrid.getColumnModel().getColumns().add(0, check.getColumn());
 		listGrid.getColumnModel().getColumns().add(1, expander);

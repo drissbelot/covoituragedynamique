@@ -1,0 +1,50 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget"
+	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
+
+	<ui:style src="stylesheet.css" />
+		
+
+		<g:VerticalPanel>
+			<gxt:TabPanel width="450" autoHeight="true">
+				<gxt:TabItem text="Informations">
+					<g:VerticalPanel>
+						<g:HorizontalPanel>
+							<g:Image ui:field="personalPicture" />
+							<g:TextArea ui:field="comment" />
+						</g:HorizontalPanel>
+
+						<form:FormPanel>
+							<form:TextField ui:field="departureField"
+								fieldLabel="" />
+							<form:TextField ui:field="arrivalField"
+								fieldLabel="" />
+							<form:TextField ui:field="distanceField"
+								fieldLabel="" />
+							<form:TextField ui:field="durationField"
+								fieldLabel="" />
+							<form:TextField ui:field="placesField"
+								fieldLabel="" />
+							
+						</form:FormPanel>
+
+					</g:VerticalPanel>
+				</gxt:TabItem>
+				<gxt:TabItem ui:field="vehiculeTab" text="Vehicule">
+					<g:VerticalPanel>
+						<gxt:Label ui:field="markField" />
+						<gxt:Label ui:field="modelField" />
+						<gxt:Label ui:field="colorField" />
+						<gxt:Label ui:field="comfortField" />
+					</g:VerticalPanel>
+
+				</gxt:TabItem>
+				<gxt:TabItem text="Route">
+					<g:Image ui:field="mapImage" />
+				</gxt:TabItem>
+			</gxt:TabPanel>
+
+		</g:VerticalPanel>
+
+
+</ui:UiBinder>

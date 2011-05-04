@@ -24,6 +24,8 @@ import com.covoiturage.client.view.ReplyMessageView;
 import com.covoiturage.client.view.ReplyMessageViewImpl;
 import com.covoiturage.client.view.SettingsView;
 import com.covoiturage.client.view.SettingsViewImpl;
+import com.covoiturage.client.view.TravelDetailsView;
+import com.covoiturage.client.view.TravelDetailsViewImpl;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.client.view.ValidatePassengersViewImpl;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -34,7 +36,8 @@ import com.google.gwt.place.shared.PlaceController;
 
 public class ClientFactoryImpl implements ClientFactory {
 	private final EventBus eventBus = new SimpleEventBus();
-	private final PlaceController placeController = new PlaceController(eventBus);
+	private final PlaceController placeController = new PlaceController(
+			eventBus);
 	private final LoginView loginView = new LoginViewImpl();
 	private final MapView mapView = new MapViewImpl();
 	private final AddUserView addUserView = new AddUserViewImpl();
@@ -48,6 +51,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	private final MessagesListView messagesListView = new MessagesListViewImpl();
 	private final MessageDetailsView messageDetailsView = new MessageDetailsViewImpl();
 	private final ReplyMessageView replyMessageView = new ReplyMessageViewImpl();
+	private final TravelDetailsView travelDetailsView = new TravelDetailsViewImpl();
 	private final CovoiturageRequestFactory requestFactory = GWT
 			.create(CovoiturageRequestFactory.class);
 
@@ -134,6 +138,12 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public LicenceView getLicenceView() {
 		return LicenceView;
+	}
+
+	@Override
+	public TravelDetailsView getTravelDetailsView() {
+
+		return travelDetailsView;
 	}
 
 }

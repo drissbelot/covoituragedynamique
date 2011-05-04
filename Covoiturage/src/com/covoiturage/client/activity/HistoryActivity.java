@@ -3,8 +3,8 @@ package com.covoiturage.client.activity;
 import java.util.List;
 
 import com.covoiturage.client.ClientFactory;
-import com.covoiturage.client.event.SendLoginEvent;
-import com.covoiturage.client.event.SendLoginEventHandler;
+import com.covoiturage.client.UserService;
+import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
@@ -13,14 +13,17 @@ import com.covoiturage.shared.JourneyRequest;
 import com.covoiturage.shared.SimpleTravelProxy;
 import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
+import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.requestfactory.shared.ServerFailure;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HistoryActivity extends AbstractActivity implements
@@ -29,7 +32,7 @@ public class HistoryActivity extends AbstractActivity implements
 	private final HistoryView historyView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
-
+	private final UserServiceAsync userService = GWT.create(UserService.class);
 	private UserInfoDetailsProxy userDetails;
 
 	public HistoryActivity(ClientFactory clientFactory) {
@@ -48,12 +51,39 @@ public class HistoryActivity extends AbstractActivity implements
 	}
 
 	private void bind() {
-		eventBus.addHandler(SendLoginEvent.TYPE, new SendLoginEventHandler() {
-			@Override
-			public void onSendLogin(SendLoginEvent event) {
+		userService.getUser(new AsyncCallback<String>() {
 
-				userDetails = event.getUserDetails();
-				searchJourneys();
+			@Override
+			public void onSuccess(String result) {
+				if (result != null) {
+					UserInfoDetailsRequest userReq = requestFactory
+							.userInfoDetailsRequest();
+					Request<UserInfoDetailsProxy> createReq = userReq
+							.findDetailsFromUser(Long.parseLong(result));
+					createReq.fire(new Receiver<UserInfoDetailsProxy>() {
+
+						@Override
+						public void onSuccess(UserInfoDetailsProxy response) {
+							userDetails = response;
+							searchJourneys();
+						}
+
+						@Override
+						public void onFailure(ServerFailure error) {
+							if (error.getMessage().contains("not logged in"))
+								goTo(new LoginPlace(null));
+
+						}
+					});
+				} else {
+					goTo(new LoginPlace(null));
+				}
+
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+
 			}
 		});
 
@@ -64,6 +94,7 @@ public class HistoryActivity extends AbstractActivity implements
 				.simpleTravelRequest();
 		Request<List<SimpleTravelProxy>> createReqTravels = requestTravels
 				.getSimpleTravelsFromUser(userDetails.getId());
+		historyView.getListGrid().getStore().removeAll();
 		createReqTravels.fire(new Receiver<List<SimpleTravelProxy>>() {
 
 			@Override
@@ -93,7 +124,7 @@ public class HistoryActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(List<JourneyProxy> response) {
-				historyView.getListGrid().getStore().removeAll();
+
 				for (JourneyProxy journey : response) {
 
 					BaseModelData rec = new BaseModelData();

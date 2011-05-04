@@ -120,6 +120,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 															.getSteps().get(1));
 											rec.set("id", passengersTravels
 													.get(i).getId());
+											rec.set("type", "SimpleTravel");
 
 											listRecords.add(rec);
 
@@ -191,6 +192,7 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 															.get(1));
 											rec.set("id", journeys.get(i)
 													.getId());
+											rec.set("type", "Journey");
 											listRecords.add(rec);
 
 										}
@@ -238,7 +240,8 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 									@Override
 									public void onClick(ClickEvent event) {
 										goTo(new TravelDetailsPlace(model.get(
-												"id").toString()));
+												"type").toString()
+												+ model.get("id").toString()));
 
 									}
 								});

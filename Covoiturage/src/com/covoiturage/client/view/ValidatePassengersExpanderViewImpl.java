@@ -25,8 +25,9 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 		Label nameLabel = new Label();
 
 		Label date = new Label();
-		mapImage = new Image(GWT.getHostPageBaseURL() + "imageService?id="
-				+ model.get("login").toString());
+		mapImage = new Image(GWT.getHostPageBaseURL() + "imageService?class="
+				+ model.get("type").toString() + "&id="
+				+ model.get("id").toString());
 		mapImage.setTitle("Click to zoom");
 
 		mapImage.setSize("200px", "200px");
@@ -48,8 +49,9 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 		window.setBlinkModal(true);
 		window.setHeading("Image");
 		window.setLayout(new FitLayout());
-		window.add(new Image(GWT.getHostPageBaseURL() + "imageService?id="
-				+ model.get("login").toString()));
+		window.add(new Image(GWT.getHostPageBaseURL() + "imageService?class="
+				+ model.get("type").toString() + "&id="
+				+ model.get("id").toString()));
 		closeButton = new Button("Close");
 		window.addButton(closeButton);
 

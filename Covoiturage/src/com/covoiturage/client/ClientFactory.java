@@ -12,6 +12,7 @@ import com.covoiturage.client.view.MessageDetailsView;
 import com.covoiturage.client.view.MessagesListView;
 import com.covoiturage.client.view.ReplyMessageView;
 import com.covoiturage.client.view.SettingsView;
+import com.covoiturage.client.view.TravelDetailsView;
 import com.covoiturage.client.view.ValidatePassengersView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.google.gwt.event.shared.EventBus;
@@ -49,4 +50,6 @@ public interface ClientFactory {
 	ReplyMessageView getReplyMessageView();
 
 	LicenceView getLicenceView();
+
+	TravelDetailsView getTravelDetailsView();
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -19,21 +20,33 @@ public class ImageServiceImpl extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Objectify ofy=  ObjectifyService.begin();
-		SimpleTravel travel;
-		travel= ofy.query(SimpleTravel.class).filter("passenger", Long.valueOf(request.getParameter("id"))).get();
+		Objectify ofy = ObjectifyService.begin();
+		if (request.getParameter("class").contains("SimpleTravel")) {
+			SimpleTravel travel;
+			travel = ofy.find(SimpleTravel.class,
+					Long.valueOf(request.getParameter("id")));
 
-		
+			response.reset();
+			response.setContentType(travel.getMapImageType());
 
+			ServletOutputStream os = response.getOutputStream();
 
-		response.reset();
-		response.setContentType(travel.getMapImageType());
+			os.write(travel.getMapImage());
+		} else if (request.getParameter("class").contains("Journey")) {
+			Journey journey;
+			journey = ofy.find(Journey.class,
+					Long.valueOf(request.getParameter("id")));
 
-		ServletOutputStream os = response.getOutputStream();
+			response.reset();
+			response.setContentType(journey.getMapImageType());
 
-		os.write(travel.getMapImage());
+			ServletOutputStream os = response.getOutputStream();
+
+			os.write(journey.getMapImage());
+		}
 
 	}
 }

@@ -6,6 +6,7 @@ import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.UserService;
 import com.covoiturage.client.UserServiceAsync;
 import com.covoiturage.client.place.LoginPlace;
+import com.covoiturage.client.place.TravelDetailsPlace;
 import com.covoiturage.client.view.HistoryView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;
@@ -15,6 +16,9 @@ import com.covoiturage.shared.SimpleTravelRequest;
 import com.covoiturage.shared.UserInfoDetailsProxy;
 import com.covoiturage.shared.UserInfoDetailsRequest;
 import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
@@ -28,7 +32,7 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HistoryActivity extends AbstractActivity implements
 		HistoryView.Presenter {
-	private final EventBus eventBus;
+
 	private final HistoryView historyView;
 	private final CovoiturageRequestFactory requestFactory;
 	private final PlaceController placeController;
@@ -37,7 +41,7 @@ public class HistoryActivity extends AbstractActivity implements
 
 	public HistoryActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
-		this.eventBus = clientFactory.getEventBus();
+
 		this.historyView = clientFactory.getHistoryView();
 		this.placeController = clientFactory.getPlaceController();
 	}
@@ -86,6 +90,16 @@ public class HistoryActivity extends AbstractActivity implements
 
 			}
 		});
+		historyView.getListGrid().addListener(Events.RowClick,
+				new Listener<GridEvent<BaseModelData>>() {
+
+					@Override
+					public void handleEvent(GridEvent<BaseModelData> be) {
+						goTo(new TravelDetailsPlace(be.getModel().get("type")
+								.toString()
+								+ be.getModel().get("id").toString()));
+					}
+				});
 
 	}
 
@@ -106,6 +120,8 @@ public class HistoryActivity extends AbstractActivity implements
 					rec.set("from", simpleTravel.getOriginAddress());
 					rec.set("to", simpleTravel.getDestinationAddress());
 					rec.set("date", simpleTravel.getDate());
+					rec.set("id", simpleTravel.getId());
+					rec.set("type", "SimpleTravel");
 					historyView.getListGrid().getStore().add(rec);
 				}
 			}
@@ -132,9 +148,11 @@ public class HistoryActivity extends AbstractActivity implements
 					rec.set("from", journey.getOriginAddress());
 					rec.set("to", journey.getDestinationAddress());
 					rec.set("date", journey.getDate());
+					rec.set("id", journey.getId());
+					rec.set("type", "Journey");
 					historyView.getListGrid().getStore().add(rec);
 				}
-				// TODO détails avec un expander
+
 			}
 
 			@Override

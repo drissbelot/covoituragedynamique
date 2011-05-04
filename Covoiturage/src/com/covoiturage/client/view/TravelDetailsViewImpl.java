@@ -7,14 +7,14 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class TravelDetailsViewImpl extends Composite implements
 		TravelDetailsView {
 
-	interface MyUiBinder extends UiBinder<FlowPanel, TravelDetailsViewImpl> {
+	interface MyUiBinder extends UiBinder<VerticalPanel, TravelDetailsViewImpl> {
 	}
 
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);

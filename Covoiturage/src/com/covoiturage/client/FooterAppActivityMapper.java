@@ -10,6 +10,7 @@ import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.ReplyMessagePlace;
 import com.covoiturage.client.place.SettingsPlace;
+import com.covoiturage.client.place.TravelDetailsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -42,9 +43,10 @@ public class FooterAppActivityMapper implements ActivityMapper {
 			return new FooterActivity(clientFactory);
 		else if (place instanceof AddUserPlace)
 			return new FooterActivity(clientFactory);
-		else if(place instanceof ReplyMessagePlace)
+		else if (place instanceof ReplyMessagePlace)
 			return new FooterActivity(clientFactory);
-
+		else if (place instanceof TravelDetailsPlace)
+			return new FooterActivity(clientFactory);
 		return null;
 	}
 

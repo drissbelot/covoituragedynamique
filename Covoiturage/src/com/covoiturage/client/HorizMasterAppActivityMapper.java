@@ -1,20 +1,20 @@
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.HeaderActivity;
-
 import com.covoiturage.client.place.HistoryPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
 import com.covoiturage.client.place.MessagesListPlace;
 import com.covoiturage.client.place.ReplyMessagePlace;
 import com.covoiturage.client.place.SettingsPlace;
+import com.covoiturage.client.place.TravelDetailsPlace;
 import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 public class HorizMasterAppActivityMapper implements ActivityMapper {
-	private ClientFactory clientFactory;
+	private final ClientFactory clientFactory;
 
 	public HorizMasterAppActivityMapper(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
@@ -34,7 +34,9 @@ public class HorizMasterAppActivityMapper implements ActivityMapper {
 			return new HeaderActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
 			return new HeaderActivity(clientFactory);
-		else if(place instanceof ReplyMessagePlace)
+		else if (place instanceof ReplyMessagePlace)
+			return new HeaderActivity(clientFactory);
+		else if (place instanceof TravelDetailsPlace)
 			return new HeaderActivity(clientFactory);
 		return null;
 

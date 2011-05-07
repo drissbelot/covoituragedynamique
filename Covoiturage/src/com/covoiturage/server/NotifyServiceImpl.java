@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server;
 
 import java.io.UnsupportedEncodingException;
@@ -22,11 +25,19 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotifyServiceImpl.
+ */
 public class NotifyServiceImpl extends RemoteServiceServlet implements
 		NotifyService {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.NotifyService#sendMessage(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, java.util.Date)
+	 */
 	@Override
 	public long sendMessage(Long userDetailsId, String subject,
 			String text, String from, Date date) {

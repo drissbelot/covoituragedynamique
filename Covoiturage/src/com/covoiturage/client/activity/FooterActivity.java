@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -12,18 +15,33 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FooterActivity.
+ */
 public class FooterActivity extends AbstractActivity implements
 		FooterView.Presenter {
 
+	/** The footer view. */
 	FooterView footerView;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/**
+	 * Instantiates a new footer activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public FooterActivity(ClientFactory clientFactory) {
 		this.footerView = clientFactory.getFooterView();
 		this.placeController = clientFactory.getPlaceController();
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -32,6 +50,9 @@ public class FooterActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		footerView.getAnchoren().addClickHandler(new ClickHandler() {
 
@@ -80,6 +101,9 @@ public class FooterActivity extends AbstractActivity implements
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.FooterView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

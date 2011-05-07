@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
@@ -34,26 +37,49 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessagesListActivity.
+ */
 public class MessagesListActivity extends AbstractActivity implements
 		MessagesListView.Presenter {
 
+	/** The messages list view. */
 	private final MessagesListView messagesListView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/** The current user. */
 	private String currentUser;
+	
+	/** The user details. */
 	private UserInfoDetailsProxy userDetails;
+	
+	/** The messages. */
 	private final List<MessagesProxy> messages = new ArrayList<MessagesProxy>();
+	
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	
+	/** The notify service. */
 	private final NotifyServiceAsync notifyService = GWT
 			.create(NotifyService.class);
 
+	/**
+	 * Instantiates a new messages list activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public MessagesListActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -61,6 +87,9 @@ public class MessagesListActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		userService.getUser(new AsyncCallback<String>() {
 
@@ -230,6 +259,9 @@ public class MessagesListActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Show messages.
+	 */
 	protected void showMessages() {
 		UserInfoDetailsRequest requestDetails = requestFactory
 				.userInfoDetailsRequest();
@@ -296,6 +328,9 @@ public class MessagesListActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -303,6 +338,9 @@ public class MessagesListActivity extends AbstractActivity implements
 		panel.setWidget(messagesListView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.MessagesListView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

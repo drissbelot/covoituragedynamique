@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server.service;
 
 import java.io.IOException;
@@ -17,7 +20,22 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JourneyDao.
+ */
 public class JourneyDao extends ObjectifyDao<Journey> {
+	
+	/**
+	 * Gets the journeys.
+	 *
+	 * @param steps the steps
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param distanceMax the distance max
+	 * @return the journeys
+	 */
 	public static List<Journey> getJourneys(List<String> steps,
 			Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax) {
@@ -27,6 +45,12 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	}
 
+	/**
+	 * Gets the journeys from user.
+	 *
+	 * @param id the id
+	 * @return the journeys from user
+	 */
 	public static List<Journey> getJourneysFromUser(Long id) {
 		Objectify ofy = ObjectifyService.begin();
 
@@ -36,6 +60,27 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return list;
 	}
 
+	/**
+	 * Save journey driver.
+	 *
+	 * @param steps the steps
+	 * @param date the date
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param driver the driver
+	 * @param originAddress the origin address
+	 * @param destinationAddress the destination address
+	 * @param waypoints the waypoints
+	 * @param stepsDetails the steps details
+	 * @param passengersTravels the passengers travels
+	 * @param comment the comment
+	 * @param duration the duration
+	 * @param distance the distance
+	 * @param places the places
+	 * @param mapImage the map image
+	 * @return the journey
+	 */
 	public static Journey saveJourneyDriver(List<String> steps, Date date,
 			Date departureStart, Date departureEnd, Date arrival, Long driver,
 			String originAddress, String destinationAddress,
@@ -95,6 +140,14 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return journey;
 	}
 
+	/**
+	 * Update journey.
+	 *
+	 * @param journeyId the journey id
+	 * @param simpleTravelId the simple travel id
+	 * @param steps the steps
+	 * @return the journey
+	 */
 	public static Journey updateJourney(Long journeyId, Long simpleTravelId,
 			List<String> steps) {
 		Journey journey = new Journey();
@@ -116,14 +169,30 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	}
 
+	/**
+	 * Count journeys.
+	 *
+	 * @return the long
+	 */
 	public Long countJourneys() {
 		return (long) this.listAll().size();
 	}
 
+	/**
+	 * Find all journeys.
+	 *
+	 * @return the list
+	 */
 	public List<Journey> findAllJourneys() {
 		return this.listAll();
 	}
 
+	/**
+	 * Find journey.
+	 *
+	 * @param id the id
+	 * @return the journey
+	 */
 	public Journey findJourney(Long id) {
 		try {
 			return this.get(id);
@@ -133,11 +202,22 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		return null;
 	}
 
+	/**
+	 * Persist.
+	 *
+	 * @param journey the journey
+	 * @return the long
+	 */
 	public Long persist(Journey journey) {
 		this.put(journey);
 		return journey.getId();
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param journey the journey
+	 */
 	public void remove(Journey journey) {
 		this.delete(journey);
 	}

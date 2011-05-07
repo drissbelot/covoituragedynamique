@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server;
 
 import javax.servlet.http.HttpSession;
@@ -8,13 +11,19 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserServiceImpl.
+ */
 public class UserServiceImpl extends RemoteServiceServlet implements
 		UserService {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.UserService#login(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public String login(String login, String password) {
 
@@ -35,6 +44,9 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.UserService#getUser()
+	 */
 	@Override
 	public String getUser() {
 		HttpSession httpSession = getThreadLocalRequest().getSession();

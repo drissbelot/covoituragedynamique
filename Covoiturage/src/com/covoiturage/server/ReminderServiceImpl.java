@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server;
 
 import java.io.IOException;
@@ -23,10 +26,18 @@ import com.covoiturage.server.domain.UserInfoDetails;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReminderServiceImpl.
+ */
 public class ReminderServiceImpl extends HttpServlet {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

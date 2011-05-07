@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client;
 
 import com.covoiturage.client.view.AddUserView;
@@ -34,112 +37,204 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientFactoryImpl.
+ */
 public class ClientFactoryImpl implements ClientFactory {
+	
+	/** The event bus. */
 	private final EventBus eventBus = new SimpleEventBus();
+	
+	/** The place controller. */
 	private final PlaceController placeController = new PlaceController(
 			eventBus);
+	
+	/** The login view. */
 	private final LoginView loginView = new LoginViewImpl();
+	
+	/** The map view. */
 	private final MapView mapView = new MapViewImpl();
+	
+	/** The add user view. */
 	private final AddUserView addUserView = new AddUserViewImpl();
+	
+	/** The Edit profil view. */
 	private final SettingsView EditProfilView = new SettingsViewImpl();
+	
+	/** The Licence view. */
 	private final LicenceView LicenceView = new LicenceViewImpl();
+	
+	/** The validate passengers view. */
 	private final ValidatePassengersView validatePassengersView = new ValidatePassengersViewImpl();
+	
+	/** The menu view. */
 	private final MenuView menuView = new MenuViewImpl();
+	
+	/** The header view. */
 	private final HeaderView headerView = new HeaderViewImpl();
+	
+	/** The footer view. */
 	private final FooterView footerView = new FooterViewImpl();
+	
+	/** The history view. */
 	private final HistoryView historyView = new HistoryViewImpl();
+	
+	/** The messages list view. */
 	private final MessagesListView messagesListView = new MessagesListViewImpl();
+	
+	/** The message details view. */
 	private final MessageDetailsView messageDetailsView = new MessageDetailsViewImpl();
+	
+	/** The reply message view. */
 	private final ReplyMessageView replyMessageView = new ReplyMessageViewImpl();
+	
+	/** The travel details view. */
 	private final TravelDetailsView travelDetailsView = new TravelDetailsViewImpl();
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory = GWT
 			.create(CovoiturageRequestFactory.class);
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getRequestFactory()
+	 */
 	@Override
 	public CovoiturageRequestFactory getRequestFactory() {
 		return requestFactory;
 	}
 
+	/**
+	 * Instantiates a new client factory impl.
+	 */
 	public ClientFactoryImpl() {
 		requestFactory.initialize(eventBus);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getEventBus()
+	 */
 	@Override
 	public EventBus getEventBus() {
 		return eventBus;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getPlaceController()
+	 */
 	@Override
 	public PlaceController getPlaceController() {
 		return placeController;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getLoginView()
+	 */
 	@Override
 	public LoginView getLoginView() {
 		return loginView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getMapView()
+	 */
 	@Override
 	public MapView getMapView() {
 		return mapView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getAddUserView()
+	 */
 	@Override
 	public AddUserView getAddUserView() {
 		return addUserView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getValidatePassengersView()
+	 */
 	@Override
 	public ValidatePassengersView getValidatePassengersView() {
 		return validatePassengersView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getSettingsView()
+	 */
 	@Override
 	public SettingsView getSettingsView() {
 		return EditProfilView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getMenuView()
+	 */
 	@Override
 	public MenuView getMenuView() {
 		return menuView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getHeaderView()
+	 */
 	@Override
 	public HeaderView getHeaderView() {
 		return headerView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getFooterView()
+	 */
 	@Override
 	public FooterView getFooterView() {
 		return footerView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getHistoryView()
+	 */
 	@Override
 	public HistoryView getHistoryView() {
 		return historyView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getMessagesListView()
+	 */
 	@Override
 	public MessagesListView getMessagesListView() {
 		return messagesListView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getMessageDetailsView()
+	 */
 	@Override
 	public MessageDetailsView getMessageDetailsView() {
 		return messageDetailsView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getReplyMessageView()
+	 */
 	@Override
 	public ReplyMessageView getReplyMessageView() {
 		return replyMessageView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getLicenceView()
+	 */
 	@Override
 	public LicenceView getLicenceView() {
 		return LicenceView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.ClientFactory#getTravelDetailsView()
+	 */
 	@Override
 	public TravelDetailsView getTravelDetailsView() {
 

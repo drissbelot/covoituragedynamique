@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -17,29 +20,49 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Image;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TravelDetailsActivity.
+ */
 public class TravelDetailsActivity extends AbstractActivity implements
 		TravelDetailsView.Presenter {
 
+	/** The travel details view. */
 	private final TravelDetailsView travelDetailsView;
 
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
 
+	/** The current user. */
 	private UserInfoProxy currentUser;
 
+	/** The language flags. */
 	private final LanguageFlagsResources languageFlags = GWT
 			.create(LanguageFlagsResources.class);
+	
+	/** The rating resources. */
 	private final RatingResources ratingResources = GWT
 			.create(RatingResources.class);
+	
+	/** The car resources. */
 	private final CarResources carResources = GWT.create(CarResources.class);
 
+	/** The where. */
 	private String where;
 
+	/**
+	 * Instantiates a new travel details activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public TravelDetailsActivity(ClientFactory clientFactory) {
 
 		this.travelDetailsView = clientFactory.getTravelDetailsView();
@@ -48,6 +71,9 @@ public class TravelDetailsActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 
 		where = ((TravelDetailsPlace) placeController.getWhere())
@@ -106,6 +132,9 @@ public class TravelDetailsActivity extends AbstractActivity implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -113,6 +142,9 @@ public class TravelDetailsActivity extends AbstractActivity implements
 		panel.setWidget(travelDetailsView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.TravelDetailsView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

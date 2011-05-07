@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -9,26 +12,40 @@ import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.MessagesProxy;
 import com.covoiturage.shared.MessagesRequest;
 import com.google.gwt.activity.shared.AbstractActivity;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReplyMessageActivity.
+ */
 public class ReplyMessageActivity extends AbstractActivity implements
 		ReplyMessageView.Presenter {
 
+	/** The reply message view. */
 	private final ReplyMessageView replyMessageView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/** The message. */
 	private MessagesProxy message;
 
+	/**
+	 * Instantiates a new reply message activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public ReplyMessageActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -36,6 +53,9 @@ public class ReplyMessageActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		showMessage();
 		replyMessageView.getAnswerButton().addClickHandler(new ClickHandler() {
@@ -50,25 +70,27 @@ public class ReplyMessageActivity extends AbstractActivity implements
 		});
 	}
 
+	/**
+	 * Show message.
+	 */
 	protected void showMessage() {
 
 		MessagesRequest requestMessages = requestFactory.messagesRequest();
 
 		Request<MessagesProxy> createReqMessages = requestMessages
-				.findMessages(Long.valueOf(((ReplyMessagePlace) placeController.getWhere())
-						.getReplyMessagesName()));
+				.findMessages(Long.valueOf(((ReplyMessagePlace) placeController
+						.getWhere()).getReplyMessagesName()));
 		createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 			@Override
 			public void onSuccess(MessagesProxy response) {
 				message = response;
-				//TODO on doit pouvoir inverser les champs
+				// TODO on doit pouvoir inverser les champs
 				replyMessageView.getFromLabel().setText(message.getFrom());
 				replyMessageView.getSubjectLabel()
 						.setText(message.getSubject());
 				replyMessageView.getDateLabel().setText(
 						message.getDate().toString());
-				
 
 			}
 
@@ -83,6 +105,9 @@ public class ReplyMessageActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -90,6 +115,9 @@ public class ReplyMessageActivity extends AbstractActivity implements
 		panel.setWidget(replyMessageView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.ReplyMessageView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

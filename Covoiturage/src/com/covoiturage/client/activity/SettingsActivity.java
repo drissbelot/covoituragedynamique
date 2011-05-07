@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
@@ -32,30 +35,51 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SettingsActivity.
+ */
 public class SettingsActivity extends AbstractActivity implements
 		SettingsView.Presenter {
 
+	/** The settings view. */
 	private final SettingsView settingsView;
 
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
 
+	/** The current user. */
 	private UserInfoProxy currentUser;
 
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	
+	/** The language flags. */
 	private final LanguageFlagsResources languageFlags = GWT
 			.create(LanguageFlagsResources.class);
+	
+	/** The rating resources. */
 	private final RatingResources ratingResources = GWT
 			.create(RatingResources.class);
+	
+	/** The car resources. */
 	private final CarResources carResources = GWT.create(CarResources.class);
 
+	/**
+	 * Instantiates a new settings activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public SettingsActivity(ClientFactory clientFactory) {
 
 		this.settingsView = clientFactory.getSettingsView();
@@ -64,6 +88,9 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		languageComboBox();
 		comfortComboBox();
@@ -198,6 +225,9 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Car color combo box.
+	 */
 	private void carColorComboBox() {
 
 		settingsView.getCarColorField().getStore().removeAll();
@@ -291,6 +321,9 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Comfort combo box.
+	 */
 	private void comfortComboBox() {
 		settingsView.getComfortField().getStore().removeAll();
 		List<BaseModelData> listRecordsComfort = new ArrayList<BaseModelData>();
@@ -321,6 +354,9 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Language combo box.
+	 */
 	private void languageComboBox() {
 		settingsView.getLanguage().getStore().removeAll();
 		List<BaseModelData> listRecords = new ArrayList<BaseModelData>();
@@ -357,6 +393,9 @@ public class SettingsActivity extends AbstractActivity implements
 		settingsView.getLanguage().getStore().add(listRecords);
 	}
 
+	/**
+	 * Modify user settings.
+	 */
 	protected void modifyUserSettings() {
 
 		UserInfoDetailsRequest requestDetails = requestFactory
@@ -401,6 +440,9 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -408,6 +450,9 @@ public class SettingsActivity extends AbstractActivity implements
 		panel.setWidget(settingsView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.SettingsView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

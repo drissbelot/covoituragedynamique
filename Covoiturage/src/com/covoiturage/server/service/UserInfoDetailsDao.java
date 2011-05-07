@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server.service;
 
 import java.util.ArrayList;
@@ -9,8 +12,19 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserInfoDetailsDao.
+ */
 public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
+	/**
+	 * Adds the message to user.
+	 *
+	 * @param id the id
+	 * @param messageId the message id
+	 * @return the user info details
+	 */
 	public static UserInfoDetails addMessageToUser(Long id, Long messageId) {
 		Objectify ofy = ObjectifyService.begin();
 		UserInfoDetails user = ofy.find(UserInfoDetails.class, id);
@@ -20,6 +34,12 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Channel.
+	 *
+	 * @param id the id
+	 * @return the user info details
+	 */
 	public static UserInfoDetails channel(Long id) {
 		Objectify ofy = ObjectifyService.begin();
 		UserInfoDetails userDetails = new UserInfoDetails();
@@ -34,6 +54,13 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Delete message.
+	 *
+	 * @param id the id
+	 * @param messageId the message id
+	 * @return the user info details
+	 */
 	public static UserInfoDetails deleteMessage(Long id, Long messageId) {
 		Objectify ofy = ObjectifyService.begin();
 		UserInfoDetails user = ofy.find(UserInfoDetails.class, id);
@@ -44,6 +71,12 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Find details from user.
+	 *
+	 * @param id the id
+	 * @return the user info details
+	 */
 	public static UserInfoDetails findDetailsFromUser(Long id) {
 		Objectify ofy = ObjectifyService.begin();
 
@@ -54,6 +87,12 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Gets the passenger list.
+	 *
+	 * @param passengers the passengers
+	 * @return the passenger list
+	 */
 	public static List<UserInfoDetails> getPassengerList(List<Long> passengers) {
 		Objectify ofy = ObjectifyService.begin();
 		List<UserInfoDetails> result = new ArrayList<UserInfoDetails>();
@@ -64,6 +103,15 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Modify user info details.
+	 *
+	 * @param id the id
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @param language the language
+	 * @return the user info details
+	 */
 	public static UserInfoDetails modifyUserInfoDetails(Long id,
 			String firstName, String lastName, String language) {
 		UserInfoDetails user = new UserInfoDetails();
@@ -81,14 +129,30 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 
 	}
 
+	/**
+	 * Count user info details.
+	 *
+	 * @return the long
+	 */
 	public Long countUserInfoDetails() {
 		return (long) this.listAll().size();
 	}
 
+	/**
+	 * Find all user info details.
+	 *
+	 * @return the list
+	 */
 	public List<UserInfoDetails> findAllUserInfoDetails() {
 		return this.listAll();
 	}
 
+	/**
+	 * Find user info details.
+	 *
+	 * @param id the id
+	 * @return the user info details
+	 */
 	public UserInfoDetails findUserInfoDetails(Long id) {
 		try {
 			return this.get(id);
@@ -98,11 +162,22 @@ public class UserInfoDetailsDao extends ObjectifyDao<UserInfoDetails> {
 		return null;
 	}
 
+	/**
+	 * Persist.
+	 *
+	 * @param userInfoDetails the user info details
+	 * @return the long
+	 */
 	public Long persist(UserInfoDetails userInfoDetails) {
 		this.put(userInfoDetails);
 		return userInfoDetails.getId();
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param userInfoDetails the user info details
+	 */
 	public void remove(UserInfoDetails userInfoDetails) {
 		this.delete(userInfoDetails);
 	}

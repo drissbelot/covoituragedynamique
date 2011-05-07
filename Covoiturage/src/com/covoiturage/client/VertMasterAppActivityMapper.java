@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.MenuActivity;
@@ -13,14 +16,28 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VertMasterAppActivityMapper.
+ */
 public class VertMasterAppActivityMapper implements ActivityMapper {
+	
+	/** The client factory. */
 	private final ClientFactory clientFactory;
 
+	/**
+	 * Instantiates a new vert master app activity mapper.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public VertMasterAppActivityMapper(ClientFactory clientFactory) {
 		super();
 		this.clientFactory = clientFactory;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public Activity getActivity(Place place) {
 		if (place instanceof MapPlace)

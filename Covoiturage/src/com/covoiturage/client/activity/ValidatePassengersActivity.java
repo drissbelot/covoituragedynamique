@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
@@ -31,34 +34,71 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ValidatePassengersActivity.
+ */
 public class ValidatePassengersActivity extends AbstractActivity implements
 		ValidatePassengersView.Presenter {
 
+	/**
+	 * The Interface Display.
+	 */
 	public interface Display {
 
+		/**
+		 * As widget.
+		 *
+		 * @return the widget
+		 */
 		Widget asWidget();
 
 	}
 
+	/** The event bus. */
 	private final EventBus eventBus;
+	
+	/** The validate passengers view. */
 	private final ValidatePassengersView validatePassengersView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The passengers travels. */
 	private List<SimpleTravelProxy> passengersTravels;
+	
+	/** The journeys. */
 	private List<JourneyProxy> journeys;
+	
+	/** The passengers info. */
 	private List<UserInfoDetailsProxy> passengersInfo = new ArrayList<UserInfoDetailsProxy>();
+	
+	/** The drivers info. */
 	private List<UserInfoDetailsProxy> driversInfo = new ArrayList<UserInfoDetailsProxy>();
 
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The passengers. */
 	private List<Long> passengers;
+	
+	/** The drivers. */
 	private List<Long> drivers;
+	
+	/** The expander widget. */
 	private ValidatePassengersExpanderViewImpl expanderWidget;
 
+	/**
+	 * Instantiates a new validate passengers activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public ValidatePassengersActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -66,6 +106,9 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 
 		eventBus.addHandler(GetValidatePassengersEvent.TYPE,
@@ -270,6 +313,9 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 
@@ -278,6 +324,9 @@ public class ValidatePassengersActivity extends AbstractActivity implements
 		panel.setWidget(validatePassengersView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.ValidatePassengersView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

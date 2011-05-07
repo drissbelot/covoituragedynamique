@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -15,18 +18,34 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddUserActivity.
+ */
 public class AddUserActivity extends AbstractActivity implements
 		AddUserView.Presenter {
 
+	/** The event bus. */
 	private final EventBus eventBus;
+	
+	/** The add user view. */
 	private final AddUserView addUserView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/**
+	 * Instantiates a new adds the user activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public AddUserActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -34,6 +53,9 @@ public class AddUserActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 
 		addUserView.getAddButton().addClickHandler(new ClickHandler() {
@@ -45,6 +67,9 @@ public class AddUserActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Adds the user.
+	 */
 	protected void addUser() {
 
 		UserInfoRequest request = requestFactory.userInfoRequest();
@@ -63,6 +88,11 @@ public class AddUserActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Save passenger driver.
+	 *
+	 * @param newUser the new user
+	 */
 	protected void savePassengerDriver(Long newUser) {
 
 		UserInfoDetailsRequest requestDriver = requestFactory
@@ -85,6 +115,9 @@ public class AddUserActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -92,6 +125,9 @@ public class AddUserActivity extends AbstractActivity implements
 		panel.setWidget(addUserView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.AddUserView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

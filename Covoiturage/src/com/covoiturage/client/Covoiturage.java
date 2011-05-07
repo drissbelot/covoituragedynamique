@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client;
 
 import com.covoiturage.client.place.LoginPlace;
@@ -22,18 +25,39 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Covoiturage.
+ */
 public class Covoiturage implements EntryPoint {
+	
+	/** The default place. */
 	private final Place defaultPlace = new LoginPlace("Covoiturage");
+	
+	/** The layout container. */
 	private final LayoutContainer layoutContainer = new LayoutContainer();
+	
+	/** The layout panel. */
 	private final BorderLayout layoutPanel = new BorderLayout();
+	
+	/** The main panel. */
 	private final ContentPanel mainPanel = new ContentPanel();
+	
+	/** The Footer panel. */
 	private final ContentPanel FooterPanel = new ContentPanel();
+	
+	/** The horiz master panel. */
 	private final ContentPanel horizMasterPanel = new ContentPanel();
+	
+	/** The vert master panel. */
 	private final ContentPanel vertMasterPanel = new ContentPanel();
+	
+	/** The aside panel. */
 	private final ContentPanel asidePanel = new ContentPanel();
 	
 	
 
+	/** The horiz master display. */
 	AcceptsOneWidget horizMasterDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
@@ -44,6 +68,8 @@ public class Covoiturage implements EntryPoint {
 			layoutContainer.layout();
 		}
 	};
+	
+	/** The aside display. */
 	AcceptsOneWidget asideDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
@@ -55,6 +81,8 @@ public class Covoiturage implements EntryPoint {
 			layoutContainer.layout();
 		}
 	};
+	
+	/** The vert master display. */
 	AcceptsOneWidget vertMasterDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
@@ -68,6 +96,7 @@ public class Covoiturage implements EntryPoint {
 		}
 	};
 
+	/** The main display. */
 	AcceptsOneWidget mainDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
@@ -83,6 +112,8 @@ public class Covoiturage implements EntryPoint {
 
 		}
 	};
+	
+	/** The footer display. */
 	AcceptsOneWidget footerDisplay = new AcceptsOneWidget() {
 		@Override
 		public void setWidget(IsWidget activityWidget) {
@@ -96,6 +127,9 @@ public class Covoiturage implements EntryPoint {
 		}
 	};
 
+	/**
+	 * Hide panels.
+	 */
 	private void hidePanels() {
 		if (horizMasterPanel.getWidget(0) == null)
 			horizMasterPanel.hide();
@@ -105,6 +139,9 @@ public class Covoiturage implements EntryPoint {
 			asidePanel.hide();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+	 */
 	@Override
 	public void onModuleLoad() {
 		final Viewport v = new Viewport();

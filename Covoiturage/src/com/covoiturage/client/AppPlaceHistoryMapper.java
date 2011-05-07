@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client;
 
 import com.covoiturage.client.place.AddUserPlace;
@@ -14,6 +17,9 @@ import com.covoiturage.client.place.ValidatePassengersPlace;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 
+/**
+ * The Interface AppPlaceHistoryMapper.
+ */
 @WithTokenizers({ LoginPlace.Tokenizer.class, MapPlace.Tokenizer.class,
 		AddUserPlace.Tokenizer.class, ValidatePassengersPlace.Tokenizer.class,
 		SettingsPlace.Tokenizer.class, HistoryPlace.Tokenizer.class,

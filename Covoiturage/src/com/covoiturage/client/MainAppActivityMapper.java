@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client;
 
 import com.covoiturage.client.activity.AddUserActivity;
@@ -25,13 +28,27 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainAppActivityMapper.
+ */
 public class MainAppActivityMapper implements ActivityMapper {
+	
+	/** The client factory. */
 	private final ClientFactory clientFactory;
 
+	/**
+	 * Instantiates a new main app activity mapper.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public MainAppActivityMapper(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public Activity getActivity(Place place) {
 		if (place instanceof LoginPlace)

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -21,23 +24,42 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuActivity.
+ */
 public class MenuActivity extends AbstractActivity implements
 		MenuView.Presenter {
 
+	/** The menu view. */
 	private final MenuView menuView;
 
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The user details. */
 	private UserInfoDetailsProxy userDetails;
+	
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The messages unread. */
 	private int messagesUnread;
 
+	/**
+	 * Instantiates a new menu activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public MenuActivity(ClientFactory clientFactory) {
 
 		this.menuView = clientFactory.getMenuView();
@@ -46,6 +68,9 @@ public class MenuActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		userService.getUser(new AsyncCallback<String>() {
 
@@ -70,7 +95,7 @@ public class MenuActivity extends AbstractActivity implements
 											.messagesRequest();
 									Request<MessagesProxy> createMessageReq = messageReq
 											.findMessages(message);
-									createMessageReq	
+									createMessageReq
 											.fire(new Receiver<MessagesProxy>() {
 
 												@Override
@@ -140,6 +165,9 @@ public class MenuActivity extends AbstractActivity implements
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -147,6 +175,9 @@ public class MenuActivity extends AbstractActivity implements
 		panel.setWidget(menuView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.MenuView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

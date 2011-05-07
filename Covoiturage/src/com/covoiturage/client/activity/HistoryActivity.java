@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import java.util.List;
@@ -24,21 +27,39 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HistoryActivity.
+ */
 public class HistoryActivity extends AbstractActivity implements
 		HistoryView.Presenter {
 
+	/** The history view. */
 	private final HistoryView historyView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	
+	/** The user details. */
 	private UserInfoDetailsProxy userDetails;
 
+	/**
+	 * Instantiates a new history activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public HistoryActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -46,6 +67,9 @@ public class HistoryActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -54,6 +78,9 @@ public class HistoryActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		userService.getUser(new AsyncCallback<String>() {
 
@@ -103,6 +130,9 @@ public class HistoryActivity extends AbstractActivity implements
 
 	}
 
+	/**
+	 * Search journeys.
+	 */
 	private void searchJourneys() {
 		SimpleTravelRequest requestTravels = requestFactory
 				.simpleTravelRequest();
@@ -166,6 +196,9 @@ public class HistoryActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.HistoryView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

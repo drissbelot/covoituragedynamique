@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server.service;
 
 import java.io.IOException;
@@ -19,8 +22,23 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SimpleTravelDao.
+ */
 public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
+	/**
+	 * Gets the simple travels.
+	 *
+	 * @param steps the steps
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param distanceMax the distance max
+	 * @param totalDistance the total distance
+	 * @return the simple travels
+	 */
 	public static List<SimpleTravel> getSimpleTravels(List<String> steps,
 			Date departureStart, Date departureEnd, Date arrival,
 			float distanceMax, double totalDistance) {
@@ -29,6 +47,12 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	}
 
+	/**
+	 * Gets the simple travels from user.
+	 *
+	 * @param userId the user id
+	 * @return the simple travels from user
+	 */
 	public static List<SimpleTravel> getSimpleTravelsFromUser(Long userId) {
 		Objectify ofy = ObjectifyService.begin();
 
@@ -39,6 +63,23 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	}
 
+	/**
+	 * Save journey passenger.
+	 *
+	 * @param steps the steps
+	 * @param originAddress the origin address
+	 * @param destinationAddress the destination address
+	 * @param date the date
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param passenger the passenger
+	 * @param comment the comment
+	 * @param distance the distance
+	 * @param duration the duration
+	 * @param mapImage the map image
+	 * @return the simple travel
+	 */
 	public SimpleTravel saveJourneyPassenger(List<String> steps,
 			String originAddress, String destinationAddress, Date date,
 			Date departureStart, Date departureEnd, Date arrival,
@@ -96,6 +137,13 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 		return simpleTravel;
 	}
 
+	/**
+	 * Update simple travel.
+	 *
+	 * @param id the id
+	 * @param statusDriver the status driver
+	 * @param statusPassenger the status passenger
+	 */
 	public static void updateSimpleTravel(Long id, String statusDriver,
 			String statusPassenger) {
 
@@ -121,14 +169,30 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 
 	}
 
+	/**
+	 * Count simple travels.
+	 *
+	 * @return the long
+	 */
 	public Long countSimpleTravels() {
 		return (long) this.listAll().size();
 	}
 
+	/**
+	 * Find all simple travels.
+	 *
+	 * @return the list
+	 */
 	public List<SimpleTravel> findAllSimpleTravels() {
 		return this.listAll();
 	}
 
+	/**
+	 * Find simple travel.
+	 *
+	 * @param id the id
+	 * @return the simple travel
+	 */
 	public SimpleTravel findSimpleTravel(Long id) {
 		try {
 			return this.get(id);
@@ -138,11 +202,22 @@ public class SimpleTravelDao extends ObjectifyDao<SimpleTravel> {
 		return null;
 	}
 
+	/**
+	 * Persist.
+	 *
+	 * @param simpleTravel the simple travel
+	 * @return the long
+	 */
 	public Long persist(SimpleTravel simpleTravel) {
 		this.put(simpleTravel);
 		return simpleTravel.getId();
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param simpleTravel the simple travel
+	 */
 	public void remove(SimpleTravel simpleTravel) {
 		this.delete(simpleTravel);
 	}

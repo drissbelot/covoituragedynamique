@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -14,20 +17,35 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessageDetailsActivity.
+ */
 public class MessageDetailsActivity extends AbstractActivity implements
 		MessageDetailsView.Presenter {
 
+	/** The messages details view. */
 	private final MessageDetailsView messagesDetailsView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/** The message. */
 	private MessagesProxy message;
 
+	/**
+	 * Instantiates a new message details activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public MessageDetailsActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -35,6 +53,9 @@ public class MessageDetailsActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		showMessage();
 		messagesDetailsView.getAnswerButton().addClickHandler(
@@ -48,12 +69,16 @@ public class MessageDetailsActivity extends AbstractActivity implements
 				});
 	}
 
+	/**
+	 * Show message.
+	 */
 	protected void showMessage() {
 
 		MessagesRequest requestMessages = requestFactory.messagesRequest();
 		Request<MessagesProxy> createReqMessages = requestMessages
-				.findMessages(Long.valueOf(((MessageDetailsPlace) placeController.getWhere())
-						.getMessageDetailsName()));
+				.findMessages(Long
+						.valueOf(((MessageDetailsPlace) placeController
+								.getWhere()).getMessageDetailsName()));
 		createReqMessages.fire(new Receiver<MessagesProxy>() {
 
 			@Override
@@ -80,6 +105,9 @@ public class MessageDetailsActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -87,6 +115,9 @@ public class MessageDetailsActivity extends AbstractActivity implements
 		panel.setWidget(messagesDetailsView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.MessageDetailsView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -22,23 +25,46 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HeaderActivity.
+ */
 public class HeaderActivity extends AbstractActivity implements
 		HeaderView.Presenter {
+	
+	/** The event bus. */
 	private final EventBus eventBus;
+	
+	/** The header view. */
 	private final HeaderView headerView;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The current user. */
 	private UserInfoProxy currentUser;
 
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
-	private final HeaderViewConstants headerview = GWT.create(HeaderViewConstants.class);
+	
+	/** The headerview. */
+	private final HeaderViewConstants headerview = GWT
+			.create(HeaderViewConstants.class);
 
+	/**
+	 * Instantiates a new header activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public HeaderActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -46,6 +72,9 @@ public class HeaderActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		userService.getUser(new AsyncCallback<String>() {
 
@@ -61,8 +90,9 @@ public class HeaderActivity extends AbstractActivity implements
 						public void onSuccess(UserInfoProxy response) {
 
 							currentUser = response;
-							headerView.getCurrentUser().setText(headerview.username()+" : "+
-									currentUser.getLogin());
+							headerView.getCurrentUser().setText(
+									headerview.username() + " : "
+											+ currentUser.getLogin());
 						}
 
 						@Override
@@ -126,22 +156,34 @@ public class HeaderActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.AbstractActivity#mayStop()
+	 */
 	@Override
 	public String mayStop() {
 
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.AbstractActivity#onCancel()
+	 */
 	@Override
 	public void onCancel() {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.AbstractActivity#onStop()
+	 */
 	@Override
 	public void onStop() {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -149,6 +191,9 @@ public class HeaderActivity extends AbstractActivity implements
 		panel.setWidget(headerView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.HeaderView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

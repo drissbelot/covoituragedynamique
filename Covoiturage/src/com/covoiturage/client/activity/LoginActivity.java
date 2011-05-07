@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -25,22 +28,42 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginActivity.
+ */
 public class LoginActivity extends AbstractActivity implements
 		LoginView.Presenter {
 
+	/** The event bus. */
 	private final EventBus eventBus;
+	
+	/** The login view. */
 	private final LoginView loginView;
+	
+	/** The current user. */
 	private UserInfoProxy currentUser;
+	
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
+	/**
+	 * Instantiates a new login activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public LoginActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 		this.eventBus = clientFactory.getEventBus();
@@ -48,6 +71,9 @@ public class LoginActivity extends AbstractActivity implements
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		loginView.getSendLoginButton().addClickHandler(new ClickHandler() {
 			@Override
@@ -64,6 +90,9 @@ public class LoginActivity extends AbstractActivity implements
 		});
 	}
 
+	/**
+	 * Login.
+	 */
 	private void login() {
 
 		userService.login(loginView.getLogin().getValue(), loginView
@@ -165,6 +194,9 @@ public class LoginActivity extends AbstractActivity implements
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
@@ -172,6 +204,9 @@ public class LoginActivity extends AbstractActivity implements
 		containerWidget.setWidget(loginView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.LoginView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

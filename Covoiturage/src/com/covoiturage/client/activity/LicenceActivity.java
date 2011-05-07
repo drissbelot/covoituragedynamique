@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
@@ -11,16 +14,31 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenceActivity.
+ */
 public class LicenceActivity extends AbstractActivity implements LicenceView.Presenter{
 	
+	/** The licence view. */
 	LicenceView licenceView;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
 
+	/**
+	 * Instantiates a new licence activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public LicenceActivity(ClientFactory clientFactory) {
 		this.licenceView = clientFactory.getLicenceView();
 		this.placeController = clientFactory.getPlaceController();
 	}
 	
+	/**
+	 * Bind.
+	 */
 	private void bind() {
 		licenceView.getNext().addClickHandler(new ClickHandler() {
 			@Override
@@ -31,6 +49,9 @@ public class LicenceActivity extends AbstractActivity implements LicenceView.Pre
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		bind();
@@ -38,6 +59,9 @@ public class LicenceActivity extends AbstractActivity implements LicenceView.Pre
 		panel.setWidget(licenceView.asWidget());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.LicenceView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 		placeController.goTo(place);

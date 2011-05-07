@@ -15,8 +15,8 @@
   
 <inherits name='com.google.gwt.activity.Activity' /> 
 <inherits name="com.google.gwt.place.Place"/>
-<inherits name='com.google.gwt.requestfactory.RequestFactory'/>
-<inherits name="com.extjs.gxt.ui.GXT" />
+<inherits name='com.google.web.bindery.requestfactory.RequestFactory'/>
+<inherits name="com.covoiturage.GXT"/>
 <inherits name="com.extjs.gxt.ui.WidgetExpander" />
 <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" />
 <inherits name="com.google.gwt.appengine.channel.Channel" />
@@ -36,5 +36,5 @@
 <extend-property name="locale" values="it"/>
 <extend-property name="locale" values="ch"/>
 
-          
+
 </module>

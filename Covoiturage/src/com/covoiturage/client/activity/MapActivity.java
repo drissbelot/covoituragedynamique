@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.client.activity;
 
 import java.util.ArrayList;
@@ -73,50 +76,112 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.impl.MarkerImpl;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.requestfactory.shared.Receiver;
-import com.google.gwt.requestfactory.shared.Request;
-import com.google.gwt.requestfactory.shared.ServerFailure;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.Request;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MapActivity.
+ */
 public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
+	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
+	
+	/** The event bus. */
 	private final EventBus eventBus;
+	
+	/** The map view. */
 	private final MapView mapView;
+	
+	/** The geocoder. */
 	private HasGeocoder geocoder;
+	
+	/** The date. */
 	private Date date = new Date();
+	
+	/** The departure start. */
 	private final Date departureStart = new Date();
+	
+	/** The departure end. */
 	private final Date departureEnd = new Date();
+	
+	/** The arrival. */
 	private final Date arrival = new Date();
+	
+	/** The is passenger. */
 	private boolean isDriver = true, isPassenger;
+	
+	/** The directions renderer. */
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
+	
+	/** The counter. */
 	private int counter;
+	
+	/** The steps. */
 	private List<String> steps;
+	
+	/** The list address. */
 	private List<String> listAddress = null;
+	
+	/** The place controller. */
 	private final PlaceController placeController;
+	
+	/** The overlays. */
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
 
+	/** The user details. */
 	private UserInfoDetailsProxy userDetails;
+	
+	/** The directions driver. */
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
+	
+	/** The waypoints. */
 	private List<HasDirectionsWaypoint> waypoints;
+	
+	/** The waypoints coords. */
 	private List<String> waypointsCoords;
+	
+	/** The passengers. */
 	private List<Long> passengers;
+	
+	/** The notify service. */
 	private final NotifyServiceAsync notifyService = GWT
 			.create(NotifyService.class);
+	
+	/** The passengers travels. */
 	private List<Long> passengersTravels;
+	
+	/** The map url. */
 	private String mapUrl;
+	
+	/** The distance. */
 	private double distance;
+	
+	/** The duration. */
 	private double duration;
+	
+	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
+	
+	/** The image el. */
 	private Element imageEl = null;
 
+	/** The mapviewconstants. */
 	private final MapViewConstants mapviewconstants = GWT
 			.create(MapViewConstants.class);
 
+	/**
+	 * Instantiates a new map activity.
+	 *
+	 * @param clientFactory the client factory
+	 */
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
 
@@ -125,6 +190,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		this.placeController = clientFactory.getPlaceController();
 	}
 
+	/**
+	 * Bind.
+	 */
 	public void bind() {
 		mapView.getSendAddressButton().addClickHandler(new ClickHandler() {
 			@Override
@@ -534,6 +602,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				});
 	}
 
+	/**
+	 * Do geolocate.
+	 *
+	 * @param point the point
+	 */
 	protected void doGeolocate(HasLatLng point) {
 		geocoder = new Geocoder();
 		HasGeocoderRequest request = new GeocoderRequest();
@@ -559,6 +632,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	}
 
+	/**
+	 * Save journey.
+	 */
 	protected void saveJourney() {
 		mapView.getSaveJourneyButton().setEnabled(false);
 		geocoder = new Geocoder();
@@ -821,6 +897,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	}
 
+	/**
+	 * Clear geolocate.
+	 */
 	private void clearGeolocate() {
 
 		for (int i = 0; i < overlays.size(); i++) {
@@ -830,6 +909,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	}
 
+	/**
+	 * Gets the directions.
+	 *
+	 * @return the directions
+	 */
 	private void getDirections() {
 
 		if (mapView.getDepartureStartTime().validate()
@@ -998,6 +1082,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		bind();
@@ -1006,6 +1093,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.covoiturage.client.view.MapView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	 */
 	@Override
 	public void goTo(Place place) {
 

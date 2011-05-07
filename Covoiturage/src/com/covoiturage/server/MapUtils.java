@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.covoiturage.server;
 
 import java.io.BufferedReader;
@@ -18,8 +21,22 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MapUtils.
+ */
 public class MapUtils {
 
+	/**
+	 * Buffer route journey.
+	 *
+	 * @param coordinates the coordinates
+	 * @param distance the distance
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @return the list
+	 */
 	public static List<Journey> bufferRouteJourney(List<String> coordinates,
 			float distance, Date departureStart, Date departureEnd, Date arrival) {
 		Coordinate[] coordArray = new Coordinate[coordinates.size()];
@@ -37,6 +54,16 @@ public class MapUtils {
 				departureEnd, arrival);
 	}
 
+	/**
+	 * Journey near buffer.
+	 *
+	 * @param buffer the buffer
+	 * @param distanceJourney the distance journey
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @return the list
+	 */
 	public static List<Journey> journeyNearBuffer(Geometry buffer,
 			float distanceJourney, Date departureStart, Date departureEnd,
 			Date arrival) {
@@ -133,6 +160,17 @@ public class MapUtils {
 
 	}
 
+	/**
+	 * Buffer route.
+	 *
+	 * @param coordinates the coordinates
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param distance the distance
+	 * @param totalDistance the total distance
+	 * @return the list
+	 */
 	public static List<SimpleTravel> bufferRoute(List<String> coordinates,
 			Date departureStart, Date departureEnd, Date arrival,
 			float distance, double totalDistance) {
@@ -153,6 +191,18 @@ public class MapUtils {
 				arrival, distance, totalDistance);
 	}
 
+	/**
+	 * Simple travels in buffer.
+	 *
+	 * @param array the array
+	 * @param buffer the buffer
+	 * @param departureStart the departure start
+	 * @param departureEnd the departure end
+	 * @param arrival the arrival
+	 * @param distanceJourney the distance journey
+	 * @param totalDistance the total distance
+	 * @return the list
+	 */
 	public static List<SimpleTravel> simpleTravelsInBuffer(Coordinate[] array,
 			Geometry buffer, Date departureStart, Date departureEnd,
 			Date arrival, float distanceJourney, double totalDistance) {

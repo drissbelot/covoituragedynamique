@@ -34,6 +34,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.WidgetComponent;
+import com.extjs.gxt.ui.client.widget.form.Field;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -251,38 +252,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 			}
 		});
-		mapView.getDateOfJourney().addListener(Events.Blur,
-				new Listener<BaseEvent>() {
 
-					@Override
-					public void handleEvent(BaseEvent be) {
-						date = mapView.getDateOfJourney().getValue();
-						WidgetComponent image = new WidgetComponent(new Image(
-								mapView.getCovoiturageResources().valid()));
-
-						if (mapView.getDateOfJourney().getValue() != null) {
-
-							image.render(mapView.getDateOfJourney().el()
-									.getParent().dom);
-							imageEl = mapView.getDateOfJourney().el()
-									.getParent().dom.appendChild(image
-									.getElement());
-
-							image.el().alignTo(
-									mapView.getDateOfJourney().getElement(),
-									"tl-tr", new int[] { 2, 3 });
-							mapView.getDateOfJourney().el().getParent()
-									.setHeight(37);
-
-						} else {
-							if (imageEl != null)
-								mapView.getDateOfJourney().el().getParent().dom
-										.removeChild(imageEl);
-
-						}
-
-					}
-				});
 		((SuggestBox) (mapView.getOriginField().getWidget())).getTextBox()
 				.addBlurHandler(new BlurHandler() {
 
@@ -324,6 +294,53 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						}
 					}
 				});
+		((SuggestBox) (mapView.getDestinationField().getWidget())).getTextBox()
+				.addBlurHandler(new BlurHandler() {
+
+					@Override
+					public void onBlur(BlurEvent event) {
+
+						WidgetComponent imageValid = new WidgetComponent(
+								new Image(mapView.getCovoiturageResources()
+										.valid()));
+						WidgetComponent imageInvalid = new WidgetComponent(
+								new Image(mapView.getCovoiturageResources()
+										.invalid()));
+						if (mapView.getDestinationField().getValue() != null) {
+							if (imageEl != null)
+								mapView.getDestinationField().el().getParent().dom
+										.removeChild(imageEl);
+							imageValid.render(mapView.getDestinationField()
+									.el().getParent().dom);
+							imageEl = mapView.getDestinationField().el()
+									.getParent().dom.appendChild(imageValid
+									.getElement());
+
+							imageValid.el().alignTo(
+									mapView.getDestinationField().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+
+						} else {
+							if (imageEl != null)
+								mapView.getDestinationField().el().getParent().dom
+										.removeChild(imageEl);
+							imageInvalid.render(mapView.getDestinationField()
+									.el().getParent().dom);
+							imageEl = mapView.getDestinationField().el()
+									.getParent().dom.appendChild(imageInvalid
+									.getElement());
+
+							imageInvalid.el().alignTo(
+									mapView.getDestinationField().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+
+						}
+					}
+				});
+		addBlurListener(mapView.getDateOfJourney());
+		addBlurListener(mapView.getDepartureStartTime());
+		addBlurListener(mapView.getDepartureEndTime());
+		addBlurListener(mapView.getArrivalTime());
 
 		mapView.getDepartureStartTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
@@ -647,6 +664,35 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 				});
 	}
 
+	private void addBlurListener(final Field<?> field) {
+		field.addListener(Events.Blur, new Listener<BaseEvent>() {
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+
+				WidgetComponent image = new WidgetComponent(new Image(mapView
+						.getCovoiturageResources().valid()));
+
+				if (field.getValue() != null) {
+
+					image.render(field.el().getParent().dom);
+					imageEl = field.el().getParent().dom.appendChild(image
+							.getElement());
+
+					image.el().alignTo(field.getElement(), "tl-tr",
+							new int[] { 2, 3 });
+					field.el().getParent().setHeight(37);
+
+				} else {
+					if (imageEl != null)
+						field.el().getParent().dom.removeChild(imageEl);
+
+				}
+
+			}
+		});
+	}
+
 	/**
 	 * Do geolocate.
 	 * 
@@ -682,6 +728,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	 * Save journey.
 	 */
 	protected void saveJourney() {
+		date = mapView.getDateOfJourney().getValue();
 		mapView.getSaveJourneyButton().setVisible(false);
 		geocoder = new Geocoder();
 		HasGeocoderRequest request = new GeocoderRequest();

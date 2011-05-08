@@ -289,17 +289,22 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 					@Override
 					public void onBlur(BlurEvent event) {
 
-						WidgetComponent image = new WidgetComponent(new Image(
-								mapView.getCovoiturageResources().valid()));
-
+						WidgetComponent imageValid = new WidgetComponent(
+								new Image(mapView.getCovoiturageResources()
+										.valid()));
+						WidgetComponent imageInvalid = new WidgetComponent(
+								new Image(mapView.getCovoiturageResources()
+										.invalid()));
 						if (mapView.getOriginField().getValue() != null) {
-
-							image.render(mapView.getOriginField().el()
+							if (imageEl != null)
+								mapView.getOriginField().el().getParent().dom
+										.removeChild(imageEl);
+							imageValid.render(mapView.getOriginField().el()
 									.getParent().dom);
 							imageEl = mapView.getOriginField().el().getParent().dom
-									.appendChild(image.getElement());
+									.appendChild(imageValid.getElement());
 
-							image.el().alignTo(
+							imageValid.el().alignTo(
 									mapView.getOriginField().getElement(),
 									"tl-tr", new int[] { 2, 3 });
 
@@ -307,6 +312,14 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							if (imageEl != null)
 								mapView.getOriginField().el().getParent().dom
 										.removeChild(imageEl);
+							imageInvalid.render(mapView.getOriginField().el()
+									.getParent().dom);
+							imageEl = mapView.getOriginField().el().getParent().dom
+									.appendChild(imageInvalid.getElement());
+
+							imageInvalid.el().alignTo(
+									mapView.getOriginField().getElement(),
+									"tl-tr", new int[] { 2, 3 });
 
 						}
 					}

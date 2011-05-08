@@ -5,9 +5,9 @@
 	<ui:style src="stylesheet.css"/>
 		
 	<gxt:ContentPanel ui:field='menuPanel' heading="{constants.menutitle}">
-		<g:Label ui:field='mapLabel' styleName='{style.buttonmenu}' text="{constants.maplabel}"/>
-  		<g:Label ui:field='settingsLabel' styleName='{style.buttonmenu}' text="{constants.settings}"/>
-  		<g:Label ui:field='messagesLabel' styleName='{style.buttonmenu}' text="{constants.message}"/>
-  		<g:Label ui:field='historyLabel' styleName='{style.buttonmenu}' text="{constants.history}"/>
+		<g:Label ui:field='mapLabel' styleName='{style.label}' text="{constants.maplabel}"/>
+  		<g:Label ui:field='settingsLabel' styleName='{style.label}' text="{constants.settings}"/>
+  		<g:Label ui:field='messagesLabel' styleName='{style.label}' text="{constants.message}"/>
+  		<g:Label ui:field='historyLabel' styleName='{style.label}' text="{constants.history}"/>
 	</gxt:ContentPanel>
 </ui:UiBinder>

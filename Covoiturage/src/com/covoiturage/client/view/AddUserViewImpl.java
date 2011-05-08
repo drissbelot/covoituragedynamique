@@ -4,6 +4,13 @@
 package com.covoiturage.client.view;
 
 import com.covoiturage.client.i18n.AddUserViewConstants;
+import com.extjs.gxt.ui.client.core.El;
+import com.extjs.gxt.ui.client.core.XDOM;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -28,20 +35,20 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 
 	/** The Constant binder. */
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	
+
 	/** The constants. */
 	private final AddUserViewConstants constants = (AddUserViewConstants) GWT
 			.create(AddUserViewConstants.class);
-	
+
 	/** The add button. */
 	@UiField
 	Button addButton;
-	
+
 	/** The login field. */
 	@UiField
 	TextField<String> firstNameField, lastNameField, emailAdressField,
 			loginField;
-	
+
 	/** The password field. */
 	@UiField
 	TextField<String> passwordField;
@@ -54,17 +61,52 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		initWidget(binder.createAndBindUi(this));
 		loginField.setAllowBlank(false);
 		loginField.setMinLength(4);
+		loginField.setData("text",
+				constants.required() + " " + constants.minLength() + " "
+						+ loginField.getMinLength());
+		loginField.addPlugin(plugin);
 		passwordField.setPassword(true);
 		passwordField.setMinLength(4);
+		passwordField.setData("text",
+				constants.required() + " " + constants.minLength() + " "
+						+ passwordField.getMinLength());
+		passwordField.addPlugin(plugin);
 		firstNameField.setAllowBlank(false);
+		firstNameField.setData("text", constants.required());
+		firstNameField.addPlugin(plugin);
 		lastNameField.setAllowBlank(false);
+		lastNameField.setData("text", constants.required());
+		lastNameField.addPlugin(plugin);
 		emailAdressField.setAllowBlank(false);
+		emailAdressField.setData("text", constants.required());
+		emailAdressField.addPlugin(plugin);
 		emailAdressField
 				.setRegex("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$");
 
 	}
 
-	/* (non-Javadoc)
+	ComponentPlugin plugin = new ComponentPlugin() {
+		@Override
+		public void init(Component component) {
+			component.addListener(Events.Render,
+					new Listener<ComponentEvent>() {
+						@Override
+						public void handleEvent(ComponentEvent be) {
+							El elem = be.getComponent().el()
+									.findParent(".x-form-element", 3);
+
+							elem.appendChild(XDOM
+									.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
+											+ be.getComponent().getData("text")
+											+ "</div>"));
+						}
+					});
+		}
+	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getFirstName()
 	 */
 	@Override
@@ -72,7 +114,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return firstNameField;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getLastName()
 	 */
 	@Override
@@ -80,7 +124,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return lastNameField;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getEmailAddress()
 	 */
 	@Override
@@ -92,7 +138,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 	@SuppressWarnings("unused")
 	private Presenter presenter;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getAddUserButton()
 	 */
 	@Override
@@ -100,7 +148,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return addButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.user.client.ui.Widget#asWidget()
 	 */
 	@Override
@@ -108,7 +158,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return this;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getAddButton()
 	 */
 	@Override
@@ -116,7 +168,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return addButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getPassword()
 	 */
 	@Override
@@ -124,7 +178,9 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return passwordField;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getLogin()
 	 */
 	@Override
@@ -132,15 +188,21 @@ public class AddUserViewImpl extends Composite implements AddUserView {
 		return loginField;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.AddUserView#setPresenter(com.covoiturage.client.view.AddUserView.Presenter)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.AddUserView#setPresenter(com.covoiturage.
+	 * client.view.AddUserView.Presenter)
 	 */
 	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.AddUserView#getConstants()
 	 */
 	@Override

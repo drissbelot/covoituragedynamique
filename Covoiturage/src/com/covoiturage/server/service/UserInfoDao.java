@@ -19,10 +19,13 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Modify user info.
-	 *
-	 * @param id the id
-	 * @param password the password
-	 * @param emailAddress the email address
+	 * 
+	 * @param id
+	 *            the id
+	 * @param password
+	 *            the password
+	 * @param emailAddress
+	 *            the email address
 	 * @return the user info
 	 */
 	public static UserInfo modifyUserInfo(Long id, String password,
@@ -42,8 +45,9 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Logout.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return true, if successful
 	 */
 	public static boolean logout(Long id) {
@@ -57,9 +61,17 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 		return true;
 	}
 
+	public boolean loginExist(String login) {
+		Objectify ofy = ObjectifyService.begin();
+		if (ofy.query(UserInfo.class).filter("login", login).count() > 0)
+			return true;
+		else
+			return false;
+	}
+
 	/**
 	 * Count user infos.
-	 *
+	 * 
 	 * @return the long
 	 */
 	public Long countUserInfos() {
@@ -68,7 +80,7 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Find all user infos.
-	 *
+	 * 
 	 * @return the list
 	 */
 	public List<UserInfo> findAllUserInfos() {
@@ -77,8 +89,9 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Find user info.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the user info
 	 */
 	public UserInfo findUserInfo(Long id) {
@@ -92,8 +105,9 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Persist.
-	 *
-	 * @param userInfo the user info
+	 * 
+	 * @param userInfo
+	 *            the user info
 	 * @return the long
 	 */
 	public Long persist(UserInfo userInfo) {
@@ -103,8 +117,9 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 
 	/**
 	 * Removes the.
-	 *
-	 * @param userInfo the user info
+	 * 
+	 * @param userInfo
+	 *            the user info
 	 */
 	public void remove(UserInfo userInfo) {
 		this.delete(userInfo);

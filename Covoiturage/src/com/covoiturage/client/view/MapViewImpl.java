@@ -46,55 +46,51 @@ public class MapViewImpl extends Composite implements MapView {
 	/** The covoiturage resources. */
 	private final CovoiturageResources covoiturageResources = GWT
 			.create(CovoiturageResources.class);
-	
+
 	/** The Constant binder. */
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
 
 	/** The flowpanel. */
 	@UiField
 	FlowPanel flowpanel;
-	
+
 	/** The map widget. */
 	@UiField(provided = true)
 	MapWidget mapWidget;
-	
+
 	/** The save journey. */
 	@UiField
 	Button sendAddress, saveJourney;
-	
+
 	/** The destination adress. */
 	@UiField
 	SuggestBox originAdress, destinationAdress;
-	
+
 	/** The directions panel. */
 	@UiField
 	ContentPanel directionsPanel;
 
-	/** The from. */
-	@UiField
-	Label to, from;
-	
 	/** The data. */
 	@UiField
 	FormPanel data;
-	
+
 	/** The date of journey. */
 	@UiField
 	DateField dateOfJourney;
-	
+
 	/** The distance max field. */
 	@UiField
 	TextField<String> departureStartTimeItem, departureEndTimeItem,
 			arrivalTimeItem, distanceMaxField;
-	
+
 	/** The passenger radio button. */
 	@UiField
 	RadioButton driverRadioButton, passengerRadioButton;
-	
+
 	/** The comment field. */
 	@UiField
 	TextArea commentField;
-	
+
 	/** The duration delta. */
 	@UiField
 	Label distance, duration, distanceDelta, durationDelta;
@@ -143,7 +139,9 @@ public class MapViewImpl extends Composite implements MapView {
 		}
 	};
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getPassengerRadioButton()
 	 */
 	@Override
@@ -151,7 +149,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return passengerRadioButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDriverRadioButton()
 	 */
 	@Override
@@ -159,7 +159,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return driverRadioButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDateOfJourney()
 	 */
 	@Override
@@ -167,7 +169,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return dateOfJourney;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getSendAddressButton()
 	 */
 	@Override
@@ -175,7 +179,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return sendAddress;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getOriginAddress()
 	 */
 	@Override
@@ -183,7 +189,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return originAdress;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDestinationAddress()
 	 */
 	@Override
@@ -191,7 +199,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return destinationAdress;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getMap()
 	 */
 	@Override
@@ -199,7 +209,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return mapWidget;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDirectionsPanel()
 	 */
 	@Override
@@ -207,7 +219,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return directionsPanel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getSaveJourneyButton()
 	 */
 	@Override
@@ -215,7 +229,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return saveJourney;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDistanceMax()
 	 */
 	@Override
@@ -223,7 +239,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return Float.valueOf(distanceMaxField.getValue());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getMapDecorator()
 	 */
 	@Override
@@ -231,8 +249,12 @@ public class MapViewImpl extends Composite implements MapView {
 		return flowpanel;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#setPresenter(com.covoiturage.client.view.MapView.Presenter)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.MapView#setPresenter(com.covoiturage.client
+	 * .view.MapView.Presenter)
 	 */
 	@Override
 	public void setPresenter(Presenter presenter) {
@@ -240,23 +262,33 @@ public class MapViewImpl extends Composite implements MapView {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#setOriginAddress(com.google.gwt.user.client.ui.SuggestBox)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.MapView#setOriginAddress(com.google.gwt.user
+	 * .client.ui.SuggestBox)
 	 */
 	@Override
 	public void setOriginAddress(SuggestBox originAddress) {
 		this.originAdress = originAddress;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView#setDestinationAddress(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.MapView#setDestinationAddress(java.lang.String
+	 * )
 	 */
 	@Override
 	public void setDestinationAddress(String destinationAddress) {
 		this.destinationAdress.setText(destinationAddress);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDepartureStartTime()
 	 */
 	@Override
@@ -264,7 +296,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return departureStartTimeItem;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getArrivalTime()
 	 */
 	@Override
@@ -272,7 +306,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return arrivalTimeItem;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDepartureEndTime()
 	 */
 	@Override
@@ -280,7 +316,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return departureEndTimeItem;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getCommentField()
 	 */
 	@Override
@@ -288,7 +326,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return commentField;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDistance()
 	 */
 	@Override
@@ -296,7 +336,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return distance;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDuration()
 	 */
 	@Override
@@ -304,7 +346,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return duration;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getCovoiturageResources()
 	 */
 	@Override
@@ -312,7 +356,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return covoiturageResources;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getData()
 	 */
 	@Override
@@ -320,7 +366,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return data;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDistanceDelta()
 	 */
 	@Override
@@ -328,7 +376,9 @@ public class MapViewImpl extends Composite implements MapView {
 		return distanceDelta;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MapView#getDurationDelta()
 	 */
 	@Override

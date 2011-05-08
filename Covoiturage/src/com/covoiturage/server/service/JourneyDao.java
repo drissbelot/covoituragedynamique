@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.covoiturage.server.MapUtils;
 import com.covoiturage.server.domain.Journey;
@@ -111,7 +110,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 			List<Long> passengersTravels, String comment, double duration,
 			double distance, int places, String mapImage) {
 		Journey journey = new Journey();
-		Logger.getLogger("").warning("test");
+
 		Objectify ofy = ObjectifyService.begin();
 		journey.setSteps(steps);
 		journey.setDate(date);

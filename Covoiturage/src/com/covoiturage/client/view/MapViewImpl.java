@@ -13,6 +13,7 @@ import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
+import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
@@ -90,7 +91,8 @@ public class MapViewImpl extends Composite implements MapView {
 	/** The comment field. */
 	@UiField
 	TextArea commentField;
-
+	@UiField
+	AdapterField originField, destinationField;
 	/** The duration delta. */
 	@UiField
 	Label distance, duration, distanceDelta, durationDelta;
@@ -384,6 +386,16 @@ public class MapViewImpl extends Composite implements MapView {
 	@Override
 	public Label getDurationDelta() {
 		return durationDelta;
+	}
+
+	@Override
+	public AdapterField getOriginField() {
+		return originField;
+	}
+
+	@Override
+	public AdapterField getDestinationField() {
+		return destinationField;
 	}
 
 }

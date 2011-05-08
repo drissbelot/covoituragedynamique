@@ -36,6 +36,8 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -81,6 +83,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
@@ -278,6 +281,34 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 						}
 
+					}
+				});
+		((SuggestBox) (mapView.getOriginField().getWidget())).getTextBox()
+				.addBlurHandler(new BlurHandler() {
+
+					@Override
+					public void onBlur(BlurEvent event) {
+
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
+
+						if (mapView.getOriginField().getValue() != null) {
+
+							image.render(mapView.getOriginField().el()
+									.getParent().dom);
+							imageEl = mapView.getOriginField().el().getParent().dom
+									.appendChild(image.getElement());
+
+							image.el().alignTo(
+									mapView.getOriginField().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+
+						} else {
+							if (imageEl != null)
+								mapView.getOriginField().el().getParent().dom
+										.removeChild(imageEl);
+
+						}
 					}
 				});
 

@@ -29,12 +29,12 @@
 				</gxt:TabItem>
 				<gxt:TabItem text="Vehicle Informations">
 					<form:FormPanel ui:field="vehicleForm">
-						<form:ComboBox ui:field="vehicleMakeField" store="{storeMake}" fieldLabel="{constants.make}"/>
-						<form:ComboBox ui:field="vehicleModelField" store="{storeModel}" fieldLabel="{constants.model}"/>
+						<form:ComboBox ui:field="vehicleMakeField" store="{storeMake}" fieldLabel="{constants.make}" displayField="name"/>
+						<form:ComboBox ui:field="vehicleModelField" store="{storeModel}" fieldLabel="{constants.model}" displayField="name"/>
 						<form:TextField ui:field="vehicleDateField" fieldLabel="{constants.vehicleDate}"/>
 						<form:TextField ui:field="seatsNumberField" fieldLabel="{constants.seatsNumber}"/>
-						<form:ComboBox ui:field="comfortField" store="{storeComfort}"/>
-						<form:ComboBox ui:field="carColorField" store="{storeCarColor}"/>
+						<form:ComboBox ui:field="comfortField" store="{storeComfort}" displayField="name"/>
+						<form:ComboBox ui:field="carColorField" store="{storeCarColor}" displayField="name"/>
 						<form:TextField ui:field="fuelMixedDriveField" fieldLabel="{constants.fuelMixedDrive}"/>
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 						

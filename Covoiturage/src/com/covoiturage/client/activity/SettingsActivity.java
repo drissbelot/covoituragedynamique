@@ -54,7 +54,7 @@ public class SettingsActivity extends AbstractActivity implements
 
 	/** The place controller. */
 	private final PlaceController placeController;
-	
+
 	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
 
@@ -63,22 +63,23 @@ public class SettingsActivity extends AbstractActivity implements
 
 	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
-	
+
 	/** The language flags. */
 	private final LanguageFlagsResources languageFlags = GWT
 			.create(LanguageFlagsResources.class);
-	
+
 	/** The rating resources. */
 	private final RatingResources ratingResources = GWT
 			.create(RatingResources.class);
-	
+
 	/** The car resources. */
 	private final CarResources carResources = GWT.create(CarResources.class);
 
 	/**
 	 * Instantiates a new settings activity.
-	 *
-	 * @param clientFactory the client factory
+	 * 
+	 * @param clientFactory
+	 *            the client factory
 	 */
 	public SettingsActivity(ClientFactory clientFactory) {
 
@@ -310,8 +311,9 @@ public class SettingsActivity extends AbstractActivity implements
 		rec.set("img", AbstractImagePrototype.create(carResources.car_yellow())
 				.getHTML());
 		listRecordsColor.add(rec);
-		rec.set("name", settingsView.getConstants().car_yellowgreen());
+
 		rec = new BaseModelData();
+		rec.set("name", settingsView.getConstants().car_yellowgreen());
 		rec.set("img",
 				AbstractImagePrototype.create(carResources.car_yellowgreen())
 						.getHTML());
@@ -440,8 +442,12 @@ public class SettingsActivity extends AbstractActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client
+	 * .ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
 	 */
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
@@ -450,8 +456,12 @@ public class SettingsActivity extends AbstractActivity implements
 		panel.setWidget(settingsView.asWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.SettingsView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.SettingsView.Presenter#goTo(com.google.gwt
+	 * .place.shared.Place)
 	 */
 	@Override
 	public void goTo(Place place) {

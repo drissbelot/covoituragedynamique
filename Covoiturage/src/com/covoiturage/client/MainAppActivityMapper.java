@@ -5,7 +5,6 @@ package com.covoiturage.client;
 
 import com.covoiturage.client.activity.AddUserActivity;
 import com.covoiturage.client.activity.HistoryActivity;
-import com.covoiturage.client.activity.LicenceActivity;
 import com.covoiturage.client.activity.LoginActivity;
 import com.covoiturage.client.activity.MapActivity;
 import com.covoiturage.client.activity.MessageDetailsActivity;
@@ -15,7 +14,6 @@ import com.covoiturage.client.activity.SettingsActivity;
 import com.covoiturage.client.activity.TravelDetailsActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
-import com.covoiturage.client.place.LicencePlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
@@ -33,21 +31,26 @@ import com.google.gwt.place.shared.Place;
  * The Class MainAppActivityMapper.
  */
 public class MainAppActivityMapper implements ActivityMapper {
-	
+
 	/** The client factory. */
 	private final ClientFactory clientFactory;
 
 	/**
 	 * Instantiates a new main app activity mapper.
-	 *
-	 * @param clientFactory the client factory
+	 * 
+	 * @param clientFactory
+	 *            the client factory
 	 */
 	public MainAppActivityMapper(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.gwt.place.shared.Place)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.
+	 * gwt.place.shared.Place)
 	 */
 	@Override
 	public Activity getActivity(Place place) {
@@ -69,8 +72,6 @@ public class MainAppActivityMapper implements ActivityMapper {
 			return new MessageDetailsActivity(clientFactory);
 		else if (place instanceof ReplyMessagePlace)
 			return new ReplyMessageActivity(clientFactory);
-		else if (place instanceof LicencePlace)
-			return new LicenceActivity(clientFactory);
 		else if (place instanceof TravelDetailsPlace)
 			return new TravelDetailsActivity(clientFactory);
 		return null;

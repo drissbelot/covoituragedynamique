@@ -6,7 +6,7 @@ package com.covoiturage.client.activity;
 import com.covoiturage.client.ClientFactory;
 import com.covoiturage.client.event.AddUserEvent;
 import com.covoiturage.client.images.CovoiturageResources;
-import com.covoiturage.client.place.LicencePlace;
+import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.view.AddUserView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.UserInfoDetailsProxy;
@@ -253,7 +253,7 @@ public class AddUserActivity extends AbstractActivity implements
 
 			@Override
 			public void onSuccess(Boolean response) {
-				if (response = false) {
+				if (response == false) {
 					UserInfoRequest request = requestFactory.userInfoRequest();
 					UserInfoProxy newUser = request.create(UserInfoProxy.class);
 					newUser.setLogin(addUserView.getLogin().getValue());
@@ -306,7 +306,7 @@ public class AddUserActivity extends AbstractActivity implements
 			@Override
 			public void onSuccess(Long response) {
 				eventBus.fireEvent(new AddUserEvent());
-				goTo(new LicencePlace(null));
+				goTo(new LoginPlace(null));
 			}
 
 		});

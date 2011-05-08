@@ -6,7 +6,6 @@ package com.covoiturage.client;
 import com.covoiturage.client.activity.FooterActivity;
 import com.covoiturage.client.place.AddUserPlace;
 import com.covoiturage.client.place.HistoryPlace;
-import com.covoiturage.client.place.LicencePlace;
 import com.covoiturage.client.place.LoginPlace;
 import com.covoiturage.client.place.MapPlace;
 import com.covoiturage.client.place.MessageDetailsPlace;
@@ -24,21 +23,26 @@ import com.google.gwt.place.shared.Place;
  * The Class FooterAppActivityMapper.
  */
 public class FooterAppActivityMapper implements ActivityMapper {
-	
+
 	/** The client factory. */
 	private final ClientFactory clientFactory;
 
 	/**
 	 * Instantiates a new footer app activity mapper.
-	 *
-	 * @param clientFactory the client factory
+	 * 
+	 * @param clientFactory
+	 *            the client factory
 	 */
 	public FooterAppActivityMapper(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.gwt.place.shared.Place)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.activity.shared.ActivityMapper#getActivity(com.google.
+	 * gwt.place.shared.Place)
 	 */
 	@Override
 	public Activity getActivity(Place place) {
@@ -56,8 +60,7 @@ public class FooterAppActivityMapper implements ActivityMapper {
 			return new FooterActivity(clientFactory);
 		else if (place instanceof MessageDetailsPlace)
 			return new FooterActivity(clientFactory);
-		else if (place instanceof LicencePlace)
-			return new FooterActivity(clientFactory);
+
 		else if (place instanceof AddUserPlace)
 			return new FooterActivity(clientFactory);
 		else if (place instanceof ReplyMessagePlace)

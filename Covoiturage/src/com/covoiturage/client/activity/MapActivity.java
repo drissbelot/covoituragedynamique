@@ -93,83 +93,83 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
-	
+
 	/** The event bus. */
 	private final EventBus eventBus;
-	
+
 	/** The map view. */
 	private final MapView mapView;
-	
+
 	/** The geocoder. */
 	private HasGeocoder geocoder;
-	
+
 	/** The date. */
 	private Date date = new Date();
-	
+
 	/** The departure start. */
 	private final Date departureStart = new Date();
-	
+
 	/** The departure end. */
 	private final Date departureEnd = new Date();
-	
+
 	/** The arrival. */
 	private final Date arrival = new Date();
-	
+
 	/** The is passenger. */
 	private boolean isDriver = true, isPassenger;
-	
+
 	/** The directions renderer. */
 	private final HasDirectionsRenderer directionsRenderer = new DirectionsRenderer();;
-	
+
 	/** The counter. */
 	private int counter;
-	
+
 	/** The steps. */
 	private List<String> steps;
-	
+
 	/** The list address. */
 	private List<String> listAddress = null;
-	
+
 	/** The place controller. */
 	private final PlaceController placeController;
-	
+
 	/** The overlays. */
 	private final List<HasMarker> overlays = new ArrayList<HasMarker>();
 
 	/** The user details. */
 	private UserInfoDetailsProxy userDetails;
-	
+
 	/** The directions driver. */
 	private HasDirectionsResult directionsDriver = new DirectionsResult(null);
-	
+
 	/** The waypoints. */
 	private List<HasDirectionsWaypoint> waypoints;
-	
+
 	/** The waypoints coords. */
 	private List<String> waypointsCoords;
-	
+
 	/** The passengers. */
-	private List<Long> passengers;
-	
+	private List<Long> passengers = new ArrayList<Long>();
+
 	/** The notify service. */
 	private final NotifyServiceAsync notifyService = GWT
 			.create(NotifyService.class);
-	
+
 	/** The passengers travels. */
-	private List<Long> passengersTravels;
-	
+	private List<Long> passengersTravels = new ArrayList<Long>();
+
 	/** The map url. */
 	private String mapUrl;
-	
+
 	/** The distance. */
 	private double distance;
-	
+
 	/** The duration. */
 	private double duration;
-	
+
 	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
-	
+
 	/** The image el. */
 	private Element imageEl = null;
 
@@ -179,8 +179,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	/**
 	 * Instantiates a new map activity.
-	 *
-	 * @param clientFactory the client factory
+	 * 
+	 * @param clientFactory
+	 *            the client factory
 	 */
 	public MapActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -604,8 +605,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	/**
 	 * Do geolocate.
-	 *
-	 * @param point the point
+	 * 
+	 * @param point
+	 *            the point
 	 */
 	protected void doGeolocate(HasLatLng point) {
 		geocoder = new Geocoder();
@@ -636,7 +638,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	 * Save journey.
 	 */
 	protected void saveJourney() {
-		mapView.getSaveJourneyButton().setEnabled(false);
+		mapView.getSaveJourneyButton().setVisible(false);
 		geocoder = new Geocoder();
 		HasGeocoderRequest request = new GeocoderRequest();
 		request.setAddress(mapView.getOriginAddress().getTextBox().getText());
@@ -686,6 +688,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								@Override
 								public void onSuccess(
 										JourneyProxy responseJourney) {
+
 									if (passengers != null) {
 										int i = 0;
 										for (final Long passenger : passengers) {
@@ -911,7 +914,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	/**
 	 * Gets the directions.
-	 *
+	 * 
 	 * @return the directions
 	 */
 	private void getDirections() {
@@ -961,7 +964,7 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 							mapView.getDistance().setText(
 									mapviewconstants.distance() + ": "
 											+ distance + " m. ");
-							GWT.log(new Date((long) duration * 1000).toString());
+
 							mapView.getDuration()
 									.setText(
 											mapviewconstants.duration()
@@ -1074,16 +1077,21 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 										});
 
 							}
-							mapView.getSaveJourneyButton().setEnabled(true);
+
 						}
 
 					});
 
 		}
+		mapView.getSaveJourneyButton().setVisible(true);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client
+	 * .ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
@@ -1093,8 +1101,12 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MapView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.MapView.Presenter#goTo(com.google.gwt.place
+	 * .shared.Place)
 	 */
 	@Override
 	public void goTo(Place place) {

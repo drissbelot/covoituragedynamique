@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.covoiturage.server.MapUtils;
 import com.covoiturage.server.domain.Journey;
@@ -25,15 +26,20 @@ import com.googlecode.objectify.Query;
  * The Class JourneyDao.
  */
 public class JourneyDao extends ObjectifyDao<Journey> {
-	
+
 	/**
 	 * Gets the journeys.
-	 *
-	 * @param steps the steps
-	 * @param departureStart the departure start
-	 * @param departureEnd the departure end
-	 * @param arrival the arrival
-	 * @param distanceMax the distance max
+	 * 
+	 * @param steps
+	 *            the steps
+	 * @param departureStart
+	 *            the departure start
+	 * @param departureEnd
+	 *            the departure end
+	 * @param arrival
+	 *            the arrival
+	 * @param distanceMax
+	 *            the distance max
 	 * @return the journeys
 	 */
 	public static List<Journey> getJourneys(List<String> steps,
@@ -47,8 +53,9 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Gets the journeys from user.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the journeys from user
 	 */
 	public static List<Journey> getJourneysFromUser(Long id) {
@@ -62,23 +69,39 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Save journey driver.
-	 *
-	 * @param steps the steps
-	 * @param date the date
-	 * @param departureStart the departure start
-	 * @param departureEnd the departure end
-	 * @param arrival the arrival
-	 * @param driver the driver
-	 * @param originAddress the origin address
-	 * @param destinationAddress the destination address
-	 * @param waypoints the waypoints
-	 * @param stepsDetails the steps details
-	 * @param passengersTravels the passengers travels
-	 * @param comment the comment
-	 * @param duration the duration
-	 * @param distance the distance
-	 * @param places the places
-	 * @param mapImage the map image
+	 * 
+	 * @param steps
+	 *            the steps
+	 * @param date
+	 *            the date
+	 * @param departureStart
+	 *            the departure start
+	 * @param departureEnd
+	 *            the departure end
+	 * @param arrival
+	 *            the arrival
+	 * @param driver
+	 *            the driver
+	 * @param originAddress
+	 *            the origin address
+	 * @param destinationAddress
+	 *            the destination address
+	 * @param waypoints
+	 *            the waypoints
+	 * @param stepsDetails
+	 *            the steps details
+	 * @param passengersTravels
+	 *            the passengers travels
+	 * @param comment
+	 *            the comment
+	 * @param duration
+	 *            the duration
+	 * @param distance
+	 *            the distance
+	 * @param places
+	 *            the places
+	 * @param mapImage
+	 *            the map image
 	 * @return the journey
 	 */
 	public static Journey saveJourneyDriver(List<String> steps, Date date,
@@ -88,6 +111,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 			List<Long> passengersTravels, String comment, double duration,
 			double distance, int places, String mapImage) {
 		Journey journey = new Journey();
+		Logger.getLogger("").warning("test");
 		Objectify ofy = ObjectifyService.begin();
 		journey.setSteps(steps);
 		journey.setDate(date);
@@ -103,7 +127,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 		journey.setComment(comment);
 		journey.setDuration(duration);
 		journey.setDistance(distance);
-		journey.setVersion(places);
+		journey.setPlaces(places);
 		URLFetchService fetchService = URLFetchServiceFactory
 				.getURLFetchService();
 
@@ -142,10 +166,13 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Update journey.
-	 *
-	 * @param journeyId the journey id
-	 * @param simpleTravelId the simple travel id
-	 * @param steps the steps
+	 * 
+	 * @param journeyId
+	 *            the journey id
+	 * @param simpleTravelId
+	 *            the simple travel id
+	 * @param steps
+	 *            the steps
 	 * @return the journey
 	 */
 	public static Journey updateJourney(Long journeyId, Long simpleTravelId,
@@ -171,7 +198,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Count journeys.
-	 *
+	 * 
 	 * @return the long
 	 */
 	public Long countJourneys() {
@@ -180,7 +207,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Find all journeys.
-	 *
+	 * 
 	 * @return the list
 	 */
 	public List<Journey> findAllJourneys() {
@@ -189,8 +216,9 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Find journey.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return the journey
 	 */
 	public Journey findJourney(Long id) {
@@ -204,8 +232,9 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Persist.
-	 *
-	 * @param journey the journey
+	 * 
+	 * @param journey
+	 *            the journey
 	 * @return the long
 	 */
 	public Long persist(Journey journey) {
@@ -215,8 +244,9 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 
 	/**
 	 * Removes the.
-	 *
-	 * @param journey the journey
+	 * 
+	 * @param journey
+	 *            the journey
 	 */
 	public void remove(Journey journey) {
 		this.delete(journey);

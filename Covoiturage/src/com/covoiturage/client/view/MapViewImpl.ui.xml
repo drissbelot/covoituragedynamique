@@ -58,7 +58,7 @@
 							<g:Button ui:field="sendAddress" styleName='{style.button}'
 								text="{constants.getDirections}" />
 							<g:Button ui:field="saveJourney" styleName='{style.button}'
-								text="{constants.saveJourney}" ui:enabled="false"/>
+								text="{constants.saveJourney}" ui:visible="false"/>
 						</g:HorizontalPanel>
 										</form:FormPanel>
 					<gxt:ContentPanel heading="">

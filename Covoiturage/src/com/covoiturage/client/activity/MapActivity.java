@@ -34,7 +34,6 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.WidgetComponent;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -175,7 +174,11 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
 	/** The image el. */
-	private Element imageEl = null;
+	private Element imageElOrigin = null;
+	private Element imageElDestination = null;
+	private Element imageElDate = null;
+
+	private Element imageElDepartureStart, imageElDepartureEnd, imageElArrival;
 
 	/** The mapviewconstants. */
 	private final MapViewConstants mapviewconstants = GWT
@@ -266,26 +269,28 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								new Image(mapView.getCovoiturageResources()
 										.invalid()));
 						if (mapView.getOriginField().getValue() != null) {
-							if (imageEl != null)
+							if (imageElOrigin != null)
 								mapView.getOriginField().el().getParent().dom
-										.removeChild(imageEl);
+										.removeChild(imageElOrigin);
 							imageValid.render(mapView.getOriginField().el()
 									.getParent().dom);
-							imageEl = mapView.getOriginField().el().getParent().dom
-									.appendChild(imageValid.getElement());
+							imageElOrigin = mapView.getOriginField().el()
+									.getParent().dom.appendChild(imageValid
+									.getElement());
 
 							imageValid.el().alignTo(
 									mapView.getOriginField().getElement(),
 									"tl-tr", new int[] { 2, 3 });
 
 						} else {
-							if (imageEl != null)
+							if (imageElOrigin != null)
 								mapView.getOriginField().el().getParent().dom
-										.removeChild(imageEl);
+										.removeChild(imageElOrigin);
 							imageInvalid.render(mapView.getOriginField().el()
 									.getParent().dom);
-							imageEl = mapView.getOriginField().el().getParent().dom
-									.appendChild(imageInvalid.getElement());
+							imageElOrigin = mapView.getOriginField().el()
+									.getParent().dom.appendChild(imageInvalid
+									.getElement());
 
 							imageInvalid.el().alignTo(
 									mapView.getOriginField().getElement(),
@@ -307,28 +312,28 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 								new Image(mapView.getCovoiturageResources()
 										.invalid()));
 						if (mapView.getDestinationField().getValue() != null) {
-							if (imageEl != null)
+							if (imageElDestination != null)
 								mapView.getDestinationField().el().getParent().dom
-										.removeChild(imageEl);
+										.removeChild(imageElDestination);
 							imageValid.render(mapView.getDestinationField()
 									.el().getParent().dom);
-							imageEl = mapView.getDestinationField().el()
-									.getParent().dom.appendChild(imageValid
-									.getElement());
+							imageElDestination = mapView.getDestinationField()
+									.el().getParent().dom
+									.appendChild(imageValid.getElement());
 
 							imageValid.el().alignTo(
 									mapView.getDestinationField().getElement(),
 									"tl-tr", new int[] { 2, 3 });
 
 						} else {
-							if (imageEl != null)
+							if (imageElDestination != null)
 								mapView.getDestinationField().el().getParent().dom
-										.removeChild(imageEl);
+										.removeChild(imageElDestination);
 							imageInvalid.render(mapView.getDestinationField()
 									.el().getParent().dom);
-							imageEl = mapView.getDestinationField().el()
-									.getParent().dom.appendChild(imageInvalid
-									.getElement());
+							imageElDestination = mapView.getDestinationField()
+									.el().getParent().dom
+									.appendChild(imageInvalid.getElement());
 
 							imageInvalid.el().alignTo(
 									mapView.getDestinationField().getElement(),
@@ -337,10 +342,140 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						}
 					}
 				});
-		addBlurListener(mapView.getDateOfJourney());
-		addBlurListener(mapView.getDepartureStartTime());
-		addBlurListener(mapView.getDepartureEndTime());
-		addBlurListener(mapView.getArrivalTime());
+
+		mapView.getDateOfJourney().addListener(Events.Blur,
+				new Listener<BaseEvent>() {
+
+					@Override
+					public void handleEvent(BaseEvent be) {
+
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
+
+						if (mapView.getDateOfJourney().getValue() != null) {
+
+							image.render(mapView.getDateOfJourney().el()
+									.getParent().dom);
+							imageElDate = mapView.getDateOfJourney().el()
+									.getParent().dom.appendChild(image
+									.getElement());
+
+							image.el().alignTo(
+									mapView.getDateOfJourney().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+							mapView.getDateOfJourney().el().getParent()
+									.setHeight(37);
+
+						} else {
+							if (imageElDate != null)
+								mapView.getDateOfJourney().el().getParent().dom
+										.removeChild(imageElDate);
+
+						}
+
+					}
+				});
+
+		mapView.getDepartureStartTime().addListener(Events.Blur,
+				new Listener<BaseEvent>() {
+
+					@Override
+					public void handleEvent(BaseEvent be) {
+
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
+
+						if (mapView.getDepartureStartTime().getValue() != null) {
+
+							image.render(mapView.getDepartureStartTime().el()
+									.getParent().dom);
+							imageElDepartureStart = mapView
+									.getDepartureStartTime().el().getParent().dom
+									.appendChild(image.getElement());
+
+							image.el().alignTo(
+									mapView.getDepartureStartTime()
+											.getElement(), "tl-tr",
+									new int[] { 2, 3 });
+							mapView.getDepartureStartTime().el().getParent()
+									.setHeight(37);
+
+						} else {
+							if (imageElDepartureStart != null)
+								mapView.getDepartureStartTime().el()
+										.getParent().dom
+										.removeChild(imageElDepartureStart);
+
+						}
+
+					}
+				});
+
+		mapView.getDepartureEndTime().addListener(Events.Blur,
+				new Listener<BaseEvent>() {
+
+					@Override
+					public void handleEvent(BaseEvent be) {
+
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
+
+						if (mapView.getDepartureEndTime().getValue() != null) {
+
+							image.render(mapView.getDepartureEndTime().el()
+									.getParent().dom);
+							imageElDepartureEnd = mapView.getDepartureEndTime()
+									.el().getParent().dom.appendChild(image
+									.getElement());
+
+							image.el().alignTo(
+									mapView.getDepartureEndTime().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+							mapView.getDepartureEndTime().el().getParent()
+									.setHeight(37);
+
+						} else {
+							if (imageElDepartureEnd != null)
+								mapView.getDepartureEndTime().el().getParent().dom
+										.removeChild(imageElDepartureEnd);
+
+						}
+
+					}
+				});
+
+		mapView.getArrivalTime().addListener(Events.Blur,
+				new Listener<BaseEvent>() {
+
+					@Override
+					public void handleEvent(BaseEvent be) {
+
+						WidgetComponent image = new WidgetComponent(new Image(
+								mapView.getCovoiturageResources().valid()));
+
+						if (mapView.getArrivalTime().getValue() != null) {
+
+							image.render(mapView.getArrivalTime().el()
+									.getParent().dom);
+							imageElArrival = mapView.getArrivalTime().el()
+									.getParent().dom.appendChild(image
+									.getElement());
+
+							image.el().alignTo(
+									mapView.getArrivalTime().getElement(),
+									"tl-tr", new int[] { 2, 3 });
+							mapView.getArrivalTime().el().getParent()
+									.setHeight(37);
+
+						} else {
+							if (imageElArrival != null)
+								mapView.getArrivalTime().el().getParent().dom
+										.removeChild(imageElArrival);
+
+						}
+
+					}
+				});
 
 		mapView.getDepartureStartTime().addListener(Events.KeyPress,
 				new Listener<BaseEvent>() {
@@ -662,35 +797,6 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 
 					}
 				});
-	}
-
-	private void addBlurListener(final Field<?> field) {
-		field.addListener(Events.Blur, new Listener<BaseEvent>() {
-
-			@Override
-			public void handleEvent(BaseEvent be) {
-
-				WidgetComponent image = new WidgetComponent(new Image(mapView
-						.getCovoiturageResources().valid()));
-
-				if (field.getValue() != null) {
-
-					image.render(field.el().getParent().dom);
-					imageEl = field.el().getParent().dom.appendChild(image
-							.getElement());
-
-					image.el().alignTo(field.getElement(), "tl-tr",
-							new int[] { 2, 3 });
-					field.el().getParent().setHeight(37);
-
-				} else {
-					if (imageEl != null)
-						field.el().getParent().dom.removeChild(imageEl);
-
-				}
-
-			}
-		});
 	}
 
 	/**

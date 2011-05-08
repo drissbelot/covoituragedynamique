@@ -18,11 +18,11 @@
 					<form:FormPanel ui:field="data" heading="{constants.header}"
 						width="500px">
 						<form:layoutdata type="FormData" anchorSpec="-20"  >
-						<form:AdapterField fieldLabel="{constants.from}">
+						<form:AdapterField fieldLabel="{constants.from}" ui:field="originField">
 							<g:SuggestBox ui:field="originAdress" styleName="x-form-field x-form-text"
 								text="1,Grand place, Louvain-La-Neuve"  />
 						</form:AdapterField>
-						<form:AdapterField fieldLabel="{constants.to}">
+						<form:AdapterField fieldLabel="{constants.to}" ui:field="destinationField">
 							<g:SuggestBox ui:field="destinationAdress" styleName="x-form-field x-form-text"
 								text="2,Grand place, Louvain-La-Neuve"  />
 						</form:AdapterField>

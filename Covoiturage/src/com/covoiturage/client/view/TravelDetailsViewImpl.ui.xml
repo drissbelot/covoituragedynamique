@@ -40,7 +40,9 @@
 
 				</gxt:TabItem>
 				<gxt:TabItem text="Route">
-					<g:Image ui:field="mapImage" />
+				<g:VerticalPanel>
+					<g:Image ui:field="mapImage" width="200px" height="200px"/>
+				</g:VerticalPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>
 

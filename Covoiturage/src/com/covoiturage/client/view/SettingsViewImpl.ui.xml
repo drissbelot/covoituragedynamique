@@ -42,8 +42,8 @@
 					</form:FormPanel>
 				</gxt:TabItem>
 				<gxt:TabItem text="Picture Upload">
-					<g:FormPanel ui:field="imageForm" action="/fileupload">
-						<form:FileUploadField ui:field="personalImageField" width="200px"/>
+					<g:FormPanel ui:field="uploadForm">
+						<g:FileUpload ui:field="personalImageField" width="200px" name="upload"/>
 					</g:FormPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>

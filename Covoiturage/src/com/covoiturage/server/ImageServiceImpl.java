@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.covoiturage.server.domain.Journey;
 import com.covoiturage.server.domain.SimpleTravel;
+import com.covoiturage.server.domain.UserInfoDetails;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -25,8 +26,12 @@ public class ImageServiceImpl extends HttpServlet {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest
+	 * , javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +59,17 @@ public class ImageServiceImpl extends HttpServlet {
 			ServletOutputStream os = response.getOutputStream();
 
 			os.write(journey.getMapImage());
-		}
+		} else if (request.getParameter("class").contains("UserInfoDetails")) {
+			UserInfoDetails userDetails;
+			userDetails = ofy.find(UserInfoDetails.class,
+					Long.valueOf(request.getParameter("id")));
 
+			response.reset();
+			response.setContentType(userDetails.getPersonalPictureType());
+
+			ServletOutputStream os = response.getOutputStream();
+
+			os.write(userDetails.getPersonalPicture());
+		}
 	}
 }

@@ -17,12 +17,15 @@ import com.googlecode.objectify.ObjectifyService;
  */
 public class UserServiceImpl extends RemoteServiceServlet implements
 		UserService {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.UserService#login(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.covoiturage.client.UserService#login(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	public String login(String login, String password) {
@@ -38,13 +41,18 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 			HttpSession httpSession = getThreadLocalRequest().getSession();
 			httpSession.setMaxInactiveInterval(1000 * 60 * 5);
 			httpSession.setAttribute("LOGGED_IN_USER", user.getId().toString());
+
 			return httpSession.getId();
-		} else
+		} else {
+
 			return null;
+		}
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.UserService#getUser()
 	 */
 	@Override

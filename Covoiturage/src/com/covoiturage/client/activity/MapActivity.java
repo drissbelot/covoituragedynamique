@@ -1278,9 +1278,9 @@ public class MapActivity extends AbstractActivity implements MapView.Presenter {
 						}
 
 					});
-
+			mapView.getSaveJourneyButton().setVisible(true);
 		}
-		mapView.getSaveJourneyButton().setVisible(true);
+		
 	}
 
 	/*

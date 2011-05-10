@@ -25,6 +25,7 @@
 						<form:TextField ui:field="homePhoneNumberField" fieldLabel="{constants.homePhoneNumber}"/>
 						<form:TextField ui:field="workPhoneNumberField" fieldLabel="{constants.workPhoneNumber}"/>
 						<form:ComboBox store="{storeLanguage}" ui:field="language" fieldLabel="{constants.languelab}"/>
+						
 					</form:FormPanel>
 				</gxt:TabItem>
 				<gxt:TabItem text="Vehicle Informations">
@@ -39,6 +40,11 @@
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 						
 					</form:FormPanel>
+				</gxt:TabItem>
+				<gxt:TabItem text="Picture Upload">
+					<g:FormPanel ui:field="imageForm">
+						<form:FileUploadField ui:field="personalImageField" width="200px"/>
+					</g:FormPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>
 			<g:Button ui:field="submitButton" styleName='{resources.style.button}' text="{constants.submit}" />

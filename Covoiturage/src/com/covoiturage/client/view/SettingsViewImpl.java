@@ -6,7 +6,6 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.SettingsViewConstants;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.FileUploadField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -14,6 +13,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FormPanel;
 
@@ -82,9 +82,10 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	TextField<String> mobilePhoneNumberField, homePhoneNumberField,
 			workPhoneNumberField;
 	@UiField
-	FileUploadField personalImageField;
+	FileUpload personalImageField;
 	@UiField
-	FormPanel imageForm;
+	FormPanel uploadForm;
+
 	/** The presenter. */
 	private Presenter presenter;
 
@@ -106,6 +107,8 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 		homePhoneNumberField.setRegex("\\d+");
 		mobilePhoneNumberField.setRegex("\\d+");
 		workPhoneNumberField.setRegex("\\d+");
+		uploadForm.setEncoding(FormPanel.ENCODING_MULTIPART);
+		uploadForm.setMethod(FormPanel.METHOD_POST);
 
 	}
 
@@ -285,13 +288,13 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	}
 
 	@Override
-	public FileUploadField getPersonalImageField() {
+	public FileUpload getPersonalImageField() {
 		return personalImageField;
 	}
 
 	@Override
-	public FormPanel getImageForm() {
-		return imageForm;
+	public FormPanel getUploadForm() {
+		return uploadForm;
 	}
 
 }

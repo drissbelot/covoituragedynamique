@@ -23,20 +23,21 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 
 	/** The map image. */
 	private final Image mapImage;
-	
+
 	/** The window. */
 	private final Window window;
 
 	/** The details anchor. */
 	private final Anchor detailsAnchor;
-	
+
 	/** The close button. */
 	private final Button closeButton;
 
 	/**
 	 * Instantiates a new validate passengers expander view impl.
-	 *
-	 * @param model the model
+	 * 
+	 * @param model
+	 *            the model
 	 */
 	public ValidatePassengersExpanderViewImpl(BaseModelData model) {
 		VerticalPanel vertPanel = new VerticalPanel();
@@ -75,16 +76,22 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.ValidatePassengersExpanderView#getMapImage()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.ValidatePassengersExpanderView#getMapImage()
 	 */
 	@Override
 	public Image getMapImage() {
 		return mapImage;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.ValidatePassengersExpanderView#getImageZoom()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.ValidatePassengersExpanderView#getImageZoom()
 	 */
 	@Override
 	public Window getImageZoom() {
@@ -93,7 +100,7 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 
 	/**
 	 * Gets the details anchor.
-	 *
+	 * 
 	 * @return the details anchor
 	 */
 	public Anchor getDetailsAnchor() {
@@ -102,7 +109,7 @@ public class ValidatePassengersExpanderViewImpl extends ContentPanel implements
 
 	/**
 	 * Gets the close button.
-	 *
+	 * 
 	 * @return the close button
 	 */
 	public Button getCloseButton() {

@@ -43,26 +43,27 @@ public class LoginActivity extends AbstractActivity implements
 
 	/** The event bus. */
 	private final EventBus eventBus;
-	
+
 	/** The login view. */
 	private final LoginView loginView;
-	
+
 	/** The current user. */
 	private UserInfoProxy currentUser;
-	
+
 	/** The request factory. */
 	private final CovoiturageRequestFactory requestFactory;
-	
+
 	/** The place controller. */
 	private final PlaceController placeController;
-	
+
 	/** The user service. */
 	private final UserServiceAsync userService = GWT.create(UserService.class);
 
 	/**
 	 * Instantiates a new login activity.
-	 *
-	 * @param clientFactory the client factory
+	 * 
+	 * @param clientFactory
+	 *            the client factory
 	 */
 	public LoginActivity(ClientFactory clientFactory) {
 		this.requestFactory = clientFactory.getRequestFactory();
@@ -110,6 +111,7 @@ public class LoginActivity extends AbstractActivity implements
 
 					@Override
 					public void onSuccess(String result) {
+
 						UserInfoRequest request = requestFactory
 								.userInfoRequest();
 						Request<UserInfoProxy> createReq = request
@@ -194,8 +196,12 @@ public class LoginActivity extends AbstractActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client.ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.activity.shared.Activity#start(com.google.gwt.user.client
+	 * .ui.AcceptsOneWidget, com.google.gwt.event.shared.EventBus)
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
@@ -204,8 +210,12 @@ public class LoginActivity extends AbstractActivity implements
 		containerWidget.setWidget(loginView.asWidget());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.LoginView.Presenter#goTo(com.google.gwt.place.shared.Place)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.LoginView.Presenter#goTo(com.google.gwt.place
+	 * .shared.Place)
 	 */
 	@Override
 	public void goTo(Place place) {

@@ -46,4 +46,15 @@
 <listener>
     <listener-class>com.covoiturage.server.ContextInitializer</listener-class>
 </listener>
+
+  <servlet>
+    <servlet-name>FileUpload</servlet-name>
+    
+    <servlet-class>com.covoiturage.server.FileUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUpload</servlet-name>
+    <url-pattern>/fileUpload</url-pattern>
+  </servlet-mapping>
+
 </web-app>

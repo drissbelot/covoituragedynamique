@@ -402,11 +402,11 @@ public class SettingsActivity extends AbstractActivity implements
 
 		UserInfoDetailsRequest requestDetails = requestFactory
 				.userInfoDetailsRequest();
-		
+
 		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails
 				.modifyUserInfoDetails(currentUser.getId(), settingsView
-						.getFirstName().getTitle(), settingsView.getLastName()
-						.getTitle(), settingsView.getLanguage()
+						.getFirstName().getValue(), settingsView.getLastName()
+						.getValue(), settingsView.getLanguage()
 						.getSelectedText());
 		createRequestDetails.fire(new Receiver<UserInfoDetailsProxy>() {
 
@@ -440,6 +440,15 @@ public class SettingsActivity extends AbstractActivity implements
 
 			}
 		});
+
+		if (settingsView.getPersonalImageField().getFilename() != "") {
+			GWT.log(settingsView.getUploadForm().getEncoding());
+			settingsView.getUploadForm().setAction(
+					GWT.getHostPageBaseURL() + "fileUpload?id="
+							+ currentUser.getId());
+			GWT.log(settingsView.getUploadForm().getAction());
+			settingsView.getUploadForm().submit();
+		}
 
 	}
 

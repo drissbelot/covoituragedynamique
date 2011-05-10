@@ -5,7 +5,6 @@ package com.covoiturage.server.service;
 
 import java.util.List;
 
-import com.covoiturage.server.BCrypt;
 import com.covoiturage.server.domain.UserInfo;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.googlecode.objectify.Objectify;
@@ -34,8 +33,8 @@ public class UserInfoDao extends ObjectifyDao<UserInfo> {
 		Objectify ofy = ObjectifyService.begin();
 
 		user = ofy.find(UserInfo.class, id);
-
-		user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
+		if (password.length() > 0)
+			user.setPassword(password);
 		user.setEmailAddress(emailAddress);
 
 		ofy.put(user);

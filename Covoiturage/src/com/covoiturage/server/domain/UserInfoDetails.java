@@ -52,6 +52,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/** The personal picture. */
 	private Blob personalPicture;
+	private String personalPictureType;
 
 	/** The vehicle picture. */
 	private Blob vehiclePicture;
@@ -77,9 +78,11 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Instantiates a new user info details.
-	 *
-	 * @param firstName the first name
-	 * @param lastName the last name
+	 * 
+	 * @param firstName
+	 *            the first name
+	 * @param lastName
+	 *            the last name
 	 */
 	public UserInfoDetails(String firstName, String lastName) {
 
@@ -89,8 +92,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Adds the message.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 */
 	public void addMessage(Long message) {
 
@@ -99,7 +103,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the channel id.
-	 *
+	 * 
 	 * @return the channel id
 	 */
 	public String getChannelId() {
@@ -108,7 +112,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the count of journeys.
-	 *
+	 * 
 	 * @return the count of journeys
 	 */
 	public Integer getCountOfJourneys() {
@@ -117,7 +121,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the count of places.
-	 *
+	 * 
 	 * @return the count of places
 	 */
 	public Integer getCountOfPlaces() {
@@ -126,7 +130,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the first name.
-	 *
+	 * 
 	 * @return the first name
 	 */
 	public String getFirstName() {
@@ -135,7 +139,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the language.
-	 *
+	 * 
 	 * @return the language
 	 */
 	public String getLanguage() {
@@ -144,7 +148,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the last name.
-	 *
+	 * 
 	 * @return the last name
 	 */
 	public String getLastName() {
@@ -153,7 +157,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the vehicle.
-	 *
+	 * 
 	 * @return the vehicle
 	 */
 	public String getVehicle() {
@@ -162,7 +166,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the messages.
-	 *
+	 * 
 	 * @return the messages
 	 */
 	public List<Long> getMessages() {
@@ -171,7 +175,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the rating.
-	 *
+	 * 
 	 * @return the rating
 	 */
 	public Integer getRating() {
@@ -180,7 +184,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the user.
-	 *
+	 * 
 	 * @return the user
 	 */
 	public Long getUser() {
@@ -189,8 +193,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Removes the message.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 */
 	public void removeMessage(Long message) {
 		messages.remove(message);
@@ -198,8 +203,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the channel id.
-	 *
-	 * @param channelId the new channel id
+	 * 
+	 * @param channelId
+	 *            the new channel id
 	 */
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
@@ -207,8 +213,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the count of journeys.
-	 *
-	 * @param countOfJourneys the new count of journeys
+	 * 
+	 * @param countOfJourneys
+	 *            the new count of journeys
 	 */
 	public void setCountOfJourneys(Integer countOfJourneys) {
 		this.countOfJourneys = countOfJourneys;
@@ -216,8 +223,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the count of places.
-	 *
-	 * @param countOfPlaces the new count of places
+	 * 
+	 * @param countOfPlaces
+	 *            the new count of places
 	 */
 	public void setCountOfPlaces(Integer countOfPlaces) {
 		this.countOfPlaces = countOfPlaces;
@@ -225,8 +233,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the first name.
-	 *
-	 * @param firstName the new first name
+	 * 
+	 * @param firstName
+	 *            the new first name
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -234,8 +243,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the language.
-	 *
-	 * @param language the new language
+	 * 
+	 * @param language
+	 *            the new language
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
@@ -243,8 +253,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the last name.
-	 *
-	 * @param lastName the new last name
+	 * 
+	 * @param lastName
+	 *            the new last name
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -252,8 +263,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the messages.
-	 *
-	 * @param messages the new messages
+	 * 
+	 * @param messages
+	 *            the new messages
 	 */
 	public void setMessages(List<Long> messages) {
 		this.messages = messages;
@@ -261,8 +273,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the rating.
-	 *
-	 * @param rating the new rating
+	 * 
+	 * @param rating
+	 *            the new rating
 	 */
 	public void setRating(Integer rating) {
 		this.rating = rating;
@@ -270,8 +283,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the user.
-	 *
-	 * @param user the new user
+	 * 
+	 * @param user
+	 *            the new user
 	 */
 	public void setUser(Long user) {
 		this.user = user;
@@ -279,8 +293,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the color of vehicle.
-	 *
-	 * @param colorOfVehicle the new color of vehicle
+	 * 
+	 * @param colorOfVehicle
+	 *            the new color of vehicle
 	 */
 	public void setColorOfVehicle(String colorOfVehicle) {
 		this.colorOfVehicle = colorOfVehicle;
@@ -288,7 +303,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the color of vehicle.
-	 *
+	 * 
 	 * @return the color of vehicle
 	 */
 	public String getColorOfVehicle() {
@@ -297,8 +312,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the personal picture.
-	 *
-	 * @param personalPicture the new personal picture
+	 * 
+	 * @param personalPicture
+	 *            the new personal picture
 	 */
 	public void setPersonalPicture(byte[] personalPicture) {
 		this.personalPicture = new Blob(personalPicture);
@@ -306,7 +322,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the personal picture.
-	 *
+	 * 
 	 * @return the personal picture
 	 */
 	public byte[] getPersonalPicture() {
@@ -315,8 +331,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the vehicle picture.
-	 *
-	 * @param vehiclePicture the new vehicle picture
+	 * 
+	 * @param vehiclePicture
+	 *            the new vehicle picture
 	 */
 	public void setVehiclePicture(byte[] vehiclePicture) {
 		this.vehiclePicture = new Blob(vehiclePicture);
@@ -324,7 +341,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the vehicle picture.
-	 *
+	 * 
 	 * @return the vehicle picture
 	 */
 	public byte[] getVehiclePicture() {
@@ -333,8 +350,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the comfort.
-	 *
-	 * @param comfort the new comfort
+	 * 
+	 * @param comfort
+	 *            the new comfort
 	 */
 	public void setComfort(Integer comfort) {
 		this.comfort = comfort;
@@ -342,7 +360,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the comfort.
-	 *
+	 * 
 	 * @return the comfort
 	 */
 	public Integer getComfort() {
@@ -351,8 +369,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the mobile phone number.
-	 *
-	 * @param mobilePhoneNumber the new mobile phone number
+	 * 
+	 * @param mobilePhoneNumber
+	 *            the new mobile phone number
 	 */
 	public void setMobilePhoneNumber(String mobilePhoneNumber) {
 		this.mobilePhoneNumber = mobilePhoneNumber;
@@ -360,7 +379,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the mobile phone number.
-	 *
+	 * 
 	 * @return the mobile phone number
 	 */
 	public String getMobilePhoneNumber() {
@@ -369,8 +388,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the home phone number.
-	 *
-	 * @param homePhoneNumber the new home phone number
+	 * 
+	 * @param homePhoneNumber
+	 *            the new home phone number
 	 */
 	public void setHomePhoneNumber(String homePhoneNumber) {
 		this.homePhoneNumber = homePhoneNumber;
@@ -378,7 +398,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the home phone number.
-	 *
+	 * 
 	 * @return the home phone number
 	 */
 	public String getHomePhoneNumber() {
@@ -387,8 +407,9 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the work phone number.
-	 *
-	 * @param workPhoneNumber the new work phone number
+	 * 
+	 * @param workPhoneNumber
+	 *            the new work phone number
 	 */
 	public void setWorkPhoneNumber(String workPhoneNumber) {
 		this.workPhoneNumber = workPhoneNumber;
@@ -396,7 +417,7 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Gets the work phone number.
-	 *
+	 * 
 	 * @return the work phone number
 	 */
 	public String getWorkPhoneNumber() {
@@ -405,11 +426,20 @@ public class UserInfoDetails extends DatastoreObject {
 
 	/**
 	 * Sets the vehicle.
-	 *
-	 * @param vehicle the new vehicle
+	 * 
+	 * @param vehicle
+	 *            the new vehicle
 	 */
 	public void setVehicle(String vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	public void setPersonalPictureType(String personalPictureType) {
+		this.personalPictureType = personalPictureType;
+	}
+
+	public String getPersonalPictureType() {
+		return personalPictureType;
 	}
 
 }

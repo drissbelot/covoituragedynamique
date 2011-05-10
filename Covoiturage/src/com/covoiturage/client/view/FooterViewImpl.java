@@ -3,7 +3,7 @@
  */
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.images.LanguageFlagsResources;
+import com.covoiturage.client.resource.LanguageFlagsResources;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;

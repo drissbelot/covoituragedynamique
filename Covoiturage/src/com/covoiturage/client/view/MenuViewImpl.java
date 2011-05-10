@@ -25,27 +25,27 @@ public class MenuViewImpl extends Composite implements MenuView {
 
 	/** The Constant binder. */
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	
+
 	/** The constants. */
 	private final MenuViewConstants constants = (MenuViewConstants) GWT
 			.create(MenuViewConstants.class);
-	
+
 	/** The menu panel. */
 	@UiField
 	ContentPanel menuPanel;
-	
+
 	/** The map label. */
 	@UiField
 	Label mapLabel;
-	
+
 	/** The settings label. */
 	@UiField
 	Label settingsLabel;
-	
+
 	/** The history label. */
 	@UiField
 	Label historyLabel;
-	
+
 	/** The messages label. */
 	@UiField
 	Label messagesLabel;
@@ -60,19 +60,23 @@ public class MenuViewImpl extends Composite implements MenuView {
 	public MenuViewImpl() {
 		initWidget(binder.createAndBindUi(this));
 
-		menuPanel.setHeaderVisible(true);
-
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.MenuView#setPresenter(com.covoiturage.client.view.MenuView.Presenter)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.MenuView#setPresenter(com.covoiturage.client
+	 * .view.MenuView.Presenter)
 	 */
 	@Override
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MenuView#getSettingsLabel()
 	 */
 	@Override
@@ -80,7 +84,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 		return settingsLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MenuView#getMapLabel()
 	 */
 	@Override
@@ -88,7 +94,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 		return mapLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MenuView#getHistoryLabel()
 	 */
 	@Override
@@ -96,7 +104,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 		return historyLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MenuView#getMessagesLabel()
 	 */
 	@Override
@@ -104,7 +114,9 @@ public class MenuViewImpl extends Composite implements MenuView {
 		return messagesLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.MenuView#getConstants()
 	 */
 	@Override

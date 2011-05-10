@@ -3,7 +3,7 @@
  */
 package com.covoiturage.client.view;
 
-import com.covoiturage.client.images.CovoiturageResources;
+import com.covoiturage.client.resource.CovoiturageResources;
 import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.event.ComponentEvent;

@@ -1,0 +1,79 @@
+.anchor {
+	font: 120% normal;
+	display: block;
+	color: RGB(59, 89, 152);
+	margin: 0% 5px 0em 0em;
+}
+
+.button {
+	margin: 1em;
+	background-color: RGB(59, 89, 152);
+	display: block;
+	color: white;
+	text-decoration: none;
+}
+
+.button:hover {
+	margin: 1em;
+	background-color: RGB(109, 134, 183);
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+.button:visited {
+	margin: 1em;
+	background-color: RGB(109, 134, 183);
+	display: block;
+	text-decoration: none;
+	color: white;
+}
+
+.label {
+	background-color: white;
+	color: black;
+	font: 115% Arial;
+	margin: 0em 1em 1em 1em;
+	width: 5.5em;
+}
+
+.h1 {
+	font: 200% Arial;
+	color: white;
+	text-align: center;
+	margin: 0px 0% 0%;
+	background-color: RGB(59, 89, 152);
+	border-bottom: solid RGB(153, 187, 232) 3px;
+}
+
+
+@sprite .menuItem {
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	gwt-image: "border";
+	color: #174867;
+	width:90px;
+	padding: 7px 15px 7px 15px;
+	height: 15px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	
+	text-decoration: none;
+	-webkit-box-shadow: 2px 2px 4px #888;
+	box-shadow: 2px 2px 4px #888;
+}
+
+@sprite .menuItem:hover {
+	cursor:pointer;
+	gwt-image: "border";
+	height: 20px;
+	width:95px;
+	color: #67A5CD;
+	padding: 7px 15px 7px 30px;
+}
+
+.labelform {
+	padding: 0.1em 0em 0.1em 0.0em;
+}

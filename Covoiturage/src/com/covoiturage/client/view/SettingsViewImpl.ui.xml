@@ -8,10 +8,10 @@
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeModel" />
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="storeMake" />
 	<ui:with type="com.covoiturage.client.i18n.SettingsViewConstants" field="constants"/>
-	<ui:style src="stylesheet.css" />
-		
+
+		<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
 	<g:FlowPanel>
-		<g:VerticalPanel ui:field="flowpanel" styleName='{style.centerpanel2}'
+		<g:VerticalPanel ui:field="flowpanel"
 			width="30%" height="100%">
 			<gxt:TabPanel width="450" autoHeight="true">
 				<gxt:TabItem text="Personal Informations">
@@ -41,7 +41,7 @@
 					</form:FormPanel>
 				</gxt:TabItem>
 			</gxt:TabPanel>
-			<g:Button ui:field="submitButton" styleName='{style.button}' text="{constants.submit}" />
+			<g:Button ui:field="submitButton" styleName='{resources.style.button}' text="{constants.submit}" />
 		</g:VerticalPanel>
 	</g:FlowPanel>
 </ui:UiBinder>

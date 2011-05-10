@@ -2,16 +2,16 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 			<ui:with type="com.covoiturage.client.i18n.HeaderViewConstants" field="constants"/>
-	<ui:style src="stylesheet.css"/>
-		
+
+		<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
 
 
-  	<g:HorizontalPanel ui:field='menu' styleName='{style.menutitre}' width="100%" height="100%">
+  	<g:HorizontalPanel ui:field='menu'  width="100%" height="100%">
   	
-  		<gxt:Label styleName='{style.h1titre}'  ui:field="title" width="16em" text="{constants.title}"/>
+
   		<gxt:Label ui:field='currentUser' text="{constants.username}"/>
   		<gxt:Label ui:field='messages' title="{constants.message}"/>
-  		<g:Anchor ui:field='logout' styleName='{style.buttontitre}' width="42px" height="30px" text="{constants.logout}"/>
+  		<g:Anchor ui:field='logout' styleName='{resources.style.anchor}'  text="{constants.logout}"/>
   	</g:HorizontalPanel>
 
   	</ui:UiBinder>

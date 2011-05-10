@@ -2,7 +2,7 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
 		<ui:with type="com.covoiturage.client.i18n.ReplyMessageViewConstants" field="constants"/>
-	<ui:style src="stylesheet.css" />
+
 		
 	<g:VerticalPanel width="100%" height="100%">
 		<g:HorizontalPanel>

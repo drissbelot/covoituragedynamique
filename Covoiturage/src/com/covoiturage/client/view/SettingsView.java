@@ -6,6 +6,7 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.SettingsViewConstants;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.FileUploadField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.place.shared.Place;
@@ -149,4 +150,5 @@ public interface SettingsView extends IsWidget {
 	 */
 	public ComboBox<BaseModelData> getCarColorField();
 
+	public FileUploadField getPersonalImageField();
 }

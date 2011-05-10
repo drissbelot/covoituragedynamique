@@ -402,6 +402,7 @@ public class SettingsActivity extends AbstractActivity implements
 
 		UserInfoDetailsRequest requestDetails = requestFactory
 				.userInfoDetailsRequest();
+		
 		Request<UserInfoDetailsProxy> createRequestDetails = requestDetails
 				.modifyUserInfoDetails(currentUser.getId(), settingsView
 						.getFirstName().getTitle(), settingsView.getLastName()

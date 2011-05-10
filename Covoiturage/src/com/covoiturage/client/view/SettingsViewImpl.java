@@ -6,6 +6,7 @@ package com.covoiturage.client.view;
 import com.covoiturage.client.i18n.SettingsViewConstants;
 import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.FileUploadField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -79,6 +80,8 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	@UiField
 	TextField<String> mobilePhoneNumberField, homePhoneNumberField,
 			workPhoneNumberField;
+@UiField
+FileUploadField personalImageField;
 
 	/** The presenter. */
 	private Presenter presenter;
@@ -244,4 +247,9 @@ public class SettingsViewImpl extends Composite implements SettingsView {
 	public ComboBox<BaseModelData> getCarColorField() {
 		return carColorField;
 	}
+	@Override
+	public FileUploadField getPersonalImageField() {
+		return personalImageField;
+	}
+
 }

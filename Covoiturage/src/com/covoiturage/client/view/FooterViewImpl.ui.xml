@@ -1,17 +1,17 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-	
-	<ui:style src="stylesheet.css"/>
+	<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
+
 	
 	
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 
-		<g:HorizontalPanel styleName='{style.anchorcontainer}'>
-			<g:Anchor ui:field="anchorfr" styleName='{style.anchor}' />
-			<g:Anchor ui:field="anchornl" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchoren" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchorit" styleName='{style.anchor}'/>
-			<g:Anchor ui:field="anchorch" styleName='{style.anchor}'/>
+		<g:HorizontalPanel >
+			<g:Anchor ui:field="anchorfr"  />
+			<g:Anchor ui:field="anchornl" />
+			<g:Anchor ui:field="anchoren" />
+			<g:Anchor ui:field="anchorit" />
+			<g:Anchor ui:field="anchorch" />
 		</g:HorizontalPanel>
 	</g:FlowPanel>
 	

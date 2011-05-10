@@ -4,16 +4,16 @@
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget" xmlns:form="urn:import:com.extjs.gxt.ui.client.widget.form">
 	<ui:with type="com.covoiturage.client.i18n.MapViewConstants"
 		field="constants" />
-	<ui:style src="stylesheet.css" />
+<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
 		
-	<g:FlowPanel ui:field="flowpanel">
+	<g:FlowPanel ui:field="flowpanel" >
 
 
 		<g:HorizontalPanel horizontalAlignment="ALIGN_LEFT">
-			<g:HorizontalPanel styleName='{style.cartecontainer}'>
+			<g:HorizontalPanel >
 				<m:MapWidget ui:field='mapWidget' width="450px" height="450px" />
 
-				<g:VerticalPanel styleName='{style.horairecontainer}'
+				<g:VerticalPanel 
 					width="100%">
 					<form:FormPanel ui:field="data" heading="{constants.header}"
 						width="500px">
@@ -37,12 +37,12 @@
 						<form:TextField ui:field="arrivalTimeItem"
 							ui:allowBlank="false" ui:regex="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
 							fieldLabel="{constants.arrivalTime}" />
-						<g:HorizontalPanel styleName='{style.paddingdown}'>
+						<g:HorizontalPanel >
 							<g:RadioButton ui:field="driverRadioButton"
-								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.driver}"
+								 ui:name="typeOfUser" text="{constants.driver}"
 								ui:value="true" />
 							<g:RadioButton ui:field="passengerRadioButton"
-								styleName='{style.radiobutton}' ui:name="typeOfUser" text="{constants.passenger}" />
+								 ui:name="typeOfUser" text="{constants.passenger}" />
 						</g:HorizontalPanel>
 
 						<form:TextField ui:field="distanceMaxField"
@@ -50,9 +50,9 @@
 						<form:TextArea ui:field="commentField" fieldLabel="Comment" />
 
 						<g:HorizontalPanel>
-							<g:Button ui:field="sendAddress" styleName='{style.button}'
+							<g:Button ui:field="sendAddress" styleName='{resources.style.button}'
 								text="{constants.getDirections}" />
-							<g:Button ui:field="saveJourney" styleName='{style.button}'
+							<g:Button ui:field="saveJourney" styleName='{resources.style.button}'
 								text="{constants.saveJourney}" ui:visible="false" />
 						</g:HorizontalPanel>
 						</form:layoutdata>
@@ -68,7 +68,7 @@
 			</g:HorizontalPanel>
 		</g:HorizontalPanel>
 		<gxt:ContentPanel ui:field="directionsPanel"
-			ui:headerVisible="false" />
+			ui:headerVisible="false" bodyBorder="false"/>
 
 
 

@@ -3,8 +3,7 @@
 	xmlns:grid="urn:import:com.extjs.gxt.ui.client.widget.grid">
 	
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
-	<ui:style src="stylesheet.css"/>
-	
+
 	
 	<g:FlowPanel ui:field="flowpanel" width="100%" height="100%">
 		<grid:Grid store="{store}" ui:field="listGrid" height="500px" width="1000px">

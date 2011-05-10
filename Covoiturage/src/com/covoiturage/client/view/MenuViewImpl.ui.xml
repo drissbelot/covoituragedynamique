@@ -2,12 +2,13 @@
 	xmlns:g='urn:import:com.google.gwt.user.client.ui'
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 			<ui:with type="com.covoiturage.client.i18n.MenuViewConstants" field="constants"/>
-	<ui:style src="stylesheet.css"/>
+<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
+
 		
-	<gxt:ContentPanel ui:field='menuPanel' heading="{constants.menutitle}">
-		<g:Label ui:field='mapLabel' styleName='{style.label}' text="{constants.maplabel}"/>
-  		<g:Label ui:field='settingsLabel' styleName='{style.label}' text="{constants.settings}"/>
-  		<g:Label ui:field='messagesLabel' styleName='{style.label}' text="{constants.message}"/>
-  		<g:Label ui:field='historyLabel' styleName='{style.label}' text="{constants.history}"/>
+	<gxt:ContentPanel ui:field='menuPanel' heading="{constants.menutitle}"  bodyBorder="false" headerVisible="true" height="300px">
+		<g:Label ui:field='mapLabel' styleName='{resources.style.menuItem}' text="{constants.maplabel}"/>
+  		<g:Label ui:field='settingsLabel' styleName='{resources.style.menuItem}' text="{constants.settings}"/>
+  		<g:Label ui:field='messagesLabel' styleName='{resources.style.menuItem}' text="{constants.message}"/>
+  		<g:Label ui:field='historyLabel' styleName='{resources.style.menuItem}' text="{constants.history}"/>
 	</gxt:ContentPanel>
 </ui:UiBinder>

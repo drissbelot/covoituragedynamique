@@ -3,7 +3,7 @@
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget">
 	<ui:with type="com.extjs.gxt.ui.client.data.BaseModelData" field="model" />
 		
-	<ui:style src="stylesheet.css" />
+
 		
 	<g:VerticalPanel>
 		<gxt:Label ui:field="dateLabel" />

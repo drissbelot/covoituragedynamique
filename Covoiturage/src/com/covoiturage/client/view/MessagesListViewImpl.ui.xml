@@ -3,7 +3,7 @@
 	xmlns:gxt="urn:import:com.extjs.gxt.ui.client.widget.button">
 			<ui:with type="com.covoiturage.client.i18n.MessagesListViewConstants" field="constants"/>
 	<ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
-	<ui:style src="stylesheet.css" />
+	
 		
 	<g:VerticalPanel>
 	<gxt:Button ui:field="deleteButton" text="{constants.Delete}"/>

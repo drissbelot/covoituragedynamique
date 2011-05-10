@@ -5,7 +5,6 @@
 <ui:with type="com.extjs.gxt.ui.client.store.ListStore" field="store" />
 
 
-<ui:style src="stylesheet.css" />
 	
 <gxt:ContentPanel headerVisible="false" >
 	<grid:Grid store="{store}" ui:field="listGrid" autoHeight="true" >

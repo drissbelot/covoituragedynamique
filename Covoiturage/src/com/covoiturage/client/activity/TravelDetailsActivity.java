@@ -4,10 +4,10 @@
 package com.covoiturage.client.activity;
 
 import com.covoiturage.client.ClientFactory;
-import com.covoiturage.client.images.CarResources;
-import com.covoiturage.client.images.LanguageFlagsResources;
-import com.covoiturage.client.images.RatingResources;
 import com.covoiturage.client.place.TravelDetailsPlace;
+import com.covoiturage.client.resource.CarResources;
+import com.covoiturage.client.resource.LanguageFlagsResources;
+import com.covoiturage.client.resource.RatingResources;
 import com.covoiturage.client.view.TravelDetailsView;
 import com.covoiturage.shared.CovoiturageRequestFactory;
 import com.covoiturage.shared.JourneyProxy;

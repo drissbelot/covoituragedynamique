@@ -47,4 +47,7 @@ public interface CovoiturageResources extends ClientBundle {
 	@Source("stylesheet.css")
 	CovoiturageCssResources style();
 
+	@ImageOptions(repeatStyle = RepeatStyle.None)
+	ImageResource covdyn();
+
 }

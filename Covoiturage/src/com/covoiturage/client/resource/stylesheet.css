@@ -46,7 +46,10 @@
 	border-bottom: solid RGB(153, 187, 232) 3px;
 }
 
-
+@sprite .header{
+	gwt-image: "covdyn";
+	
+	}
 @sprite .menuItem {
 	-webkit-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;

@@ -6,7 +6,7 @@
 		<ui:with type="com.covoiturage.client.resource.CovoiturageResources" field="resources"/>
 
 
-  	<g:HorizontalPanel ui:field='menu'  width="100%" height="100%">
+  	<g:HorizontalPanel ui:field='menu'  width="100%" height="100%" styleName="{resources.style.header}" horizontalAlignment="ALIGN_RIGHT">
   	
 
   		<gxt:Label ui:field='currentUser' text="{constants.username}"/>

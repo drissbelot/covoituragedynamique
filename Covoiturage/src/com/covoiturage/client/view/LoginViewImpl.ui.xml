@@ -9,11 +9,11 @@
 	
 	
 
-<g:AbsolutePanel ui:field="flowpanel" width="100%" height="100%">
+<g:FlowPanel ui:field="flowpanel" width="100%" >
 	<g:Label styleName='{resources.style.h1}'  ui:field="title" text="{constants.login}"/>	
-	<g:HorizontalPanel >	
+	<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">	
 		<g:Image ui:field="image" />
-			<g:VerticalPanel  verticalAlignment="ALIGN_TOP" horizontalAlignment="ALIGN_CENTER">
+			<g:VerticalPanel  verticalAlignment="ALIGN_MIDDLE" horizontalAlignment="ALIGN_CENTER">
 				<form:FormPanel ui:field="header" heading="{constants.login}">
 					<form:TextField ui:field="loginField" fieldLabel="{constants.username}"/>
 					<form:TextField ui:field="passwordField" fieldLabel="{constants.password}"/>
@@ -24,5 +24,5 @@
 				</form:FormPanel>	
 			</g:VerticalPanel>
 	</g:HorizontalPanel>
-</g:AbsolutePanel>
+</g:FlowPanel>
 </ui:UiBinder>

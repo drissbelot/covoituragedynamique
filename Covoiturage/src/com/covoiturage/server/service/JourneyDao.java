@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.covoiturage.server.MapUtils;
 import com.covoiturage.server.domain.Journey;
@@ -131,7 +132,7 @@ public class JourneyDao extends ObjectifyDao<Journey> {
 				.getURLFetchService();
 
 		try {
-
+			Logger.getLogger("").warning(mapImage);
 			HTTPResponse fetchResponse = fetchService.fetch(new URL(mapImage));
 
 			String fetchResponseContentType = null;

@@ -151,7 +151,7 @@ public class Covoiturage implements EntryPoint {
 		final Viewport v = new Viewport();
 		v.setLayout(new FitLayout());
 		BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH,
-				60);
+				160);
 		layoutContainer.add(horizMasterPanel, northData);
 		BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 300);
 		eastData.setCollapsible(true);
@@ -174,6 +174,7 @@ public class Covoiturage implements EntryPoint {
 		vertMasterPanel.setHeaderVisible(false);
 		horizMasterPanel.setBodyBorder(false);
 		vertMasterPanel.setBodyBorder(false);
+		asidePanel.setHeading("Matches found :");
 
 		ClientFactory clientFactory = new ClientFactoryImpl();
 		EventBus eventBus = clientFactory.getEventBus();

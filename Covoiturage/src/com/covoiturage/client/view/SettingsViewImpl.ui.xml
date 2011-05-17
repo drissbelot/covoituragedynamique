@@ -34,8 +34,8 @@
 						<form:ComboBox ui:field="vehicleModelField" store="{storeModel}" fieldLabel="{constants.model}" displayField="name"/>
 						<form:TextField ui:field="vehicleDateField" fieldLabel="{constants.vehicleDate}"/>
 						<form:TextField ui:field="seatsNumberField" fieldLabel="{constants.seatsNumber}"/>
-						<form:ComboBox ui:field="comfortField" store="{storeComfort}" displayField="name"/>
-						<form:ComboBox ui:field="carColorField" store="{storeCarColor}" displayField="name"/>
+						<form:ComboBox ui:field="comfortField" store="{storeComfort}" displayField="name" fieldLabel="Comfort"/>
+						<form:ComboBox ui:field="carColorField" store="{storeCarColor}" displayField="name" fieldLabel="Car color"/>
 						<form:TextField ui:field="fuelMixedDriveField" fieldLabel="{constants.fuelMixedDrive}"/>
 						<form:TextField ui:field="emissionsCO2Field" fieldLabel="{constants.emissionsCO2}"/>
 						

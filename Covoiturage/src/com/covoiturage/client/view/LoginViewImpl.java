@@ -12,9 +12,9 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
@@ -27,36 +27,36 @@ public class LoginViewImpl extends Composite implements LoginView {
 	/**
 	 * The Interface MyUiBinder.
 	 */
-	interface MyUiBinder extends UiBinder<AbsolutePanel, LoginViewImpl> {
+	interface MyUiBinder extends UiBinder<FlowPanel, LoginViewImpl> {
 	}
 
 	/** The Constant binder. */
 	private static final MyUiBinder binder = GWT.create(MyUiBinder.class);
-	
+
 	/** The covoiturage resources. */
 	private final CovoiturageResources covoiturageResources = GWT
 			.create(CovoiturageResources.class);
-	
+
 	/** The password field. */
 	@UiField
 	TextField<String> loginField, passwordField;
-	
+
 	/** The title. */
 	@UiField
 	Label title;
-	
+
 	/** The send button. */
 	@UiField
 	Button addUserButton, sendButton;
-	
+
 	/** The image. */
 	@UiField
 	Image image;
-	
+
 	/** The flowpanel. */
 	@UiField
-	AbsolutePanel flowpanel;
-	
+	FlowPanel flowpanel;
+
 	/** The header. */
 	@UiField
 	FormPanel header;
@@ -75,7 +75,9 @@ public class LoginViewImpl extends Composite implements LoginView {
 		image.setResource(covoiturageResources.taxi());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.LoginView#getSendLoginButton()
 	 */
 	@Override
@@ -83,7 +85,9 @@ public class LoginViewImpl extends Composite implements LoginView {
 		return sendButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.LoginView#getAddUserButton()
 	 */
 	@Override
@@ -91,7 +95,9 @@ public class LoginViewImpl extends Composite implements LoginView {
 		return addUserButton;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.LoginView#getPassword()
 	 */
 	@Override
@@ -99,7 +105,9 @@ public class LoginViewImpl extends Composite implements LoginView {
 		return passwordField;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.covoiturage.client.view.LoginView#getLogin()
 	 */
 	@Override
@@ -107,8 +115,12 @@ public class LoginViewImpl extends Composite implements LoginView {
 		return loginField;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.covoiturage.client.view.LoginView#setPresenter(com.covoiturage.client.view.LoginView.Presenter)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.covoiturage.client.view.LoginView#setPresenter(com.covoiturage.client
+	 * .view.LoginView.Presenter)
 	 */
 	@Override
 	public void setPresenter(Presenter presenter) {
@@ -117,8 +129,9 @@ public class LoginViewImpl extends Composite implements LoginView {
 
 	/**
 	 * On add user button click.
-	 *
-	 * @param event the event
+	 * 
+	 * @param event
+	 *            the event
 	 */
 	@UiHandler("addUserButton")
 	void onAddUserButtonClick(ClickEvent event) {

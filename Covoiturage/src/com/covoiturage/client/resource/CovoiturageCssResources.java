@@ -15,4 +15,6 @@ public interface CovoiturageCssResources extends CssResource {
 	String h1();
 
 	String bubble();
+
+	String header();
 }

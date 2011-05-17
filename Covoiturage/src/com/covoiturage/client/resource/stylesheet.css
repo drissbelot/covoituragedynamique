@@ -48,6 +48,7 @@
 
 @sprite .header{
 	gwt-image: "covdyn";
+	height: 100px;
 	
 	}
 @sprite .menuItem {
